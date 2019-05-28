@@ -1,0 +1,14 @@
+Debug
+hiredis.tlog
+/RedisHelperCpp/Debug/RedisHelperCpp.tlog
+/testConsole/obj
+obj
+*.opendb
+HyTestBuilder.VC.db
+*.pdb
+IndustrialEthernetEntity.pdb
+/TestForm/bin/Debug/*.pdb
+*.a
+*._
+*.nupkg
+*.p7s
