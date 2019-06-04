@@ -23,6 +23,19 @@ volatile int wkc;
 boolean inOP;
 uint8 currentgroup = 0;
 
+typedef struct SLAVE_EL2008t {
+	boolean value1;
+}SLAVE_EL2008;
+typedef struct SLAVE_EL4034t {
+	int16 value1;
+	int16 value2;
+	int16 value3;
+	int16 value4;
+}SLAVE_EL4034;
+
+SLAVE_EL2008* EL2008;
+SLAVE_EL4034* EL4034;
+
 void simpletest(char *ifname)
 {
     int i, j, oloop, iloop, chk;
@@ -85,7 +98,12 @@ void simpletest(char *ifname)
             printf("Operational state reached for all slaves.\n");
             inOP = TRUE;
                 /* cyclic loop */
-			for (i = 1; i <= 10000; i++)
+			//printf("¿´ÕâÀï--->>>%b\n",*ec_slave[2].outputs);
+			EL2008 = (SLAVE_EL2008*)ec_slave[3].outputs;
+			EL4034 = (SLAVE_EL4034*)ec_slave[5].outputs;
+			EL4034->value1 = 0b11000011;
+			EL2008->value1 = 0b11000011;
+			for (i = 1; i <= 1000; i++)
 			{
 				ec_send_processdata();
 				wkc = ec_receive_processdata(EC_TIMEOUTRET);
@@ -104,12 +122,20 @@ void simpletest(char *ifname)
 					{
 						printf(" %2.2x", *(ec_slave[0].inputs + j));
 					}
-					printf(" T:%"PRId64"\r", ec_DCtime);
+					printf(" T:%"PRId64"==||==%d\r", ec_DCtime, i);
 					needlf = TRUE;
 				}
+				
+				//EL2008->value3 = 0x1;
+				//EL2008->value4 = 0x1;
+				//EL2008->value5 = 0x1;
+				//EL2008->value6 = 0x1;
+				//EL2008->value7 = 0x1;
+				//EL2008->value8 = 0x1;
 				osal_usleep(5000);
-
+				
 			}
+
 			inOP = FALSE;
 		 }
 		 else
@@ -126,9 +152,9 @@ void simpletest(char *ifname)
 			 }
 		 }
 		 printf("\nRequest init state for all slaves\n");
-		 ec_slave[0].state = EC_STATE_INIT;
+		 ec_slave[0].state = EC_STATE_OPERATIONAL;
 		 /* request INIT state for all slaves */
-		 ec_writestate(0);
+		 ec_writestate(8);
 	   }
 	   else
 	   {

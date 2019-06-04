@@ -13,9 +13,10 @@ namespace EtherCATImpl.localEntity
     {
         public int id;
         public int type;//Di,DO,AI,AO
-        public StringBuilder name;
         public int channelNum;
         public IntPtr ptrToSth;
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 3)]
+        public string name;
     }
     class entities
     {

@@ -216,11 +216,12 @@ int getSlaveInfoImpl(SLAVET_ARR *slave, int id) {
 	}
 	//SLAVET_ARR* slaveinfo = &slave_arr[id];
 	//SLAVET_ARR* slaveinfo = new SLAVET_ARR();
-	slave->channelNum = 2;
-	slave->id = 1;
-	slave->name = "EL3002";
+	
+	slave->id = 1806;
+	slave->name = "ABCDEF";
 	slave->type = 3;
 	slave->ptrToSlave = NULL;
+	slave->channelNum = 2;
 	
 	return 0;
 }

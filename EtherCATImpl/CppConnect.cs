@@ -24,7 +24,7 @@ namespace EtherCATImpl
         public static extern int initConfig();
         [DllImport("ExportClass.dll")]
         public static extern int getSlaveNum();
-        [DllImport("ExportClass.dll", EntryPoint = "getSlaveInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("ExportClass.dll", EntryPoint = "getSlaveInfo", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern int getSlaveInfo(ref SlaveInfo slaveInfo, int id);
         //设置从站某端口信息
         [DllImport("ExportClass.dll")]
