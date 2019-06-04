@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ServiceStack.Redis;
 using System.Configuration;
 
-namespace EtherCATImpl.database
+namespace HyTestEtherCAT.database
 {
     /// <summary>
     /// RedisClient管理类，可以获取Redis客户端。

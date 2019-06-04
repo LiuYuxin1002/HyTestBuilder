@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtherCATImpl.localEntity
+namespace HyTestEtherCAT.localEntity
 {
     //单个从站
     [StructLayout(LayoutKind.Sequential)]

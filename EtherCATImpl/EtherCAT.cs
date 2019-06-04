@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IndustrialEthernetAPI;
-using IndustrialEthernetEntity;
-using EtherCATImpl.localEntity;
+using HyTestIEInterface;
+using HyTestIEEntity;
+using HyTestEtherCAT.localEntity;
 
-namespace EtherCATImpl
+namespace HyTestEtherCAT
 {
     public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReadWrite
     {
@@ -121,13 +121,7 @@ namespace EtherCATImpl
         {
             return CppConnect.setIntergerValue(deviceId, channel, value);
         }
-        /// <summary>
-        /// 批量写
-        /// </summary>
-        /// <param name="deviceList"></param>
-        /// <param name="channelList"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
+        
         public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<bool[]> values)
         {
             throw new NotImplementedException();

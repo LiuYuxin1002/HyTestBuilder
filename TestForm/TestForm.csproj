@@ -100,21 +100,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EtherCATImpl\EtherCATImpl.csproj">
+    <ProjectReference Include="..\EtherCATImpl\HyTestEtherCAT.csproj">
       <Project>{b7d3e5b0-ec3b-4de7-878e-8fdeb4250d9b}</Project>
-      <Name>EtherCATImpl</Name>
+      <Name>HyTestEtherCAT</Name>
     </ProjectReference>
     <ProjectReference Include="..\ExportClass\ExportClass.vcxproj">
       <Project>{fed8bcdd-c285-4dc1-bec2-beff907602c3}</Project>
       <Name>ExportClass</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IndustrialEthernetAPI\IndustrialEthernetAPI.csproj">
+    <ProjectReference Include="..\IndustrialEthernetAPI\HyTestIEInterface.csproj">
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
-      <Name>IndustrialEthernetAPI</Name>
+      <Name>HyTestIEInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IndustrialEthernetEntity\IndustrialEthernetEntity.csproj">
+    <ProjectReference Include="..\IndustrialEthernetEntity\HyTestIEEntity.csproj">
       <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
-      <Name>IndustrialEthernetEntity</Name>
+      <Name>HyTestIEEntity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,12 +1,12 @@
-﻿using EtherCATImpl;
-using IndustrialEthernetEntity;
+﻿using HyTestEtherCAT;
+using HyTestIEEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IndustrialEthernetAPI;
-using EtherCATImpl.localEntity;
+using HyTestIEInterface;
+using HyTestEtherCAT.localEntity;
 
 namespace testConsole
 {

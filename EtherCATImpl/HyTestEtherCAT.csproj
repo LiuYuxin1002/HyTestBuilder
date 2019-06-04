@@ -7,8 +7,8 @@
     <ProjectGuid>{B7D3E5B0-EC3B-4DE7-878E-8FDEB4250D9B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EtherCATImpl</RootNamespace>
-    <AssemblyName>EtherCATImpl</AssemblyName>
+    <RootNamespace>HyTestEtherCAT</RootNamespace>
+    <AssemblyName>HyTestEtherCAT</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -108,13 +108,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IndustrialEthernetAPI\IndustrialEthernetAPI.csproj">
+    <ProjectReference Include="..\IndustrialEthernetAPI\HyTestIEInterface.csproj">
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
-      <Name>IndustrialEthernetAPI</Name>
+      <Name>HyTestIEInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IndustrialEthernetEntity\IndustrialEthernetEntity.csproj">
+    <ProjectReference Include="..\IndustrialEthernetEntity\HyTestIEEntity.csproj">
       <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
-      <Name>IndustrialEthernetEntity</Name>
+      <Name>HyTestIEEntity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

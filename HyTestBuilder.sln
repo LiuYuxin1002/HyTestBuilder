@@ -23,17 +23,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExportClass", "ExportClass\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testConsole", "testConsole\testConsole.csproj", "{8133C6EC-1CED-48E9-8E3E-0C6B1E91EAE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustrialEthernetAPI", "IndustrialEthernetAPI\IndustrialEthernetAPI.csproj", "{56107191-C952-4278-A900-7FEEC736217F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyTestIEInterface", "IndustrialEthernetAPI\HyTestIEInterface.csproj", "{56107191-C952-4278-A900-7FEEC736217F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FED8BCDD-C285-4DC1-BEC2-BEFF907602C3} = {FED8BCDD-C285-4DC1-BEC2-BEFF907602C3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndustrialEthernetEntity", "IndustrialEthernetEntity\IndustrialEthernetEntity.csproj", "{D275FCD2-A4C4-4768-87B8-66DE1DD4275A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyTestIEEntity", "IndustrialEthernetEntity\HyTestIEEntity.csproj", "{D275FCD2-A4C4-4768-87B8-66DE1DD4275A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FED8BCDD-C285-4DC1-BEC2-BEFF907602C3} = {FED8BCDD-C285-4DC1-BEC2-BEFF907602C3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtherCATImpl", "EtherCATImpl\EtherCATImpl.csproj", "{B7D3E5B0-EC3B-4DE7-878E-8FDEB4250D9B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyTestEtherCAT", "EtherCATImpl\HyTestEtherCAT.csproj", "{B7D3E5B0-EC3B-4DE7-878E-8FDEB4250D9B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8E473C89-8E3F-44CE-A98C-1CC067314CFA} = {8E473C89-8E3F-44CE-A98C-1CC067314CFA}
 		{C991FAA2-5684-45F4-A2E7-A61F91AF9473} = {C991FAA2-5684-45F4-A2E7-A61F91AF9473}
@@ -50,6 +50,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedisHelperCpp", "RedisHelp
 	ProjectSection(ProjectDependencies) = postProject
 		{9521D4A3-E7E8-4945-835D-0573A4E2F7DD} = {9521D4A3-E7E8-4945-835D-0573A4E2F7DD}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyTestRTDataService", "HyTestRTDataService\HyTestRTDataService.csproj", "{78C8A452-8A2F-4416-B74A-052D73084094}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,18 @@ Global
 		{C88C0985-157C-450A-8B4A-EFC10904C704}.Release|x64.Build.0 = Release|x64
 		{C88C0985-157C-450A-8B4A-EFC10904C704}.Release|x86.ActiveCfg = Release|Win32
 		{C88C0985-157C-450A-8B4A-EFC10904C704}.Release|x86.Build.0 = Release|Win32
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|x64.Build.0 = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Debug|x86.Build.0 = Debug|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|x64.ActiveCfg = Release|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|x64.Build.0 = Release|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|x86.ActiveCfg = Release|Any CPU
+		{78C8A452-8A2F-4416-B74A-052D73084094}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestEtherCAT.server
+namespace HyTestRTDataService.Protocol
 {
-    class EthercatServer
+    class ProtocolContext
     {
-        
     }
 }

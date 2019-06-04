@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using IndustrialEthernetEntity;
-using EtherCATImpl.localEntity;
+using HyTestIEEntity;
+using HyTestEtherCAT.localEntity;
 
-namespace EtherCATImpl
+namespace HyTestEtherCAT
 {
     public class CppConnect
     {

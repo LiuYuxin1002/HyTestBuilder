@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TwinCAT.Ads;
 
-namespace IndustrialEthernetAPI
+namespace HyTestIEInterface
 {
     public interface IConnection
     {

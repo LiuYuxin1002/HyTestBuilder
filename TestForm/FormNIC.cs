@@ -1,6 +1,6 @@
-﻿using EtherCATImpl;
-using IndustrialEthernetAPI;
-using IndustrialEthernetEntity;
+﻿using HyTestEtherCAT;
+using HyTestIEInterface;
+using HyTestIEEntity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

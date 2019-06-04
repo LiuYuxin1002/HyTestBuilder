@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56107191-C952-4278-A900-7FEEC736217F}</ProjectGuid>
+    <ProjectGuid>{D275FCD2-A4C4-4768-87B8-66DE1DD4275A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IndustrialEthernetAPI</RootNamespace>
-    <AssemblyName>IndustrialEthernetAPI</AssemblyName>
+    <RootNamespace>HyTestIEEntity</RootNamespace>
+    <AssemblyName>HyTestIEEntity</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,27 +39,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="TwinCAT.Ads, Version=4.2.165.0, Culture=neutral, PublicKeyToken=180016cd49e5e8c3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\lib\TwinCAT.Ads.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="abstractClass\AbstractIEBConnector.cs" />
-    <Compile Include="context\ConnectionContext.cs" />
-    <Compile Include="excode\ExCode.cs" />
-    <Compile Include="interfaces\IAdapterLoader.cs" />
-    <Compile Include="interfaces\IConnection.cs" />
-    <Compile Include="interfaces\IDeviceLoader.cs" />
-    <Compile Include="interfaces\IReadWrite.cs" />
+    <Compile Include="Adapter.cs" />
+    <Compile Include="IOdevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\IndustrialEthernetEntity\IndustrialEthernetEntity.csproj">
-      <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
-      <Name>IndustrialEthernetEntity</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

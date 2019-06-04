@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using EtherCATImpl.server;
+using HyTestEtherCAT.server;
 
-namespace EtherCATImpl.controls
+namespace HyTestEtherCAT.controls
 {
     public partial class LED : UserControl
     {

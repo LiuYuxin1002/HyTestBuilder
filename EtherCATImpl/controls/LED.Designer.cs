@@ -1,4 +1,4 @@
-﻿namespace EtherCATImpl.controls
+﻿namespace HyTestEtherCAT.controls
 {
     partial class LED
     {

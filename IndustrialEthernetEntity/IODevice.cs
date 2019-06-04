@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IndustrialEthernetEntity
+namespace HyTestIEEntity
 {
     public struct IOdevice
     {

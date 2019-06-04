@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestEtherCAT.server
+namespace HyTestRTDataService.DataRw
 {
-    class EthercatServer
+    class DataCallback
     {
-        
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using static System.Collections.Generic.Dictionary<string, string>;
 
-namespace EtherCATImpl.database
+namespace HyTestEtherCAT.database
 {
     /// <summary>
     /// 数据格式

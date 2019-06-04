@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EtherCATImpl.database
+namespace HyTestEtherCAT.database
 {
     public class RedisHashHelper
     {
