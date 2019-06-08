@@ -45,13 +45,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="abstractClass\AbstractIEBConnector.cs" />
-    <Compile Include="context\ConnectionContext.cs" />
-    <Compile Include="excode\ExCode.cs" />
-    <Compile Include="interfaces\IAdapterLoader.cs" />
-    <Compile Include="interfaces\IConnection.cs" />
-    <Compile Include="interfaces\IDeviceLoader.cs" />
-    <Compile Include="interfaces\IReadWrite.cs" />
+    <Compile Include="AbstractClass\AbstractIEBConnector.cs" />
+    <Compile Include="Context\ConnectionContext.cs" />
+    <Compile Include="Excode\ExCode.cs" />
+    <Compile Include="Interfaces\IAdapterLoader.cs" />
+    <Compile Include="Interfaces\IConnection.cs" />
+    <Compile Include="Interfaces\IDeviceLoader.cs" />
+    <Compile Include="Interfaces\IReadWrite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
