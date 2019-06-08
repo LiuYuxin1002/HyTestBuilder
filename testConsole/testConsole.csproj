@@ -53,21 +53,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EtherCATImpl\HyTestEtherCAT.csproj">
-      <Project>{B7D3E5B0-EC3B-4DE7-878E-8FDEB4250D9B}</Project>
-      <Name>HyTestEtherCAT</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ExportClass\ExportClass.vcxproj">
       <Project>{fed8bcdd-c285-4dc1-bec2-beff907602c3}</Project>
       <Name>ExportClass</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IndustrialEthernetAPI\HyTestIEInterface.csproj">
-      <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
-      <Name>HyTestIEInterface</Name>
+    <ProjectReference Include="..\HyTestEtherCAT\HyTestEtherCAT.csproj">
+      <Project>{b7d3e5b0-ec3b-4de7-878e-8fdeb4250d9b}</Project>
+      <Name>HyTestEtherCAT</Name>
     </ProjectReference>
-    <ProjectReference Include="..\IndustrialEthernetEntity\HyTestIEEntity.csproj">
+    <ProjectReference Include="..\HyTestIEEntity\HyTestIEEntity.csproj">
       <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
       <Name>HyTestIEEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HyTestIEInterface\HyTestIEInterface.csproj">
+      <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
+      <Name>HyTestIEInterface</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

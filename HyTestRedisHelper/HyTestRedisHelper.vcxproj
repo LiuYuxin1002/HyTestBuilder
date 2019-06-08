@@ -21,8 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C88C0985-157C-450A-8B4A-EFC10904C704}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>RedisHelperCpp</RootNamespace>
+    <RootNamespace>HyTestRedisHelper</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>HyTestRedisHelper</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
