@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestIEInterface
+namespace HyTestRTDataService.RunningMode
 {
-    public interface IHyTestBase
+    class RunningServer
     {
-        string name { get; set; }
     }
 }

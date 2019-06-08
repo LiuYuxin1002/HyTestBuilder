@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestRTDataService.DataRw
+namespace HyTestRTDataService.RunningMode
 {
     class DataCallback
     {

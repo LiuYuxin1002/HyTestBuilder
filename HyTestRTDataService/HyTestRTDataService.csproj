@@ -40,15 +40,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Config\LocalDbConfig.cs" />
-    <Compile Include="Config\MapConfig.cs" />
-    <Compile Include="DataRw\DataCallback.cs" />
+    <Compile Include="ConfigMode\ConfigProtocol.cs" />
+    <Compile Include="ConfigMode\ConfigAdapter.cs" />
+    <Compile Include="ConfigMode\ConfigBase.cs" />
+    <Compile Include="ConfigMode\ConfigDatabase.cs" />
+    <Compile Include="ConfigMode\ConfigIOmap.cs" />
+    <Compile Include="ConfigMode\ConfigEnvironment.cs" />
+    <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\ProtocolContext.cs" />
+    <Compile Include="RunningMode\RunningGroup.cs" />
+    <Compile Include="RunningMode\RunningServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IndustrialEthernetAPI\HyTestIEInterface.csproj">
+      <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
+      <Name>HyTestIEInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IndustrialEthernetEntity\HyTestIEEntity.csproj">
+      <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
+      <Name>HyTestIEEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestIEInterface
+namespace HyTestRTDataService.ConfigMode
 {
-    public interface IHyTestBase
+    class ConfigProtocol
     {
-        string name { get; set; }
     }
 }

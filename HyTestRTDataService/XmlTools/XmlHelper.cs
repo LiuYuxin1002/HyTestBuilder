@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestIEInterface
+namespace HyTestRTDataService.XmlTools
 {
-    public interface IHyTestBase
+    public class XmlHelper
     {
-        string name { get; set; }
     }
 }

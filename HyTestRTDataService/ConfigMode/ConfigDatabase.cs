@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestRTDataService.Config
+namespace HyTestRTDataService.ConfigMode
 {
-    class MapConfig
+    class ConfigDatabase
     {
     }
 }

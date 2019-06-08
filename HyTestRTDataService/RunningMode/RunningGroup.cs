@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestRTDataService
+namespace HyTestRTDataService.RunningMode
 {
-    public class Class1
+    class RunningGroup
     {
     }
 }
