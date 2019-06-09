@@ -15,7 +15,7 @@ namespace TestForm
 {
     public partial class FormNIC : Form
     {
-        EtherCAT ethercat;
+        IAdapterLoader ethercat;
         public FormNIC()
         {
             InitializeComponent();

@@ -11,12 +11,12 @@ using HyTestEtherCAT;
 
 namespace TestForm
 {
-    public partial class Form1 : Form
+    public partial class RWTest : Form
     {
         //EtherCAT ethercat;
         Server server = new Server();
 
-        public Form1()
+        public RWTest()
         {
             InitializeComponent();
             //ethercat = new EtherCAT(false);

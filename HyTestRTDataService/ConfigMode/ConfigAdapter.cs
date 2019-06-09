@@ -6,12 +6,25 @@ using System.Threading.Tasks;
 using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Data;
+using HyTestEtherCAT;
 
 namespace HyTestRTDataService.ConfigMode
 {
     public class ConfigAdapter
     {
         IAdapterLoader loader;
+
+        public static Config config
+        {
+            get
+            {
+                return Config.getConfig();
+            }
+            set
+            {
+                config = value;
+            }
+        }
 
         private IList<Adapter> adapterList;
         private IList<Adapter> ignoreList;  //忽略列表
@@ -22,18 +35,12 @@ namespace HyTestRTDataService.ConfigMode
         private string currentDesc;
         public int adapterNum;
         
-        public ConfigAdapter(bool autoLoad)
+        public ConfigAdapter()
         {
-            if (autoLoad)
-            {
-                //从xml初始化adapterList
-            }
-            else
-            {
-                adapterList = new List<Adapter>();
-                getAdapterList();
-            }
-            
+            adapterList = new List<Adapter>();
+            loader = EtherCAT.getEtherCAT(true);
+
+            getAdapterList();
         }
         
         public IList<Adapter> getAdapterList()
@@ -42,7 +49,8 @@ namespace HyTestRTDataService.ConfigMode
             {
                 //debug adapterList不为空
             }
-            this.adapterList = loader.getAdapter().ToList();
+            Adapter[] adapterArr = loader.getAdapter();
+            this.adapterList = adapterArr.ToList();
             this.adapterNum = adapterList.Count;
             return this.adapterList;
         } 

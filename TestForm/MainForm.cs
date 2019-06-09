@@ -21,8 +21,12 @@ namespace TestForm
         {
             FormNIC nicf = new FormNIC();
             nicf.ShowDialog();
-
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RWTest ftest = new RWTest();
+            ftest.Show();
+        }
     }
 }

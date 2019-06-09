@@ -38,7 +38,7 @@ namespace HyTestRTDataService.ConfigMode
 
         private Config()
         {
-
+            
         }
     }
 }

@@ -30,6 +30,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,13 +63,13 @@
     <Compile Include="ConfigMode\ConfigDevice.cs" />
     <Compile Include="ConfigMode\ConfigProtocol.cs" />
     <Compile Include="ConfigMode\ConfigAdapter.cs" />
-    <Compile Include="ConfigMode\ConfigBase.cs" />
     <Compile Include="ConfigMode\ConfigDatabase.cs" />
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
     <Compile Include="ConfigMode\ConfigEnvironment.cs" />
     <Compile Include="ConfigMode\MapEntities\Port.cs" />
     <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
     <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\RunningGroup.cs" />
@@ -77,6 +80,14 @@
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExportClass\ExportClass.vcxproj">
+      <Project>{fed8bcdd-c285-4dc1-bec2-beff907602c3}</Project>
+      <Name>ExportClass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HyTestEtherCAT\HyTestEtherCAT.csproj">
+      <Project>{b7d3e5b0-ec3b-4de7-878e-8fdeb4250d9b}</Project>
+      <Name>HyTestEtherCAT</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HyTestIEEntity\HyTestIEEntity.csproj">
       <Project>{d275fcd2-a4c4-4768-87b8-66de1dd4275a}</Project>
       <Name>HyTestIEEntity</Name>

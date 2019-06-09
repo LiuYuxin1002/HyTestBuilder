@@ -30,42 +30,24 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.AdapterConfigButton = new System.Windows.Forms.Button();
-            this.deviceManagerButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.configManager1 = new HyTestRTDataService.ConfigMode.Component.ConfigManager(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.deviceManagerButton = new System.Windows.Forms.Button();
+            this.AdapterConfigButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // AdapterConfigButton
-            // 
-            resources.ApplyResources(this.AdapterConfigButton, "AdapterConfigButton");
-            this.AdapterConfigButton.Name = "AdapterConfigButton";
-            this.AdapterConfigButton.UseVisualStyleBackColor = true;
-            this.AdapterConfigButton.Click += new System.EventHandler(this.AdapterConfigButton_Click);
-            // 
-            // deviceManagerButton
-            // 
-            resources.ApplyResources(this.deviceManagerButton, "deviceManagerButton");
-            this.deviceManagerButton.Name = "deviceManagerButton";
-            this.deviceManagerButton.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // richTextBox1
             // 
@@ -94,6 +76,25 @@
             resources.ApplyResources(this.configManager1, "configManager1");
             this.configManager1.Name = "configManager1";
             // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // deviceManagerButton
+            // 
+            resources.ApplyResources(this.deviceManagerButton, "deviceManagerButton");
+            this.deviceManagerButton.Name = "deviceManagerButton";
+            this.deviceManagerButton.UseVisualStyleBackColor = true;
+            // 
+            // AdapterConfigButton
+            // 
+            resources.ApplyResources(this.AdapterConfigButton, "AdapterConfigButton");
+            this.AdapterConfigButton.Name = "AdapterConfigButton";
+            this.AdapterConfigButton.UseVisualStyleBackColor = true;
+            this.AdapterConfigButton.Click += new System.EventHandler(this.AdapterConfigButton_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -108,14 +109,13 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button AdapterConfigButton;
-        private System.Windows.Forms.Button deviceManagerButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private HyTestRTDataService.ConfigMode.Component.ConfigManager configManager1;
+        private System.Windows.Forms.Button AdapterConfigButton;
+        private System.Windows.Forms.Button deviceManagerButton;
+        private System.Windows.Forms.Button button2;
     }
 }

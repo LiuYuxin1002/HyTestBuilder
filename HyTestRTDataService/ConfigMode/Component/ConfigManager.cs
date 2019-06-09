@@ -8,8 +8,6 @@ namespace HyTestRTDataService.ConfigMode.Component
     [Designer(typeof(OpcConfigDesigner), typeof(IDesigner))]
     public partial class ConfigManager : Control
     {
-        private Config config;
-
         public ConfigManager()
         {
             InitializeComponent();
