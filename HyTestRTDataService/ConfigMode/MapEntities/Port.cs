@@ -11,6 +11,8 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     /// </summary>
     public class Port
     {
+        public string portId;   //数据类型+序号
+        public int portType;
         public string name;
         public int deviceId;
         public int channelId;

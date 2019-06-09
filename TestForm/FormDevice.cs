@@ -67,11 +67,11 @@ namespace TestForm
             nicform.ShowDialog();
             if (nicform.DialogResult == DialogResult.OK)
             {
-                Console.WriteLine("LaLaLa");
+                //bebug 确认
             }
             else
             {
-                MessageBox.Show("取消");
+                //bebug 取消
             }
         }
 
