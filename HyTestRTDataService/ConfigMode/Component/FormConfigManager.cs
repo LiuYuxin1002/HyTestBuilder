@@ -8,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TestForm
+namespace HyTestRTDataService.ConfigMode.Component
 {
-    public partial class MainForm : Form
+    public partial class FormConfigManager : Form
     {
-        public MainForm()
+        private ConfigManager confman;
+
+        public FormConfigManager()
         {
             InitializeComponent();
         }
 
-        private void AdapterConfigButton_Click(object sender, EventArgs e)
+        public FormConfigManager(ConfigManager confman)
         {
-            FormNIC nicf = new FormNIC();
-            nicf.ShowDialog();
-
+            this.confman = confman;
         }
-
     }
 }

@@ -125,6 +125,10 @@
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
       <Name>HyTestIEInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HyTestRTDataService\HyTestRTDataService.csproj">
+      <Project>{78c8a452-8a2f-4416-b74a-052d73084094}</Project>
+      <Name>HyTestRTDataService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

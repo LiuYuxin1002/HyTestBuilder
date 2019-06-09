@@ -29,11 +29,12 @@ namespace HyTestRTDataService.ConfigMode
         public IOdevice[] deviceArray;
         public int deviceNum;
 
-        //数据绑定
+        //iomap config
         public SerializableDictionary<Port, string> mapPortToName;
         public SerializableDictionary<string, Port> mapNameToPort;
 
-        
+        //协议配置
+        public Protocol currentProtocol;
 
         private Config()
         {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.AdapterConfigButton = new System.Windows.Forms.Button();
             this.deviceManagerButton = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.configManager1 = new HyTestRTDataService.ConfigMode.Component.ConfigManager(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -87,6 +89,11 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // configManager1
+            // 
+            resources.ApplyResources(this.configManager1, "configManager1");
+            this.configManager1.Name = "configManager1";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -109,5 +116,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private HyTestRTDataService.ConfigMode.Component.ConfigManager configManager1;
     }
 }

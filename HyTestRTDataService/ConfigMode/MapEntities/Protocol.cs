@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HyTestRTDataService.ConfigMode
+namespace HyTestRTDataService.ConfigMode.MapEntities
 {
-    public class ConfigProtocol
+    public class Protocol
     {
     }
 }

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HyTestRTDataService</RootNamespace>
     <AssemblyName>HyTestRTDataService</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +44,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigMode\Component\ConfigManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ConfigMode\Component\ConfigManager.Designer.cs">
+      <DependentUpon>ConfigManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigMode\Component\FormConfigManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigMode\Component\FormConfigManager.Designer.cs">
+      <DependentUpon>FormConfigManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigMode\Config.cs" />
+    <Compile Include="ConfigMode\ConfigDevice.cs" />
     <Compile Include="ConfigMode\ConfigProtocol.cs" />
     <Compile Include="ConfigMode\ConfigAdapter.cs" />
     <Compile Include="ConfigMode\ConfigBase.cs" />
@@ -48,6 +65,8 @@
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
     <Compile Include="ConfigMode\ConfigEnvironment.cs" />
     <Compile Include="ConfigMode\MapEntities\Port.cs" />
+    <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
+    <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />
     <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\RunningGroup.cs" />
@@ -66,6 +85,11 @@
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
       <Name>HyTestIEInterface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigMode\Component\FormConfigManager.resx">
+      <DependentUpon>FormConfigManager.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
