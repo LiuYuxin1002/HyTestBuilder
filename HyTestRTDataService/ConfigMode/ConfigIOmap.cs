@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HyTestRTDataService.Utils;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -13,10 +14,7 @@ namespace HyTestRTDataService.ConfigMode
     /// </summary>
     class ConfigIOmap
     {
-        private Dictionary<Port, string> mapPortToName;
-        private Dictionary<string, Port> mapNameToPort;
-
-        private DataTable IOmapTable;
+        private Config config = Config.getConfig();
         
         //从xml获取IOmapTable
         private void initIOmapTable()
@@ -24,20 +22,31 @@ namespace HyTestRTDataService.ConfigMode
 
         }
 
+        public DataTable getIOmapFromExcel()
+        {
+            config.ioMapTable = ExcelHelper.SelectExcelToDataTable();
+            return config.ioMapTable;
+        }
+
         //public的初始化方法
         public void initIOmap()
         {
-            if (IOmapTable == null)
+            if (config.ioMapTable == null)
             {
                 initIOmapTable();
             }
             //将table的值用来初始化map
-            foreach (DataRow dr in IOmapTable.Rows)
+            foreach (DataRow dr in config.ioMapTable.Rows)
             {
 
             }
 
         }
 
+        internal void saveIOmapToExcel()
+        {
+            ExcelHelper.DataTableToExcel(config.ioMapTable);
+            throw new NotImplementedException();
+        }
     }
 }

@@ -32,6 +32,7 @@ namespace HyTestRTDataService.ConfigMode
         //iomap config
         public SerializableDictionary<Port, string> mapPortToName;
         public SerializableDictionary<string, Port> mapNameToPort;
+        public DataTable ioMapTable;
 
         //协议配置
         public Protocol currentProtocol;

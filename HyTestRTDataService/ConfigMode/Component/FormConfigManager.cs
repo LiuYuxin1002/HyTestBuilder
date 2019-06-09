@@ -29,18 +29,8 @@ namespace HyTestRTDataService.ConfigMode.Component
 
             this.configAdapter = new ConfigAdapter();
             this.configDevice = new ConfigDevice();
+            this.configIOmap = new ConfigIOmap();
         }
-        //从xml文件读入config信息，写到config里面去，显示出来
-        private void ReadXmlConfigInfoIfExist()
-        {
-            if (IsExist(""))
-            {
-                //将xml信息读入config
-                //显示config
-            }
-        }
-
-        
 
         public FormConfigManager(ConfigManager confman) : this()
         {
@@ -70,6 +60,15 @@ namespace HyTestRTDataService.ConfigMode.Component
             return false;
         }
 
+        //从xml文件读入config信息，写到config里面去，显示出来
+        private void ReadXmlConfigInfoIfExist()
+        {
+            if (IsExist(xmlPath))
+            {
+                //将xml信息读入config
+                //显示config
+            }
+        }
         #endregion
 
         #region 事件
@@ -117,12 +116,13 @@ namespace HyTestRTDataService.ConfigMode.Component
         //导入变量表
         private void btn_ImportExcel_Click(object sender, EventArgs e)
         {
-
+            configIOmap.getIOmapFromExcel();
+            this.dataGridView2.DataSource = config.ioMapTable;
         }
         //导出变量表
         private void btn_ExportExcel_Click(object sender, EventArgs e)
         {
-
+            configIOmap.saveIOmapToExcel();
         }
         //保存映射文件的更改
         private void btn_SaveIOmapChange_Click(object sender, EventArgs e)

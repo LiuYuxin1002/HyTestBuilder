@@ -202,7 +202,7 @@
             this.btn_ExportExcel.Name = "btn_ExportExcel";
             this.btn_ExportExcel.Size = new System.Drawing.Size(170, 45);
             this.btn_ExportExcel.TabIndex = 18;
-            this.btn_ExportExcel.Text = "导入变量";
+            this.btn_ExportExcel.Text = "导出变量";
             this.btn_ExportExcel.UseVisualStyleBackColor = true;
             this.btn_ExportExcel.Click += new System.EventHandler(this.btn_ExportExcel_Click);
             // 
@@ -250,7 +250,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(676, 454);
+            this.tabPage4.Size = new System.Drawing.Size(676, 455);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "数据库配置";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -260,7 +260,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 29);
             this.tabPage5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(676, 454);
+            this.tabPage5.Size = new System.Drawing.Size(676, 455);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "测试环境配置";
             this.tabPage5.UseVisualStyleBackColor = true;
