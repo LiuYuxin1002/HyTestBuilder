@@ -28,6 +28,7 @@ namespace HyTestRTDataService.ConfigMode.Component
             ReadXmlConfigInfoIfExist();
 
             this.configAdapter = new ConfigAdapter();
+            this.configDevice = new ConfigDevice();
         }
         //从xml文件读入config信息，写到config里面去，显示出来
         private void ReadXmlConfigInfoIfExist()
@@ -39,16 +40,39 @@ namespace HyTestRTDataService.ConfigMode.Component
             }
         }
 
-        private bool IsExist(string filePath)
-        {
-            return false;
-        }
+        
 
         public FormConfigManager(ConfigManager confman) : this()
         {
             this.confman = confman;
             this.config = Config.getConfig();
         }
+
+        #region 方法
+
+        private void saveAllConfig()
+        {
+
+        }
+
+        private void saveDeviceConfig()
+        {
+
+        }
+
+        private void saveIOmapConfig()
+        {
+
+        }
+        //判断配置文件是否存在
+        private bool IsExist(string filePath)
+        {
+            return false;
+        }
+
+        #endregion
+
+        #region 事件
 
         private void btn_ScanAdapter_Click(object sender, EventArgs e)
         {
@@ -68,5 +92,49 @@ namespace HyTestRTDataService.ConfigMode.Component
             	
             }
         }
+
+        private void btn_ScanDevices_Click(object sender, EventArgs e)
+        {
+            TreeNode rootDeviceTree = configDevice.getDeviceTree();
+            treeView1.Nodes.Add(rootDeviceTree);
+        }
+
+        private void btn_SaveDeviceConfig_Click(object sender, EventArgs e)
+        {
+            saveDeviceConfig();
+        }
+
+        private void btn_SaveConfig_Click(object sender, EventArgs e)
+        {
+            saveAllConfig();
+        }
+
+        private void btn_ReloadConfig_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //导入变量表
+        private void btn_ImportExcel_Click(object sender, EventArgs e)
+        {
+
+        }
+        //导出变量表
+        private void btn_ExportExcel_Click(object sender, EventArgs e)
+        {
+
+        }
+        //保存映射文件的更改
+        private void btn_SaveIOmapChange_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }

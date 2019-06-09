@@ -7,6 +7,7 @@ using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Windows.Forms;
 using System.Data;
+using HyTestEtherCAT;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -23,7 +24,10 @@ namespace HyTestRTDataService.ConfigMode
         public int deviceNum;
         private string[] type = { "DI", "DO", "AI", "AO", };
 
-        public ConfigDevice() { }
+        public ConfigDevice()
+        {
+            loader = EtherCAT.getEtherCAT(true);
+        }
 
         public IList<IOdevice> getDeviceList()
         {

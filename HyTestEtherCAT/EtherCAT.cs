@@ -71,7 +71,7 @@ namespace HyTestEtherCAT
 
         public IOdevice[] getDevice()
         {
-            int slaveNum = CppConnect.getSlaveNum();
+            int slaveNum = CppConnect.initSlaveConfig();
             deviceNum = slaveNum;
             for (int i = 0; i < slaveNum; i++)
             {
