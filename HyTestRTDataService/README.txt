@@ -19,3 +19,5 @@
 		b）数据读写：
 		c）数据订阅：目前的工作主要集中在RunningServer上，有他进行数据定时读取到datapool，读写都写到datapool
 		d) 提供数据显示控件：DigitalMeter, AnalogMeter
+	4) 注意：
+		写之前要进行数值转化

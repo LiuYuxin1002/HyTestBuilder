@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="ConfigMode\Config.cs" />
     <Compile Include="ConfigMode\ConfigDevice.cs" />
+    <Compile Include="ConfigMode\ConfigManager.cs" />
     <Compile Include="ConfigMode\ConfigProtocol.cs" />
     <Compile Include="ConfigMode\ConfigAdapter.cs" />
     <Compile Include="ConfigMode\ConfigDatabase.cs" />

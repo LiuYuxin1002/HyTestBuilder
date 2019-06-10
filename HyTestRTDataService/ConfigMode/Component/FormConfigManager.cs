@@ -21,6 +21,8 @@ namespace HyTestRTDataService.ConfigMode.Component
         private ConfigDevice configDevice;
         private ConfigIOmap configIOmap;
 
+        private bool isSavedConfig;
+
         public FormConfigManager()
         {
             InitializeComponent();
@@ -106,6 +108,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         private void btn_SaveConfig_Click(object sender, EventArgs e)
         {
             saveAllConfig();
+            isSavedConfig = true;
         }
 
         private void btn_ReloadConfig_Click(object sender, EventArgs e)
@@ -132,7 +135,14 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-
+            if (!isSavedConfig)
+            {
+                if (MessageBox.Show("配置还没有保存，确定关闭？", "Confirm Message", MessageBoxButtons.OKCancel) != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            this.Close();
         }
 
         #endregion
