@@ -17,4 +17,5 @@
 	3）运行模式方面：RunningMode
 		a）为运行中的程序提供数据读写和数据订阅的功能；
 		b）数据读写：
-		c）数据订阅：
+		c）数据订阅：目前的工作主要集中在RunningServer上，有他进行数据定时读取到datapool，读写都写到datapool
+		d) 提供数据显示控件：DigitalMeter, AnalogMeter

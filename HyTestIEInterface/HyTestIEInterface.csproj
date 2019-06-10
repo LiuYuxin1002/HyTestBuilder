@@ -52,7 +52,9 @@
     <Compile Include="Interfaces\IConnection.cs" />
     <Compile Include="Interfaces\IDeviceLoader.cs" />
     <Compile Include="Interfaces\IHyTestBase.cs" />
+    <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IReadWrite.cs" />
+    <Compile Include="Interfaces\IWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

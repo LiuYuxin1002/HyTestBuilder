@@ -9,7 +9,7 @@ using HyTestEtherCAT.localEntity;
 
 namespace HyTestEtherCAT
 {
-    public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReadWrite
+    public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter
     {
         #region region_属性
 
