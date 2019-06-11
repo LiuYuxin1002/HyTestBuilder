@@ -79,6 +79,8 @@
     </Compile>
     <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunningMode\DataTransformer.cs" />
+    <Compile Include="RunningMode\RealTimeDataPool.cs" />
     <Compile Include="RunningMode\RunningGroup.cs" />
     <Compile Include="RunningMode\RunningServer.cs" />
     <Compile Include="Utils\ExcelHelper.cs" />

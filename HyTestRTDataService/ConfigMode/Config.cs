@@ -34,6 +34,7 @@ namespace HyTestRTDataService.ConfigMode
         public SerializableDictionary<string, Port> mapNameToPort;
         public SerializableDictionary<int, string> mapIndexToName;
         public SerializableDictionary<string, int> mapNameToIndex;
+        public SerializableDictionary<string, Type> mapNameToType;
         public DataTable ioMapTable;
         public int readVarNum, writeVarNum;
 

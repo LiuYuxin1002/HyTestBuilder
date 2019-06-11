@@ -19,11 +19,9 @@ namespace HyTestRTDataService.RunningMode
             return server;
         }
 
-        private double[] rdataList;
-        private double[] wdataList;
-
         IReader reader;
-        IWriter writer; 
+        IWriter writer;
+        private RealTimeDataPool datapool = new RealTimeDataPool();
 
         private System.Windows.Forms.Timer timer;
         private int refreshFrequency;
@@ -68,22 +66,111 @@ namespace HyTestRTDataService.RunningMode
 
         private void ReadDataToDatapool()
         {
-            for(int i=0; i<rdataList.Count(); i++)
+            for(int i=0; i<datapool.rdataList.Count(); i++)
             {
-                rdataList[i] = ReadData(i);
+                datapool.rdataList[i] = ReadDataFromDevice(i);
             }
         }
 
-        private double ReadData(int index)
+        DataTransformer transformer;
+
+        /// <summary>
+        /// 从底层读取数值，返回以更新datapool中的数据
+        /// </summary>
+        /// <param name="index">datapool中的序号</param>
+        /// <returns></returns>
+        private double ReadDataFromDevice(int index)
         {
-            int data = 0;
+            double data = -1;
             string varName = config.mapIndexToName[index];
             Port varPort = config.mapNameToPort[varName];
-            reader.ReadAnalog(varPort.deviceId, varPort.channelId, ref data);
+            Type varType = config.mapNameToType[varName];
+
+            if (varType == typeof(bool))
+            {
+                bool value = false;
+                reader.ReadDigital(varPort.deviceId, varPort.channelId, ref value);
+                transformer = new DataTransformer();
+                data = transformer.TransDigitalToBoolDouble(value);
+            }
+            else if (varType == typeof(int))
+            {
+                int value = -1;
+                reader.ReadAnalog(varPort.deviceId, varPort.channelId, ref value);
+                transformer = new DataTransformer();
+                data = transformer.TransAnalogToIntDouble(value);
+            }
+            else if (varType == typeof(double))
+            {
+                int value = -1;
+                reader.ReadAnalog(varPort.deviceId, varPort.channelId, ref value);
+                transformer = new DataTransformer();
+                data = transformer.TransAnalogToIntDouble(value);
+            }
+            
             return (double)data;
         }
 
+        //实例化过程中，先把XML读到config
         public void LoadDataTable()
+        {
+
+        }
+
+        public T NormalRead<T>(string varName)
+        {
+            T value;
+            Type varType = config.mapNameToType[varName];
+            //Port varPort = config.mapNameToPort[varName];
+            int varIndex = config.mapNameToIndex[varName];
+            if (varType == typeof(int))
+            {
+                int value1 = DataTransformer.TransformingInt(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
+            else if(varType == typeof(bool))
+            {
+                double value1 = DataTransformer.TransformingDouble(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
+            else
+            {
+                bool value1 = DataTransformer.TransformingBool(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
+            return default(T);
+        }
+
+        public void NormalWrite<T>(string varName, T value)
+        {
+            Type varType = config.mapNameToType[varName];
+            int varIndex = config.mapNameToIndex[varName];
+            if (varType == typeof(int))
+            {
+                int value1 = (int)Convert.ChangeType(value, typeof(int));
+                datapool.rdataList[varIndex] = value1;
+            }
+            else if (varType == typeof(bool))
+            {
+                double value1 = (double)Convert.ChangeType(value, typeof(double));
+                datapool.rdataList[varIndex] = value1;
+            }
+            else
+            {
+                bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
+                datapool.rdataList[varIndex] = value1 ? 1 : 0;
+            }
+        }
+
+        //直接从端口读取
+        public T InstantRead<T>(string varName)
+        {
+
+            return default(T);
+        }
+
+        //直接写到端口
+        public void InstantWrite<T>(string varName, T value)
         {
 
         }
