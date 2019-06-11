@@ -26,19 +26,6 @@ namespace testConsole
             SlaveInfo slave = new SlaveInfo();
             CppConnect.getSlaveInfo(ref slave, 0);
             Console.WriteLine(slave.id+","+slave.name);
-            Console.WriteLine(StringToBinary(slave.name));
-        }
-
-        public static string StringToBinary(string ss)
-        {
-            byte[] u = Encoding.Unicode.GetBytes(ss);
-            string result = string.Empty;
-            foreach (byte a in u)
-            {
-                result += a.ToString();
-            }
-            return result;
-
         }
     }
 }

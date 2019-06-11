@@ -129,6 +129,14 @@ int initSlaveConfigInfo() {
 	}
 }
 
+int getSlaveIdFromName(char* name) {
+	int slaveId = 0;
+	for (int i = 2; i < 6; i++) {//表示2,3,4,5位
+		slaveId = (name[i] - '0') + slaveId * 10;
+	}
+	return slaveId;
+}
+
 void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {
 		return;
@@ -147,7 +155,7 @@ void initLocalSlaveInfo() {
 		int type = name[SLAVE_TYPE_ID] - '0';			//获取类型
 		int channel = name[SLAVE_CHANNEL_ID] - '0';		//获取从站channel数量
 
-		slave_arr[i].name = name;						//赋值
+		slave_arr[i].name = getSlaveIdFromName(name);						//赋值
 		slave_arr[i].type = type;
 		slave_arr[i].channelNum = channel;
 
@@ -214,11 +222,9 @@ int getSlaveInfoImpl(SLAVET_ARR *slave, int id) {
 		printf("没有检查到从站信息！");
 		return -1;
 	}
-	//SLAVET_ARR* slaveinfo = &slave_arr[id];
-	//SLAVET_ARR* slaveinfo = new SLAVET_ARR();
 	
 	slave->id = 1806;
-	slave->name = "ABCDEF";
+	slave->name = 1234;
 	slave->type = 3;
 	slave->ptrToSlave = NULL;
 	slave->channelNum = 2;

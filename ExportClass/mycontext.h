@@ -36,7 +36,8 @@ extern "C" {
 		int		type;			//0:empty, 1:di, 2:do, 3:ai, 4:ao
 		int		channelNum;		//1,2,4,8...目前打算只支持这四种
 		void*	ptrToSlave;		//指向对应的从站端口
-		char*	name;			//可读名称
+		//char*	name;			//可读名称
+		int		name;
 	};
 	extern struct SLAVET_ARR slave_arr[MAX_SLAVE];
 

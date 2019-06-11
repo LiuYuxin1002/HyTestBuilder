@@ -92,7 +92,7 @@
             // btn_SelectAdapter
             // 
             this.btn_SelectAdapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SelectAdapter.Location = new System.Drawing.Point(189, 31);
+            this.btn_SelectAdapter.Location = new System.Drawing.Point(189, 38);
             this.btn_SelectAdapter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_SelectAdapter.Name = "btn_SelectAdapter";
             this.btn_SelectAdapter.Size = new System.Drawing.Size(170, 45);
@@ -104,7 +104,7 @@
             // btn_ScanAdapter
             // 
             this.btn_ScanAdapter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ScanAdapter.Location = new System.Drawing.Point(9, 31);
+            this.btn_ScanAdapter.Location = new System.Drawing.Point(9, 38);
             this.btn_ScanAdapter.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ScanAdapter.Name = "btn_ScanAdapter";
             this.btn_ScanAdapter.Size = new System.Drawing.Size(170, 45);
@@ -129,14 +129,14 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(655, 381);
+            this.dataGridView1.Size = new System.Drawing.Size(655, 388);
             this.dataGridView1.TabIndex = 11;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.treeView1);
             this.tabPage2.Controls.Add(this.btn_SaveDeviceConfig);
             this.tabPage2.Controls.Add(this.btn_ScanDevices);
+            this.tabPage2.Controls.Add(this.treeView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Name = "tabPage2";
@@ -154,13 +154,13 @@
             this.treeView1.Location = new System.Drawing.Point(9, 74);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(655, 381);
+            this.treeView1.Size = new System.Drawing.Size(655, 388);
             this.treeView1.TabIndex = 11;
             // 
             // btn_SaveDeviceConfig
             // 
             this.btn_SaveDeviceConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SaveDeviceConfig.Location = new System.Drawing.Point(187, 30);
+            this.btn_SaveDeviceConfig.Location = new System.Drawing.Point(187, 37);
             this.btn_SaveDeviceConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_SaveDeviceConfig.Name = "btn_SaveDeviceConfig";
             this.btn_SaveDeviceConfig.Size = new System.Drawing.Size(170, 45);
@@ -172,7 +172,7 @@
             // btn_ScanDevices
             // 
             this.btn_ScanDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ScanDevices.Location = new System.Drawing.Point(9, 30);
+            this.btn_ScanDevices.Location = new System.Drawing.Point(9, 37);
             this.btn_ScanDevices.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ScanDevices.Name = "btn_ScanDevices";
             this.btn_ScanDevices.Size = new System.Drawing.Size(170, 45);
@@ -198,7 +198,7 @@
             // btn_ExportExcel
             // 
             this.btn_ExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ExportExcel.Location = new System.Drawing.Point(187, 30);
+            this.btn_ExportExcel.Location = new System.Drawing.Point(187, 37);
             this.btn_ExportExcel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ExportExcel.Name = "btn_ExportExcel";
             this.btn_ExportExcel.Size = new System.Drawing.Size(170, 45);
@@ -210,7 +210,7 @@
             // btn_SaveIOmapChange
             // 
             this.btn_SaveIOmapChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_SaveIOmapChange.Location = new System.Drawing.Point(494, 30);
+            this.btn_SaveIOmapChange.Location = new System.Drawing.Point(494, 37);
             this.btn_SaveIOmapChange.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_SaveIOmapChange.Name = "btn_SaveIOmapChange";
             this.btn_SaveIOmapChange.Size = new System.Drawing.Size(170, 45);
@@ -222,7 +222,7 @@
             // btn_ImportExcel
             // 
             this.btn_ImportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ImportExcel.Location = new System.Drawing.Point(9, 30);
+            this.btn_ImportExcel.Location = new System.Drawing.Point(9, 37);
             this.btn_ImportExcel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ImportExcel.Name = "btn_ImportExcel";
             this.btn_ImportExcel.Size = new System.Drawing.Size(170, 45);
@@ -243,7 +243,7 @@
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(655, 381);
+            this.dataGridView2.Size = new System.Drawing.Size(655, 388);
             this.dataGridView2.TabIndex = 0;
             // 
             // tabPage4
@@ -291,7 +291,7 @@
             // btn_Cancel
             // 
             this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Cancel.Location = new System.Drawing.Point(499, 9);
+            this.btn_Cancel.Location = new System.Drawing.Point(499, 6);
             this.btn_Cancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_Cancel.Name = "btn_Cancel";
             this.btn_Cancel.Size = new System.Drawing.Size(172, 40);
@@ -303,7 +303,7 @@
             // btn_ReloadConfig
             // 
             this.btn_ReloadConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_ReloadConfig.Location = new System.Drawing.Point(184, 9);
+            this.btn_ReloadConfig.Location = new System.Drawing.Point(184, 6);
             this.btn_ReloadConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_ReloadConfig.Name = "btn_ReloadConfig";
             this.btn_ReloadConfig.Size = new System.Drawing.Size(172, 40);
@@ -315,7 +315,7 @@
             // btn_SaveConfig
             // 
             this.btn_SaveConfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btn_SaveConfig.Location = new System.Drawing.Point(4, 9);
+            this.btn_SaveConfig.Location = new System.Drawing.Point(4, 6);
             this.btn_SaveConfig.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btn_SaveConfig.Name = "btn_SaveConfig";
             this.btn_SaveConfig.Size = new System.Drawing.Size(172, 40);

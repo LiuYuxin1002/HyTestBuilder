@@ -15,8 +15,9 @@ namespace HyTestEtherCAT.localEntity
         public int type;//Di,DO,AI,AO
         public int channelNum;
         public IntPtr ptrToSth;
-        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 3)]
-        public string name;
+        //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 3)]
+        //public string name;
+        public int name;
     }
     class entities
     {
