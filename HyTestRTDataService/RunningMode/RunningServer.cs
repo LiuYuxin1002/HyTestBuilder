@@ -4,6 +4,7 @@ using HyTestRTDataService.ConfigMode;
 using HyTestIEInterface;
 using System.Threading;
 using HyTestRTDataService.ConfigMode.MapEntities;
+using HyTestRTDataService.ConfigMode.Component;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -42,8 +43,8 @@ namespace HyTestRTDataService.RunningMode
 
         private void InitializeConfig()
         {
-            config = Config.getConfig();
-            config.LoadXmlConfig();
+            config = FormConfigManager.config;
+            //config.LoadXmlConfig();
             reader = ConfigProtocol.getReader();
             writer = ConfigProtocol.getWriter();
         }
@@ -83,8 +84,8 @@ namespace HyTestRTDataService.RunningMode
         {
             double data = -1;
             string varName = config.mapIndexToName[index];
-            Port varPort = config.mapNameToPort[varName];
-            Type varType = config.mapNameToType[varName];
+            Port varPort = FormConfigManager.GetPort(config.mapNameToPort[varName]);
+            Type varType = Type.GetType(config.mapNameToType[varName]);
 
             if (varType == typeof(bool))
             {
@@ -120,7 +121,7 @@ namespace HyTestRTDataService.RunningMode
         public T NormalRead<T>(string varName)
         {
             T value;
-            Type varType = config.mapNameToType[varName];
+            Type varType = Type.GetType(config.mapNameToType[varName]);
             //Port varPort = config.mapNameToPort[varName];
             int varIndex = config.mapNameToIndex[varName];
             if (varType == typeof(int))
@@ -143,7 +144,7 @@ namespace HyTestRTDataService.RunningMode
 
         public void NormalWrite<T>(string varName, T value)
         {
-            Type varType = config.mapNameToType[varName];
+            Type varType = Type.GetType(config.mapNameToType[varName]);
             int varIndex = config.mapNameToIndex[varName];
             if (varType == typeof(int))
             {

@@ -10,7 +10,7 @@ using namespace std;
 
 #ifdef __cplusplus
 extern "C" {
-#endif // __cplusplus
+#endif 
 
 #define EC_TIMEOUT 500
 #define EC_STACK_SIZE 128000
@@ -78,15 +78,9 @@ extern "C" {
 
 	//方法声明
 
-	//int getAdapterNumImpl();					//获取计算机网卡信息
-	//int getContextInfoImpl(char* adapterName);
-	//int setAdapterIdImpl(int nicId);				//设置网卡,返回从站数目
-	//int initConfigImpl();						//自动配置从站
-	//void getSlaveInfoImpl();					//返回配置后的从站信息
 	int setIntegerValueImpl(int slaveId, int channel, int value);	//设置从站端口值
 	int setBoolValueImpl(int slaveId, int channel, boolean value);
-	//int initSlaveInfoImpl(char* ifname);		//初始化从站
 
 #ifdef __cplusplus
 }
-#endif // __cplusplus
+#endif

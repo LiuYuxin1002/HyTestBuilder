@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HyTestRTDataService.Utils;
+using HyTestRTDataService.ConfigMode.Component;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -14,7 +15,7 @@ namespace HyTestRTDataService.ConfigMode
     /// </summary>
     class ConfigIOmap
     {
-        private Config config = Config.getConfig();
+        private Config config = FormConfigManager.config;
         
         //从xml获取IOmapTable
         private void initIOmapTable()

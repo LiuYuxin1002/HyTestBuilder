@@ -7,6 +7,7 @@ using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Data;
 using HyTestEtherCAT;
+using HyTestRTDataService.ConfigMode.Component;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -14,17 +15,7 @@ namespace HyTestRTDataService.ConfigMode
     {
         IAdapterLoader loader;
 
-        private static Config config
-        {
-            get
-            {
-                return Config.getConfig();
-            }
-            set
-            {
-                config = value;
-            }
-        }
+        private Config config = FormConfigManager.config;
 
         private IList<Adapter> adapterList;
         private IList<Adapter> ignoreList;  //忽略列表
@@ -86,8 +77,8 @@ namespace HyTestRTDataService.ConfigMode
 
             ErrorCode errCode = loader.setAdapter(adapterId);
             config.currentAdapter = adapterList[adapterId - 1];
-            config.currentName = config.currentAdapter.name;
-            config.currentDesc = config.currentAdapter.desc;
+            config.currentAdapterName = config.currentAdapter.name;
+            config.currentAdapterDesc = config.currentAdapter.desc;
         }
     }
 }

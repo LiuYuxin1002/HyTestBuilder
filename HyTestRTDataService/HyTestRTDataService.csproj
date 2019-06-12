@@ -34,6 +34,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -47,17 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigMode\Component\ConfigManager.cs">
+    <Compile Include="ConfigMode\Component\ConfigManager1.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ConfigMode\Component\ConfigManager.Designer.cs">
-      <DependentUpon>ConfigManager.cs</DependentUpon>
+    <Compile Include="ConfigMode\Component\ConfigManager1.Designer.cs">
+      <DependentUpon>ConfigManager1.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigMode\Component\FormConfigManager.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConfigMode\Component\FormConfigManager.Designer.cs">
       <DependentUpon>FormConfigManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigMode\Component\FormTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigMode\Component\FormTest.Designer.cs">
+      <DependentUpon>FormTest.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigMode\Config.cs" />
     <Compile Include="ConfigMode\ConfigDevice.cs" />
@@ -110,6 +119,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ConfigMode\Component\FormConfigManager.resx">
       <DependentUpon>FormConfigManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigMode\Component\FormTest.resx">
+      <DependentUpon>FormTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RunningMode\Component\FormTestRunning.resx">
       <DependentUpon>FormTestRunning.cs</DependentUpon>

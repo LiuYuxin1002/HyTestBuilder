@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace HyTestRTDataService.ConfigMode.MapEntities
 {
+    [Serializable]
     public class Protocol
     {
         public string name;
+        public Protocol() { }
         public Protocol(string name)
         {
             this.name = name;

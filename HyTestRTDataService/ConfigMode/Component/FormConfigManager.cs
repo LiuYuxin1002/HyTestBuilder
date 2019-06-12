@@ -1,61 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
+using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode.Component
 {
     public partial class FormConfigManager : Form
     {
-        private string xmlPath = "";    //文件存放路径
+        private ConfigManager1 confman;
 
-        private ConfigManager confman;
-        private Config config;
-
-        private ConfigAdapter configAdapter;
-        private ConfigDevice configDevice;
-        private ConfigIOmap configIOmap;
+        public ConfigManager configManager;         //正经ConfigManager
+        public static Config config = new Config();
 
         private bool isSavedConfig;
 
         public FormConfigManager()
         {
             InitializeComponent();
+
+            configManager = new ConfigManager();
             
             ReadXmlConfigInfoIfExist();
-
-            this.configAdapter = new ConfigAdapter();
-            this.configDevice = new ConfigDevice();
-            this.configIOmap = new ConfigIOmap();
         }
 
-        public FormConfigManager(ConfigManager confman) : this()
+        public FormConfigManager(ConfigManager1 confman) : this()
         {
             this.confman = confman;
-            this.config = Config.getConfig();
         }
 
-        #region 方法
+        #region method
 
-        private void saveAllConfig()
-        {
-
-        }
-
-        private void saveDeviceConfig()
-        {
-
-        }
-
-        private void saveIOmapConfig()
-        {
-
-        }
+       
         //判断配置文件是否存在
         private bool IsExist(string filePath)
         {
@@ -65,11 +43,36 @@ namespace HyTestRTDataService.ConfigMode.Component
         //从xml文件读入config信息，写到config里面去，显示出来
         private void ReadXmlConfigInfoIfExist()
         {
-            if (IsExist(xmlPath))
+            if (IsExist(configManager.ConfigFile))
             {
-                //将xml信息读入config
-                //显示config
+                configManager.LoadConfig();
             }
+
+            ShowConfigOnForm();
+        }
+
+        //将Config显示出来
+        private void ShowConfigOnForm()
+        {
+
+        }
+
+        //配置一旦发生更改触发
+        private void OnConfigChanged()
+        {
+            this.isSavedConfig = false;
+            this.btn_SaveConfig.Enabled = true;
+        }
+
+        private void OnConfigSaved()
+        {
+            this.isSavedConfig = false;
+            this.btn_SaveConfig.Enabled = false;
+        }
+
+        internal static Port GetPort(string v)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -77,7 +80,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_ScanAdapter_Click(object sender, EventArgs e)
         {
-            DataTable adapterTable = configAdapter.getAdapterTable();
+            DataTable adapterTable = configManager.GetAdapterDT();
             this.dataGridView1.DataSource = adapterTable;
         }
 
@@ -86,29 +89,32 @@ namespace HyTestRTDataService.ConfigMode.Component
             int selectedAdapter = this.dataGridView1.SelectedRows[0].Index;
             try
             {
-                configAdapter.selectAdapter(selectedAdapter);
+                configManager.SetAdapterSelected(selectedAdapter);
             }
             catch (System.Exception ex)
             {
             	
             }
+
+            OnConfigChanged();
         }
 
         private void btn_ScanDevices_Click(object sender, EventArgs e)
         {
-            TreeNode rootDeviceTree = configDevice.getDeviceTree();
+            TreeNode rootDeviceTree = configManager.GetDeviceTree();
             treeView1.Nodes.Add(rootDeviceTree);
         }
 
         private void btn_SaveDeviceConfig_Click(object sender, EventArgs e)
         {
-            saveDeviceConfig();
+            configManager.SaveDeviceConfig();
+            OnConfigChanged();
         }
 
         private void btn_SaveConfig_Click(object sender, EventArgs e)
         {
-            saveAllConfig();
-            isSavedConfig = true;
+            configManager.SaveConfig();
+            OnConfigSaved();
         }
 
         private void btn_ReloadConfig_Click(object sender, EventArgs e)
@@ -119,18 +125,19 @@ namespace HyTestRTDataService.ConfigMode.Component
         //导入变量表
         private void btn_ImportExcel_Click(object sender, EventArgs e)
         {
-            configIOmap.getIOmapFromExcel();
+            configManager.GetIOmapFromExcel();
             this.dataGridView2.DataSource = config.ioMapTable;
         }
         //导出变量表
         private void btn_ExportExcel_Click(object sender, EventArgs e)
         {
-            configIOmap.saveIOmapToExcel();
+            configManager.SaveIOmapToExcel();
         }
         //保存映射文件的更改
         private void btn_SaveIOmapChange_Click(object sender, EventArgs e)
         {
-
+            configManager.SetIOmapConfig();
+            //OnConfigChanged();
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)

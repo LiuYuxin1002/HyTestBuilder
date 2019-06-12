@@ -3,7 +3,6 @@
 #include "SlaveConfigSystem.h"
 
 //变量声明
-//char* ifbuf;
 char IOmap[MAP_SIZE];
 
 struct SLAVET_ARR slave_arr[MAX_SLAVE];
@@ -34,7 +33,7 @@ int initSlaveConfigInfo() {
 			while (EcatError) printf("%s", ec_elist2string());
 			printf("%d slaves found and configured.\n", ec_slavecount);
 			expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
-			printf("Calculated workcounter %d\n", expectedWKC);
+			printf("计算workcounter %d\n", expectedWKC);
 			/* wait for all slaves to reach SAFE_OP state */
 			ec_statecheck(0, EC_STATE_SAFE_OP, EC_TIMEOUTSTATE * 3);
 			if (ec_slave[0].state != EC_STATE_SAFE_OP)
@@ -51,66 +50,7 @@ int initSlaveConfigInfo() {
 				}
 			}
 			ec_readstate();
-			//打印从站具体信息
-			//for (cnt = 1; cnt <= ec_slavecount; cnt++)
-			//{
-			//	printf("\nSlave:%d\n Name:%s\n Output size: %dbits\n Input size: %dbits\n State: %d\n Delay: %d[ns]\n Has DC: %d\n",
-			//		cnt, ec_slave[cnt].name, ec_slave[cnt].Obits, ec_slave[cnt].Ibits,
-			//		ec_slave[cnt].state, ec_slave[cnt].pdelay, ec_slave[cnt].hasdc);
-			//	if (ec_slave[cnt].hasdc) printf(" DCParentport:%d\n", ec_slave[cnt].parentport);
-			//	printf(" Activeports:%d.%d.%d.%d\n", (ec_slave[cnt].activeports & 0x01) > 0,
-			//		(ec_slave[cnt].activeports & 0x02) > 0,
-			//		(ec_slave[cnt].activeports & 0x04) > 0,
-			//		(ec_slave[cnt].activeports & 0x08) > 0);
-			//	printf(" Configured address: %4.4x\n", ec_slave[cnt].configadr);
-			//	printf(" Man: %8.8x ID: %8.8x Rev: %8.8x\n", (int)ec_slave[cnt].eep_man, (int)ec_slave[cnt].eep_id, (int)ec_slave[cnt].eep_rev);
-			//	for (nSM = 0; nSM < EC_MAXSM; nSM++)
-			//	{
-			//		if (ec_slave[cnt].SM[nSM].StartAddr > 0)
-			//			printf(" SM%1d A:%4.4x L:%4d F:%8.8x Type:%d\n", nSM, ec_slave[cnt].SM[nSM].StartAddr, ec_slave[cnt].SM[nSM].SMlength,
-			//			(int)ec_slave[cnt].SM[nSM].SMflags, ec_slave[cnt].SMtype[nSM]);
-			//	}
-			//	for (j = 0; j < ec_slave[cnt].FMMUunused; j++)
-			//	{
-			//		printf(" FMMU%1d Ls:%8.8x Ll:%4d Lsb:%d Leb:%d Ps:%4.4x Psb:%d Ty:%2.2x Act:%2.2x\n", j,
-			//			(int)ec_slave[cnt].FMMU[j].LogStart, ec_slave[cnt].FMMU[j].LogLength, ec_slave[cnt].FMMU[j].LogStartbit,
-			//			ec_slave[cnt].FMMU[j].LogEndbit, ec_slave[cnt].FMMU[j].PhysStart, ec_slave[cnt].FMMU[j].PhysStartBit,
-			//			ec_slave[cnt].FMMU[j].FMMUtype, ec_slave[cnt].FMMU[j].FMMUactive);
-			//	}
-			//	printf(" FMMUfunc 0:%d 1:%d 2:%d 3:%d\n",
-			//		ec_slave[cnt].FMMU0func, ec_slave[cnt].FMMU1func, ec_slave[cnt].FMMU2func, ec_slave[cnt].FMMU3func);
-			//	printf(" MBX length wr: %d rd: %d MBX protocols : %2.2x\n", ec_slave[cnt].mbx_l, ec_slave[cnt].mbx_rl, ec_slave[cnt].mbx_proto);
-			//	ssigen = ec_siifind(cnt, ECT_SII_GENERAL);
-			//	/* SII general section */
-			//	if (ssigen)
-			//	{
-			//		ec_slave[cnt].CoEdetails = ec_siigetbyte(cnt, ssigen + 0x07);
-			//		ec_slave[cnt].FoEdetails = ec_siigetbyte(cnt, ssigen + 0x08);
-			//		ec_slave[cnt].EoEdetails = ec_siigetbyte(cnt, ssigen + 0x09);
-			//		ec_slave[cnt].SoEdetails = ec_siigetbyte(cnt, ssigen + 0x0a);
-			//		if ((ec_siigetbyte(cnt, ssigen + 0x0d) & 0x02) > 0)
-			//		{
-			//			ec_slave[cnt].blockLRW = 1;
-			//			ec_slave[0].blockLRW++;
-			//		}
-			//		ec_slave[cnt].Ebuscurrent = ec_siigetbyte(cnt, ssigen + 0x0e);
-			//		ec_slave[cnt].Ebuscurrent += ec_siigetbyte(cnt, ssigen + 0x0f) << 8;
-			//		ec_slave[0].Ebuscurrent += ec_slave[cnt].Ebuscurrent;
-			//	}
-			//	printf(" CoE details: %2.2x FoE details: %2.2x EoE details: %2.2x SoE details: %2.2x\n",
-			//		ec_slave[cnt].CoEdetails, ec_slave[cnt].FoEdetails, ec_slave[cnt].EoEdetails, ec_slave[cnt].SoEdetails);
-			//	printf(" Ebus current: %d[mA]\n only LRD/LWR:%d\n",
-			//		ec_slave[cnt].Ebuscurrent, ec_slave[cnt].blockLRW);
-			//	if ((ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE) && printSDO)
-			//		si_sdo(cnt);
-			//	if (printMAP)
-			//	{
-			//		if (ec_slave[cnt].mbx_proto & ECT_MBXPROT_COE)
-			//			si_map_sdo(cnt);
-			//		else
-			//			si_map_sii(cnt);
-			//	}
-			//}
+			
 			return ec_slavecount;
 		}
 		else
@@ -118,9 +58,7 @@ int initSlaveConfigInfo() {
 			printf("No slaves found!\n");
 			return 0;
 		}
-		//printf("End slaveinfo, close socket\n");
-		/* stop SOEM, close socket */
-		//ec_close();
+		
 	}
 	else
 	{
@@ -141,10 +79,6 @@ void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {
 		return;
 	}
-
-	//if (slave_arr == NULL) {	//为slave_arr申请空间
-	//	slave_arr = (SLAVET_ARR*)malloc(sizeof(struct SLAVET_ARR));
-	//}
 
 	for (int i = 0; i < ec_slavecount; i++) {
 		if (i == 0) {									//不处理第一个

@@ -22,19 +22,18 @@ std::map<char*, char*> getKeyValues(char* key);					//hash_get_all:	hgetall
 void	removeKey(char* key);
 void	removeField(char* key, char* field);
 
-//hiredis.h简介
-/*
-获取连接：redisClient()
-发送命令：
+/************************************************************************/
+/*hiredis.h简介
+  获取连接：redisClient()
+  发送命令：
 	redisReply reply = redisCommand(context, "cmd");
 	redisReply reply = redisCommand(context, "set foo %s", value);
 	redisReply reply = redisCommand(context, "set foo %b", value, (size_t) valuelen);
-redisReply的使用：
+  redisReply的使用：
 	type:		返回类型
 	integer:	当返回redis_reply_integer，用这个接受
 	len:		字符串长度
 	str:		当返回字符串或者err时候用这个接收
 	elements:	返回元素个数
-	element:	返回数组用这个接收，是一个redisReply**
-*/
-//redis常用命令
+	element:	返回数组用这个接收，是一个redisReply**						*/
+/************************************************************************/

@@ -30,6 +30,9 @@
     <ClCompile Include="SlaveConfigSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SlaveReadManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

@@ -21,7 +21,6 @@ char* setAdapterIdImpl(int nicId) {
 	string tmpstr = myadapter.nicName[nicId].data();
 	tmpstr = "\\Device\\NPF_" + tmpstr;				//要不要加前缀，有待考证~~
 	strcpy(ifbuf, tmpstr.c_str());					//注意检查ifbuf和所选是否对应
-	printf(">>>ifbuf=%s\n", ifbuf);		//debug
 	return ifbuf;
 }
 

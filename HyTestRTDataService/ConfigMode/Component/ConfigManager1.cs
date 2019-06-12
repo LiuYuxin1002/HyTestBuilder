@@ -5,22 +5,22 @@ using System.ComponentModel.Design;
 
 namespace HyTestRTDataService.ConfigMode.Component
 {
-    [Designer(typeof(OpcConfigDesigner), typeof(IDesigner))]
-    public partial class ConfigManager : Control
+    [Designer(typeof(ConfigDesigner), typeof(IDesigner))]
+    public partial class ConfigManager1 : Control
     {
-        public ConfigManager()
+        public ConfigManager1()
         {
             InitializeComponent();
         }
-        public ConfigManager(IContainer container)
+        public ConfigManager1(IContainer container):this()
         {
             container.Add(this);
         }
     }
 
-    internal class OpcConfigDesigner : ComponentDesigner
+    internal class ConfigDesigner : ComponentDesigner
     {
-        public OpcConfigDesigner() : base()
+        public ConfigDesigner() : base()
         {
         }
 
@@ -41,7 +41,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void OnSystemConfiguration(object sender, EventArgs args)
         {
-            ConfigManager confman = this.Component as ConfigManager;
+            ConfigManager1 confman = this.Component as ConfigManager1;
             if (confman == null)
                 return;
 

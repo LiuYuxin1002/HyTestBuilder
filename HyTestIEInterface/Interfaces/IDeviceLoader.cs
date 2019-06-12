@@ -9,7 +9,6 @@ namespace HyTestIEInterface
 {
     public interface IDeviceLoader
     {
-        //IOdevice[] devices { get; set; }
         IOdevice[] getDevice();
     }
 }
