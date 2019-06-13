@@ -15,8 +15,13 @@ namespace HyTestRTDataService.ConfigMode
     /// </summary>
     class ConfigIOmap
     {
-        private Config config = FormConfigManager.config;
-        
+        public SerializableDictionary<string, string> mapPortToName;
+        public SerializableDictionary<string, string> mapNameToPort;
+        public SerializableDictionary<int, string> mapIndexToName;
+        public SerializableDictionary<string, int> mapNameToIndex;
+        public SerializableDictionary<string, string> mapNameToType;
+        public DataTable ioMapTable;
+        public int inputVarNum, outputVarNum;
         //从xml获取IOmapTable
         private void initIOmapTable()
         {
@@ -25,19 +30,19 @@ namespace HyTestRTDataService.ConfigMode
 
         public DataTable getIOmapFromExcel()
         {
-            config.ioMapTable = ExcelHelper.SelectExcelToDataTable();
-            return config.ioMapTable;
+            this.ioMapTable = ExcelHelper.SelectExcelToDataTable();
+            return this.ioMapTable;
         }
 
         //public的初始化方法
         public void initIOmap()
         {
-            if (config.ioMapTable == null)
+            if (this.ioMapTable == null)
             {
                 initIOmapTable();
             }
             //将table的值用来初始化map
-            foreach (DataRow dr in config.ioMapTable.Rows)
+            foreach (DataRow dr in this.ioMapTable.Rows)
             {
 
             }
@@ -46,8 +51,8 @@ namespace HyTestRTDataService.ConfigMode
 
         internal void saveIOmapToExcel()
         {
-            ExcelHelper.DataTableToExcel(config.ioMapTable);
-            throw new NotImplementedException();
+            ExcelHelper.DataTableToExcel(this.ioMapTable);
+            //throw new NotImplementedException();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace HyTestRTDataService.ConfigMode.Component
 {
-    partial class ConfigManager1
+    partial class ControlConfigManager
     {
         /// <summary>
         /// 必需的设计器变量。

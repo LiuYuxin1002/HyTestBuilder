@@ -37,6 +37,26 @@
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.0.0.999, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.0.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.1\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -50,11 +70,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigMode\Component\ConfigManager1.cs">
+    <Compile Include="ConfigMode\Component\ControlConfigManager.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ConfigMode\Component\ConfigManager1.Designer.cs">
-      <DependentUpon>ConfigManager1.cs</DependentUpon>
+    <Compile Include="ConfigMode\Component\ControlConfigManager.Designer.cs">
+      <DependentUpon>ControlConfigManager.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigMode\Component\FormConfigManager.cs">
       <SubType>Form</SubType>
@@ -76,6 +96,7 @@
     <Compile Include="ConfigMode\ConfigDatabase.cs" />
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
     <Compile Include="ConfigMode\ConfigEnvironment.cs" />
+    <Compile Include="ConfigMode\IConfigBase.cs" />
     <Compile Include="ConfigMode\MapEntities\Port.cs" />
     <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
     <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />
@@ -126,6 +147,9 @@
     <EmbeddedResource Include="RunningMode\Component\FormTestRunning.resx">
       <DependentUpon>FormTestRunning.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

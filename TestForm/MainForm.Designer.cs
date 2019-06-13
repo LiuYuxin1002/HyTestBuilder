@@ -34,7 +34,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.configManager1 = new HyTestRTDataService.ConfigMode.Component.ConfigManager1(this.components);
+            this.configManager1 = new HyTestRTDataService.ConfigMode.Component.ControlConfigManager(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.deviceManagerButton = new System.Windows.Forms.Button();
             this.AdapterConfigButton = new System.Windows.Forms.Button();
@@ -113,7 +113,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private HyTestRTDataService.ConfigMode.Component.ConfigManager1 configManager1;
+        private HyTestRTDataService.ConfigMode.Component.ControlConfigManager configManager1;
         private System.Windows.Forms.Button AdapterConfigButton;
         private System.Windows.Forms.Button deviceManagerButton;
         private System.Windows.Forms.Button button2;

@@ -29,7 +29,7 @@ namespace HyTestRTDataService.ConfigMode
             loader = EtherCAT.getEtherCAT(true);
         }
 
-        public IList<IOdevice> getDeviceList()
+        public IList<IOdevice> GetDeviceList()
         {
             if (this.deviceList == null)
             {
@@ -43,7 +43,7 @@ namespace HyTestRTDataService.ConfigMode
             return this.deviceList;
         }
 
-        public IOdevice[] getDeviceArr()
+        public IOdevice[] GetDeviceArr()
         {
             if (this.deviceArray == null)
             {
@@ -52,21 +52,31 @@ namespace HyTestRTDataService.ConfigMode
             return this.deviceArray;
         }
 
-        public TreeNode getDeviceTree()
+        //获取设备树，保存到本地字段
+        public TreeNode GetDeviceTree()
         {
-            if (this.deviceArray == null)
-            {
-                getDeviceArr();
-            }
+            GetDeviceArr();
 
-            TreeNode rootNode = new TreeNode("Devices");
+            ArrToTreeNode();
+
+            return this.deviceTree;
+        }
+
+        public void SetDeviceTree(TreeNode deviceTree)
+        {
+            this.deviceTree = deviceTree;
+        }
+
+        public void ArrToTreeNode()
+        {
+            this.deviceTree = new TreeNode("Devices");
             TreeNode[] typeNode = new TreeNode[4];
             for (int i = 0; i < 4; i++)
             {
                 typeNode[i] = new TreeNode(type[i]);
             }
 
-            rootNode.Nodes.AddRange(typeNode);
+            deviceTree.Nodes.AddRange(typeNode);
 
             for (int i = 0; i < this.deviceNum; i++)
             {
@@ -80,14 +90,36 @@ namespace HyTestRTDataService.ConfigMode
                     slave.Nodes.Add(ch);
                 }
             }
-
-            return rootNode;
         }
 
+        //从IODevice数组生成dataTable
         public DataTable getDeviceTable()
         {
             //包括：id，设备名称，端口号，设备类型，所连接的变量名（可空）
-            return default(DataTable);
+            this.deviceTable = new DataTable();
+            deviceTable.Columns.Add("ID", typeof(int));
+            deviceTable.Columns.Add("设备名称", typeof(string));
+            deviceTable.Columns.Add("设备编号", typeof(string));
+            deviceTable.Columns.Add("端口号", typeof(string));
+            deviceTable.Columns.Add("设备类型", typeof(string));
+            deviceTable.Columns.Add("变量名", typeof(string));
+            //完善表
+            int id = 1;
+            foreach (IOdevice device in deviceArray)
+            {
+                DataRow row = deviceTable.NewRow();
+                row["ID"] = id++;
+                row["设备名称"] = device.name;
+                row["设备编号"] = device.id;
+                row["设备类型"] = type[device.type];
+                int channelnum = device.channelNum;
+                for(int i=0; i<channelnum; i++)
+                {
+                    row["端口号"] = i;
+                    row["变量名"] = "N/A";
+                }
+            }
+            return this.deviceTable;
         }
     }
 }

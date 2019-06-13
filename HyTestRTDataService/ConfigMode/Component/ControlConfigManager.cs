@@ -6,13 +6,13 @@ using System.ComponentModel.Design;
 namespace HyTestRTDataService.ConfigMode.Component
 {
     [Designer(typeof(ConfigDesigner), typeof(IDesigner))]
-    public partial class ConfigManager1 : Control
+    public partial class ControlConfigManager : Control
     {
-        public ConfigManager1()
+        public ControlConfigManager()
         {
             InitializeComponent();
         }
-        public ConfigManager1(IContainer container):this()
+        public ControlConfigManager(IContainer container):this()
         {
             container.Add(this);
         }
@@ -41,7 +41,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void OnSystemConfiguration(object sender, EventArgs args)
         {
-            ConfigManager1 confman = this.Component as ConfigManager1;
+            ControlConfigManager confman = this.Component as ControlConfigManager;
             if (confman == null)
                 return;
 

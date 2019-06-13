@@ -2,6 +2,7 @@
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System;
 using System.Data;
+using System.Windows.Forms;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -11,13 +12,13 @@ namespace HyTestRTDataService.ConfigMode
         //adapter config
         public DataTable adapterTable;
         public Adapter currentAdapter;
-        public string currentAdapterName;
-        public string currentAdapterDesc;
         public int adapterNum;
 
         //device config
         public DataTable deviceTable;
         public int deviceNum;
+        public IOdevice[] deviceArr;
+       // public TreeNode rootNode;
 
         //iomap config
         public SerializableDictionary<string, string> mapPortToName;

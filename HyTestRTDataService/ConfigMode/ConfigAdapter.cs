@@ -11,15 +11,17 @@ using HyTestRTDataService.ConfigMode.Component;
 
 namespace HyTestRTDataService.ConfigMode
 {
-    public class ConfigAdapter
+    public class ConfigAdapter:IConfigBase
     {
         IAdapterLoader loader;
 
-        private Config config = FormConfigManager.config;
-
         private IList<Adapter> adapterList;
         private IList<Adapter> ignoreList;  //忽略列表
-        
+
+        public DataTable adapterTable;
+        public Adapter currentAdapter;
+        public int adapterNum;
+
         public ConfigAdapter()
         {
             adapterList = new List<Adapter>();
@@ -36,34 +38,30 @@ namespace HyTestRTDataService.ConfigMode
             }
             Adapter[] adapterArr = loader.getAdapter();
             this.adapterList = adapterArr.ToList();
-            config.adapterNum = adapterList.Count;
+            this.adapterNum = adapterList.Count;
             return this.adapterList;
         } 
 
         public DataTable getAdapterTable()
         {
-            if (config.adapterTable == null)
-            {
-                getAdapterList();
+            Adapter[] adapterArr = loader.getAdapter();
 
-                DataTable adapterTable = new DataTable();
-                adapterTable.Columns.Add("ID", typeof(int));
-                adapterTable.Columns.Add("NAME", typeof(string));
-                adapterTable.Columns.Add("DESCRIPTION", typeof(string));
-                adapterTable.Columns.Add("STATE", typeof(string));
-                for (int i = 0; i < config.adapterNum; i++)
-                {
-                    DataRow row = adapterTable.NewRow();
-                    row[0] = i + 1;
-                    row[1] = adapterList[i].name;
-                    row[2] = adapterList[i].desc;
-                    row[3] = "OK";
-                    adapterTable.Rows.Add(row);
-                }
-                config.adapterTable = adapterTable;
+            this.adapterTable = new DataTable();
+            adapterTable.Columns.Add("ID", typeof(int));
+            adapterTable.Columns.Add("NAME", typeof(string));
+            adapterTable.Columns.Add("DESCRIPTION", typeof(string));
+            adapterTable.Columns.Add("STATE", typeof(string));
+            for (int i = 0; i < this.adapterNum; i++)
+            {
+                DataRow row = adapterTable.NewRow();
+                row[0] = i + 1;
+                row[1] = adapterArr[i].name;
+                row[2] = adapterArr[i].desc;
+                row[3] = "OK";
+                adapterTable.Rows.Add(row);
             }
 
-            return config.adapterTable;
+            return this.adapterTable;
         }
 
         public void refreshAdapterList()
@@ -74,11 +72,13 @@ namespace HyTestRTDataService.ConfigMode
         public void selectAdapter(int adapterId)//id是角标+1
         {
             //选取网卡，处理错误
-
             ErrorCode errCode = loader.setAdapter(adapterId);
-            config.currentAdapter = adapterList[adapterId - 1];
-            config.currentAdapterName = config.currentAdapter.name;
-            config.currentAdapterDesc = config.currentAdapter.desc;
+            this.currentAdapter = adapterList[adapterId - 1];
+        }
+
+        public void RefreshLocalConfigFromConfig()
+        {
+            throw new NotImplementedException();
         }
     }
 }

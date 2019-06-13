@@ -10,7 +10,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 {
     public partial class FormConfigManager : Form
     {
-        private ConfigManager1 confman;
+        private ControlConfigManager confman;
 
         public ConfigManager configManager;         //正经ConfigManager
         public static Config config = new Config();
@@ -26,7 +26,7 @@ namespace HyTestRTDataService.ConfigMode.Component
             ReadXmlConfigInfoIfExist();
         }
 
-        public FormConfigManager(ConfigManager1 confman) : this()
+        public FormConfigManager(ControlConfigManager confman) : this()
         {
             this.confman = confman;
         }
@@ -54,7 +54,19 @@ namespace HyTestRTDataService.ConfigMode.Component
         //将Config显示出来
         private void ShowConfigOnForm()
         {
+            //adapter
+            this.dataGridView1.DataSource = config.adapterTable;
 
+            //device
+            TreeNode tn = configManager.GetDeviceTree();
+            if(tn!=null)
+            {
+                this.treeView1.Nodes.Add(tn);
+            }
+
+            //iomap
+            this.dataGridView2.DataSource = config.ioMapTable;
+            
         }
 
         //配置一旦发生更改触发
@@ -80,7 +92,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_ScanAdapter_Click(object sender, EventArgs e)
         {
-            DataTable adapterTable = configManager.GetAdapterDT();
+            DataTable adapterTable = configManager.ScanAdapter();
             this.dataGridView1.DataSource = adapterTable;
         }
 
@@ -102,6 +114,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         private void btn_ScanDevices_Click(object sender, EventArgs e)
         {
             TreeNode rootDeviceTree = configManager.GetDeviceTree();
+            treeView1.Nodes.Clear();
             treeView1.Nodes.Add(rootDeviceTree);
         }
 
@@ -125,8 +138,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         //导入变量表
         private void btn_ImportExcel_Click(object sender, EventArgs e)
         {
-            configManager.GetIOmapFromExcel();
-            this.dataGridView2.DataSource = config.ioMapTable;
+            this.dataGridView2.DataSource = configManager.GetIOmapFromExcel();
         }
         //导出变量表
         private void btn_ExportExcel_Click(object sender, EventArgs e)
