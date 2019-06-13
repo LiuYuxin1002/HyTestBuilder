@@ -177,7 +177,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public void SetIOmapConfig(DataTable iomapTable)
         {
-            ConfigIOmap.SetIOmapInfo(ConfigIOmapInfo iomapInfo);//table一变全都要变
+            ConfigIOmap.SetIOmapInfo(iomapTable);//table一变全都要变
         }
     }
 }

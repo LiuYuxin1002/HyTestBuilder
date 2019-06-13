@@ -146,7 +146,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         //保存映射文件的更改
         private void btn_SaveIOmapChange_Click(object sender, EventArgs e)
         {
-            configManager.SetIOmapConfig();
+            configManager.SetIOmapConfig(this.dataGridView2.DataSource as DataTable);
             //OnConfigChanged();
         }
 
