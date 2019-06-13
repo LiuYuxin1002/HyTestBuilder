@@ -1,50 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Data;
 using HyTestEtherCAT;
-using HyTestRTDataService.ConfigMode.Component;
+using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode
 {
-    public class ConfigAdapter:IConfigBase
+    public class ConfigAdapter : IConfigBase
     {
         IAdapterLoader loader;
 
-        private IList<Adapter> adapterList;
-        private IList<Adapter> ignoreList;  //忽略列表
+        ConfigAdapterInfo adapterInfo;
 
+        public Adapter[] adapterArray;
         public DataTable adapterTable;
         public Adapter currentAdapter;
         public int adapterNum;
 
-        public ConfigAdapter()
+        public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            adapterList = new List<Adapter>();
             loader = EtherCAT.getEtherCAT(true);
 
-            getAdapterList();
+            this.adapterInfo = adapterInfo;
+            ReadConfig();
         }
-        
-        public IList<Adapter> getAdapterList()
-        {
-            if (this.adapterList != null)
-            {
-                //debug adapterList不为空
-            }
-            Adapter[] adapterArr = loader.getAdapter();
-            this.adapterList = adapterArr.ToList();
-            this.adapterNum = adapterList.Count;
-            return this.adapterList;
-        } 
 
         public DataTable getAdapterTable()
         {
-            Adapter[] adapterArr = loader.getAdapter();
+            adapterArray = loader.getAdapter();
+            this.adapterNum = adapterArray.Length;
 
             this.adapterTable = new DataTable();
             adapterTable.Columns.Add("ID", typeof(int));
@@ -55,8 +42,8 @@ namespace HyTestRTDataService.ConfigMode
             {
                 DataRow row = adapterTable.NewRow();
                 row[0] = i + 1;
-                row[1] = adapterArr[i].name;
-                row[2] = adapterArr[i].desc;
+                row[1] = adapterArray[i].name;
+                row[2] = adapterArray[i].desc;
                 row[3] = "OK";
                 adapterTable.Rows.Add(row);
             }
@@ -64,21 +51,21 @@ namespace HyTestRTDataService.ConfigMode
             return this.adapterTable;
         }
 
-        public void refreshAdapterList()
-        {
-
-        }
-
         public void selectAdapter(int adapterId)//id是角标+1
         {
             //选取网卡，处理错误
             ErrorCode errCode = loader.setAdapter(adapterId);
-            this.currentAdapter = adapterList[adapterId - 1];
+            this.currentAdapter = adapterArray[adapterId - 1];
         }
 
-        public void RefreshLocalConfigFromConfig()
+        public void ReadConfig()
         {
-            throw new NotImplementedException();
+            if (adapterInfo != null)
+            {
+                this.adapterTable = adapterInfo.adapterTable;
+                this.currentAdapter = adapterInfo.currentAdapter;
+                this.adapterNum = adapterInfo.adapterNum;
+            }
         }
     }
 }

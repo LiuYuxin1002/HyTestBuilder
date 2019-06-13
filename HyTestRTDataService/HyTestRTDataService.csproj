@@ -97,6 +97,10 @@
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
     <Compile Include="ConfigMode\ConfigEnvironment.cs" />
     <Compile Include="ConfigMode\IConfigBase.cs" />
+    <Compile Include="ConfigMode\MapEntities\ConfigAdapterInfo.cs" />
+    <Compile Include="ConfigMode\MapEntities\ConfigDeviceInfo.cs" />
+    <Compile Include="ConfigMode\MapEntities\ConfigIOmapInfo.cs" />
+    <Compile Include="ConfigMode\MapEntities\ConfigTestEnvironmentInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\Port.cs" />
     <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
     <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />

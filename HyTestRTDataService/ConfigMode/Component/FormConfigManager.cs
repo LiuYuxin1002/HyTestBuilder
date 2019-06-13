@@ -13,7 +13,6 @@ namespace HyTestRTDataService.ConfigMode.Component
         private ControlConfigManager confman;
 
         public ConfigManager configManager;         //正经ConfigManager
-        public static Config config = new Config();
 
         private bool isSavedConfig;
 
@@ -46,26 +45,25 @@ namespace HyTestRTDataService.ConfigMode.Component
             if (IsExist(configManager.ConfigFile))
             {
                 configManager.LoadConfig();
+                ShowConfigOnForm();
             }
-
-            ShowConfigOnForm();
         }
 
         //将Config显示出来
         private void ShowConfigOnForm()
         {
             //adapter
-            this.dataGridView1.DataSource = config.adapterTable;
+            this.dataGridView1.DataSource = configManager.GetAdapterTable();
 
             //device
-            TreeNode tn = configManager.GetDeviceTree();
+            TreeNode tn = configManager.GetDeviceTree(false);
             if(tn!=null)
             {
                 this.treeView1.Nodes.Add(tn);
             }
 
             //iomap
-            this.dataGridView2.DataSource = config.ioMapTable;
+            this.dataGridView2.DataSource = configManager.GetIOmapTable();
             
         }
 
@@ -92,7 +90,7 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_ScanAdapter_Click(object sender, EventArgs e)
         {
-            DataTable adapterTable = configManager.ScanAdapter();
+            DataTable adapterTable = configManager.GetAdapterTable();
             this.dataGridView1.DataSource = adapterTable;
         }
 
@@ -113,14 +111,14 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_ScanDevices_Click(object sender, EventArgs e)
         {
-            TreeNode rootDeviceTree = configManager.GetDeviceTree();
+            TreeNode rootDeviceTree = configManager.GetDeviceTree(true);
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(rootDeviceTree);
         }
 
         private void btn_SaveDeviceConfig_Click(object sender, EventArgs e)
         {
-            configManager.SaveDeviceConfig();
+            configManager.SetDeviceTree(treeView1.Nodes[0]);
             OnConfigChanged();
         }
 

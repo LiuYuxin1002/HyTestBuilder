@@ -8,6 +8,6 @@ namespace HyTestRTDataService.ConfigMode
 {
     public interface IConfigBase
     {
-        void RefreshLocalConfigFromConfig();
+        void ReadConfig();
     }
 }

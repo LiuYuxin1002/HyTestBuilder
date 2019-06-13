@@ -8,6 +8,7 @@ using HyTestIEEntity;
 using System.Windows.Forms;
 using System.Data;
 using HyTestEtherCAT;
+using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -17,14 +18,14 @@ namespace HyTestRTDataService.ConfigMode
         private IList<IOdevice> deviceList;
         private IList<IOdevice> ignoreList;
 
-        private IOdevice[] deviceArray;
+        public IOdevice[] deviceArray;
         private TreeNode deviceTree;
-        private DataTable deviceTable;
+        public DataTable deviceTable;
 
         public int deviceNum;
         private string[] type = { "DI", "DO", "AI", "AO", };
 
-        public ConfigDevice()
+        public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
             loader = EtherCAT.getEtherCAT(true);
         }
@@ -43,7 +44,7 @@ namespace HyTestRTDataService.ConfigMode
             return this.deviceList;
         }
 
-        public IOdevice[] GetDeviceArr()
+        public IOdevice[] ScanDeviceArr()
         {
             if (this.deviceArray == null)
             {
@@ -55,9 +56,9 @@ namespace HyTestRTDataService.ConfigMode
         //获取设备树，保存到本地字段
         public TreeNode GetDeviceTree()
         {
-            GetDeviceArr();
+            ScanDeviceArr();
 
-            ArrToTreeNode();
+            this.deviceTree = ArrToTreeNode(this.deviceArray);
 
             return this.deviceTree;
         }
@@ -67,20 +68,24 @@ namespace HyTestRTDataService.ConfigMode
             this.deviceTree = deviceTree;
         }
 
-        public void ArrToTreeNode()
+        /// <summary>
+        /// 将给定的IOdevice数组转为TreeNode
+        /// </summary>
+        /// <param name="deviceArray"></param>
+        public TreeNode ArrToTreeNode(IOdevice[] deviceArr)
         {
-            this.deviceTree = new TreeNode("Devices");
+            TreeNode tmpTree = new TreeNode("Devices");
             TreeNode[] typeNode = new TreeNode[4];
             for (int i = 0; i < 4; i++)
             {
                 typeNode[i] = new TreeNode(type[i]);
             }
 
-            deviceTree.Nodes.AddRange(typeNode);
+            tmpTree.Nodes.AddRange(typeNode);
 
             for (int i = 0; i < this.deviceNum; i++)
             {
-                IOdevice device = this.deviceArray[i];
+                IOdevice device = deviceArr[i];
                 TreeNode slave = new TreeNode(device.name);
                 int slaveType = device.type;
                 typeNode[slaveType - 1].Nodes.Add(slave);
@@ -90,6 +95,7 @@ namespace HyTestRTDataService.ConfigMode
                     slave.Nodes.Add(ch);
                 }
             }
+            return tmpTree;
         }
 
         //从IODevice数组生成dataTable

@@ -24,9 +24,15 @@ namespace HyTestRTDataService.RunningMode
         IWriter writer;
         private RealTimeDataPool datapool = new RealTimeDataPool();
 
+        private ConfigManager configManager;
+        private Config config;
+        private ConfigAdapterInfo adapterInfo;
+        private ConfigDeviceInfo deviceInfo;
+        private ConfigIOmapInfo iomapInfo;
+        private ConfigTestEnvironmentInfo testInfo;
+
         private System.Windows.Forms.Timer timer;
         private int refreshFrequency;
-        private Config config;
         private bool subscribeStart = true;
 
         private RunningServer()     //构造函数
@@ -43,8 +49,15 @@ namespace HyTestRTDataService.RunningMode
 
         private void InitializeConfig()
         {
-            config = FormConfigManager.config;
-            //config.LoadXmlConfig();
+            configManager = new ConfigManager();
+            configManager.LoadConfig();
+
+            config = ConfigManager.config;
+            adapterInfo = config.adapterInfo;
+            deviceInfo = config.deviceInfo;
+            iomapInfo = config.iomapInfo;
+            testInfo = config.testInfo;
+
             reader = ConfigProtocol.getReader();
             writer = ConfigProtocol.getWriter();
         }
@@ -53,7 +66,7 @@ namespace HyTestRTDataService.RunningMode
         {
             timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
-            timer.Interval = config.refreshFrequency;   //可能有未实例化对象错误
+            timer.Interval = this.testInfo.refreshFrequency;   //可能有未实例化对象错误
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -83,9 +96,9 @@ namespace HyTestRTDataService.RunningMode
         private double ReadDataFromDevice(int index)
         {
             double data = -1;
-            string varName = config.mapIndexToName[index];
-            Port varPort = FormConfigManager.GetPort(config.mapNameToPort[varName]);
-            Type varType = Type.GetType(config.mapNameToType[varName]);
+            string varName = iomapInfo.mapIndexToName[index];
+            Port varPort = FormConfigManager.GetPort(iomapInfo.mapNameToPort[varName]);
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
 
             if (varType == typeof(bool))
             {
@@ -121,9 +134,9 @@ namespace HyTestRTDataService.RunningMode
         public T NormalRead<T>(string varName)
         {
             T value;
-            Type varType = Type.GetType(config.mapNameToType[varName]);
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
             //Port varPort = config.mapNameToPort[varName];
-            int varIndex = config.mapNameToIndex[varName];
+            int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
             {
                 int value1 = DataTransformer.TransformingInt(datapool.rdataList[varIndex]);
@@ -144,8 +157,8 @@ namespace HyTestRTDataService.RunningMode
 
         public void NormalWrite<T>(string varName, T value)
         {
-            Type varType = Type.GetType(config.mapNameToType[varName]);
-            int varIndex = config.mapNameToIndex[varName];
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
             {
                 int value1 = (int)Convert.ChangeType(value, typeof(int));

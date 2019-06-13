@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+using HyTestRTDataService.ConfigMode.MapEntities;
+using HyTestIEEntity;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -18,7 +20,7 @@ namespace HyTestRTDataService.ConfigMode
         {
             get
             {
-                return Application.StartupPath + @"\\opcserver.xml";
+                return Application.StartupPath + @"\\config.xml";
             }
         }
 
@@ -26,14 +28,17 @@ namespace HyTestRTDataService.ConfigMode
         {
             LoadConfig();
 
-            this.configAdapter = new ConfigAdapter();
-            this.configDevice = new ConfigDevice();
-            this.configIOmap = new ConfigIOmap();
+            this.configAdapter = new ConfigAdapter(config.adapterInfo);
+            this.configDevice = new ConfigDevice(config.deviceInfo);
+            this.configIOmap = new ConfigIOmap(config.iomapInfo);
         }
 
+        /// <summary>
+        /// 把本地配置文件读取到Config对象中，会抛出System.Exception异常
+        /// </summary>
         public void LoadConfig()
         {
-            if (!File.Exists(ConfigFile))
+            if (!File.Exists(ConfigFile))   //安全检查
                 return;
 
             try
@@ -48,12 +53,40 @@ namespace HyTestRTDataService.ConfigMode
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.StackTrace + "\n" + ex.Message);
+                throw new System.Exception();
             }
+        }
+
+        private void MoveSubconfigToConfig()
+        {
+            //adapter
+            config.adapterInfo.adapterNum = configAdapter.adapterNum;
+            config.adapterInfo.adapterTable = configAdapter.adapterTable;
+            config.adapterInfo.currentAdapter = configAdapter.currentAdapter;
+            //device
+            config.deviceInfo.deviceArr = configDevice.deviceArray;
+            config.deviceInfo.deviceNum = configDevice.deviceNum;
+            config.deviceInfo.deviceTable = configDevice.deviceTable;
+            //iomap
+            config.iomapInfo.inputVarNum = configIOmap.inputVarNum;
+            config.iomapInfo.outputVarNum = configIOmap.outputVarNum;
+            config.iomapInfo.ioMapTable = configIOmap.ioMapTable;
+            config.iomapInfo.mapIndexToName = configIOmap.mapIndexToName;
+            config.iomapInfo.mapNameToIndex = configIOmap.mapNameToIndex;
+            config.iomapInfo.mapNameToPort = configIOmap.mapNameToPort;
+            config.iomapInfo.mapPortToName = configIOmap.mapPortToName;
+            config.iomapInfo.mapNameToType = configIOmap.mapNameToType;
+
+            //database
+            //environment
+            //...
         }
 
         public void SaveConfig()
         {
+            //将所有配置集中到Config对象
+            MoveSubconfigToConfig();
+
             using (FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
             {
                 XmlWriter xw = XmlWriter.Create(fs);
@@ -71,10 +104,7 @@ namespace HyTestRTDataService.ConfigMode
             }
         }
 
-        public void SaveDeviceConfig()
-        {
-
-        }
+        
 
         public void SaveIOmapConfig()
         {
@@ -91,11 +121,10 @@ namespace HyTestRTDataService.ConfigMode
 
         }
 
-        //具体配置过程：上面都是加载旧的XML的方法，但是每个配置过程都有获取新的配置的途径
-        //下面就是新配置的获取和保存，具体的实现都在各个配置类里面封装
-
         //AdapterConfig
-        public DataTable ScanAdapter()
+
+        //从底层获取真实adapter列表
+        public DataTable GetAdapterTable()
         {
             return configAdapter.getAdapterTable();
         }
@@ -106,9 +135,18 @@ namespace HyTestRTDataService.ConfigMode
         }
 
         //DeviceConfig
-        public TreeNode GetDeviceTree()
+        public TreeNode GetDeviceTree(bool needNew)
         {
-            return configDevice.GetDeviceTree();
+            IOdevice[] deviceArr;
+            if (needNew)
+            {
+                deviceArr = configDevice.ScanDeviceArr();
+            }
+            else
+            {
+                deviceArr = config.deviceInfo.deviceArr;
+            }
+            return configDevice.ArrToTreeNode(deviceArr);
         }
 
         public void SetDeviceTree(TreeNode tn)
@@ -117,6 +155,12 @@ namespace HyTestRTDataService.ConfigMode
         }
 
         //MapConfig
+        //获取本地配置的IOmap，由于已经从Config加载到本地了，所以直接返回就行
+        public DataTable GetIOmapTable()
+        {
+            return configIOmap.ioMapTable;
+        }
+
         public DataTable GetIOmapFromExcel()
         {
             return configIOmap.getIOmapFromExcel();
@@ -131,9 +175,9 @@ namespace HyTestRTDataService.ConfigMode
             configIOmap.saveIOmapToExcel();
         }
 
-        public void SetIOmapConfig()
+        public void SetIOmapConfig(DataTable iomapTable)
         {
-
+            ConfigIOmap.SetIOmapInfo(ConfigIOmapInfo iomapInfo);//table一变全都要变
         }
     }
 }

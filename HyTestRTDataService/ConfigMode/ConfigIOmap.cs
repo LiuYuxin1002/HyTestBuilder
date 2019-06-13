@@ -1,19 +1,14 @@
 ﻿using HyTestRTDataService.ConfigMode.MapEntities;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HyTestRTDataService.Utils;
-using HyTestRTDataService.ConfigMode.Component;
+using System;
 
 namespace HyTestRTDataService.ConfigMode
 {
     /// <summary>
     /// 通过datatable初始化map
     /// </summary>
-    class ConfigIOmap
+    public class ConfigIOmap
     {
         public SerializableDictionary<string, string> mapPortToName;
         public SerializableDictionary<string, string> mapNameToPort;
@@ -22,6 +17,12 @@ namespace HyTestRTDataService.ConfigMode
         public SerializableDictionary<string, string> mapNameToType;
         public DataTable ioMapTable;
         public int inputVarNum, outputVarNum;
+
+        public ConfigIOmap(ConfigIOmapInfo iomapInfo)
+        {
+
+        }
+
         //从xml获取IOmapTable
         private void initIOmapTable()
         {
@@ -53,6 +54,11 @@ namespace HyTestRTDataService.ConfigMode
         {
             ExcelHelper.DataTableToExcel(this.ioMapTable);
             //throw new NotImplementedException();
+        }
+
+        internal static void SetIOmapInfo(DataTable iomapTable)
+        {
+            //重新映射，通过IOmapTable
         }
     }
 }
