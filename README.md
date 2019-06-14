@@ -40,7 +40,28 @@
 1. 将RunningServer向下添加了数值转换类；
 2. 将RunningServer向上添加了数据读写函数并完善了数据订阅；
 问题： 
-1.为绑定事件建立委托；
-2.搭建界面进行读写测试；
-3.完善之前的程序留空；
-4.维护设备扫描的bug；
+1. 为绑定事件建立委托；
+2. 搭建界面进行读写测试；
+3. 完善之前的程序留空；
+4. 维护设备扫描的bug；
+
+##2019.6.12
+
+
+##2019.6.13
+更新：
+1. 重构ConfigManager，使之变为ConfigForm和各SubConfig之间的桥梁。主要体现在
+	1. 唯一拥有Config对象，并能对其进行各种操作；
+	2. 唯一拥有各SubConfig对象，可操作；
+	3. 调用者拥有ConfigManager对象对所有配置进行操作；
+2. 重构subconfig，使之初始化方便：
+	1. 抽取关键参数为ConfigXXXInfo类，在subConfig中添加接收ConfigXXXInfo的构造函数；
+	2. Config类替换参数为ConfigXXXInfo对象，统一进行初始化；
+	3. 形成Config和SubConfig各有一套配置数据的形式
+	4. 两套配置数据的关系如下 => Config的改变一定会引起SubConfig参数的改变；SubConfig参数的改变不影响Config的改变；
+	点击保存后Config获取Subconfig的值对自身进行数据刷新
+3. 完善IOmap的配置，实现了了Excel的导入导出功能；
+问题： 
+1. IOmap配置部分还有问题：Config配置信息->IOmapConfig配置信息这一块还没有做好
+2. 上面做好的同时，就要保证导入数据的正确性，需要添加Datatable的格式校验
+3. StringToPort这个函数还是要考虑撤掉
