@@ -11,5 +11,10 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     {
         public Protocol currentProtocol;
         public int refreshFrequency;
+
+        public ConfigTestEnvironmentInfo()
+        {
+
+        }
     }
 }

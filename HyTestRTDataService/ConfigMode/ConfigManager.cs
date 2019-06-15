@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using HyTestIEEntity;
+using System;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -26,6 +27,12 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigManager()
         {
+            InitializeComponent();
+        }
+
+        //加载xmlconfig，初始化subconfig
+        private void InitializeComponent()
+        {
             LoadConfig();
 
             this.configAdapter = new ConfigAdapter(config.adapterInfo);
@@ -46,6 +53,9 @@ namespace HyTestRTDataService.ConfigMode
                 using (FileStream fs = new FileStream(ConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     XmlReader xr = XmlReader.Create(fs);
+
+                    //if (xr.AttributeCount == 0) return;
+
                     XmlSerializer xs = new XmlSerializer(typeof(Config));
                     config = xs.Deserialize(xr) as Config;
                     fs.Close();
@@ -55,28 +65,29 @@ namespace HyTestRTDataService.ConfigMode
             {
                 throw new System.Exception();
             }
+            OnConfigChanged();
+        }
+
+        //当config变化时触发，更新所有SubConfig
+        private void OnConfigChanged()
+        {
+            if(configAdapter!=null && configDevice!=null && configIOmap != null)
+            {
+                configAdapter.ReadSubConfig(config.adapterInfo);
+                configDevice.ReadSubConfig(config.deviceInfo);
+                configIOmap.iomapInfo = config.iomapInfo;
+            }
+            
         }
 
         private void MoveSubconfigToConfig()
         {
             //adapter
-            config.adapterInfo.adapterNum = configAdapter.adapterNum;
-            config.adapterInfo.adapterTable = configAdapter.adapterTable;
-            config.adapterInfo.currentAdapter = configAdapter.currentAdapter;
+            config.adapterInfo = (ConfigAdapterInfo)configAdapter.GetSubConfig();
             //device
-            config.deviceInfo.deviceArr = configDevice.deviceArray;
-            config.deviceInfo.deviceNum = configDevice.deviceNum;
-            config.deviceInfo.deviceTable = configDevice.deviceTable;
+            config.deviceInfo = (ConfigDeviceInfo)configDevice.GetSubConfig();
             //iomap
-            config.iomapInfo.inputVarNum = configIOmap.inputVarNum;
-            config.iomapInfo.outputVarNum = configIOmap.outputVarNum;
-            config.iomapInfo.ioMapTable = configIOmap.ioMapTable;
-            config.iomapInfo.mapIndexToName = configIOmap.mapIndexToName;
-            config.iomapInfo.mapNameToIndex = configIOmap.mapNameToIndex;
-            config.iomapInfo.mapNameToPort = configIOmap.mapNameToPort;
-            config.iomapInfo.mapPortToName = configIOmap.mapPortToName;
-            config.iomapInfo.mapNameToType = configIOmap.mapNameToType;
-
+            config.iomapInfo = configIOmap.iomapInfo;
             //database
             //environment
             //...
@@ -94,71 +105,53 @@ namespace HyTestRTDataService.ConfigMode
                 try
                 {
                     xs = new XmlSerializer(typeof(Config));
+                    xs.Serialize(xw, config);
                 }
                 catch (System.Exception ex)
                 {
                     //debug
                 }
-                xs.Serialize(xw, config);
                 fs.Close();
             }
         }
 
-        
-
-        public void SaveIOmapConfig()
-        {
-
-        }
-
-        public void SaveEnvironmentConfig()
-        {
-
-        }
-
-        public void SaveDatabaseConfig()
-        {
-
-        }
-
         //AdapterConfig
 
-        //从底层获取真实adapter列表
-        public DataTable GetAdapterTable()
+        public DataTable GetAdapterTableWithRefresh()   //刷新
         {
-            return configAdapter.getAdapterTable();
+            return configAdapter.getAdapterTable(true);
         }
 
-        public void SetAdapterSelected(int id)
+        public DataTable GetAdapterTableNoRefresh()     //不刷新
         {
-            configAdapter.selectAdapter(id);
+            return configAdapter.getAdapterTable(false);
+        }
+
+        public void SaveAdapterConfig(int id)           //保存
+        {
+            configAdapter.SaveSubConfig(id);
         }
 
         //DeviceConfig
-        public TreeNode GetDeviceTree(bool needNew)
+        public TreeNode GetDeviceTreeWithRefresh()      //刷新
         {
-            IOdevice[] deviceArr;
-            if (needNew)
-            {
-                deviceArr = configDevice.ScanDeviceArr();
-            }
-            else
-            {
-                deviceArr = config.deviceInfo.deviceArr;
-            }
-            return configDevice.ArrToTreeNode(deviceArr);
+            return configDevice.GetDeviceTree(true);
+        }
+        public TreeNode GetDeviceTreeNoRefresh()        //不刷新
+        {
+            return configDevice.GetDeviceTree(false);
         }
 
-        public void SetDeviceTree(TreeNode tn)
+        public void SaveDeviceConfig(TreeNode tn)       //保存
         {
-            configDevice.SetDeviceTree(tn);
+            configDevice.SaveSubConfig(tn);
         }
 
         //MapConfig
         //获取本地配置的IOmap，由于已经从Config加载到本地了，所以直接返回就行
         public DataTable GetIOmapTable()
         {
-            return configIOmap.ioMapTable;
+            return configIOmap.iomapInfo.ioMapTable;
         }
 
         public DataTable GetIOmapFromExcel()

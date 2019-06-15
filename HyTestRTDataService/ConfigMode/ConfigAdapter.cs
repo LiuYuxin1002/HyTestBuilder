@@ -9,63 +9,73 @@ using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode
 {
+    /* 最主要的数据： 
+     * adapter[] 底层直接获取到的
+     * datatable adapter转化来的，主要流通手段
+     * current adapter 所选adapter对象
+     * adapter number adapter的个数
+     */
     public class ConfigAdapter : IConfigBase
     {
-        IAdapterLoader loader;
+        private IAdapterLoader loader;
 
-        ConfigAdapterInfo adapterInfo;
-
-        public Adapter[] adapterArray;
-        public DataTable adapterTable;
-        public Adapter currentAdapter;
-        public int adapterNum;
+        private ConfigAdapterInfo adapterInfo;
+        
+        private Adapter[] adapterArray;
 
         public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            loader = EtherCAT.getEtherCAT(true);
+            loader = EtherCAT.getEtherCAT(true);//后面要改成选择型
 
-            this.adapterInfo = adapterInfo;
-            ReadConfig();
+            ReadSubConfig(adapterInfo);
         }
 
-        public DataTable getAdapterTable()
+        public DataTable getAdapterTable(bool refresh)
         {
-            adapterArray = loader.getAdapter();
-            this.adapterNum = adapterArray.Length;
-
-            this.adapterTable = new DataTable();
-            adapterTable.Columns.Add("ID", typeof(int));
-            adapterTable.Columns.Add("NAME", typeof(string));
-            adapterTable.Columns.Add("DESCRIPTION", typeof(string));
-            adapterTable.Columns.Add("STATE", typeof(string));
-            for (int i = 0; i < this.adapterNum; i++)
+            if (refresh)
             {
-                DataRow row = adapterTable.NewRow();
-                row[0] = i + 1;
-                row[1] = adapterArray[i].name;
-                row[2] = adapterArray[i].desc;
-                row[3] = "OK";
-                adapterTable.Rows.Add(row);
-            }
+                ScanSubConfig();
+                adapterInfo.adapterNum = adapterArray.Length;
 
-            return this.adapterTable;
+                adapterInfo.adapterTable = new DataTable();
+                adapterInfo.adapterTable.TableName = "AdapterTable";
+                adapterInfo.adapterTable.Columns.Add("ID", typeof(int));
+                adapterInfo.adapterTable.Columns.Add("NAME", typeof(string));
+                adapterInfo.adapterTable.Columns.Add("DESCRIPTION", typeof(string));
+                adapterInfo.adapterTable.Columns.Add("STATE", typeof(string));
+                for (int i = 0; i < adapterInfo.adapterNum; i++)
+                {
+                    DataRow row = adapterInfo.adapterTable.NewRow();
+                    row[0] = i + 1;                         //ID
+                    row[1] = adapterArray[i].name;          //Name
+                    row[2] = adapterArray[i].desc;          //description
+                    row[3] = "OK";                          //state
+                    adapterInfo.adapterTable.Rows.Add(row);
+                }
+            }
+            return adapterInfo.adapterTable;
         }
 
-        public void selectAdapter(int adapterId)//id是角标+1
+        public void ReadSubConfig(object configInfo)
         {
-            //选取网卡，处理错误
+            this.adapterInfo = (ConfigAdapterInfo)configInfo;
+        }
+
+        public object GetSubConfig()
+        {
+            return this.adapterInfo;
+        }
+
+        public void ScanSubConfig()
+        {
+            this.adapterArray = loader.getAdapter();
+        }
+
+        public void SaveSubConfig(object var)
+        {
+            int adapterId = (int)var;
             ErrorCode errCode = loader.setAdapter(adapterId);
-            this.currentAdapter = adapterArray[adapterId - 1];
-        }
-
-        public void ReadConfig()
-        {
-            if (adapterInfo != null)
-            {
-                this.adapterTable = adapterInfo.adapterTable;
-                this.currentAdapter = adapterInfo.currentAdapter;
-                this.adapterNum = adapterInfo.adapterNum;
-            }
+            adapterInfo.currentAdapter = adapterArray[adapterId];
         }
     }
 }

@@ -10,5 +10,10 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public DataTable adapterTable;
         public Adapter currentAdapter;
         public int adapterNum;
+
+        public ConfigAdapterInfo()
+        {
+
+        }
     }
 }

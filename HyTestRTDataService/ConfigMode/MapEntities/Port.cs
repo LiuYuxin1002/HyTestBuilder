@@ -9,6 +9,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     /// <summary>
     /// 硬件端口信息类
     /// </summary>
+    [Serializable]
     public class Port
     {
         public string portId;   //数据类型+序号

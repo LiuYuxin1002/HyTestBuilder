@@ -16,6 +16,10 @@ namespace HyTestRTDataService.ConfigMode
 
         public Config()
         {
+            adapterInfo = new ConfigAdapterInfo();
+            deviceInfo = new ConfigDeviceInfo();
+            iomapInfo = new ConfigIOmapInfo();
+            testInfo = new ConfigTestEnvironmentInfo();
         }
     }
 }

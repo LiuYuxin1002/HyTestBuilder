@@ -13,5 +13,10 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public SerializableDictionary<string, string> mapNameToType;
         public DataTable ioMapTable;
         public int inputVarNum, outputVarNum;
+
+        public ConfigIOmapInfo()
+        {
+
+        }
     }
 }

@@ -10,5 +10,10 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public DataTable deviceTable;
         public int deviceNum;
         public IOdevice[] deviceArr;
+
+        public ConfigDeviceInfo()
+        {
+
+        }
     }
 }

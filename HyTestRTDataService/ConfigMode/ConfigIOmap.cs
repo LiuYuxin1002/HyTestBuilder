@@ -10,17 +10,19 @@ namespace HyTestRTDataService.ConfigMode
     /// </summary>
     public class ConfigIOmap
     {
-        public SerializableDictionary<string, string> mapPortToName;
-        public SerializableDictionary<string, string> mapNameToPort;
-        public SerializableDictionary<int, string> mapIndexToName;
-        public SerializableDictionary<string, int> mapNameToIndex;
-        public SerializableDictionary<string, string> mapNameToType;
-        public DataTable ioMapTable;
-        public int inputVarNum, outputVarNum;
+        public ConfigIOmapInfo iomapInfo;
+
+        //public SerializableDictionary<string, string> mapPortToName;
+        //public SerializableDictionary<string, string> mapNameToPort;
+        //public SerializableDictionary<int, string> mapIndexToName;
+        //public SerializableDictionary<string, int> mapNameToIndex;
+        //public SerializableDictionary<string, string> mapNameToType;
+        //public DataTable ioMapTable;
+        //public int inputVarNum, outputVarNum;
 
         public ConfigIOmap(ConfigIOmapInfo iomapInfo)
         {
-
+            this.iomapInfo = iomapInfo;
         }
 
         //从xml获取IOmapTable
@@ -31,19 +33,19 @@ namespace HyTestRTDataService.ConfigMode
 
         public DataTable getIOmapFromExcel()
         {
-            this.ioMapTable = ExcelHelper.SelectExcelToDataTable();
-            return this.ioMapTable;
+            iomapInfo.ioMapTable = ExcelHelper.SelectExcelToDataTable();
+            return iomapInfo.ioMapTable;
         }
 
         //public的初始化方法
         public void initIOmap()
         {
-            if (this.ioMapTable == null)
+            if (iomapInfo.ioMapTable == null)
             {
                 initIOmapTable();
             }
             //将table的值用来初始化map
-            foreach (DataRow dr in this.ioMapTable.Rows)
+            foreach (DataRow dr in iomapInfo.ioMapTable.Rows)
             {
 
             }
@@ -52,7 +54,7 @@ namespace HyTestRTDataService.ConfigMode
 
         internal void saveIOmapToExcel()
         {
-            ExcelHelper.DataTableToExcel(this.ioMapTable);
+            ExcelHelper.DataTableToExcel(iomapInfo.ioMapTable);
             //throw new NotImplementedException();
         }
 
