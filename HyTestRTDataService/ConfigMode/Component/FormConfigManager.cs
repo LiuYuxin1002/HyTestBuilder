@@ -19,6 +19,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         public FormConfigManager()
         {
             InitializeComponent();
+            InitializeIOmapDataGridView();
 
             configManager = new ConfigManager();
 
@@ -31,8 +32,55 @@ namespace HyTestRTDataService.ConfigMode.Component
         }
 
         #region method
+        //初始化Datagridview2
+        private void InitializeIOmapDataGridView()
+        {
+            DataGridViewTextBoxColumn ID = new DataGridViewTextBoxColumn();
+            ID.DataPropertyName = "ID";
+            ID.HeaderText = "ID";
+            ID.Visible = true;
+            this.dataGridView2.Columns.Add(ID);
 
-       
+            DataGridViewTextBoxColumn Name = new DataGridViewTextBoxColumn();
+            Name.DataPropertyName = "变量名";
+            Name.HeaderText = "变量名";
+            Name.Visible = true;
+            this.dataGridView2.Columns.Add(Name);
+
+            DataGridViewComboBoxColumn VarType = new DataGridViewComboBoxColumn();
+            VarType.DataPropertyName = "变量类型";
+            VarType.HeaderText = "变量类型";
+            VarType.DataSource = new string[]
+            {
+                "System.Int",
+                "System.Double",
+                "System.Bool",
+                "System.String",
+            };
+            VarType.Visible = true;
+            this.dataGridView2.Columns.Add(VarType);
+
+            DataGridViewComboBoxColumn IOType = new DataGridViewComboBoxColumn();
+            IOType.DataPropertyName = "IO类型";
+            IOType.HeaderText = "IO类型";
+            IOType.DataSource = new string[]
+            {
+                "DI",
+                "DO",
+                "AI",
+                "AO",
+            };
+            IOType.Visible = true;
+            this.dataGridView2.Columns.Add(IOType);
+
+            DataGridViewTextBoxColumn Port = new DataGridViewTextBoxColumn();
+            Port.DataPropertyName = "端口号";
+            Port.HeaderText = "端口号";
+            Port.Visible = true;
+            this.dataGridView2.Columns.Add(Port);
+
+        }
+
         //判断配置文件是否存在
         private bool IsExist(string filePath)
         {
@@ -63,7 +111,7 @@ namespace HyTestRTDataService.ConfigMode.Component
             }
 
             //iomap
-            this.dataGridView2.DataSource = configManager.GetIOmapTable();
+            this.dataGridView2.DataSource = configManager.GetIOmapTableNoRefresh();
             
         }
 
@@ -136,7 +184,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         //导入变量表
         private void btn_ImportExcel_Click(object sender, EventArgs e)
         {
-            this.dataGridView2.DataSource = configManager.GetIOmapFromExcel();
+            this.dataGridView2.DataSource = configManager.GetIOmapWithRefresh();
         }
         //导出变量表
         private void btn_ExportExcel_Click(object sender, EventArgs e)
@@ -146,7 +194,7 @@ namespace HyTestRTDataService.ConfigMode.Component
         //保存映射文件的更改
         private void btn_SaveIOmapChange_Click(object sender, EventArgs e)
         {
-            configManager.SetIOmapConfig(this.dataGridView2.DataSource as DataTable);
+            configManager.SaveIOmapConfig(this.dataGridView2.DataSource as DataTable);
             //OnConfigChanged();
         }
 

@@ -97,6 +97,7 @@
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
     <Compile Include="ConfigMode\ConfigEnvironment.cs" />
     <Compile Include="ConfigMode\IConfigBase.cs" />
+    <Compile Include="ConfigMode\MapEntities\Arguments.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigAdapterInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigDeviceInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigIOmapInfo.cs" />

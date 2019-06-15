@@ -49,7 +49,6 @@ namespace HyTestRTDataService.ConfigMode
             if (refresh || deviceInfo.deviceTable==null)
             {
                 ScanSubConfig();
-                this.deviceInfo.deviceTable = ArrToDataTable();
             }
             
             return deviceInfo.deviceTable;
@@ -87,6 +86,7 @@ namespace HyTestRTDataService.ConfigMode
         {
             //包括：id，设备名称，端口号，设备类型，所连接的变量名（可空）
             DataTable table = new DataTable();
+            table.TableName = "DEVICE_TABLE";
             table.Columns.Add("ID", typeof(int));
             table.Columns.Add("设备名称", typeof(string));
             table.Columns.Add("设备编号", typeof(string));
@@ -126,12 +126,25 @@ namespace HyTestRTDataService.ConfigMode
         public void ScanSubConfig()
         {
             this.deviceInfo.deviceArr = loader.getDevice();
-            this.deviceInfo.deviceNum = this.deviceInfo.deviceArr.Length;
+            RefreshDataWithArray();
         }
 
         public void SaveSubConfig(object var)
         {
             this.deviceTree = (TreeNode)var;
+            RefreshDataWithTree();
+        }
+
+        //根据树刷新全局
+        private void RefreshDataWithTree()
+        {
+            
+        }
+        //根据数组刷新全局
+        private void RefreshDataWithArray()
+        {
+            this.deviceInfo.deviceNum = this.deviceInfo.deviceArr.Length;
+            this.deviceInfo.deviceTable = ArrToDataTable();
         }
         #endregion
 

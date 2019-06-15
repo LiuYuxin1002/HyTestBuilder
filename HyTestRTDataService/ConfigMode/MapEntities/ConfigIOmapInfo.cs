@@ -16,7 +16,11 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
 
         public ConfigIOmapInfo()
         {
-
+            mapPortToName = new SerializableDictionary<string, string>();
+            mapNameToPort = new SerializableDictionary<string, string>();
+            mapIndexToName = new SerializableDictionary<int, string>();
+            mapNameToIndex = new SerializableDictionary<string, int>();
+            mapNameToType = new SerializableDictionary<string, string>();
         }
     }
 }

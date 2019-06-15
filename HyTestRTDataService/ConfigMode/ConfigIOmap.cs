@@ -5,12 +5,14 @@ using System;
 
 namespace HyTestRTDataService.ConfigMode
 {
-    /// <summary>
-    /// 通过datatable初始化map
-    /// </summary>
-    public class ConfigIOmap
+    /* 最主要的数据： 
+     * iomapTable[]     Excel直接获取到的，主要展示手段
+     * Maps             table转化而来，主要计算工具
+     * ioNum            table计算得到，主要计算辅助
+     */
+    public class ConfigIOmap : IConfigBase
     {
-        public ConfigIOmapInfo iomapInfo;
+        private ConfigIOmapInfo iomapInfo;
 
         //public SerializableDictionary<string, string> mapPortToName;
         //public SerializableDictionary<string, string> mapNameToPort;
@@ -22,45 +24,95 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigIOmap(ConfigIOmapInfo iomapInfo)
         {
-            this.iomapInfo = iomapInfo;
+            ReadSubConfig(iomapInfo);
         }
 
         //从xml获取IOmapTable
         private void initIOmapTable()
         {
-
+            DataTable iomapTable = new DataTable();
+            iomapTable.TableName = "IOmapTable";
+            DataColumn colId = iomapTable.Columns.Add("ID", typeof(int));
+            DataColumn colName = iomapTable.Columns.Add("变量名", typeof(string));
+            DataColumn colType = iomapTable.Columns.Add("变量类型", typeof(string));
+            DataColumn colIO = iomapTable.Columns.Add("IO类型", typeof(string));
+            DataColumn colPort = iomapTable.Columns.Add("端口号", typeof(string));
+            iomapInfo.ioMapTable = iomapTable;
         }
 
-        public DataTable getIOmapFromExcel()
+        //table结构：ID，变量名，数据类型，输入输入，端口
+        private void RefreshMap()
         {
-            iomapInfo.ioMapTable = ExcelHelper.SelectExcelToDataTable();
-            return iomapInfo.ioMapTable;
+            iomapInfo.ioMapTable.TableName = "IOmapTable";
+            iomapInfo.inputVarNum = iomapInfo.outputVarNum = 0;
+            DataTable mapTable = iomapInfo.ioMapTable;
+            //通过IOmapTable建立映射
+            foreach (DataRow row in mapTable.Rows)
+            {
+                int id = (int)row["ID"];
+                string name = (string)row["变量名"];
+                string type = (string)row["变量类型"];
+                string iotype = (string)row["IO类型"];
+                string port = (string)row["端口号"];
+
+                iomapInfo.mapIndexToName[id] = name;
+                iomapInfo.mapNameToIndex[name] = id;
+                iomapInfo.mapNameToPort[name] = port;
+                iomapInfo.mapPortToName[port] = name;
+                iomapInfo.mapNameToType[name] = type;
+
+                if (iotype.Contains("I"))
+                {
+                    iomapInfo.inputVarNum++;
+                }
+                else if (iotype.Contains("O"))
+                {
+                    iomapInfo.outputVarNum++;
+                }
+            }
         }
 
-        //public的初始化方法
-        public void initIOmap()
+        public DataTable GetIOmapTable(bool refresh)
         {
-            if (iomapInfo.ioMapTable == null)
+            if (refresh)
+            {
+                ScanSubConfig();
+            }
+            else if (iomapInfo.ioMapTable == null)
             {
                 initIOmapTable();
             }
-            //将table的值用来初始化map
-            foreach (DataRow dr in iomapInfo.ioMapTable.Rows)
-            {
-
-            }
-
+            return this.iomapInfo.ioMapTable;
         }
 
-        internal void saveIOmapToExcel()
+        #region 公共方法
+        public void ReadSubConfig(object configInfo)
+        {
+            this.iomapInfo = (ConfigIOmapInfo)configInfo;
+        }
+
+        public object GetSubConfig()
+        {
+            return this.iomapInfo;
+        }
+
+        public void ScanSubConfig()
+        {
+            iomapInfo.ioMapTable = ExcelHelper.SelectExcelToDataTable();
+            RefreshMap();
+        }
+
+        public void SaveSubConfig(object var)
+        {
+            this.iomapInfo.ioMapTable = (DataTable)var;
+            RefreshMap();
+        }
+        #endregion
+
+
+        public void saveIOmapToExcel()
         {
             ExcelHelper.DataTableToExcel(iomapInfo.ioMapTable);
-            //throw new NotImplementedException();
-        }
-
-        internal static void SetIOmapInfo(DataTable iomapTable)
-        {
-            //重新映射，通过IOmapTable
         }
     }
 }

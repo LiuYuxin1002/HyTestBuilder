@@ -63,7 +63,7 @@ namespace HyTestRTDataService.ConfigMode
             }
             catch (System.Exception ex)
             {
-                throw new System.Exception();
+                MessageBox.Show(ex.Message);
             }
             OnConfigChanged();
         }
@@ -75,7 +75,7 @@ namespace HyTestRTDataService.ConfigMode
             {
                 configAdapter.ReadSubConfig(config.adapterInfo);
                 configDevice.ReadSubConfig(config.deviceInfo);
-                configIOmap.iomapInfo = config.iomapInfo;
+                configIOmap.ReadSubConfig(config.iomapInfo);
             }
             
         }
@@ -87,7 +87,7 @@ namespace HyTestRTDataService.ConfigMode
             //device
             config.deviceInfo = (ConfigDeviceInfo)configDevice.GetSubConfig();
             //iomap
-            config.iomapInfo = configIOmap.iomapInfo;
+            config.iomapInfo = (ConfigIOmapInfo)configIOmap.GetSubConfig();
             //database
             //environment
             //...
@@ -149,28 +149,24 @@ namespace HyTestRTDataService.ConfigMode
 
         //MapConfig
         //获取本地配置的IOmap，由于已经从Config加载到本地了，所以直接返回就行
-        public DataTable GetIOmapTable()
+        public DataTable GetIOmapTableNoRefresh()       //不刷新
         {
-            return configIOmap.iomapInfo.ioMapTable;
+            return configIOmap.GetIOmapTable(false);
         }
 
-        public DataTable GetIOmapFromExcel()
+        public DataTable GetIOmapWithRefresh()          //刷新
         {
-            return configIOmap.getIOmapFromExcel();
-
-            //然后把configIOmap里面的内容倒腾到Config里面
-            //最后的显示是界面的事情了
+            return configIOmap.GetIOmapTable(true);
         }
 
-        public void SaveIOmapToExcel()
+        public void SaveIOmapToExcel()                  //保存Excel
         {
-            //可选路径
             configIOmap.saveIOmapToExcel();
         }
 
-        public void SetIOmapConfig(DataTable iomapTable)
+        public void SaveIOmapConfig(DataTable iomapTable)   //保存1
         {
-            ConfigIOmap.SetIOmapInfo(iomapTable);//table一变全都要变
+            configIOmap.SaveSubConfig(iomapTable);//table一变全都要变
         }
     }
 }
