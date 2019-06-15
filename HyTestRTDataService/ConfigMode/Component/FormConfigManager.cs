@@ -128,10 +128,6 @@ namespace HyTestRTDataService.ConfigMode.Component
             this.btn_SaveConfig.Enabled = false;
         }
 
-        internal static Port GetPort(string v)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
 
         #region 事件

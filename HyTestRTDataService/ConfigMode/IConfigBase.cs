@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HyTestRTDataService.ConfigMode
 {
+    /// <summary>
+    /// 本接口提供SubConfig配置的基本方法声明
+    /// </summary>
     public interface IConfigBase
     {
         //加载Config到本地

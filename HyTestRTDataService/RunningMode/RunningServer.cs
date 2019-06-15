@@ -97,7 +97,7 @@ namespace HyTestRTDataService.RunningMode
         {
             double data = -1;
             string varName = iomapInfo.mapIndexToName[index];
-            Port varPort = FormConfigManager.GetPort(iomapInfo.mapNameToPort[varName]);
+            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
 
             if (varType == typeof(bool))
@@ -123,12 +123,6 @@ namespace HyTestRTDataService.RunningMode
             }
             
             return (double)data;
-        }
-
-        //实例化过程中，先把XML读到config
-        public void LoadDataTable()
-        {
-
         }
 
         public T NormalRead<T>(string varName)

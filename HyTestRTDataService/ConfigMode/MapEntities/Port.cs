@@ -18,5 +18,17 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public int deviceId;
         public int channelId;
         public int isBounded;
+
+        public Port()
+        {
+
+        }
+
+        public Port(string port)
+        {
+            string[] info = port.Split('-');
+            deviceId = int.Parse(info[0]);
+            channelId = int.Parse(info[1]);
+        }
     }
 }

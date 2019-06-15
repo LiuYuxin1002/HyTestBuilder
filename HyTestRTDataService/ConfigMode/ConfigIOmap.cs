@@ -14,14 +14,6 @@ namespace HyTestRTDataService.ConfigMode
     {
         private ConfigIOmapInfo iomapInfo;
 
-        //public SerializableDictionary<string, string> mapPortToName;
-        //public SerializableDictionary<string, string> mapNameToPort;
-        //public SerializableDictionary<int, string> mapIndexToName;
-        //public SerializableDictionary<string, int> mapNameToIndex;
-        //public SerializableDictionary<string, string> mapNameToType;
-        //public DataTable ioMapTable;
-        //public int inputVarNum, outputVarNum;
-
         public ConfigIOmap(ConfigIOmapInfo iomapInfo)
         {
             ReadSubConfig(iomapInfo);
