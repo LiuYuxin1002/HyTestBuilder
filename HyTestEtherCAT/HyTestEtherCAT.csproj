@@ -81,12 +81,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controls\LED.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\LED.Designer.cs">
-      <DependentUpon>LED.cs</DependentUpon>
-    </Compile>
     <Compile Include="CppConnect.cs" />
     <Compile Include="database\DataDeserialization.cs" />
     <Compile Include="database\RedisHashHelper.cs" />
@@ -97,11 +91,6 @@
     <Compile Include="server\EthercatServer.cs" />
     <Compile Include="EtherCAT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="controls\LED.resx">
-      <DependentUpon>LED.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -115,6 +104,9 @@
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
       <Name>HyTestIEInterface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

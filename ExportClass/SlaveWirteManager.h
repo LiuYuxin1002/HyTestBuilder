@@ -9,5 +9,5 @@ int slaveWriteSigleDigital(int slaveid, int channelid, bool value);
 int slaveWriteBatchDigital(int *slaveid, int *channelid, bool *value);
 
 //还应考虑，
-//1.周期性输出场合，如何保证周期稳定性？
+//1.周期性输出场合，如何保证周期稳定性？经试验，需要循环写入IOmap
 //2.高频闭环控制如何做？这个可以作为研究点？**测试方案呢？

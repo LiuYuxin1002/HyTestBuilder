@@ -7,7 +7,7 @@ int slavePrepareToRead();
 //开始读取，控制读取线程while_true循环周期性读取
 int slaveReadStart();
 //停止读取
-int slaveReadStop();
+void slaveReadStop();
 //单点读取，如果是数字量，返回0和1，如果是模拟量，返回具体数值
 int slaveReadSingleVariable(int slaveid, int channelid);
 //私有方法，读取线程，后面应移动到cpp文件当中*
