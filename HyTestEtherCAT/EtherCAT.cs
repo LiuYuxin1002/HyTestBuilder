@@ -69,20 +69,20 @@ namespace HyTestEtherCAT
 
         public IOdevice[] getDevice()
         {
-            int slaveNum = 1;//CppConnect.initSlaveConfig();
+            int slaveNum = CppConnect.initSlaveConfig();
             deviceNum = slaveNum;
-            devices = new IOdevice[deviceNum];
-            for (int i = 0; i < slaveNum; i++)
+            devices = new IOdevice[deviceNum-1];
+            for (int i = 2; i < slaveNum+1; i++)
             {
                 SlaveInfo tmpSlave = new SlaveInfo();
                 int err = CppConnect.getSlaveInfo(ref tmpSlave, i);
                 if (err == SAFECODE)
                 {
-                    devices[i] = new IOdevice();
-                    devices[i].id = tmpSlave.id;
-                    devices[i].channelNum = tmpSlave.channelNum;
-                    devices[i].name = "EL"+tmpSlave.name;
-                    devices[i].type = tmpSlave.type;
+                    devices[i-2] = new IOdevice();
+                    devices[i-2].id = tmpSlave.id;
+                    devices[i-2].channelNum = tmpSlave.channelNum;
+                    devices[i-2].name = "EL"+tmpSlave.name;
+                    devices[i-2].type = tmpSlave.type;
                 }
                 else//有错误
                 {

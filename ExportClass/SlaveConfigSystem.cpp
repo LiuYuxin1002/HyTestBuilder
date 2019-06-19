@@ -50,7 +50,7 @@ int initSlaveConfigInfo() {
 				}
 			}
 			ec_readstate();
-			
+			initLocalSlaveInfo();
 			return ec_slavecount;
 		}
 		else
@@ -79,9 +79,13 @@ void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {
 		return;
 	}
+	//for (int i = 0; i < ec_slavecount+1; i++) {
+	//	cout << ec_slave[i].name << endl;
+	//	cout << "端口号位："<<ec_slave[i].name[5] << endl;
+	//}
 
-	for (int i = 0; i < ec_slavecount; i++) {
-		if (i == 0) {									//不处理第一个
+	for (int i = 0; i < ec_slavecount+1; i++) {
+		if (i == 0 || i==1) {									//不处理第一个
 			continue;
 		}
 
@@ -93,6 +97,11 @@ void initLocalSlaveInfo() {
 		slave_arr[i].type = type;
 		slave_arr[i].channelNum = channel;
 
+		//cout << "ID: " << slave_arr[i].id << endl;
+		//cout << slave_arr[i].name << endl;
+		//cout << slave_arr[i].type << endl;
+		//cout << slave_arr[i].channelNum << endl;
+
 		//判断从站类型
 		switch (type)
 		{
@@ -100,13 +109,14 @@ void initLocalSlaveInfo() {
 		{
 			slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
 			tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
-
+			
 			slave_arr[i].ptrToSlave = tmpslave;						//slave_arr[i]指向当前结构体
 			tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
 
 			slave_di ptr = dis->next;								//插入头结点
 			dis->next = tmpslave;
 			tmpslave->next = ptr;
+			break;
 		}
 		case 2:				//DO
 		{
@@ -119,6 +129,7 @@ void initLocalSlaveInfo() {
 			slave_do ptr = dos->next;
 			dos->next = tmpslave;
 			tmpslave->next = ptr;
+			break;
 		}
 		case 3:				//AI
 		{
@@ -131,6 +142,7 @@ void initLocalSlaveInfo() {
 			slave_ai ptr = ais->next;
 			ais->next = tmpslave;
 			tmpslave->next = ptr;
+			break;
 		}
 		case 4:				//AO
 		{
@@ -143,6 +155,7 @@ void initLocalSlaveInfo() {
 			slave_ao ptr = aos->next;
 			aos->next = tmpslave;
 			tmpslave->next = ptr;
+			break;
 		}
 		default:
 			printf("从站类型扫描错误，请检查第%d个slave\n", i);		//说明Slave的可读名称name不对
@@ -157,11 +170,17 @@ int getSlaveInfoImpl(SLAVET_ARR *slave, int id) {
 		return -1;
 	}
 	
-	slave->id = 1806;
-	slave->name = 1234;
-	slave->type = 3;
+	//slave->id = 1806;
+	//slave->name = 1234;
+	//slave->type = 3;
+	//slave->ptrToSlave = NULL;
+	//slave->channelNum = 2;
+
+	slave->id = slave_arr[id].id;
+	slave->name = slave_arr[id].name;
+	slave->type = slave_arr[id].type;
 	slave->ptrToSlave = NULL;
-	slave->channelNum = 2;
+	slave->channelNum = slave_arr[id].channelNum;
 	
 	return 0;
 }

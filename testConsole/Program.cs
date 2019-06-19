@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HyTestIEInterface;
 using HyTestEtherCAT.localEntity;
+using System.Threading;
 
 namespace testConsole
 {
@@ -21,11 +22,33 @@ namespace testConsole
             //{
             //    Console.WriteLine(adapters[i].desc + "->" + adapters[i].name);
             //}
-            ErrorCode err = ethercat.setAdapter(0);
+            ErrorCode err = ethercat.setAdapter(1);
             /*从站读取测试部分*/
-            SlaveInfo slave = new SlaveInfo();
-            CppConnect.getSlaveInfo(ref slave, 0);
-            Console.WriteLine(slave.id+","+slave.name);
+            IOdevice[] slaveList = ethercat.getDevice();
+            for(int i=0; i<slaveList.Length; i++)
+            {
+                Console.WriteLine(slaveList[i].id + "," + slaveList[i].name);
+            }
+//            RedisTest redis = new RedisTest();
+  //          redis.TestStart();
         }
+    }
+
+    class RedisTest
+    {
+        public RedisTest()
+        {
+
+        }
+
+        public void TestStart()
+        {
+            int count = ImportClass.prepareToRead();
+
+            ImportClass.readStart();
+            Thread.Sleep(1000);
+            ImportClass.readStop();
+        }
+
     }
 }

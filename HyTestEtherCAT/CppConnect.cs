@@ -31,5 +31,12 @@ namespace HyTestEtherCAT
         public static extern int setIntergerValue(int slaveId, int channel, int value);
         [DllImport("ExportClass.dll")]
         public static extern int setDigitalValue(int slaveId, int channel, bool value);
+
+        [DllImport("ExportClass.dll")]
+        public static extern int prepareToRead();
+        [DllImport("ExportClass.dll")]
+        public static extern int readStart();
+        [DllImport("ExportClass.dll")]
+        public static extern int readStop();
     }
 }

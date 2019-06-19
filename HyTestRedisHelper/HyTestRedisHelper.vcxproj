@@ -152,6 +152,11 @@
   <ItemGroup>
     <ClInclude Include="HiredisHelper.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\hiredis\hiredis.vcxproj">
+      <Project>{9521d4a3-e7e8-4945-835d-0573a4e2f7dd}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -23,7 +23,7 @@ namespace HyTestRTDataService.ConfigMode
         private ConfigDeviceInfo deviceInfo;
         private IDeviceLoader loader;
         private TreeNode deviceTree;
-        private string[] type = { "DI", "DO", "AI", "AO", };
+        private string[] type = {"DI", "DO", "AI", "AO", };
 
         public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
@@ -97,11 +97,15 @@ namespace HyTestRTDataService.ConfigMode
             int id = 1;
             foreach (IOdevice device in deviceInfo.deviceArr)
             {
+                if (device==null)
+                {
+                    break;
+                }
                 DataRow row = table.NewRow();
                 row["ID"] = id++;
                 row["设备名称"] = device.name;
                 row["设备编号"] = device.id;
-                row["设备类型"] = type[device.type];
+                row["设备类型"] = type[device.type-1];
                 int channelnum = device.channelNum;
                 for (int i = 0; i < channelnum; i++)
                 {

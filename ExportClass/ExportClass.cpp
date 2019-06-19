@@ -2,6 +2,7 @@
 #include "mycontext.h"
 #include "NicConfigSystem.h"
 #include "SlaveConfigSystem.h"
+#include "SlaveReadManager.h"
 
 
 //SoemImplClass* transfer = new SoemImplClass();
@@ -55,6 +56,18 @@ extern "C"
 	TEXPORT int setBoolValue(int slaveId, int channel, boolean value)
 	{
 		return setBoolValueImpl(slaveId, channel, value);
+	}
+
+	TEXPORT int prepareToRead() {
+		return slavePrepareToRead();
+	}
+
+	TEXPORT int readStart() {
+		return slaveReadStart();
+	}
+
+	TEXPORT void readStop() {
+		return slaveReadStop();
 	}
 
 #ifdef __cplusplus
