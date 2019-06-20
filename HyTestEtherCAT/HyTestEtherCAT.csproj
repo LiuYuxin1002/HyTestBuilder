@@ -86,7 +86,7 @@
     <Compile Include="database\RedisHashHelper.cs" />
     <Compile Include="database\RedisManager.cs" />
     <Compile Include="database\RedisTest.cs" />
-    <Compile Include="localEntity\entities.cs" />
+    <Compile Include="localEntity\SlaveInfo.cs" />
     <Compile Include="server\EthercatGroup.cs" />
     <Compile Include="server\EthercatServer.cs" />
     <Compile Include="EtherCAT.cs" />

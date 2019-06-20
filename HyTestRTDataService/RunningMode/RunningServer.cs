@@ -20,16 +20,20 @@ namespace HyTestRTDataService.RunningMode
             return server;
         }
 
+        /*read & write*/
         IReader reader;
         IWriter writer;
-        private RealTimeDataPool datapool = new RealTimeDataPool();
 
-        private ConfigManager configManager;
-        private Config config;
-        private ConfigAdapterInfo adapterInfo;
-        private ConfigDeviceInfo deviceInfo;
-        private ConfigIOmapInfo iomapInfo;
-        private ConfigTestEnvironmentInfo testInfo;
+        /*data pool*/
+        private RealTimeDataPool datapool;
+
+        /*config info*/
+        private ConfigManager       configManager;
+        private Config              config;
+        private ConfigAdapterInfo   adapterInfo;
+        private ConfigDeviceInfo    deviceInfo;
+        private ConfigIOmapInfo     iomapInfo;
+        private ConfigTestEnvInfo   testInfo;
 
         private System.Windows.Forms.Timer timer;
         private int refreshFrequency;
@@ -37,9 +41,15 @@ namespace HyTestRTDataService.RunningMode
 
         private RunningServer()     //构造函数
         {
+            InitializeDataPool();
             InitializeConfig();
             InitializeTimer();
             StartTimer();
+        }
+
+        private void InitializeDataPool()
+        {
+            datapool = new RealTimeDataPool();
         }
 
         private void StartTimer()
@@ -125,6 +135,9 @@ namespace HyTestRTDataService.RunningMode
             return (double)data;
         }
 
+        /// <summary>
+        /// 常规读取，读取的是本地数据池
+        /// </summary>
         public T NormalRead<T>(string varName)
         {
             T value;
@@ -149,6 +162,9 @@ namespace HyTestRTDataService.RunningMode
             return default(T);
         }
 
+        /// <summary>
+        /// 常规写入，写入的是本地数据池
+        /// </summary>
         public void NormalWrite<T>(string varName, T value)
         {
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
@@ -170,14 +186,18 @@ namespace HyTestRTDataService.RunningMode
             }
         }
 
-        //直接从端口读取
+        /// <summary>
+        /// 直接从端口读取
+        /// </summary>
         public T InstantRead<T>(string varName)
         {
 
             return default(T);
         }
 
-        //直接写到端口
+        /// <summary>
+        /// 直接写到端口
+        /// </summary>
         public void InstantWrite<T>(string varName, T value)
         {
 
