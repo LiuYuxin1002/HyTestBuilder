@@ -29,8 +29,8 @@ namespace testConsole
             {
                 Console.WriteLine(slaveList[i].id + "," + slaveList[i].name);
             }
-//            RedisTest redis = new RedisTest();
-  //          redis.TestStart();
+            RedisTest redis = new RedisTest();
+            redis.TestStart();
         }
     }
 

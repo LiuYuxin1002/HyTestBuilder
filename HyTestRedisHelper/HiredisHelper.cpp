@@ -31,14 +31,14 @@ int checkRedisError(redisReply* reply) {
 void addKeyValue(char* key, char* value) {
 	redisReply* reply = (redisReply*)redisCommand(client, "set %s %s", key, value);
 	if (checkRedisError(reply)!=0) {
-		printf("出错了");
+		printf("出错了\n");
 	}
 }
 
 char* getKeyValue(char* key) {
 	redisReply* reply = (redisReply*)redisCommand(client, "get %s", key);
 	if (checkRedisError(reply) != 0) {
-		printf("出错了");
+		printf("出错了\n");
 	}
 	char* result = reply->str;
 	return result;
@@ -48,7 +48,7 @@ void addKeyValue(char * key, char * field, char * value)
 {
 	redisReply* reply = (redisReply*)redisCommand(client, "hset %s %s %s", key, field, value);
 	if (checkRedisError(reply) != 0) {
-		printf("出错了");
+		printf("出错了\n");
 	}
 }
 
@@ -56,7 +56,7 @@ char * getKeyValue(char * key, char * field)
 {
 	redisReply* reply = (redisReply*)redisCommand(client, "hmget %s %s", key, field);
 	if (checkRedisError(reply) != 0) {
-		printf("出错了");
+		printf("出错了\n");
 	}
 	return reply->str;
 }
@@ -77,7 +77,7 @@ void addKeyValues(char* key, map<char *, char *> value) {
 	redisReply* reply = (redisReply*)redisCommand(client, cmdstr.c_str());
 	
 	if (checkRedisError(reply) != 0) {
-		printf("出错了");
+		printf("出错了\n");
 	}
 }
 
