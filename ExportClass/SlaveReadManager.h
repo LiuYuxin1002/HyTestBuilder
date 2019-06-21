@@ -16,3 +16,5 @@ void readSlave(void*);
 int checkSlaveState();
 //私有方法，检查redis连接状况，返回redis状态：服务未开启、无法连接、最大请求已满、内存已满等
 int checkRedisState();
+
+void readSlaveInfo();

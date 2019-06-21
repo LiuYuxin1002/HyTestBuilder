@@ -61,7 +61,7 @@ char * getKeyValue(char * key, char * field)
 	return reply->str;
 }
 
-void addKeyValues(char* key, map<char *, char *> value) {
+void addKeyValues(char *key, map<char *, char *> value) {
 	string cmdstr = "hmset ";
 	cmdstr += key;
 

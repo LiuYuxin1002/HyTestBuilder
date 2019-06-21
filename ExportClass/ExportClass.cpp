@@ -70,6 +70,8 @@ extern "C"
 		return slaveReadStop();
 	}
 
+	
+
 #ifdef __cplusplus
 }
 #endif
