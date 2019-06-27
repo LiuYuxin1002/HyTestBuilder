@@ -135,7 +135,7 @@ int slaveReadStart() {
 	/*hthread = CreateThread(NULL,0,ThreadProc,NULL,NULL,NULL);
 	StartThread(hthread);
 	SuspendThread(hthread);*/
-	readSlaveInfo();
+	//readSlaveInfo();
 	_beginthread(readSlave, 0, NULL);
 	return 0;
 }
