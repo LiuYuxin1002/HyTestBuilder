@@ -71,9 +71,26 @@
 1. 一周来，工作主要集中在“读写问题”上，从EtherCAT的读写实现，到底层驱动的读写实现
 2. 期间，按照上一期问题完善了IOmapconfig
 3. 对configinfo进行了完善
+
 #### 更新： 
 1. 调试C++中，redis的循环写入部分，修改部分bug
+
 #### 问题：
 1. （读）redis写入解决了，还要解决设备读管理这一完整工作，具有：启停、可调周期的功能
 2. （写）设备写入还没有开动，同样要做到可以：启停、周期可调
 3. （读）C#端需要对redis做订阅，试验：订阅后C++端写入的最高频率，以便进一步分析可行性
+
+### 2019.6.29
+#### 更新：
+1. 重构解决方案，删除不必要的项目和.c文件，将两个开源项目soem和hiredis整合到HyTestEthercatDriver项目中；
+2. 添加了项目HyTestConfigSys作为配置工具窗口（一个custom tool window），用作配置模块的view部分；
+3. 重写C++多线程实现；
+
+#### 说明：
+1. 总体来说配置系统新的思路就是将HyTestRTdataService项目作为Control，并存放Entity作为Model，将HyTestConfigSys作为View：
+	Model   => HyTestRTdataService => Config类及其依赖
+	View    => HyTestConfigSys
+	Control => HyTestRTdataService => ConfigManager类及其依赖
+2. C++多线程实现用于EtherCAT驱动读写从站端口：
+	读：完全扫描输入设备，每个周期将其打包为数据包发送到redis
+	写：接收调用，改变C++数据池缓存；
