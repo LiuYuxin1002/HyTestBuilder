@@ -66,7 +66,11 @@ extern "C"
 		return slaveReadStart();
 	}
 
-	TEXPORT void readStop() {
+	TEXPORT int readSuspend() {
+		return slaveReadSuspend();
+	}
+
+	TEXPORT int readStop() {
 		return slaveReadStop();
 	}
 

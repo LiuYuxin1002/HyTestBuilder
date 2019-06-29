@@ -33,6 +33,9 @@
     <ClCompile Include="SlaveReadManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="HiredisHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -70,6 +73,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SafeThreadManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HiredisHelper.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

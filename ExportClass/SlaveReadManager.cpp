@@ -12,13 +12,19 @@
 using namespace std;
 
 boolean runningState;
+HANDLE hthread;
+
+char strbuf[64] = "";
+
+#define DI 1
+#define AI 3
 
 long long getSystemTime() {
 	struct timeb t;
 	ftime(&t);
 	return 1000 * t.time + t.millitm;
 }
-char strbuf[64] = "";
+
 char* ltos(long long lld)
 {
 	sprintf(strbuf, "%lld", lld);
@@ -70,66 +76,6 @@ int checkRedisState() {
 	return 0;
 }
 
-int slavePrepareToRead() {
-	checkRedisState();
-	int wkc = checkSlaveState();
-	cout << "prepare finished" << endl;
-	runningState = true;
-	return wkc;
-}
-
-#define DI 1
-#define AI 3
-
-void readSlave(void*) {
-	while (runningState)
-	{
-		long long timestamp = getSystemTime();
-		char *timeStampStr = ltos(timestamp);
-
-		ec_slavecount = 1;
-
-		map<char*, char*>* tmpMap = new map<char *, char *>();
-		int slaveid, channelid;
-
-		char *value;
-
-		for (int i = 0; i < ec_slavecount; i++)
-		{
-			slaveid = i;
-
-			if (slave_arr[i].type == DI) {
-				slave_di tmpDI = (SLAVE_DI*)slave_arr[i].ptrToSlave;
-
-				for (int j = 0; j < slave_arr[i].channelNum; j++) {
-					channelid = j;
-					char *keystr = new char[10];
-					sprintf(keystr, "%d_%d", slaveid, channelid);	//channelID
-
-					value = tmpDI->values[j] ? "1" : "0";
-
-					tmpMap->insert(pair<char*, char*>(keystr, value));
-				}
-			}
-			else if (slave_arr[i].type == AI) {
-				slave_ai tmpAI = (SLAVE_AI*)slave_arr[i].ptrToSlave;
-
-				for (int j = 0; j < slave_arr[i].channelNum; j++) {
-					channelid = j;
-					char *keystr = new char[10];
-
-					sprintf(keystr, "%d_%d", slaveid, channelid);	//key
-					sprintf(value, "%d", tmpAI->values[j]);			//value
-
-					tmpMap->insert(pair<char*, char*>(keystr, value));
-				}
-			}
-		}
-
-		addKeyValues(timeStampStr, *tmpMap);//添加到redis
-	}
-}
-
 DWORD WINAPI readSlaveThread(LPVOID lpParameter) {
 	while (runningState)
 	{
@@ -177,9 +123,17 @@ DWORD WINAPI readSlaveThread(LPVOID lpParameter) {
 
 		addKeyValues(timeStampStr, *tmpMap);//添加到redis
 	}
+	return 0;
 }
 
-HANDLE hthread;
+int slavePrepareToRead() {
+	checkRedisState();
+	int wkc = checkSlaveState();
+	cout << "prepare finished" << endl;
+	runningState = true;
+	return wkc;
+}
+
 int slaveReadStart() {
 	if(hthread==NULL) hthread = CreateThread(NULL,0,readSlaveThread,NULL,0,NULL);
 	return 0;
@@ -194,5 +148,3 @@ int slaveReadStop() {
 	if(hthread!=NULL) CloseHandle(hthread);
 	return 0;
 }
-
-
