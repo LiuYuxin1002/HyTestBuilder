@@ -29,7 +29,7 @@ namespace HyTestConfigSys
         /// </summary>
         public ConfigToolWindow() : base(null)
         {
-            this.Caption = "ConfigToolWindow";
+            this.Caption = "HT运行配置";
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on

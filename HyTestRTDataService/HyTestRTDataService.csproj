@@ -82,12 +82,6 @@
     <Compile Include="ConfigMode\Component\FormConfigManager.Designer.cs">
       <DependentUpon>FormConfigManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="ConfigMode\Component\FormTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConfigMode\Component\FormTest.Designer.cs">
-      <DependentUpon>FormTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigMode\Config.cs" />
     <Compile Include="ConfigMode\ConfigDevice.cs" />
     <Compile Include="ConfigMode\ConfigManager.cs" />
@@ -145,9 +139,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ConfigMode\Component\FormConfigManager.resx">
       <DependentUpon>FormConfigManager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ConfigMode\Component\FormTest.resx">
-      <DependentUpon>FormTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RunningMode\Component\FormTestRunning.resx">
       <DependentUpon>FormTestRunning.cs</DependentUpon>

@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="HyTestConfigSys.刘雨鑫.29545b9d-a421-4cd8-8322-24db3cc8ae66" Version="1.0" Language="en-US" Publisher="刘雨鑫" />
     <DisplayName>HyTestConfigSys</DisplayName>
-    <Description>Empty VSIX Project.</Description>
+    <Description xml:space="preserve">此插件用于建立可编辑液压测试系统的配置界面。HyTestBuilder的设备管理、网络配置、变量映射均在此配置。</Description>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0]" />
