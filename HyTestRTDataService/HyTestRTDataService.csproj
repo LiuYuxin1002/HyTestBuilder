@@ -119,9 +119,9 @@
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ExportClass\ExportClass.vcxproj">
+    <ProjectReference Include="..\HyTestEthercatDriver\ExportClass.vcxproj">
       <Project>{fed8bcdd-c285-4dc1-bec2-beff907602c3}</Project>
-      <Name>ExportClass</Name>
+      <Name>HyTestEthercatDriver</Name>
     </ProjectReference>
     <ProjectReference Include="..\HyTestEtherCAT\HyTestEtherCAT.csproj">
       <Project>{b7d3e5b0-ec3b-4de7-878e-8fdeb4250d9b}</Project>
