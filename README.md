@@ -18,6 +18,10 @@
 1. 开发环境Visual Studio 2015，根据开发环境不同可能会无法编译；
 2. 有时存在找不到ExportDll（现在是HyTestEtherCATDriver.dll）的情况；
 
+## 异常解决
+1. Q: HyTestEtherCAT.CppConnect::setDigitalValue”的调用导致堆栈不对称。原因可能是托管的 PInvoke 签名与非托管的目标签名不匹配。请检查 PInvoke 签名的调用约定和参数与非托管的目标签名是否匹配。 
+   A: 添加CallingConvention = CallingConvention.Cdecl 
+
 ## 进度说明
 
 ### 2019.6.9 

@@ -21,7 +21,7 @@ namespace HyTestRTDataService.RunningMode
         }
 
         /*read & write*/
-        IReader reader;
+        IReader reader;//有默认值EtherCAT
         IWriter writer;
 
         /*data pool*/
@@ -44,7 +44,7 @@ namespace HyTestRTDataService.RunningMode
             InitializeDataPool();
             InitializeConfig();
             InitializeTimer();
-            StartTimer();
+            ChangeTimerState();
         }
 
         private void InitializeDataPool()
@@ -52,9 +52,18 @@ namespace HyTestRTDataService.RunningMode
             datapool = new RealTimeDataPool();
         }
 
-        private void StartTimer()
+        //根据refreshFrequency改变timer状态
+        private void ChangeTimerState()
         {
-            this.timer.Start();
+            if (this.refreshFrequency >= 0 && !timer.Enabled)   //且 timer未开启
+            {
+                timer.Enabled = true;
+                this.timer.Start();
+            }
+            else if(this.refreshFrequency<0 && timer.Enabled)   //且 timer已开启
+            {
+                this.timer.Enabled = false;
+            }
         }
 
         private void InitializeConfig()
@@ -76,7 +85,11 @@ namespace HyTestRTDataService.RunningMode
         {
             timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
-            timer.Interval = this.testInfo.refreshFrequency;   //可能有未实例化对象错误
+            if (this.testInfo.refreshFrequency>0)
+            {
+                timer.Interval = this.testInfo.refreshFrequency;   //可能有未实例化对象错误
+            }
+            
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -112,7 +125,7 @@ namespace HyTestRTDataService.RunningMode
 
             if (varType == typeof(bool))
             {
-                bool value = false;
+                byte value = 0;
                 reader.ReadDigital(varPort.deviceId, varPort.channelId, ref value);
                 transformer = new DataTransformer();
                 data = transformer.TransDigitalToBoolDouble(value);
@@ -146,17 +159,17 @@ namespace HyTestRTDataService.RunningMode
             int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
             {
-                int value1 = DataTransformer.TransformingInt(datapool.rdataList[varIndex]);
+                int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else if(varType == typeof(bool))
             {
-                double value1 = DataTransformer.TransformingDouble(datapool.rdataList[varIndex]);
+                double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else
             {
-                bool value1 = DataTransformer.TransformingBool(datapool.rdataList[varIndex]);
+                bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             return default(T);
@@ -200,7 +213,24 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public void InstantWrite<T>(string varName, T value)
         {
+            double data = -1;
+            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
 
+            if (varType == typeof(bool))
+            {
+                data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 
+                        (byte)Convert.ChangeType(value, typeof(byte)));
+            }
+            else if (varType == typeof(int))
+            {
+                data = writer.WriteAnalog(varPort.deviceId, varPort.channelId,
+                    (int)Convert.ChangeType(value, typeof(int)));
+            }
+            else if (varType == typeof(double))
+            {
+
+            }
         }
     }
 }

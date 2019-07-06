@@ -37,7 +37,7 @@ namespace HyTestRTDataService.RunningMode
 
         private const double TRUE = 1.0;
         private const double FALSE = 0.0;
-        public static bool TransformingBool(double value)
+        public static bool DoubleToBool(double value)
         {
             if (value == TRUE)
             {
@@ -48,11 +48,11 @@ namespace HyTestRTDataService.RunningMode
                 return false;
             }
         }
-        public static int TransformingInt(double value)
+        public static int DoubleToInt(double value)
         {
             return (int)value;
         }
-        public static double TransformingDouble(double value)
+        public static double DoubleToDouble(double value)
         {
             return value;
         }
@@ -71,9 +71,9 @@ namespace HyTestRTDataService.RunningMode
             return result;
         }
 
-        public double TransDigitalToBoolDouble(bool digital)
+        public double TransDigitalToBoolDouble(byte digital)
         {
-            if (digital)
+            if (digital==1)
             {
                 return TRUE;
             }

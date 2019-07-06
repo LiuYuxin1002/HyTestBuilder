@@ -122,6 +122,7 @@ DWORD WINAPI readSlaveThread(LPVOID lpParameter) {
 		}
 
 		addKeyValues(timeStampStr, *tmpMap);//Ìí¼Óµ½redis
+		Sleep(100);
 	}
 	return 0;
 }

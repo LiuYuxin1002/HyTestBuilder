@@ -164,6 +164,7 @@
     <ClCompile Include="NicConfigSystem.cpp" />
     <ClCompile Include="SlaveConfigSystem.cpp" />
     <ClCompile Include="SlaveReadManager.cpp" />
+    <ClCompile Include="SlaveWriteManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

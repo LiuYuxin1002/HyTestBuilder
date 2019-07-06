@@ -1,4 +1,5 @@
 ﻿using HyTestRTDataService.ConfigMode.Component;
+using HyTestRTDataService.RunningMode.Component;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,9 @@ namespace HyTestRTDataService
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormConfigManager());
+            //Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FormTestRunning());
+            //Application.Run(new FormConfigManager());
         }
     }
 }

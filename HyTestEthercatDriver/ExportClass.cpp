@@ -3,6 +3,7 @@
 #include "NicConfigSystem.h"
 #include "SlaveConfigSystem.h"
 #include "SlaveReadManager.h"
+#include "SlaveWirteManager.h"
 
 
 //SoemImplClass* transfer = new SoemImplClass();
@@ -55,7 +56,7 @@ extern "C"
 
 	TEXPORT int setBoolValue(int slaveId, int channel, boolean value)
 	{
-		return setBoolValueImpl(slaveId, channel, value);
+		return slaveWriteSigleDigital(slaveId, channel, value);
 	}
 
 	TEXPORT int prepareToRead() {

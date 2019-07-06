@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include <bitset>
 #include "ethercat.h"
 
 using namespace std;
@@ -47,17 +48,17 @@ extern "C" {
 	typedef struct SLAVE_AO *slave_ao;
 
 	struct SLAVE_DI {
-		bool values[MAX_CHANNEL];
+		bitset<8> values;
 		slave_di next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;//指回去，指向从站整体列表
 	};
 
 	struct SLAVE_DO {
-		bool values[MAX_CHANNEL];
+		bitset<8> values;
 		slave_do next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;
 	};
-
+	
 	struct SLAVE_AI {
 		int16 values[MAX_CHANNEL];
 		slave_ai next = NULL;

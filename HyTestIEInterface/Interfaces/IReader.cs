@@ -23,7 +23,7 @@ namespace HyTestIEInterface
         /// <param name="channel"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        int ReadDigital(int deviceId, int channel, ref bool value);
+        int ReadDigital(int deviceId, int channel, ref byte value);
         /// <summary>
         /// 批量读模拟量
         /// </summary>
@@ -39,6 +39,6 @@ namespace HyTestIEInterface
         /// <param name="channelList"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<bool[]> values);
+        int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values);
     }
 }

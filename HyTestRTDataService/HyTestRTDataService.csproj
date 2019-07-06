@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -134,6 +136,10 @@
     <ProjectReference Include="..\HyTestIEInterface\HyTestIEInterface.csproj">
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
       <Name>HyTestIEInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LBIndustrialCtrls\LBIndustrialCtrls.csproj">
+      <Project>{b4218bc9-9736-42b9-bc99-7903fdbeba28}</Project>
+      <Name>LBIndustrialCtrls</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -29,8 +29,8 @@ namespace HyTestEtherCAT
         //设置从站某端口信息
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int setIntergerValue(int slaveId, int channel, int value);
-        [DllImport("HyTestEthercatDriver.dll")]
-        public static extern int setDigitalValue(int slaveId, int channel, bool value);
+        [DllImport("HyTestEthercatDriver.dll", EntryPoint ="setBoolValue", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int setDigitalValue(int slaveId, int channel, byte value);
 
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int prepareToRead();

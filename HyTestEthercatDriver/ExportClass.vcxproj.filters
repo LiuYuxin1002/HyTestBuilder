@@ -36,6 +36,9 @@
     <ClCompile Include="HiredisHelper.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SlaveWriteManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

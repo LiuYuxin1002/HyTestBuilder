@@ -106,12 +106,12 @@ namespace HyTestEtherCAT
             throw new NotImplementedException();
         }
 
-        public int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<bool[]> values)
+        public int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values)
         {
             throw new NotImplementedException();
         }
 
-        public int ReadDigital(int deviceId, int channel, ref bool value)
+        public int ReadDigital(int deviceId, int channel, ref byte value)
         {
             throw new NotImplementedException();
         }
@@ -126,12 +126,12 @@ namespace HyTestEtherCAT
             return CppConnect.setIntergerValue(deviceId, channel, value);
         }
         
-        public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<bool[]> values)
+        public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<byte[]> values)
         {
             throw new NotImplementedException();
         }
 
-        public int WriteDigital(int deviceId, int channel, bool value)
+        public int WriteDigital(int deviceId, int channel, byte value)
         {
             return CppConnect.setDigitalValue(deviceId, channel, value);
         }

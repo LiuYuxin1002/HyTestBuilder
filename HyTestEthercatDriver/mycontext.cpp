@@ -43,25 +43,3 @@ int setIntegerValueImpl(int slaveId, int channel, int value) {
 
 	return wkc;
 }
-
-int setBoolValueImpl(int slaveId, int channel, boolean value) {
-	SLAVET_ARR* slave = &slave_arr[slaveId];
-	int type = slave->type;
-
-	if (channel > slave->channelNum) {//没那么多端口
-		printf("没那么多端口，检查channel的值\n");
-		return -1;
-	}
-	else if (type != 2) {				//设置数字量只能是数字量输出
-		printf("设置数字量只能是数字量输出，检查slaveId的值\n");
-		return -2;
-	}
-
-	slave_do tmp = (slave_do)slave->ptrToSlave;
-	tmp->values[channel] = value;
-
-	ec_send_processdata();
-	int wkc = ec_receive_processdata(3000);
-	
-	return wkc;
-}
