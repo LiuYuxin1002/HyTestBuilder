@@ -39,9 +39,10 @@ namespace HyTestRTDataService.ConfigMode
             iomapInfo.inputVarNum = iomapInfo.outputVarNum = 0;
             DataTable mapTable = iomapInfo.ioMapTable;
             //通过IOmapTable建立映射
+            int index = 0;
             foreach (DataRow row in mapTable.Rows)
             {
-                int id = (int)row["ID"];
+                int id = index++;
                 string name = (string)row["变量名"];
                 string type = (string)row["变量类型"];
                 string iotype = (string)row["IO类型"];

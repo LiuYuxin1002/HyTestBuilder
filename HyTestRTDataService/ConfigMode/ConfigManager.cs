@@ -45,7 +45,7 @@ namespace HyTestRTDataService.ConfigMode
         /// </summary>
         public void LoadConfig()
         {
-            if (!File.Exists(ConfigFile))   //安全检查
+            if (!File.Exists(ConfigFile))
                 return;
 
             try
@@ -63,7 +63,7 @@ namespace HyTestRTDataService.ConfigMode
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);    //debug
             }
             OnConfigChanged();
         }
@@ -93,6 +93,9 @@ namespace HyTestRTDataService.ConfigMode
             //...
         }
 
+        /// <summary>
+        /// save config to local xml file
+        /// </summary>
         public void SaveConfig()
         {
             //将所有配置集中到Config对象
@@ -109,64 +112,112 @@ namespace HyTestRTDataService.ConfigMode
                 }
                 catch (System.Exception ex)
                 {
-                    //debug
+                    //debug sth. or throw exception
                 }
                 fs.Close();
             }
         }
 
-        //AdapterConfig
+        #region AdapterConfig
 
-        public DataTable GetAdapterTableWithRefresh()   //刷新
+        /// <summary>
+        /// Read from underlying.
+        /// </summary>
+        /// <returns>The data table of real info of this computer.</returns>
+        public DataTable GetAdapterTableWithRefresh()
         {
             return configAdapter.getAdapterTable(true);
         }
 
-        public DataTable GetAdapterTableNoRefresh()     //不刷新
+        /// <summary>
+        /// Read from local config.xml
+        /// </summary>
+        /// <returns>The data table of old adapter info</returns>
+        public DataTable GetAdapterTableNoRefresh()
         {
             return configAdapter.getAdapterTable(false);
         }
 
-        public void SaveAdapterConfig(int id)           //保存
+        /// <summary>
+        /// To save adapter config to the subConfig object.
+        /// <br>(NOT CONFIG OBJ) If you want to save in config object, you should call "SaveConfig"</br>
+        /// </summary>
+        /// <param name="id"></param>
+        public void SaveAdapterConfig(int id)
         {
             configAdapter.SaveSubConfig(id);
         }
 
-        //DeviceConfig
-        public TreeNode GetDeviceTreeWithRefresh()      //刷新
+        #endregion
+
+        #region DeviceConfig
+
+        /// <summary>
+        /// Read from underlying.
+        /// </summary>
+        /// <returns>The TreeNode of real info of currnet devices connected.</returns>
+        public TreeNode GetDeviceTreeWithRefresh()
         {
             return configDevice.GetDeviceTree(true);
         }
-        public TreeNode GetDeviceTreeNoRefresh()        //不刷新
+
+        /// <summary>
+        /// Read from local config.xml
+        /// </summary>
+        /// <returns>The TreeNode of old info</returns>
+        public TreeNode GetDeviceTreeNoRefresh()
         {
             return configDevice.GetDeviceTree(false);
         }
 
-        public void SaveDeviceConfig(TreeNode tn)       //保存
+        /// <summary>
+        /// To save device config to the subConfig object.
+        /// <br>(NOT CONFIG OBJ) If you want to save in config object, you should call "SaveConfig"</br>
+        /// </summary>
+        /// <param name="tn">The TreeNode Now.</param>
+        public void SaveDeviceConfig(TreeNode tn)
         {
             configDevice.SaveSubConfig(tn);
         }
 
-        //MapConfig
-        //获取本地配置的IOmap，由于已经从Config加载到本地了，所以直接返回就行
-        public DataTable GetIOmapTableNoRefresh()       //不刷新
+        #endregion
+
+        #region MapConfig
+        /// <summary>
+        /// Read from local config.xml
+        /// </summary>
+        /// <returns>The DataTable of old info</returns>
+        public DataTable GetIOmapTableNoRefresh()
         {
             return configIOmap.GetIOmapTable(false);
         }
 
-        public DataTable GetIOmapWithRefresh()          //刷新
+        /// <summary>
+        /// Read from a Excel File. Call this method means user have to select a
+        /// Excel File from Local File System.
+        /// </summary>
+        /// <returns>The DataTable of a Excel of io map .</returns>
+        public DataTable GetIOmapWithRefresh()
         {
             return configIOmap.GetIOmapTable(true);
         }
 
-        public void SaveIOmapToExcel()                  //保存Excel
+        /// <summary>
+        /// Export current IOmap in subConfig to a <c>Excel</c>. You should notice that 
+        /// you have to call "SaveIOmapConfig" before this method if you changed
+        /// the iomap. Otherwise, the saved result will be the old info.
+        /// </summary>
+        public void SaveIOmapToExcel()
         {
             configIOmap.saveIOmapToExcel();
         }
 
+        
         public void SaveIOmapConfig(DataTable iomapTable)   //保存1
         {
             configIOmap.SaveSubConfig(iomapTable);//table一变全都要变
         }
+
+        #endregion
     }
 }

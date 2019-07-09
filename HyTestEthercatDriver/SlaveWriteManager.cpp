@@ -2,6 +2,8 @@
 
 #include "SlaveWirteManager.h"
 
+#define DEFINE_SLEEP_TIME 300
+
 bool runningState = true;
 HANDLE wthread;
 
@@ -10,6 +12,9 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	while (runningState) {
 		ec_send_processdata();
 		wkc = ec_receive_processdata(300);
+
+		int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
+		Sleep(sleepTime);
 	}
 	return 0;
 }

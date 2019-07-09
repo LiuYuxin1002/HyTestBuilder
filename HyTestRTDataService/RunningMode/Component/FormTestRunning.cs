@@ -36,7 +36,7 @@ namespace HyTestRTDataService.RunningMode.Component
             writer.WriteDigital(3, 0, state[0] ? TRUE : FALSE);
             this.lbLed1.State = state[0] ? LedState.On : LedState.Off;
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
             state[1] = !state[1];

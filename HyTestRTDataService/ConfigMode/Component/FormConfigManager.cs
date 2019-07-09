@@ -134,8 +134,17 @@ namespace HyTestRTDataService.ConfigMode.Component
 
         private void btn_ScanAdapter_Click(object sender, EventArgs e)
         {
-            DataTable adapterTable = configManager.GetAdapterTableWithRefresh();
-            this.dataGridView1.DataSource = adapterTable;
+            DataTable adapterTable = null;
+            try
+            {
+                adapterTable = configManager.GetAdapterTableWithRefresh();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+            if(adapterTable!=null) this.dataGridView1.DataSource = adapterTable;
         }
 
         private void btn_SelectAdapter_Click(object sender, EventArgs e)
@@ -158,6 +167,10 @@ namespace HyTestRTDataService.ConfigMode.Component
             TreeNode rootDeviceTree = configManager.GetDeviceTreeWithRefresh();
             treeView1.Nodes.Clear();
             treeView1.Nodes.Add(rootDeviceTree);
+            for(int i=0; i<treeView1.Nodes.Count; i++)
+            {
+                treeView1.Nodes[i].Expand();
+            }
         }
 
         private void btn_SaveDeviceConfig_Click(object sender, EventArgs e)

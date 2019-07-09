@@ -5,10 +5,33 @@ using HyTestIEInterface;
 using System.Threading;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using HyTestRTDataService.ConfigMode.Component;
+using System.Collections.Generic;
+using System.Data;
 
 namespace HyTestRTDataService.RunningMode
 {
-    class RunningServer
+    public class TmpClass
+    {
+        RunningServer server = RunningServer.getServer();
+
+        void RunTest()
+        {
+            server.NormalWrite<int>("var1", 1);
+            server.NormalWrite<double>("var2", 2);
+
+            server.NormalRead<int>("var3");
+
+            //注意：write的必须是输出；read的可以是输入和输出；
+
+            //变量的订阅
+            server.SetDataPack(new string[] { "var1", "var2" });
+            server.GetDataPack();
+            server.AddDataPackMember("var3");
+            server.DataPackCallback();
+
+        }
+    }
+    public class RunningServer
     {
         private static RunningServer server;
         public static RunningServer getServer()
@@ -20,6 +43,26 @@ namespace HyTestRTDataService.RunningMode
             return server;
         }
 
+        /*Event*/
+        public event EventHandler<EventArgs> DataRefresh;
+        /// <summary>
+        /// 控件数据订阅如下：
+        /// </summary>
+        // RunningServer server = RunningServer.GetServer();   //获取服务
+        // 
+        // server.DataRefresh += OnDataRefresh;                //委托绑定事件
+        // 
+        // private void OnDataRefresh(object sender, EventArgs e)  //DataRefresh函数触发调用事件
+        // {
+        //     FetchDataAndShow();      //自己写函数，向server获取数据并令控件显示获取到的数据
+        
+        // }
+        //数字量Light、模拟量meter, LED，趋势图time-value
+        //void FetchDataAndShow()
+        //{
+        //    int data = server.NormalRead<int>(varname);
+        //    this.Value = data;
+        //}
         /*read & write*/
         IReader reader;//有默认值EtherCAT
         IWriter writer;
@@ -107,6 +150,7 @@ namespace HyTestRTDataService.RunningMode
             {
                 datapool.rdataList[i] = ReadDataFromDevice(i);
             }
+            DataRefresh(this, new EventArgs());     //通知各控件
         }
 
         DataTransformer transformer;
@@ -232,5 +276,68 @@ namespace HyTestRTDataService.RunningMode
 
             }
         }
+
+        /// <summary>
+        /// 设置订阅列表
+        /// </summary>
+        /// <param name="nameList">订阅变量名数组</param>
+        /// <returns>成功</returns>
+        public bool SetDataPack(string[] nameList)
+        {
+            return default(bool);
+        }
+
+        /// <summary>
+        /// 获取订阅列表
+        /// </summary>
+        /// <returns>订阅变量名数组</returns>
+        public string[] GetDataPack()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 清空变量列表
+        /// </summary>
+        /// <returns>将Data Package 初始化</returns>
+        public string[] ClearDataPack()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 添加订阅变量，添加失败返回-1
+        /// </summary>
+        /// <param name="varName">待添加变量名</param>
+        /// <returns>变量在列表中的ID（index）</returns>
+        public int AddDataPackMember(string varName)
+        {
+            //throw new Exception("变量名已存在");
+            return default(int);
+        }
+
+        /// <summary>
+        /// 移除订阅变量
+        /// </summary>
+        /// <param name="varName">待移除变量名</param>
+        /// <returns>成功</returns>
+        public bool RemoveDataPackMember(string varName)
+        {
+            return default(bool);
+        }
+
+        /// <summary>
+        /// 获取本次试验数据
+        /// </summary>
+        /// <remarks>
+        /// 查阅MSDN，DataTable最大存储行数为16,777,216，足够需求。如果经计算不够尽早反馈。
+        /// </remarks>
+        /// <returns>返回DataTable结构为Id, Name, Type 和 Value。
+        /// 其中Value是一个Dictionary，key代表时间(hhmmss)，value代表值，统一为double类型</returns>
+        public DataTable DataPackCallback()
+        {
+            return null;
+        }//C# dictionary java map C++ map
     }
+
 }
