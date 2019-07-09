@@ -101,7 +101,7 @@ namespace HyTestRTDataService.RunningMode
             if (this.refreshFrequency >= 0 && !timer.Enabled)   //且 timer未开启
             {
                 timer.Enabled = true;
-                this.timer.Start();
+                //this.timer.Start();
             }
             else if(this.refreshFrequency<0 && timer.Enabled)   //且 timer已开启
             {
@@ -146,11 +146,11 @@ namespace HyTestRTDataService.RunningMode
 
         private void ReadDataToDatapool()
         {
-            for(int i=0; i<datapool.rdataList.Count(); i++)
-            {
-                datapool.rdataList[i] = ReadDataFromDevice(i);
-            }
-            DataRefresh(this, new EventArgs());     //通知各控件
+            //for(int i=0; i<datapool.rdataList.Count(); i++)
+            //{
+            //    datapool.rdataList[i] = ReadDataFromDevice(i);
+            //}
+            //DataRefresh(this, new EventArgs());     //通知各控件
         }
 
         DataTransformer transformer;
@@ -197,25 +197,25 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            T value;
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            //Port varPort = config.mapNameToPort[varName];
-            int varIndex = iomapInfo.mapNameToIndex[varName];
-            if (varType == typeof(int))
-            {
-                int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
-                return (T)Convert.ChangeType(value1, typeof(T));
-            }
-            else if(varType == typeof(bool))
-            {
-                double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
-                return (T)Convert.ChangeType(value1, typeof(T));
-            }
-            else
-            {
-                bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
-                return (T)Convert.ChangeType(value1, typeof(T));
-            }
+            //T value;
+            //Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            ////Port varPort = config.mapNameToPort[varName];
+            //int varIndex = iomapInfo.mapNameToIndex[varName];
+            //if (varType == typeof(int))
+            //{
+            //    int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
+            //    return (T)Convert.ChangeType(value1, typeof(T));
+            //}
+            //else if(varType == typeof(bool))
+            //{
+            //    double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
+            //    return (T)Convert.ChangeType(value1, typeof(T));
+            //}
+            //else
+            //{
+            //    bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
+            //    return (T)Convert.ChangeType(value1, typeof(T));
+            //}
             return default(T);
         }
 
@@ -224,23 +224,23 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public void NormalWrite<T>(string varName, T value)
         {
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            int varIndex = iomapInfo.mapNameToIndex[varName];
-            if (varType == typeof(int))
-            {
-                int value1 = (int)Convert.ChangeType(value, typeof(int));
-                datapool.rdataList[varIndex] = value1;
-            }
-            else if (varType == typeof(bool))
-            {
-                double value1 = (double)Convert.ChangeType(value, typeof(double));
-                datapool.rdataList[varIndex] = value1;
-            }
-            else
-            {
-                bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
-                datapool.rdataList[varIndex] = value1 ? 1 : 0;
-            }
+            //Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            //int varIndex = iomapInfo.mapNameToIndex[varName];
+            //if (varType == typeof(int))
+            //{
+            //    int value1 = (int)Convert.ChangeType(value, typeof(int));
+            //    datapool.rdataList[varIndex] = value1;
+            //}
+            //else if (varType == typeof(bool))
+            //{
+            //    double value1 = (double)Convert.ChangeType(value, typeof(double));
+            //    datapool.rdataList[varIndex] = value1;
+            //}
+            //else
+            //{
+            //    bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
+            //    datapool.rdataList[varIndex] = value1 ? 1 : 0;
+            //}
         }
 
         /// <summary>
@@ -261,12 +261,12 @@ namespace HyTestRTDataService.RunningMode
             Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
 
-            if (varType == typeof(bool))
+            if (varType == typeof(bool))    //if digital
             {
                 data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 
                         (byte)Convert.ChangeType(value, typeof(byte)));
             }
-            else if (varType == typeof(int))
+            else if (varType == typeof(int))    //if analog
             {
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId,
                     (int)Convert.ChangeType(value, typeof(int)));

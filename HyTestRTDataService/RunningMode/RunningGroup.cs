@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace HyTestRTDataService.RunningMode
 {
-    class RunningGroup
-    {
-    }
+    class RunningGroup { }
 }
