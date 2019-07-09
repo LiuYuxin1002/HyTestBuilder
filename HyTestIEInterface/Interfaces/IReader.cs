@@ -15,7 +15,8 @@ namespace HyTestIEInterface
         /// <param name="channel">端口</param>
         /// <param name="value"></param>
         /// <returns></returns>
-        int ReadAnalog(int deviceId, int channel, ref int value);
+        int ReadAnalog(int deviceId, int channel);
+        
         /// <summary>
         /// 单点读数字量
         /// </summary>
@@ -23,7 +24,8 @@ namespace HyTestIEInterface
         /// <param name="channel"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        int ReadDigital(int deviceId, int channel, ref byte value);
+        bool ReadDigital(int deviceId, int channel);
+        
         /// <summary>
         /// 批量读模拟量
         /// </summary>
@@ -32,6 +34,7 @@ namespace HyTestIEInterface
         /// <param name="values"></param>
         /// <returns></returns>
         int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values);
+        
         /// <summary>
         /// 批量读数字量
         /// </summary>

@@ -63,6 +63,7 @@ namespace HyTestRTDataService.RunningMode
         //    int data = server.NormalRead<int>(varname);
         //    this.Value = data;
         //}
+
         /*read & write*/
         IReader reader;//有默认值EtherCAT
         IWriter writer;
@@ -78,7 +79,7 @@ namespace HyTestRTDataService.RunningMode
         private ConfigIOmapInfo     iomapInfo;
         private ConfigTestEnvInfo   testInfo;
 
-        private System.Windows.Forms.Timer timer;
+        //private System.Windows.Forms.Timer timer;
         private int refreshFrequency;
         private bool subscribeStart = true;
 
@@ -86,27 +87,11 @@ namespace HyTestRTDataService.RunningMode
         {
             InitializeDataPool();
             InitializeConfig();
-            InitializeTimer();
-            ChangeTimerState();
         }
 
         private void InitializeDataPool()
         {
             datapool = new RealTimeDataPool();
-        }
-
-        //根据refreshFrequency改变timer状态
-        private void ChangeTimerState()
-        {
-            if (this.refreshFrequency >= 0 && !timer.Enabled)   //且 timer未开启
-            {
-                timer.Enabled = true;
-                //this.timer.Start();
-            }
-            else if(this.refreshFrequency<0 && timer.Enabled)   //且 timer已开启
-            {
-                this.timer.Enabled = false;
-            }
         }
 
         private void InitializeConfig()
@@ -124,17 +109,6 @@ namespace HyTestRTDataService.RunningMode
             writer = ConfigProtocol.getWriter();
         }
 
-        private void InitializeTimer()
-        {
-            timer = new System.Windows.Forms.Timer();
-            timer.Tick += Timer_Tick;
-            if (this.testInfo.refreshFrequency>0)
-            {
-                timer.Interval = this.testInfo.refreshFrequency;   //可能有未实例化对象错误
-            }
-            
-        }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (subscribeStart)
@@ -146,11 +120,13 @@ namespace HyTestRTDataService.RunningMode
 
         private void ReadDataToDatapool()
         {
-            //for(int i=0; i<datapool.rdataList.Count(); i++)
-            //{
-            //    datapool.rdataList[i] = ReadDataFromDevice(i);
-            //}
-            //DataRefresh(this, new EventArgs());     //通知各控件
+            if (datapool.rdataList == null) return;
+
+            for (int i = 0; i < datapool.rdataList.Count(); i++)
+            {
+                datapool.rdataList[i] = ReadDataFromDevice(i);
+            }
+            DataRefresh(this, new EventArgs());     //通知各控件
         }
 
         DataTransformer transformer;
@@ -169,27 +145,19 @@ namespace HyTestRTDataService.RunningMode
 
             if (varType == typeof(bool))
             {
-                byte value = 0;
-                reader.ReadDigital(varPort.deviceId, varPort.channelId, ref value);
-                transformer = new DataTransformer();
-                data = transformer.TransDigitalToBoolDouble(value);
+                bool value = InstantRead<bool>(varName);
+                return value ? 1 : 0;
             }
             else if (varType == typeof(int))
             {
-                int value = -1;
-                reader.ReadAnalog(varPort.deviceId, varPort.channelId, ref value);
-                transformer = new DataTransformer();
-                data = transformer.TransAnalogToIntDouble(value);
+                return InstantRead<int>(varName);
             }
             else if (varType == typeof(double))
             {
-                int value = -1;
-                reader.ReadAnalog(varPort.deviceId, varPort.channelId, ref value);
-                transformer = new DataTransformer();
-                data = transformer.TransAnalogToIntDouble(value);
+                return InstantRead<double>(varName);
             }
             
-            return (double)data;
+            else return default(double);
         }
 
         /// <summary>
@@ -197,25 +165,24 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            //T value;
-            //Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            ////Port varPort = config.mapNameToPort[varName];
-            //int varIndex = iomapInfo.mapNameToIndex[varName];
-            //if (varType == typeof(int))
-            //{
-            //    int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
-            //    return (T)Convert.ChangeType(value1, typeof(T));
-            //}
-            //else if(varType == typeof(bool))
-            //{
-            //    double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
-            //    return (T)Convert.ChangeType(value1, typeof(T));
-            //}
-            //else
-            //{
-            //    bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
-            //    return (T)Convert.ChangeType(value1, typeof(T));
-            //}
+            T value;
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            int varIndex = iomapInfo.mapNameToIndex[varName];
+            if (varType == typeof(int))
+            {
+                int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
+            else if (varType == typeof(bool))
+            {
+                double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
+            else
+            {
+                bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
+                return (T)Convert.ChangeType(value1, typeof(T));
+            }
             return default(T);
         }
 
@@ -224,23 +191,23 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public void NormalWrite<T>(string varName, T value)
         {
-            //Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            //int varIndex = iomapInfo.mapNameToIndex[varName];
-            //if (varType == typeof(int))
-            //{
-            //    int value1 = (int)Convert.ChangeType(value, typeof(int));
-            //    datapool.rdataList[varIndex] = value1;
-            //}
-            //else if (varType == typeof(bool))
-            //{
-            //    double value1 = (double)Convert.ChangeType(value, typeof(double));
-            //    datapool.rdataList[varIndex] = value1;
-            //}
-            //else
-            //{
-            //    bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
-            //    datapool.rdataList[varIndex] = value1 ? 1 : 0;
-            //}
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            int varIndex = iomapInfo.mapNameToIndex[varName];
+            if (varType == typeof(int))
+            {
+                int value1 = (int)Convert.ChangeType(value, typeof(int));
+                datapool.rdataList[varIndex] = value1;
+            }
+            else if (varType == typeof(bool))
+            {
+                double value1 = (double)Convert.ChangeType(value, typeof(double));
+                datapool.rdataList[varIndex] = value1;
+            }
+            else
+            {
+                bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
+                datapool.rdataList[varIndex] = value1 ? 1 : 0;
+            }
         }
 
         /// <summary>
@@ -248,8 +215,26 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T InstantRead<T>(string varName)
         {
+            //int data = -1;
+            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
+            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
 
-            return default(T);
+            if (varType == typeof(bool))    //if digital
+            {
+                bool data = reader.ReadDigital(varPort.deviceId, varPort.channelId);
+                return (T)Convert.ChangeType(data, typeof(T));
+            }
+            else if (varType == typeof(int))    //if int, but maybe useless
+            {
+                int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
+                return (T)Convert.ChangeType(DataTransformer.InputAnalogToPhysical(data), typeof(T));
+            }
+            else if (varType == typeof(double)) //if double
+            {
+                int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
+                return (T)Convert.ChangeType(DataTransformer.InputAnalogToPhysical(data), typeof(T));
+            }
+            else throw new Exception();
         }
 
         /// <summary>
@@ -266,14 +251,15 @@ namespace HyTestRTDataService.RunningMode
                 data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 
                         (byte)Convert.ChangeType(value, typeof(byte)));
             }
-            else if (varType == typeof(int))    //if analog
+            else if (varType == typeof(int))    //if int, but maybe useless
             {
-                data = writer.WriteAnalog(varPort.deviceId, varPort.channelId,
-                    (int)Convert.ChangeType(value, typeof(int)));
+                int realValue = DataTransformer.OutputPhysicalToAnalog((int)Convert.ChangeType(value, typeof(int)));
+                data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
-            else if (varType == typeof(double))
+            else if (varType == typeof(double)) //if double
             {
-
+                int realValue = DataTransformer.OutputPhysicalToAnalog((double)Convert.ChangeType(value, typeof(double)));
+                data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
         }
 
