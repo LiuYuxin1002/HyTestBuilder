@@ -96,36 +96,57 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_读写
+        //TODO:
         public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
         {
             throw new NotImplementedException();
         }
 
-        public int ReadAnalog(int deviceId, int channel, ref int value)
+        /// <summary>
+        /// 写模拟量
+        /// </summary>
+        /// <returns>返回-1表示失败</returns>
+        public int ReadAnalog(int deviceId, int channel)
         {
-            throw new NotImplementedException();
+            int tmpValue = CppConnect.getAnalogValue(deviceId, channel);
+            return tmpValue;
         }
 
+        //TODO:
         public int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values)
         {
             throw new NotImplementedException();
         }
 
-        public int ReadDigital(int deviceId, int channel, ref byte value)
+        public bool ReadDigital(int deviceId, int channel)
         {
-            throw new NotImplementedException();
+            int tmpValue = CppConnect.getDigitalValue(deviceId, channel);
+            if (tmpValue == 0) return false;
+            else if (tmpValue == 1) return true;
+            else
+            {
+                throw new Exception("读取bool值错误，请检查:"+typeof(EtherCAT));
+            }
         }
 
+        //TODO: 
         public int WriteAnalog(List<int> deviceList, List<int[]> channelList, List<int[]> values)
         {
-            throw new NotImplementedException();
+            bool succeed = true;
+            for (int i=0; i<deviceList.Count; i++)
+            {
+                int device = deviceList[i];
+                //TODO: complete these write
+            }
+            return succeed ? 0 : -1;
         }
 
         public int WriteAnalog(int deviceId, int channel, int value)
         {
-            return CppConnect.setIntergerValue(deviceId, channel, value);
+            return CppConnect.setAnalogValue(deviceId, channel, value);
         }
         
+        //TODO: foreach write
         public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<byte[]> values)
         {
             throw new NotImplementedException();

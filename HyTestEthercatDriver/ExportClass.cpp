@@ -75,6 +75,13 @@ extern "C"
 		return slaveReadStop();
 	}
 
+	TEXPORT int getAnalogValue(int deviceId, int channelId) {
+		
+	}
+
+	TEXPORT int getDigitalValue(int deviceId, int channelId) {
+
+	}
 	
 
 #ifdef __cplusplus

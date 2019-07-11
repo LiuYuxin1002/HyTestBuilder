@@ -28,10 +28,22 @@ namespace HyTestEtherCAT
         public static extern int getSlaveInfo(ref SlaveInfo slaveInfo, int id);
         //设置从站某端口信息
         [DllImport("HyTestEthercatDriver.dll")]
-        public static extern int setIntergerValue(int slaveId, int channel, int value);
+        public static extern int setAnalogValue(int slaveId, int channel, int value);
         [DllImport("HyTestEthercatDriver.dll", EntryPoint ="setBoolValue", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setDigitalValue(int slaveId, int channel, byte value);
 
+        /// <summary>
+        /// 获取模拟量
+        /// </summary>
+        /// <returns>返回真实值</returns>
+        [DllImport("HyTestEthercatDriver.dll")]
+        public static extern int getAnalogValue(int slaveId, int channelId);
+        /// <summary>
+        /// 获取数字量，返回int需要自行处理
+        /// </summary>
+        /// <returns>返回1=true，返回0=false</returns>
+        [DllImport("HyTestEthercatDriver.dll")]
+        public static extern int getDigitalValue(int slaveId, int channelId);
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int prepareToRead();
         [DllImport("HyTestEthercatDriver.dll")]

@@ -149,3 +149,13 @@ int slaveReadStop() {
 	if(hthread!=NULL) CloseHandle(hthread);
 	return 0;
 }
+
+int getDigitalValueImpl(int deviceId, int channelId) {
+	SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave;
+	return tmpSlave->values[channelId];
+}
+
+int getAnalogValueImpl(int deviceId, int channelId) {
+	SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave;
+	return tmpSlave->values[channelId];
+}

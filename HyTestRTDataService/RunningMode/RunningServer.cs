@@ -30,6 +30,8 @@ namespace HyTestRTDataService.RunningMode
             server.DataPackCallback();
 
         }
+
+        
     }
     public class RunningServer
     {
