@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TwinCAT.Ads;
 
 namespace HyTestIEInterface
 {
@@ -27,10 +22,5 @@ namespace HyTestIEInterface
         /// </summary>
         /// <returns></returns>
         int disconnect();
-    }
-
-    class Test
-    {
-        TcAdsClient client;
     }
 }
