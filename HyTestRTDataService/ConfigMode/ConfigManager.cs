@@ -142,7 +142,7 @@ namespace HyTestRTDataService.ConfigMode
         /// To save adapter config to the subConfig object.
         /// <br>(NOT CONFIG OBJ) If you want to save in config object, you should call "SaveConfig"</br>
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">the adapter selected</param>
         public void SaveAdapterConfig(int id)
         {
             configAdapter.SaveSubConfig(id);

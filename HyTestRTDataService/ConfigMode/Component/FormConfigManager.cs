@@ -54,7 +54,7 @@ namespace HyTestRTDataService.ConfigMode.Component
             {
                 "System.Int",
                 "System.Double",
-                "System.Bool",
+                "System.Boolean",
                 "System.String",
             };
             VarType.Visible = true;

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-boolean runningState;
+int runningState;
 HANDLE hthread;
 
 char strbuf[64] = "";
@@ -43,7 +43,7 @@ map<char*, char*> getDataMap() {
 }
 
 int checkSlaveState() {
-	if (ec_slavecount != -1) {
+	if (ec_slavecount == 0) {
 		SLAVET_ARR *newSlave = new SLAVET_ARR();
 		newSlave->channelNum = 4;
 		newSlave->id = 0;
@@ -76,6 +76,7 @@ int checkRedisState() {
 	return 0;
 }
 
+// 定时100ms读取数据到Redis
 DWORD WINAPI readSlaveThread(LPVOID lpParameter) {
 	while (runningState)
 	{
@@ -143,6 +144,11 @@ int slaveReadStart() {
 int slaveReadSuspend() {
 	if(hthread!=NULL) SuspendThread(hthread);
 	return 0;
+}
+
+int slaveReadResume() {
+	if (hthread != NULL) ResumeThread(hthread);
+	return 1;
 }
 
 int slaveReadStop() {

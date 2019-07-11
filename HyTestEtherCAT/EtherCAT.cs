@@ -4,13 +4,21 @@ using System.Text;
 using HyTestIEInterface;
 using HyTestIEEntity;
 using HyTestEtherCAT.localEntity;
+using System.Timers;
 
 namespace HyTestEtherCAT
 {
     public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter
     {
         #region region_属性
-
+        /// <summary>
+        /// EtherCAT刷新频率
+        /// </summary>
+        public static int RefreshFrequency{ get; set; }
+        /// <summary>
+        /// 所选网卡
+        /// </summary>
+        public int AdapterSelected { get; set; }
         #endregion
 
         #region region_常量
@@ -18,37 +26,46 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_成员变量
+        Timer timer = new Timer();
 
         private static EtherCAT ethercat;
-        public static EtherCAT getEtherCAT(bool hasAdapter)//单例
+        public static EtherCAT getEtherCAT(int refreshFrequency)//单例
         {
-            if(ethercat == null)
-            {
-                ethercat = new EtherCAT(hasAdapter);
-                return ethercat;
+            if(ethercat == null) ethercat = new EtherCAT(refreshFrequency);
+            else if(ethercat != null && RefreshFrequency==0 ) {
+                RefreshFrequency = refreshFrequency;
             }
-            else
-            {
-                return ethercat;
-            }
+
+            return ethercat;
+        }
+        public static EtherCAT getEtherCAT()
+        {
+            if (ethercat == null) ethercat = new EtherCAT();
+
+            return ethercat;
         }
 
         #endregion
 
         #region region_构造函数
-        private EtherCAT(bool hasAdapter)
+        private EtherCAT() { }
+        private EtherCAT(int refreshFrequency)
         {
-            haveAdapter = hasAdapter;
+            InitTimer(refreshFrequency);
+            BuildConnection();
         }
+
         #endregion
 
         #region region_事件
 
         public event EventHandler datachanged;
+        public event EventHandler<EventArgs> myevent;
 
         #endregion
 
         #region region_连接管理
+        
         public int close()
         {
             throw new NotImplementedException();
@@ -96,6 +113,13 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_读写
+        //数据刷新时触发，目前做成Timer触发，后面应该是Redis更新触发
+        public void OnDataRefresh(object sender, EventArgs e)
+        {
+            //数据刷新
+            myevent(null, null);
+        }
+
         //TODO:
         public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
         {
@@ -201,7 +225,48 @@ namespace HyTestEtherCAT
         #endregion
 
         #region other method
+        public void SetRefreshParams(int interval)
+        {
+            this.timer.Interval = interval;
+        }
 
+        private void InitTimer(int interval)
+        {
+            this.timer.Interval = interval;
+            timer.Elapsed += OnDataRefresh;
+        }
+
+        public void StartTimer()
+        {
+            this.timer.Start();
+        }
+
+        public void StopTimer()
+        {
+            this.timer.Stop();
+        }
+
+        /// <summary>
+        /// 建立连接状态，包括：初始化网卡，选择网卡，初始化从站
+        /// </summary>
+        /// <returns></returns>
+        private void BuildConnection()
+        {
+            CppConnect.getAdapterNum();
+            CppConnect.setAdapterId(this.AdapterSelected);
+            CppConnect.initSlaveConfig();
+        }
+
+        public int SetAdapterFromConfig(int AdapterId)
+        {
+            if (this.AdapterSelected == 0)
+            {
+                this.AdapterSelected = AdapterId;
+                BuildConnection();
+                return 2;
+            }
+            else return 1;
+        }
         #endregion
     }
 }

@@ -27,7 +27,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
-            loader = EtherCAT.getEtherCAT(true);
+            loader = EtherCAT.getEtherCAT();
 
             ReadSubConfig(deviceInfo);
         }

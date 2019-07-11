@@ -9,6 +9,8 @@ int slavePrepareToRead();
 int slaveReadStart();
 //‘›Õ£∂¡»°
 int slaveReadSuspend();
+//ª÷∏¥∂¡»°
+int slaveReadResume();
 //Õ£÷π∂¡»°
 int slaveReadStop();
 

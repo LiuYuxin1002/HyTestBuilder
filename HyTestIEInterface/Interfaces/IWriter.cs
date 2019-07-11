@@ -9,6 +9,11 @@ namespace HyTestIEInterface
     public interface IWriter
     {
         /// <summary>
+        /// if not setting Adapter which is selected，setting it
+        /// </summary>
+        int SetAdapterFromConfig(int AdapterId);
+
+        /// <summary>
         /// 单点写模拟量
         /// </summary>
         /// <returns></returns>

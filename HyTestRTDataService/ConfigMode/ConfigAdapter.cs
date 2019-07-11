@@ -25,7 +25,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            loader = EtherCAT.getEtherCAT(true);//后面要改成选择型
+            loader = EtherCAT.getEtherCAT();//后面要改成选择型
 
             ReadSubConfig(adapterInfo);
         }
@@ -76,6 +76,7 @@ namespace HyTestRTDataService.ConfigMode
             int adapterId = (int)var;
             ErrorCode errCode = loader.setAdapter(adapterId);
             adapterInfo.currentAdapter = adapterArray[adapterId];
+            adapterInfo.currentAdapterId = adapterId;
         }
     }
 }

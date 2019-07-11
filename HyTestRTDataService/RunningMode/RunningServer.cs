@@ -7,6 +7,7 @@ using HyTestRTDataService.ConfigMode.MapEntities;
 using HyTestRTDataService.ConfigMode.Component;
 using System.Collections.Generic;
 using System.Data;
+using HyTestEtherCAT;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -89,6 +90,7 @@ namespace HyTestRTDataService.RunningMode
         {
             InitializeDataPool();
             InitializeConfig();
+            
         }
 
         private void InitializeDataPool()
@@ -109,6 +111,8 @@ namespace HyTestRTDataService.RunningMode
 
             reader = ConfigProtocol.getReader();
             writer = ConfigProtocol.getWriter();
+
+            writer.SetAdapterFromConfig(config.adapterInfo.currentAdapterId);
         }
 
         private void Timer_Tick(object sender, EventArgs e)

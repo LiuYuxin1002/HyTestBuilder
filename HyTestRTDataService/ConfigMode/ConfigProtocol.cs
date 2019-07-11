@@ -25,7 +25,7 @@ namespace HyTestRTDataService.ConfigMode
             switch (currentProtocol)
             {
                 case 0:
-                    reader = EtherCAT.getEtherCAT(true);
+                    reader = EtherCAT.getEtherCAT();
                     break;
                 default:
                     reader = null;
@@ -40,7 +40,7 @@ namespace HyTestRTDataService.ConfigMode
             switch (currentProtocol)
             {
                 case 0:
-                    writer = EtherCAT.getEtherCAT(true);
+                    writer = EtherCAT.getEtherCAT();
                     break;
                 default:
                     writer = null;

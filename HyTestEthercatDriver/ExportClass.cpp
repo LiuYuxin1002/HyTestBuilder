@@ -5,8 +5,6 @@
 #include "SlaveReadManager.h"
 #include "SlaveWirteManager.h"
 
-
-//SoemImplClass* transfer = new SoemImplClass();
 #ifdef __cplusplus
 extern "C"
 {
@@ -14,7 +12,6 @@ extern "C"
 #else
 #define TEXPORT _declspec(dllexport)
 #endif
-
 
 	TEXPORT int getAdapterNum() {
 		return getAdapterNumImpl();
@@ -76,13 +73,12 @@ extern "C"
 	}
 
 	TEXPORT int getAnalogValue(int deviceId, int channelId) {
-		
+		return getAnalogValueImpl(deviceId, channelId);
 	}
 
 	TEXPORT int getDigitalValue(int deviceId, int channelId) {
-
+		return getDigitalValueImpl(deviceId, channelId);
 	}
-	
 
 #ifdef __cplusplus
 }
