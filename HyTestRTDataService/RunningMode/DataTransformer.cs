@@ -113,6 +113,12 @@ namespace HyTestRTDataService.RunningMode
         /// <returns></returns>
         public static int OutputPhysicalToAnalog(double physical)
         {
+            if (physical > OUTPUT_MAX || physical<OUTPUT_MIN)
+            {
+                throw new Exception("给定变量不在有效范围内");
+                return -1;
+            }
+
             double rate = (ANALOG_MAX - ANALOG_MIN) / (OUTPUT_MAX - OUTPUT_MIN);    //rate>1
             int result = (int)(rate * (physical - OUTPUT_MIN)) + ANALOG_MIN;
             return result;

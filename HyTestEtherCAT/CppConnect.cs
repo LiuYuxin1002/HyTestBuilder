@@ -21,8 +21,6 @@ namespace HyTestEtherCAT
         public static extern int setAdapterId(int nicId);
         //自动配置从站，成功更新结构体数组
         [DllImport("HyTestEthercatDriver.dll")]
-        public static extern int initConfig();
-        [DllImport("HyTestEthercatDriver.dll")]
         public static extern int initSlaveConfig();
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "getSlaveInfo", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
         public static extern int getSlaveInfo(ref SlaveInfo slaveInfo, int id);
@@ -52,5 +50,7 @@ namespace HyTestEtherCAT
         public static extern int readSuspend();
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int readStop();
+        [DllImport("HyTestEthercatDriver.dll")]
+        public static extern int readResume();
     }
 }

@@ -82,7 +82,6 @@ namespace HyTestRTDataService.RunningMode
         private ConfigIOmapInfo     iomapInfo;
         private ConfigTestEnvInfo   testInfo;
 
-        //private System.Windows.Forms.Timer timer;
         private int refreshFrequency;
         private bool subscribeStart = true;
 
@@ -251,7 +250,7 @@ namespace HyTestRTDataService.RunningMode
             double data = -1;
             Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-
+            
             if (varType == typeof(bool))    //if digital
             {
                 data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 

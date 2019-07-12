@@ -52,7 +52,7 @@ namespace HyTestRTDataService.ConfigMode.Component
             VarType.HeaderText = "变量类型";
             VarType.DataSource = new string[]
             {
-                "System.Int",
+                "System.Int32",
                 "System.Double",
                 "System.Boolean",
                 "System.String",

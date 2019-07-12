@@ -79,5 +79,58 @@ namespace HyTestRTDataService.RunningMode.Component
             server.InstantWrite("DI8", state[7]);
             this.lbLed8.State = state[7] ? LedState.On : LedState.Off;
         }
+        
+        //AO部分
+        private void button9_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox1.Text.Trim();
+            if(valueStr!="" || valueStr!=null)
+            {
+                //还应该判断是不是非double
+                server.InstantWrite("AI1", double.Parse(valueStr));
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox2.Text.Trim();
+            server.InstantWrite("AI2", double.Parse(valueStr));
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox3.Text.Trim();
+            server.InstantWrite("AI3", double.Parse(valueStr));
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox4.Text.Trim();
+            server.InstantWrite("AI4", double.Parse(valueStr));
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox5.Text.Trim();
+            server.InstantWrite("AI5", double.Parse(valueStr));
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox6.Text.Trim();
+            server.InstantWrite("AI6", double.Parse(valueStr));
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox7.Text.Trim();
+            server.InstantWrite("AI7", double.Parse(valueStr));
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            string valueStr = this.textBox8.Text.Trim();
+            server.InstantWrite("AI8", double.Parse(valueStr));
+        }
     }
 }

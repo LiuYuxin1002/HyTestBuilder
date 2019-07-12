@@ -46,6 +46,22 @@
             this.lbLed8 = new LBSoft.IndustrialCtrls.Leds.LBLed();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.button15 = new System.Windows.Forms.Button();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.button11 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -88,22 +104,6 @@
             this.lbDigitalMeter14 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
             this.lbDigitalMeter15 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
             this.lbDigitalMeter16 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button11 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button12 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button14 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button15 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button16 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -375,6 +375,142 @@
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EtherCAT写模拟量";
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(353, 207);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(25, 23);
+            this.button16.TabIndex = 47;
+            this.button16.Text = "W";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(247, 209);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 21);
+            this.textBox8.TabIndex = 46;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(171, 209);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(25, 23);
+            this.button15.TabIndex = 45;
+            this.button15.Text = "W";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(65, 211);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 21);
+            this.textBox7.TabIndex = 44;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(353, 156);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(25, 23);
+            this.button14.TabIndex = 43;
+            this.button14.Text = "W";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(247, 158);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 21);
+            this.textBox6.TabIndex = 42;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(171, 153);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(25, 23);
+            this.button13.TabIndex = 41;
+            this.button13.Text = "W";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(65, 155);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 21);
+            this.textBox5.TabIndex = 40;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(353, 102);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(25, 23);
+            this.button12.TabIndex = 39;
+            this.button12.Text = "W";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(247, 104);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.TabIndex = 38;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(171, 99);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(25, 23);
+            this.button11.TabIndex = 37;
+            this.button11.Text = "W";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(65, 101);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 21);
+            this.textBox3.TabIndex = 36;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(353, 52);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(25, 23);
+            this.button10.TabIndex = 35;
+            this.button10.Text = "W";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(247, 54);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 34;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(171, 52);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(25, 23);
+            this.button9.TabIndex = 33;
+            this.button9.Text = "W";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(65, 54);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 32;
             // 
             // label8
             // 
@@ -662,13 +798,13 @@
             this.lbLed16.BackColor = System.Drawing.Color.Transparent;
             this.lbLed16.BlinkInterval = 500;
             this.lbLed16.Label = "";
-            this.lbLed16.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed16.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Right;
             this.lbLed16.LedColor = System.Drawing.Color.Chartreuse;
             this.lbLed16.LedSize = new System.Drawing.SizeF(18F, 18F);
             this.lbLed16.Location = new System.Drawing.Point(24, 52);
             this.lbLed16.Name = "lbLed16";
             this.lbLed16.Renderer = null;
-            this.lbLed16.Size = new System.Drawing.Size(30, 23);
+            this.lbLed16.Size = new System.Drawing.Size(48, 23);
             this.lbLed16.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
             this.lbLed16.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
             this.lbLed16.TabIndex = 8;
@@ -865,134 +1001,6 @@
             this.lbDigitalMeter16.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter16.TabIndex = 16;
             this.lbDigitalMeter16.Value = 0D;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(65, 54);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 32;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(171, 52);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(25, 23);
-            this.button9.TabIndex = 33;
-            this.button9.Text = "W";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(353, 52);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(25, 23);
-            this.button10.TabIndex = 35;
-            this.button10.Text = "W";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(247, 54);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 34;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(171, 99);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(25, 23);
-            this.button11.TabIndex = 37;
-            this.button11.Text = "W";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(65, 101);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 36;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(353, 102);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(25, 23);
-            this.button12.TabIndex = 39;
-            this.button12.Text = "W";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(247, 104);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 38;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(171, 153);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(25, 23);
-            this.button13.TabIndex = 41;
-            this.button13.Text = "W";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(65, 155);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 40;
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(353, 156);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(25, 23);
-            this.button14.TabIndex = 43;
-            this.button14.Text = "W";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(247, 158);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
-            this.textBox6.TabIndex = 42;
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(171, 209);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(25, 23);
-            this.button15.TabIndex = 45;
-            this.button15.Text = "W";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(65, 211);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 21);
-            this.textBox7.TabIndex = 44;
-            // 
-            // button16
-            // 
-            this.button16.Location = new System.Drawing.Point(353, 207);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(25, 23);
-            this.button16.TabIndex = 47;
-            this.button16.Text = "W";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(247, 209);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 21);
-            this.textBox8.TabIndex = 46;
             // 
             // FormTestRunning
             // 

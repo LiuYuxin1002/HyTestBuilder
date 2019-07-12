@@ -13,6 +13,7 @@ extern "C"
 #define TEXPORT _declspec(dllexport)
 #endif
 
+	//ADAPTER
 	TEXPORT int getAdapterNum() {
 		return getAdapterNumImpl();
 	}
@@ -33,7 +34,7 @@ extern "C"
 		}
 	}
 
-
+	//SLAVE CONFIG
 	TEXPORT int initSlaveConfig()
 	{
 		return initSlaveConfigInfo();
@@ -44,18 +45,19 @@ extern "C"
 		getSlaveInfoImpl(slave, id);
 	}
 
-
-	TEXPORT int setIntegerValue(int slaveId, int channel, int value)
+	//Write Value
+	TEXPORT int setAnalogValue(int slaveId, int channel, int value)
 	{
-		return setIntegerValueImpl(slaveId, channel, value);
+		return slaveWriteSingleAnalog(slaveId, channel, value);
 	}
 
 
-	TEXPORT int setBoolValue(int slaveId, int channel, boolean value)
+	TEXPORT int setDigitalValue(int slaveId, int channel, boolean value)
 	{
 		return slaveWriteSigleDigital(slaveId, channel, value);
 	}
 
+	//AUTO READ
 	TEXPORT int prepareToRead() {
 		return slavePrepareToRead();
 	}
@@ -72,6 +74,11 @@ extern "C"
 		return slaveReadStop();
 	}
 
+	TEXPORT int readResume() {
+		return slaveReadResume();
+	}
+
+	//MANUL READ
 	TEXPORT int getAnalogValue(int deviceId, int channelId) {
 		return getAnalogValueImpl(deviceId, channelId);
 	}
