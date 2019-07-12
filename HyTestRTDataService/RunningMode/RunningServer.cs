@@ -11,29 +11,6 @@ using HyTestEtherCAT;
 
 namespace HyTestRTDataService.RunningMode
 {
-    public class TmpClass
-    {
-        RunningServer server = RunningServer.getServer();
-
-        void RunTest()
-        {
-            server.NormalWrite<int>("var1", 1);
-            server.NormalWrite<double>("var2", 2);
-
-            server.NormalRead<int>("var3");
-
-            //注意：write的必须是输出；read的可以是输入和输出；
-
-            //变量的订阅
-            server.SetDataPack(new string[] { "var1", "var2" });
-            server.GetDataPack();
-            server.AddDataPackMember("var3");
-            server.DataPackCallback();
-
-        }
-
-        
-    }
     public class RunningServer
     {
         private static RunningServer server;
@@ -46,7 +23,7 @@ namespace HyTestRTDataService.RunningMode
             return server;
         }
 
-        /*Event*/
+        /*Event 使用说明如下：*/
         public event EventHandler<EventArgs> DataRefresh;
         /// <summary>
         /// 控件数据订阅如下：

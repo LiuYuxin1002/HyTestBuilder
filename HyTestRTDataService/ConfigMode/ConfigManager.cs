@@ -21,7 +21,7 @@ namespace HyTestRTDataService.ConfigMode
         {
             get
             {
-                return Application.StartupPath + @"\\config.xml";
+                return Application.StartupPath + @"\\..\\..\\..\\bin\\config.xml";
             }
         }
 

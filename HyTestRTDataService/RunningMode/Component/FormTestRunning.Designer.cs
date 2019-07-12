@@ -36,14 +36,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.lbLed1 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed2 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed3 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed4 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed5 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed6 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed7 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed8 = new LBSoft.IndustrialCtrls.Leds.LBLed();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button16 = new System.Windows.Forms.Button();
@@ -79,14 +71,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.lbLed9 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed10 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed11 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed12 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed13 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed14 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed15 = new LBSoft.IndustrialCtrls.Leds.LBLed();
-            this.lbLed16 = new LBSoft.IndustrialCtrls.Leds.LBLed();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -104,6 +88,22 @@
             this.lbDigitalMeter14 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
             this.lbDigitalMeter15 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
             this.lbDigitalMeter16 = new LBSoft.IndustrialCtrls.Meters.LBDigitalMeter();
+            this.lbLed9 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed10 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed11 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed12 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed13 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed14 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed15 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed16 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed8 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed7 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed6 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed5 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed4 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed3 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed2 = new LBSoft.IndustrialCtrls.Leds.LBLed();
+            this.lbLed1 = new LBSoft.IndustrialCtrls.Leds.LBLed();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -189,134 +189,6 @@
             this.button8.Text = "DO8";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // lbLed1
-            // 
-            this.lbLed1.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed1.BlinkInterval = 500;
-            this.lbLed1.Label = "";
-            this.lbLed1.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed1.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed1.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed1.Location = new System.Drawing.Point(10, 52);
-            this.lbLed1.Name = "lbLed1";
-            this.lbLed1.Renderer = null;
-            this.lbLed1.Size = new System.Drawing.Size(30, 23);
-            this.lbLed1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed1.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed1.TabIndex = 8;
-            // 
-            // lbLed2
-            // 
-            this.lbLed2.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed2.BlinkInterval = 500;
-            this.lbLed2.Label = "";
-            this.lbLed2.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed2.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed2.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed2.Location = new System.Drawing.Point(150, 52);
-            this.lbLed2.Name = "lbLed2";
-            this.lbLed2.Renderer = null;
-            this.lbLed2.Size = new System.Drawing.Size(30, 23);
-            this.lbLed2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed2.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed2.TabIndex = 9;
-            // 
-            // lbLed3
-            // 
-            this.lbLed3.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed3.BlinkInterval = 500;
-            this.lbLed3.Label = "";
-            this.lbLed3.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed3.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed3.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed3.Location = new System.Drawing.Point(10, 104);
-            this.lbLed3.Name = "lbLed3";
-            this.lbLed3.Renderer = null;
-            this.lbLed3.Size = new System.Drawing.Size(30, 23);
-            this.lbLed3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed3.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed3.TabIndex = 10;
-            // 
-            // lbLed4
-            // 
-            this.lbLed4.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed4.BlinkInterval = 500;
-            this.lbLed4.Label = "";
-            this.lbLed4.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed4.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed4.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed4.Location = new System.Drawing.Point(150, 104);
-            this.lbLed4.Name = "lbLed4";
-            this.lbLed4.Renderer = null;
-            this.lbLed4.Size = new System.Drawing.Size(30, 23);
-            this.lbLed4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed4.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed4.TabIndex = 11;
-            // 
-            // lbLed5
-            // 
-            this.lbLed5.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed5.BlinkInterval = 500;
-            this.lbLed5.Label = "";
-            this.lbLed5.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed5.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed5.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed5.Location = new System.Drawing.Point(10, 153);
-            this.lbLed5.Name = "lbLed5";
-            this.lbLed5.Renderer = null;
-            this.lbLed5.Size = new System.Drawing.Size(30, 23);
-            this.lbLed5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed5.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed5.TabIndex = 12;
-            // 
-            // lbLed6
-            // 
-            this.lbLed6.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed6.BlinkInterval = 500;
-            this.lbLed6.Label = "";
-            this.lbLed6.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed6.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed6.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed6.Location = new System.Drawing.Point(150, 156);
-            this.lbLed6.Name = "lbLed6";
-            this.lbLed6.Renderer = null;
-            this.lbLed6.Size = new System.Drawing.Size(30, 23);
-            this.lbLed6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed6.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed6.TabIndex = 13;
-            // 
-            // lbLed7
-            // 
-            this.lbLed7.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed7.BlinkInterval = 500;
-            this.lbLed7.Label = "";
-            this.lbLed7.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed7.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed7.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed7.Location = new System.Drawing.Point(10, 208);
-            this.lbLed7.Name = "lbLed7";
-            this.lbLed7.Renderer = null;
-            this.lbLed7.Size = new System.Drawing.Size(30, 23);
-            this.lbLed7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed7.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed7.TabIndex = 14;
-            // 
-            // lbLed8
-            // 
-            this.lbLed8.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed8.BlinkInterval = 500;
-            this.lbLed8.Label = "";
-            this.lbLed8.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed8.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed8.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed8.Location = new System.Drawing.Point(150, 208);
-            this.lbLed8.Name = "lbLed8";
-            this.lbLed8.Renderer = null;
-            this.lbLed8.Size = new System.Drawing.Size(30, 23);
-            this.lbLed8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed8.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed8.TabIndex = 15;
             // 
             // groupBox1
             // 
@@ -681,134 +553,6 @@
             this.label17.TabIndex = 16;
             this.label17.Text = "DI1";
             // 
-            // lbLed9
-            // 
-            this.lbLed9.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed9.BlinkInterval = 500;
-            this.lbLed9.Label = "";
-            this.lbLed9.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed9.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed9.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed9.Location = new System.Drawing.Point(150, 208);
-            this.lbLed9.Name = "lbLed9";
-            this.lbLed9.Renderer = null;
-            this.lbLed9.Size = new System.Drawing.Size(30, 23);
-            this.lbLed9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed9.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed9.TabIndex = 15;
-            // 
-            // lbLed10
-            // 
-            this.lbLed10.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed10.BlinkInterval = 500;
-            this.lbLed10.Label = "";
-            this.lbLed10.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed10.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed10.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed10.Location = new System.Drawing.Point(24, 208);
-            this.lbLed10.Name = "lbLed10";
-            this.lbLed10.Renderer = null;
-            this.lbLed10.Size = new System.Drawing.Size(30, 23);
-            this.lbLed10.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed10.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed10.TabIndex = 14;
-            // 
-            // lbLed11
-            // 
-            this.lbLed11.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed11.BlinkInterval = 500;
-            this.lbLed11.Label = "";
-            this.lbLed11.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed11.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed11.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed11.Location = new System.Drawing.Point(150, 156);
-            this.lbLed11.Name = "lbLed11";
-            this.lbLed11.Renderer = null;
-            this.lbLed11.Size = new System.Drawing.Size(30, 23);
-            this.lbLed11.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed11.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed11.TabIndex = 13;
-            // 
-            // lbLed12
-            // 
-            this.lbLed12.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed12.BlinkInterval = 500;
-            this.lbLed12.Label = "";
-            this.lbLed12.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed12.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed12.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed12.Location = new System.Drawing.Point(24, 153);
-            this.lbLed12.Name = "lbLed12";
-            this.lbLed12.Renderer = null;
-            this.lbLed12.Size = new System.Drawing.Size(30, 23);
-            this.lbLed12.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed12.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed12.TabIndex = 12;
-            // 
-            // lbLed13
-            // 
-            this.lbLed13.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed13.BlinkInterval = 500;
-            this.lbLed13.Label = "";
-            this.lbLed13.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed13.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed13.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed13.Location = new System.Drawing.Point(150, 104);
-            this.lbLed13.Name = "lbLed13";
-            this.lbLed13.Renderer = null;
-            this.lbLed13.Size = new System.Drawing.Size(30, 23);
-            this.lbLed13.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed13.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed13.TabIndex = 11;
-            // 
-            // lbLed14
-            // 
-            this.lbLed14.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed14.BlinkInterval = 500;
-            this.lbLed14.Label = "";
-            this.lbLed14.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed14.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed14.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed14.Location = new System.Drawing.Point(24, 104);
-            this.lbLed14.Name = "lbLed14";
-            this.lbLed14.Renderer = null;
-            this.lbLed14.Size = new System.Drawing.Size(30, 23);
-            this.lbLed14.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed14.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed14.TabIndex = 10;
-            // 
-            // lbLed15
-            // 
-            this.lbLed15.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed15.BlinkInterval = 500;
-            this.lbLed15.Label = "";
-            this.lbLed15.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
-            this.lbLed15.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed15.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed15.Location = new System.Drawing.Point(150, 52);
-            this.lbLed15.Name = "lbLed15";
-            this.lbLed15.Renderer = null;
-            this.lbLed15.Size = new System.Drawing.Size(30, 23);
-            this.lbLed15.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed15.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed15.TabIndex = 9;
-            // 
-            // lbLed16
-            // 
-            this.lbLed16.BackColor = System.Drawing.Color.Transparent;
-            this.lbLed16.BlinkInterval = 500;
-            this.lbLed16.Label = "";
-            this.lbLed16.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Right;
-            this.lbLed16.LedColor = System.Drawing.Color.Chartreuse;
-            this.lbLed16.LedSize = new System.Drawing.SizeF(18F, 18F);
-            this.lbLed16.Location = new System.Drawing.Point(24, 52);
-            this.lbLed16.Name = "lbLed16";
-            this.lbLed16.Renderer = null;
-            this.lbLed16.Size = new System.Drawing.Size(48, 23);
-            this.lbLed16.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
-            this.lbLed16.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
-            this.lbLed16.TabIndex = 8;
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label9);
@@ -917,6 +661,7 @@
             this.lbDigitalMeter9.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter9.TabIndex = 23;
             this.lbDigitalMeter9.Value = 0D;
+            this.lbDigitalMeter9.VarName = "AI8";
             // 
             // lbDigitalMeter10
             // 
@@ -929,6 +674,7 @@
             this.lbDigitalMeter10.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter10.TabIndex = 22;
             this.lbDigitalMeter10.Value = 0D;
+            this.lbDigitalMeter10.VarName = "AI7";
             // 
             // lbDigitalMeter11
             // 
@@ -941,6 +687,7 @@
             this.lbDigitalMeter11.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter11.TabIndex = 21;
             this.lbDigitalMeter11.Value = 0D;
+            this.lbDigitalMeter11.VarName = "AI6";
             // 
             // lbDigitalMeter12
             // 
@@ -953,6 +700,7 @@
             this.lbDigitalMeter12.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter12.TabIndex = 20;
             this.lbDigitalMeter12.Value = 0D;
+            this.lbDigitalMeter12.VarName = "AI5";
             // 
             // lbDigitalMeter13
             // 
@@ -965,6 +713,7 @@
             this.lbDigitalMeter13.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter13.TabIndex = 19;
             this.lbDigitalMeter13.Value = 0D;
+            this.lbDigitalMeter13.VarName = "AI4";
             // 
             // lbDigitalMeter14
             // 
@@ -977,6 +726,7 @@
             this.lbDigitalMeter14.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter14.TabIndex = 18;
             this.lbDigitalMeter14.Value = 0D;
+            this.lbDigitalMeter14.VarName = "AI3";
             // 
             // lbDigitalMeter15
             // 
@@ -989,6 +739,7 @@
             this.lbDigitalMeter15.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter15.TabIndex = 17;
             this.lbDigitalMeter15.Value = 0D;
+            this.lbDigitalMeter15.VarName = "AI2";
             // 
             // lbDigitalMeter16
             // 
@@ -1001,6 +752,279 @@
             this.lbDigitalMeter16.Size = new System.Drawing.Size(97, 23);
             this.lbDigitalMeter16.TabIndex = 16;
             this.lbDigitalMeter16.Value = 0D;
+            this.lbDigitalMeter16.VarName = "AI1";
+            // 
+            // lbLed9
+            // 
+            this.lbLed9.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed9.BlinkInterval = 500;
+            this.lbLed9.Label = "";
+            this.lbLed9.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed9.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed9.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed9.Location = new System.Drawing.Point(150, 208);
+            this.lbLed9.Name = "lbLed9";
+            this.lbLed9.Renderer = null;
+            this.lbLed9.Size = new System.Drawing.Size(30, 23);
+            this.lbLed9.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed9.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed9.TabIndex = 15;
+            this.lbLed9.VarName = "DI8";
+            // 
+            // lbLed10
+            // 
+            this.lbLed10.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed10.BlinkInterval = 500;
+            this.lbLed10.Label = "";
+            this.lbLed10.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed10.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed10.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed10.Location = new System.Drawing.Point(24, 208);
+            this.lbLed10.Name = "lbLed10";
+            this.lbLed10.Renderer = null;
+            this.lbLed10.Size = new System.Drawing.Size(30, 23);
+            this.lbLed10.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed10.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed10.TabIndex = 14;
+            this.lbLed10.VarName = "DI7";
+            // 
+            // lbLed11
+            // 
+            this.lbLed11.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed11.BlinkInterval = 500;
+            this.lbLed11.Label = "";
+            this.lbLed11.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed11.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed11.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed11.Location = new System.Drawing.Point(150, 156);
+            this.lbLed11.Name = "lbLed11";
+            this.lbLed11.Renderer = null;
+            this.lbLed11.Size = new System.Drawing.Size(30, 23);
+            this.lbLed11.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed11.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed11.TabIndex = 13;
+            this.lbLed11.VarName = "DI6";
+            // 
+            // lbLed12
+            // 
+            this.lbLed12.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed12.BlinkInterval = 500;
+            this.lbLed12.Label = "";
+            this.lbLed12.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed12.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed12.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed12.Location = new System.Drawing.Point(24, 153);
+            this.lbLed12.Name = "lbLed12";
+            this.lbLed12.Renderer = null;
+            this.lbLed12.Size = new System.Drawing.Size(30, 23);
+            this.lbLed12.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed12.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed12.TabIndex = 12;
+            this.lbLed12.VarName = "DI5";
+            // 
+            // lbLed13
+            // 
+            this.lbLed13.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed13.BlinkInterval = 500;
+            this.lbLed13.Label = "";
+            this.lbLed13.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed13.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed13.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed13.Location = new System.Drawing.Point(150, 104);
+            this.lbLed13.Name = "lbLed13";
+            this.lbLed13.Renderer = null;
+            this.lbLed13.Size = new System.Drawing.Size(30, 23);
+            this.lbLed13.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed13.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed13.TabIndex = 11;
+            this.lbLed13.VarName = "DI4";
+            // 
+            // lbLed14
+            // 
+            this.lbLed14.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed14.BlinkInterval = 500;
+            this.lbLed14.Label = "";
+            this.lbLed14.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed14.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed14.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed14.Location = new System.Drawing.Point(24, 104);
+            this.lbLed14.Name = "lbLed14";
+            this.lbLed14.Renderer = null;
+            this.lbLed14.Size = new System.Drawing.Size(30, 23);
+            this.lbLed14.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed14.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed14.TabIndex = 10;
+            this.lbLed14.VarName = "DI3";
+            // 
+            // lbLed15
+            // 
+            this.lbLed15.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed15.BlinkInterval = 500;
+            this.lbLed15.Label = "";
+            this.lbLed15.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed15.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed15.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed15.Location = new System.Drawing.Point(150, 52);
+            this.lbLed15.Name = "lbLed15";
+            this.lbLed15.Renderer = null;
+            this.lbLed15.Size = new System.Drawing.Size(30, 23);
+            this.lbLed15.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed15.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed15.TabIndex = 9;
+            this.lbLed15.VarName = "DI2";
+            // 
+            // lbLed16
+            // 
+            this.lbLed16.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed16.BlinkInterval = 500;
+            this.lbLed16.Label = "";
+            this.lbLed16.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Right;
+            this.lbLed16.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed16.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed16.Location = new System.Drawing.Point(24, 52);
+            this.lbLed16.Name = "lbLed16";
+            this.lbLed16.Renderer = null;
+            this.lbLed16.Size = new System.Drawing.Size(48, 23);
+            this.lbLed16.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed16.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed16.TabIndex = 8;
+            this.lbLed16.VarName = "DI1";
+            // 
+            // lbLed8
+            // 
+            this.lbLed8.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed8.BlinkInterval = 500;
+            this.lbLed8.Label = "";
+            this.lbLed8.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed8.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed8.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed8.Location = new System.Drawing.Point(150, 208);
+            this.lbLed8.Name = "lbLed8";
+            this.lbLed8.Renderer = null;
+            this.lbLed8.Size = new System.Drawing.Size(30, 23);
+            this.lbLed8.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed8.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed8.TabIndex = 15;
+            this.lbLed8.VarName = null;
+            // 
+            // lbLed7
+            // 
+            this.lbLed7.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed7.BlinkInterval = 500;
+            this.lbLed7.Label = "";
+            this.lbLed7.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed7.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed7.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed7.Location = new System.Drawing.Point(10, 208);
+            this.lbLed7.Name = "lbLed7";
+            this.lbLed7.Renderer = null;
+            this.lbLed7.Size = new System.Drawing.Size(30, 23);
+            this.lbLed7.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed7.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed7.TabIndex = 14;
+            this.lbLed7.VarName = null;
+            // 
+            // lbLed6
+            // 
+            this.lbLed6.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed6.BlinkInterval = 500;
+            this.lbLed6.Label = "";
+            this.lbLed6.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed6.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed6.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed6.Location = new System.Drawing.Point(150, 156);
+            this.lbLed6.Name = "lbLed6";
+            this.lbLed6.Renderer = null;
+            this.lbLed6.Size = new System.Drawing.Size(30, 23);
+            this.lbLed6.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed6.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed6.TabIndex = 13;
+            this.lbLed6.VarName = null;
+            // 
+            // lbLed5
+            // 
+            this.lbLed5.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed5.BlinkInterval = 500;
+            this.lbLed5.Label = "";
+            this.lbLed5.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed5.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed5.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed5.Location = new System.Drawing.Point(10, 153);
+            this.lbLed5.Name = "lbLed5";
+            this.lbLed5.Renderer = null;
+            this.lbLed5.Size = new System.Drawing.Size(30, 23);
+            this.lbLed5.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed5.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed5.TabIndex = 12;
+            this.lbLed5.VarName = null;
+            // 
+            // lbLed4
+            // 
+            this.lbLed4.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed4.BlinkInterval = 500;
+            this.lbLed4.Label = "";
+            this.lbLed4.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed4.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed4.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed4.Location = new System.Drawing.Point(150, 104);
+            this.lbLed4.Name = "lbLed4";
+            this.lbLed4.Renderer = null;
+            this.lbLed4.Size = new System.Drawing.Size(30, 23);
+            this.lbLed4.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed4.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed4.TabIndex = 11;
+            this.lbLed4.VarName = null;
+            // 
+            // lbLed3
+            // 
+            this.lbLed3.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed3.BlinkInterval = 500;
+            this.lbLed3.Label = "";
+            this.lbLed3.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed3.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed3.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed3.Location = new System.Drawing.Point(10, 104);
+            this.lbLed3.Name = "lbLed3";
+            this.lbLed3.Renderer = null;
+            this.lbLed3.Size = new System.Drawing.Size(30, 23);
+            this.lbLed3.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed3.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed3.TabIndex = 10;
+            this.lbLed3.VarName = null;
+            // 
+            // lbLed2
+            // 
+            this.lbLed2.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed2.BlinkInterval = 500;
+            this.lbLed2.Label = "";
+            this.lbLed2.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed2.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed2.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed2.Location = new System.Drawing.Point(150, 52);
+            this.lbLed2.Name = "lbLed2";
+            this.lbLed2.Renderer = null;
+            this.lbLed2.Size = new System.Drawing.Size(30, 23);
+            this.lbLed2.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed2.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed2.TabIndex = 9;
+            this.lbLed2.VarName = null;
+            // 
+            // lbLed1
+            // 
+            this.lbLed1.BackColor = System.Drawing.Color.Transparent;
+            this.lbLed1.BlinkInterval = 500;
+            this.lbLed1.Label = "";
+            this.lbLed1.LabelPosition = LBSoft.IndustrialCtrls.Leds.LBLed.LedLabelPosition.Top;
+            this.lbLed1.LedColor = System.Drawing.Color.Chartreuse;
+            this.lbLed1.LedSize = new System.Drawing.SizeF(18F, 18F);
+            this.lbLed1.Location = new System.Drawing.Point(10, 52);
+            this.lbLed1.Name = "lbLed1";
+            this.lbLed1.Renderer = null;
+            this.lbLed1.Size = new System.Drawing.Size(30, 23);
+            this.lbLed1.State = LBSoft.IndustrialCtrls.Leds.LBLed.LedState.Off;
+            this.lbLed1.Style = LBSoft.IndustrialCtrls.Leds.LBLed.LedStyle.Circular;
+            this.lbLed1.TabIndex = 8;
+            this.lbLed1.VarName = null;
             // 
             // FormTestRunning
             // 

@@ -18,8 +18,11 @@ namespace LBSoft.IndustrialCtrls.Base
     /// </summary>
     public partial class LBIndustrialCtrlBase : UserControl
     {
-        [Category("数据绑定")]
-        public string Name { get; set; }
+        [Browsable(true)]
+        [Category("AAA DATA BINDING")]
+        public string VarName { get; set; }
+
+        private string varName;
 
         #region (* Constructor *)
         public LBIndustrialCtrlBase()

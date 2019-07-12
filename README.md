@@ -10,8 +10,23 @@
 
 ## 安装教程
 
-1. 下载下来编译一下就行；
-2. 涉及TwinCat的部分报错就直接删除那部分；
+1. 添加引用
+	1. 添加LBIndustrialCtrls.dll控件引用
+	2. 添加HyTestRTDataService.dll服务引用
+	3. 添加HyTestEthercatDriver.dll驱动引用
+2. 试运行
+	1. 检查配置文件是否加载，如果没有找到配置文件，搜索配置文件config.xml移动到解决方案路径的bin目录下
+	2. 检查能否找到驱动引用，如果没有找到，联系我
+	3. 如果运行时出现某某问题导致“堆栈不对称”，尝试将项目的启动方式设置为x86，具体操作为：
+		项目右键->生成->目标平台下拉框->x86
+		如果没有解决，先检查你的数据类型，or联系我
+3. 调试
+	调试界面可参考HyTestBuilderTest解决方案，如果没有，联系我。
+	
+4. 反馈
+	如果有好的建议或意见，可以在github创建账号，拉你到HyTestBuider项目：[HyTestBuilder]https://github.com/LiuYuxin1002/HyTestBuilder
+
+
 
 ## 使用说明
 
@@ -104,3 +119,7 @@
 2. C++多线程实现用于EtherCAT驱动读写从站端口：
 	1. 读：完全扫描输入设备，每个周期将其打包为数据包发送到redis
 	2. 写：接收调用，改变C++数据池缓存；
+
+### 2019.7.2
+#### 工作记录
+1. 需要调试cpp的写部分。问题在slaveWriteSigleDigital函数，数组slave_arr没有值。
