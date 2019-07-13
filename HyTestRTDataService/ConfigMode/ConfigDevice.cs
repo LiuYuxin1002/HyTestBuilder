@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HyTestIEInterface;
+﻿using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Windows.Forms;
 using System.Data;
-using HyTestEtherCAT;
 using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode
@@ -27,7 +21,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
-            loader = EtherCAT.getEtherCAT();
+            loader = ConfigProtocol.GetDeviceLoader();
 
             ReadSubConfig(deviceInfo);
         }

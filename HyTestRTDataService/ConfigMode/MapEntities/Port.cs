@@ -12,17 +12,14 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     [Serializable]
     public class Port
     {
-        public string portId;   //数据类型+序号
-        public int portType;
-        public string name;
-        public int deviceId;
-        public int channelId;
-        public int isBounded;
+        public string portId;   //normal id
+        public int portType;    //port type in config
+        public string name;     //port name in config
+        public int deviceId;    //device id
+        public int channelId;   //channel id in this device
+        public int isBounded;   //tmp
 
-        public Port()
-        {
-
-        }
+        public Port() { }
 
         public Port(string port)
         {

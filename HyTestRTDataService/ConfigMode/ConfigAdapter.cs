@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HyTestIEInterface;
+﻿using HyTestIEInterface;
 using HyTestIEEntity;
 using System.Data;
-using HyTestEtherCAT;
 using HyTestRTDataService.ConfigMode.MapEntities;
 
 namespace HyTestRTDataService.ConfigMode
@@ -25,12 +21,12 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            loader = EtherCAT.getEtherCAT();//后面要改成选择型
+            loader = ConfigProtocol.GetAdapterLoader();
 
             ReadSubConfig(adapterInfo);
         }
 
-        public DataTable getAdapterTable(bool refresh)
+        public DataTable GetAdapterTable(bool refresh)
         {
             if (refresh)
             {

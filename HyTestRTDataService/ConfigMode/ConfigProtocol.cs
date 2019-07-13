@@ -10,6 +10,11 @@ namespace HyTestRTDataService.ConfigMode
         public static int currentProtocol;
         public IList<Protocol> protocolList;
 
+        public static IReader reader;
+        public static IWriter writer;
+        public static IDeviceLoader deviceLoader;
+        public static IAdapterLoader adapterLoader;
+
         public ConfigProtocol()
         {
             protocolList = new List<Protocol>
@@ -19,34 +24,56 @@ namespace HyTestRTDataService.ConfigMode
             };
         }
 
-        public static IReader getReader()
+        private static object GetServiceEntity()
         {
-            IReader reader;
+            object serviceEntity;
             switch (currentProtocol)
             {
                 case 0:
-                    reader = EtherCAT.getEtherCAT();
+                    serviceEntity = EtherCAT.getEtherCAT();
                     break;
                 default:
-                    reader = null;
+                    serviceEntity = null;
                     break;
             }
+            return serviceEntity;
+        }
+
+        /// <summary>
+        /// Get Reader Which Is Adapte To The Protocol In Config
+        /// </summary>
+        public static IReader GetReader()
+        {
+            if (reader == null) reader = (IReader)GetServiceEntity();
             return reader;
         }
 
-        public static IWriter getWriter()
+        /// <summary>
+        /// Get Writer Which Is Adapte To The Protocol In Config
+        /// </summary>
+        public static IWriter GetWriter()
         {
-            IWriter writer;
-            switch (currentProtocol)
-            {
-                case 0:
-                    writer = EtherCAT.getEtherCAT();
-                    break;
-                default:
-                    writer = null;
-                    break;
-            }
+            if (writer == null) writer = (IWriter)GetServiceEntity();
             return writer;
+        }
+
+        /// <summary>
+        /// Get DeviceLoader Which Is Adapte To The Protocol In Config
+        /// </summary>
+        public static IDeviceLoader GetDeviceLoader()
+        {
+            if (deviceLoader == null) deviceLoader = (IDeviceLoader)GetServiceEntity();
+            return deviceLoader;
+        }
+
+        /// <summary>
+        /// Get AdapterLoader Which Is Adapte To The Protocol In Config
+        /// </summary>
+        /// <returns></returns>
+        public static IAdapterLoader GetAdapterLoader()
+        {
+            if (adapterLoader == null) adapterLoader = (IAdapterLoader)GetServiceEntity();
+            return adapterLoader;
         }
     }
 }

@@ -126,7 +126,7 @@ namespace HyTestRTDataService.ConfigMode
         /// <returns>The data table of real info of this computer.</returns>
         public DataTable GetAdapterTableWithRefresh()
         {
-            return configAdapter.getAdapterTable(true);
+            return configAdapter.GetAdapterTable(true);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace HyTestRTDataService.ConfigMode
         /// <returns>The data table of old adapter info</returns>
         public DataTable GetAdapterTableNoRefresh()
         {
-            return configAdapter.getAdapterTable(false);
+            return configAdapter.GetAdapterTable(false);
         }
 
         /// <summary>

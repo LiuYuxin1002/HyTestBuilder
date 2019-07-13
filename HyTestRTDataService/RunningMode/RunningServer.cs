@@ -12,7 +12,7 @@ namespace HyTestRTDataService.RunningMode
     {
         private static object locky = new object();
         private static RunningServer server;
-        public static RunningServer getServer()
+        public static RunningServer getServer() //多线程单例
         {
             if (server == null)
             {
@@ -64,7 +64,6 @@ namespace HyTestRTDataService.RunningMode
         private ConfigTestEnvInfo   testInfo;
 
         private int refreshFrequency;
-        private bool subscribeStart = true;
 
         private RunningServer()     //构造函数
         {
@@ -88,8 +87,8 @@ namespace HyTestRTDataService.RunningMode
             iomapInfo = config.iomapInfo;
             testInfo = config.testInfo;
 
-            reader = ConfigProtocol.getReader();
-            writer = ConfigProtocol.getWriter();
+            reader = ConfigProtocol.GetReader();
+            writer = ConfigProtocol.GetWriter();
 
             writer.SetAdapterFromConfig(config.adapterInfo.currentAdapterId);
         }
@@ -104,8 +103,6 @@ namespace HyTestRTDataService.RunningMode
             }
             DataRefresh(this, new EventArgs());     //通知各控件
         }
-
-        DataTransformer transformer;
 
         /// <summary>
         /// 从底层读取数值，返回以更新datapool中的数据

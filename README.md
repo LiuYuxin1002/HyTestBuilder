@@ -3,6 +3,7 @@
 ## 介绍
 **HyTestBuilder是一款基于Windows X86平台的液压测控系统开发平台软件**
 老版本请看 [HyTestBuilder_old](https://github.com/LiuYuxin1002/HyTestBuilder_old)
+测试用例请看[HyTestBuilderTest](https://github.com/LiuYuxin1002/HyTestBuilderTest)
 
 ## 软件架构
 参见《软件架构说明与课题规划》
@@ -18,11 +19,12 @@
 	1. 检查配置文件是否加载，如果没有找到配置文件，搜索配置文件config.xml移动到解决方案路径的bin目录下
 	2. 检查能否找到驱动引用，如果没有找到，联系我
 	3. 如果运行时出现某某问题导致“堆栈不对称”，尝试将项目的启动方式设置为x86，具体操作为：
-		项目右键->生成->目标平台下拉框->x86
-		如果没有解决，先检查你的数据类型，or联系我
+		项目右键->生成->目标平台下拉框->x86；
+		另外还可以添加CallingConvention = CallingConvention.Cdecl；
+		如果没有解决，先检查你的数据类型，or联系我。
 3. 调试
 	调试界面可参考HyTestBuilderTest解决方案，如果没有，联系我。
-	
+
 4. 反馈
 	如果有好的建议或意见，可以在github创建账号，拉你到HyTestBuider项目：[HyTestBuilder]https://github.com/LiuYuxin1002/HyTestBuilder
 

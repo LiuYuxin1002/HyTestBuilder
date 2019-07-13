@@ -122,14 +122,14 @@ namespace HyTestEtherCAT
             DataChanged(null, null);
         }
 
-        //TODO:
+        //TODO:批量读
         public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// 写模拟量
+        /// 读模拟量（单个）
         /// </summary>
         /// <returns>返回-1表示失败</returns>
         public int ReadAnalog(int deviceId, int channel)
@@ -144,6 +144,9 @@ namespace HyTestEtherCAT
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 读取数字量（单个）
+        /// </summary>
         public bool ReadDigital(int deviceId, int channel)
         {
             int tmpValue = CppConnect.getDigitalValue(deviceId, channel);
@@ -167,6 +170,13 @@ namespace HyTestEtherCAT
             return succeed ? 0 : -1;
         }
 
+        /// <summary>
+        /// 写模拟量（单个）
+        /// </summary>
+        /// <param name="deviceId"></param>
+        /// <param name="channel"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public int WriteAnalog(int deviceId, int channel, int value)
         {
             return CppConnect.setAnalogValue(deviceId, channel, value);
@@ -178,6 +188,9 @@ namespace HyTestEtherCAT
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 写数字量（单个）
+        /// </summary>
         public int WriteDigital(int deviceId, int channel, byte value)
         {
             return CppConnect.setDigitalValue(deviceId, channel, value);
