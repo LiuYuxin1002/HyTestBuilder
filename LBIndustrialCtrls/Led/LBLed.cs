@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using LBSoft.IndustrialCtrls.Base;
+using HyTestRTDataService.RunningMode;
 
 namespace LBSoft.IndustrialCtrls.Leds
 {
@@ -17,8 +18,23 @@ namespace LBSoft.IndustrialCtrls.Leds
 	/// </summary>
 	public partial class LBLed : LBIndustrialCtrlBase
 	{
-		#region (* Enumeratives *)
-		public enum LedState
+        #region(* My Alter *)
+        public override void OnDataChanged(object sender, EventArgs e)
+        {
+            FetchDataAndShow();
+        }
+
+        private void FetchDataAndShow()
+        {
+            if (varName == null && varName == "") return;
+
+            RunningServer server = RunningServer.getServer();      
+            bool value = server.InstantRead<bool>(varName);
+            this.State = value ? LedState.On : LedState.Off;
+        }
+        #endregion
+        #region (* Enumeratives *)
+        public enum LedState
 		{
 			Off	= 0,
 			On,

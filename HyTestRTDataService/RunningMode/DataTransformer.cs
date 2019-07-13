@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -18,11 +19,11 @@ namespace HyTestRTDataService.RunningMode
         //模拟量数字最小值
         private const int ANALOG_MIN = 0;
         //模拟量数字最大值
-        private const int ANALOG_MAX = 27648;
+        private const int ANALOG_MAX = 32768;
         //物理输入最大值
-        private const double INPUT_MAX = 20.0;
+        private const double INPUT_MAX = 10.0;
         //物理输入最小值
-        private const double INPUT_MIN = 0.0;
+        private const double INPUT_MIN = 0;
         //物理输出最大值
         private const double OUTPUT_MAX = 10.0;
         //物理输出最小值
@@ -115,7 +116,7 @@ namespace HyTestRTDataService.RunningMode
         {
             if (physical > OUTPUT_MAX || physical<OUTPUT_MIN)
             {
-                throw new Exception("给定变量不在有效范围内");
+                MessageBox.Show(physical+"不在有效范围");
                 return -1;
             }
 

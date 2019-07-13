@@ -4,21 +4,25 @@ using HyTestRTDataService.ConfigMode;
 using HyTestIEInterface;
 using System.Threading;
 using HyTestRTDataService.ConfigMode.MapEntities;
-using HyTestRTDataService.ConfigMode.Component;
-using System.Collections.Generic;
 using System.Data;
-using HyTestEtherCAT;
 
 namespace HyTestRTDataService.RunningMode
 {
     public class RunningServer
     {
+        private static object locky = new object();
         private static RunningServer server;
         public static RunningServer getServer()
         {
             if (server == null)
             {
-                server = new RunningServer();
+                lock (locky)
+                {
+                    if (server==null)
+                    {
+                        server = new RunningServer();
+                    }
+                }
             }
             return server;
         }
@@ -66,7 +70,6 @@ namespace HyTestRTDataService.RunningMode
         {
             InitializeDataPool();
             InitializeConfig();
-            
         }
 
         private void InitializeDataPool()
@@ -89,15 +92,6 @@ namespace HyTestRTDataService.RunningMode
             writer = ConfigProtocol.getWriter();
 
             writer.SetAdapterFromConfig(config.adapterInfo.currentAdapterId);
-        }
-
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (subscribeStart)
-            {
-                Thread rthread = new Thread(ReadDataToDatapool);
-                rthread.Start();
-            }
         }
 
         private void ReadDataToDatapool()

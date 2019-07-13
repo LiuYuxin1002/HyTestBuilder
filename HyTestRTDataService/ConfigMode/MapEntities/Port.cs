@@ -27,7 +27,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public Port(string port)
         {
             string[] info = port.Split('-');
-            deviceId = int.Parse(info[0]) + 2;
+            deviceId = int.Parse(info[0]) + 1;
             channelId = int.Parse(info[1]) - 1;
         }
     }

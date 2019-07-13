@@ -12,6 +12,7 @@ using System.Text;
 using System.Windows.Forms;
 using LBSoft.IndustrialCtrls.Leds;
 using LBSoft.IndustrialCtrls.Base;
+using HyTestRTDataService.RunningMode;
 
 namespace LBSoft.IndustrialCtrls.Meters
 {
@@ -20,6 +21,21 @@ namespace LBSoft.IndustrialCtrls.Meters
     /// </summary>
     public partial class LBDigitalMeter : LBIndustrialCtrlBase
     {
+        #region(* My Alter *)
+        public override void OnDataChanged(object sender, EventArgs e)
+        {
+            FetchDataAndShow();
+        }
+
+        private void FetchDataAndShow()
+        {
+            if (varName == null && varName == "") return;
+            RunningServer server = RunningServer.getServer();
+            double value = server.InstantRead<double>(varName);
+            this.Value = value;
+        }
+        #endregion
+
         #region (* Class variables *)
         protected int _dpPos = 0;
         protected int _numDigits = 0;

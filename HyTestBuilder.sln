@@ -16,6 +16,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HyTestEthercatDriver", "HyTestEthercatDriver\ExportClass.vcxproj", "{FED8BCDD-C285-4DC1-BEC2-BEFF907602C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LBIndustrialCtrls", "LBIndustrialCtrls\LBIndustrialCtrls.csproj", "{B4218BC9-9736-42B9-BC99-7903FDBEBA28}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78C8A452-8A2F-4416-B74A-052D73084094} = {78C8A452-8A2F-4416-B74A-052D73084094}
+		{FED8BCDD-C285-4DC1-BEC2-BEFF907602C3} = {FED8BCDD-C285-4DC1-BEC2-BEFF907602C3}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

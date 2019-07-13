@@ -83,18 +83,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigMode\Component\ControlConfigManager.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ConfigMode\Component\ControlConfigManager.Designer.cs">
-      <DependentUpon>ControlConfigManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ConfigMode\Component\FormConfigManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ConfigMode\Component\FormConfigManager.Designer.cs">
-      <DependentUpon>FormConfigManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConfigMode\Config.cs" />
     <Compile Include="ConfigMode\ConfigDevice.cs" />
     <Compile Include="ConfigMode\ConfigManager.cs" />
@@ -113,12 +101,6 @@
     <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
     <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RunningMode\Component\FormTestRunning.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RunningMode\Component\FormTestRunning.Designer.cs">
-      <DependentUpon>FormTestRunning.cs</DependentUpon>
-    </Compile>
     <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\DataTransformer.cs" />
@@ -148,21 +130,13 @@
       <Project>{56107191-c952-4278-a900-7feec736217f}</Project>
       <Name>HyTestIEInterface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LBIndustrialCtrls\LBIndustrialCtrls.csproj">
-      <Project>{b4218bc9-9736-42b9-bc99-7903fdbeba28}</Project>
-      <Name>LBIndustrialCtrls</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="ConfigMode\Component\FormConfigManager.resx">
-      <DependentUpon>FormConfigManager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RunningMode\Component\FormTestRunning.resx">
-      <DependentUpon>FormTestRunning.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfigMode\Component\" />
+    <Folder Include="RunningMode\Component\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

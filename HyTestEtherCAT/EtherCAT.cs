@@ -4,7 +4,7 @@ using System.Text;
 using HyTestIEInterface;
 using HyTestIEEntity;
 using HyTestEtherCAT.localEntity;
-using System.Timers;
+using System.Windows.Forms;
 
 namespace HyTestEtherCAT
 {
@@ -45,6 +45,8 @@ namespace HyTestEtherCAT
             return ethercat;
         }
 
+        private bool isLoadedDriver = false;
+
         #endregion
 
         #region region_构造函数
@@ -60,7 +62,7 @@ namespace HyTestEtherCAT
         #region region_事件
 
         public event EventHandler datachanged;
-        public event EventHandler<EventArgs> myevent;
+        public event EventHandler<EventArgs> DataChanged;
 
         #endregion
 
@@ -117,7 +119,7 @@ namespace HyTestEtherCAT
         public void OnDataRefresh(object sender, EventArgs e)
         {
             //数据刷新
-            myevent(null, null);
+            DataChanged(null, null);
         }
 
         //TODO:
@@ -233,7 +235,7 @@ namespace HyTestEtherCAT
         private void InitTimer(int interval)
         {
             this.timer.Interval = interval;
-            timer.Elapsed += OnDataRefresh;
+            timer.Tick += OnDataRefresh;
         }
 
         public void StartTimer()
@@ -252,9 +254,14 @@ namespace HyTestEtherCAT
         /// <returns></returns>
         private void BuildConnection()
         {
+            if (isLoadedDriver) return;
+
             CppConnect.getAdapterNum();
             CppConnect.setAdapterId(this.AdapterSelected);
-            CppConnect.initSlaveConfig();
+            this.getDevice();
+            StartTimer();
+
+            isLoadedDriver = true;
         }
 
         public int SetAdapterFromConfig(int AdapterId)

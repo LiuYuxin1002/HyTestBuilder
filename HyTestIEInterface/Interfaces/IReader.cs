@@ -8,7 +8,7 @@ namespace HyTestIEInterface
 {
     public interface IReader
     {
-        event EventHandler<EventArgs> myevent;
+        event EventHandler<EventArgs> DataChanged;
 
         int SetAdapterFromConfig(int AdapterId);
 

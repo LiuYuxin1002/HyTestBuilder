@@ -2,7 +2,7 @@
 
 #include "SlaveWirteManager.h"
 
-#define DEFINE_SLEEP_TIME 100
+#define DEFINE_SLEEP_TIME 300
 #define DO 2
 #define AO 4
 
@@ -16,7 +16,7 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 		wkc = ec_receive_processdata(2*DEFINE_SLEEP_TIME);
 
 		int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;//如果没有设定值，就用默认值
-		Sleep(sleepTime);
+		osal_usleep(sleepTime);
 	}
 	return 0;
 }

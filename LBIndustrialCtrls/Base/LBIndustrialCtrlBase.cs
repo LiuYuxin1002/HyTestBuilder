@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using HyTestRTDataService.RunningMode;
 
 namespace LBSoft.IndustrialCtrls.Base
 {
@@ -18,11 +19,18 @@ namespace LBSoft.IndustrialCtrls.Base
     /// </summary>
     public partial class LBIndustrialCtrlBase : UserControl
     {
+        #region (* My Alter *)
         [Browsable(true)]
         [Category("AAA DATA BINDING")]
         public string VarName { get; set; }
 
-        private string varName;
+        protected string varName;
+
+        public virtual void OnDataChanged(Object sender, EventArgs e) {
+            
+        }
+        
+        #endregion
 
         #region (* Constructor *)
         public LBIndustrialCtrlBase()
@@ -43,7 +51,14 @@ namespace LBSoft.IndustrialCtrls.Base
             this._defaultRenderer = CreateDefaultRenderer();
             if (this._defaultRenderer != null)
                 this._defaultRenderer.Control = this;
-        }
+
+            //data subjection
+            if (this.varName != null && this.varName != "")
+            {
+                RunningServer server = RunningServer.getServer();
+                server.DataRefresh += OnDataChanged;
+            }
+    }
         #endregion
 
         #region (* Properties *)

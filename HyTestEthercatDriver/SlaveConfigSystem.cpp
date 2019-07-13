@@ -50,6 +50,24 @@ int initSlaveConfigInfo() {
 				}
 			}
 			ec_readstate();
+
+			/////////////////////////////////////OP STATE/////////////////////////////////////
+			ec_slave[0].state = EC_STATE_OPERATIONAL;
+			/* send one valid process data to make outputs in slaves happy*/
+			ec_send_processdata();
+			ec_receive_processdata(EC_TIMEOUTRET);
+			/* request OP state for all slaves */
+			ec_writestate(0);
+			int chk = 40;
+			/* wait for all slaves to reach OP state */
+			do
+			{
+				ec_send_processdata();
+				ec_receive_processdata(EC_TIMEOUTRET);
+				ec_statecheck(0, EC_STATE_OPERATIONAL, 50000);
+			} while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
+
+
 			initLocalSlaveInfo();
 			return ec_slavecount;
 		}
