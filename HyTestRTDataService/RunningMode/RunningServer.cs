@@ -241,7 +241,7 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="nameList">订阅变量名数组</param>
         /// <returns>成功</returns>
-        public bool SetDataPack(string[] nameList)
+        public bool SetDataPack(ReadingTask task)
         {
             return default(bool);
         }
