@@ -1,4 +1,4 @@
-﻿using HyTestIEEntity;
+﻿using HyTestIEInterface.Entity;
 using System;
 using System.Data;
 
@@ -12,9 +12,6 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public int adapterNum;
         public int currentAdapterId;
 
-        public ConfigAdapterInfo()
-        {
-
-        }
+        public ConfigAdapterInfo() { }
     }
 }

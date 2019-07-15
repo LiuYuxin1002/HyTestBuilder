@@ -1,8 +1,8 @@
 ﻿using HyTestIEInterface;
-using HyTestIEEntity;
 using System.Windows.Forms;
 using System.Data;
 using HyTestRTDataService.ConfigMode.MapEntities;
+using HyTestIEInterface.Entity;
 
 namespace HyTestRTDataService.ConfigMode
 {

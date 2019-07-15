@@ -1,9 +1,4 @@
-﻿using HyTestIEEntity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HyTestIEInterface.Entity;
 
 namespace HyTestIEInterface
 {
@@ -11,6 +6,6 @@ namespace HyTestIEInterface
     {
         int AdapterSelected { get; set; }
         Adapter[] getAdapter();
-        ErrorCode setAdapter(int id);
+        int setAdapter(int id);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using HyTestIEInterface;
-using HyTestIEEntity;
 using System.Data;
 using HyTestRTDataService.ConfigMode.MapEntities;
+using HyTestIEInterface.Entity;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -70,7 +70,7 @@ namespace HyTestRTDataService.ConfigMode
         public void SaveSubConfig(object var)
         {
             int adapterId = (int)var;
-            ErrorCode errCode = loader.setAdapter(adapterId);
+            int errCode = loader.setAdapter(adapterId);
             adapterInfo.currentAdapter = adapterArray[adapterId];
             adapterInfo.currentAdapterId = adapterId;
         }

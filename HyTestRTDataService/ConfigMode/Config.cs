@@ -1,8 +1,5 @@
-﻿using HyTestIEEntity;
-using HyTestRTDataService.ConfigMode.MapEntities;
+﻿using HyTestRTDataService.ConfigMode.MapEntities;
 using System;
-using System.Data;
-using System.Windows.Forms;
 
 namespace HyTestRTDataService.ConfigMode
 {

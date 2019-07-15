@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using HyTestRTDataService.ConfigMode.MapEntities;
-using HyTestIEEntity;
-using System;
 
 namespace HyTestRTDataService.ConfigMode
 {

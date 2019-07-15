@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using HyTestIEInterface;
-using HyTestIEEntity;
 using HyTestEtherCAT.localEntity;
 using System.Windows.Forms;
+using HyTestIEInterface.Entity;
 
 namespace HyTestEtherCAT
 {
@@ -212,7 +212,7 @@ namespace HyTestEtherCAT
                 int err = CppConnect.getAdapterName(tmpAdapterName, tmpAdapterDesc, i);
                 if (err != 0)//有错误
                 {
-                    Console.WriteLine("您输入的id有误，请检查！"); //一般来讲是这个错误
+                    throw new Exception(); //一般来讲是这个错误
                 }
                 adapters[i] = new Adapter();
                 adapters[i].name = tmpAdapterName.ToString();
@@ -223,17 +223,17 @@ namespace HyTestEtherCAT
             return adapters;
         }
 
-        public ErrorCode setAdapter(int id)
+        public int setAdapter(int id)
         {
             int errmsg = CppConnect.setAdapterId(id);   //返回-1表示赋值失败
             if (errmsg < 0)
             {
-                return ErrorCode.ADAPTER_SELECT_FAIL;
+                throw new Exception("Adapter selected failed");
             }
             else                                        //返回0表示没有错误
             {
                 deviceNum = errmsg;
-                return ErrorCode.NO_ERROR;
+                return deviceNum;
             }
         }
 

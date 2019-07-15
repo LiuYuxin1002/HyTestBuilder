@@ -1,4 +1,4 @@
-﻿using HyTestIEEntity;
+﻿using HyTestIEInterface.Entity;
 using System;
 using System.Data;
 
