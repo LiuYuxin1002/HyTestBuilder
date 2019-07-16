@@ -114,7 +114,6 @@ namespace HyTestRTDataService.RunningMode
         /// <returns></returns>
         private double ReadDataFromDevice(int index)
         {
-            double data = -1;
             string varName = iomapInfo.mapIndexToName[index];
             Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
@@ -144,7 +143,6 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            T value;
             Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
             int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
@@ -162,7 +160,6 @@ namespace HyTestRTDataService.RunningMode
                 bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
-            return default(T);
         }
 
         /// <summary>
@@ -268,7 +265,12 @@ namespace HyTestRTDataService.RunningMode
             }
             else if (varType == typeof(double)) //if double
             {
-                int realValue = DataTransformer.PhysicalToAnalog((double)Convert.ChangeType(value, typeof(double)), varMax, varMin);
+                double tmp = (double)Convert.ChangeType(value, typeof(double));
+                if(tmp > varMax || tmp < varMin)
+                {
+                    MessageBox.Show(string.Format("该值不在范围内: %d ~ %d", varMin, varMax));
+                }
+                int realValue = DataTransformer.PhysicalToAnalog(tmp, varMax, varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
         }

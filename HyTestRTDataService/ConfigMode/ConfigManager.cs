@@ -14,6 +14,7 @@ namespace HyTestRTDataService.ConfigMode
         private ConfigAdapter configAdapter;
         private ConfigDevice configDevice;
         private ConfigIOmap configIOmap;
+        private ConfigTestEnvInfo configTestEnvInfo;
 
         public string ConfigFile//如果处于设计模式需要重写
         {

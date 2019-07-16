@@ -85,7 +85,9 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_硬件
-
+        /// <summary>
+        /// 获取设备列表
+        /// </summary>
         public IOdevice[] getDevice()
         {
             int slaveNum = CppConnect.initSlaveConfig();
@@ -95,14 +97,18 @@ namespace HyTestEtherCAT
             for (int i = 2; i < slaveNum+1; i++)
             {
                 SlaveInfo tmpSlave = new SlaveInfo();
-                int err = CppConnect.getSlaveInfo(ref tmpSlave, i);
+
+                StringBuilder tmpSlaveName = new StringBuilder();
+                tmpSlaveName.Capacity = 128;
+
+                int err = CppConnect.getSlaveInfo(ref tmpSlave,tmpSlaveName, i);
                 if (err == SAFECODE)
                 {
                     devices[i-2] = new IOdevice();
-                    devices[i-2].id = tmpSlave.id;
+                    devices[i-2].id         = tmpSlave.id;
                     devices[i-2].channelNum = tmpSlave.channelNum;
-                    devices[i-2].name = "EL"+tmpSlave.name;
-                    devices[i-2].type = tmpSlave.type;
+                    devices[i-2].name       = tmpSlaveName.ToString();    //renew get_name method
+                    devices[i-2].type       = tmpSlave.type;
                 }
                 else//有错误
                 {

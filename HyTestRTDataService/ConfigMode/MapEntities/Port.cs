@@ -21,7 +21,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
 
         public Port() { }
 
-        public Port(string port)
+        public Port(string port)    //附带端口修正
         {
             string[] info = port.Split('-');
             deviceId = int.Parse(info[0]) + 1;

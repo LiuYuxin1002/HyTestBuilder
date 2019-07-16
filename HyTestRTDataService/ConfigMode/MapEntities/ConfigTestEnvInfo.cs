@@ -9,10 +9,14 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     [Serializable]
     public class ConfigTestEnvInfo
     {
-        /*当前协议*/
+        /// <summary>
+        /// 当前协议
+        /// </summary>
         public Protocol currentProtocol;
 
-        /*控件刷新频率*/
+        /// <summary>
+        /// 控件刷新频率
+        /// </summary>
         public int refreshFrequency;
 
         /// <summary>
@@ -25,12 +29,11 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         /// </summary>
         public int redisRefreshFrequency;
 
-        /*最大设备连接数*/
+        /// <summary>
+        /// 最大设备连接数
+        /// </summary>
         public int maxDeviceNum;
 
-        public ConfigTestEnvInfo()
-        {
-
-        }
+        public ConfigTestEnvInfo() { }
     }
 }

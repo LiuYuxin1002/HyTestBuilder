@@ -18,7 +18,7 @@ namespace HyTestEtherCAT
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int initSlaveConfig();
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "getSlaveInfo", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
-        public static extern int getSlaveInfo(ref SlaveInfo slaveInfo, int id);
+        public static extern int getSlaveInfo(ref SlaveInfo slaveInfo, StringBuilder slaveName, int id);
         //设置从站某端口信息
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAnalogValue(int slaveId, int channel, int value);

@@ -45,28 +45,18 @@ map<char*, char*> getDataMap() {
 	return *dataMap;
 }
 
+//If success return slavecount, else return 0.
 int checkSlaveState() {
-	if (ec_slavecount == 0) {
-		SLAVET_ARR *newSlave = new SLAVET_ARR();
-		newSlave->channelNum = 4;
-		newSlave->id = 0;
-		newSlave->name = 1234;
-		newSlave->type = 1;
-
-		slave_ai newai = (slave_ai)malloc(sizeof(struct SLAVE_AI));
-		for (int i = 0; i < newSlave->channelNum; i++) {
-			newai->values[i] = i;
-		}
-
-		newSlave->ptrToSlave = newai;
-		slave_arr[0] = *newSlave;
+	if (ec_slavecount != 0) {
+		//The work for state check here.
 
 		cout << "check slave finish" << endl;
-		return 1;
 	}
 	else {
-		return 0;
+		//Doing sth. for this state
+		cout << "No Slave Found" << endl;
 	}
+	return ec_slavecount;
 }
 
 int checkRedisState() {

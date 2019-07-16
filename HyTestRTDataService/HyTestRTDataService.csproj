@@ -90,9 +90,8 @@
     <Compile Include="ConfigMode\ConfigAdapter.cs" />
     <Compile Include="ConfigMode\ConfigDatabase.cs" />
     <Compile Include="ConfigMode\ConfigIOmap.cs" />
-    <Compile Include="ConfigMode\ConfigEnvironment.cs" />
+    <Compile Include="ConfigMode\ConfigEnvrmt.cs" />
     <Compile Include="ConfigMode\IConfigBase.cs" />
-    <Compile Include="ConfigMode\MapEntities\Arguments.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigAdapterInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigDeviceInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigIOmapInfo.cs" />

@@ -12,6 +12,7 @@ slave_ai ais = (slave_ai)new SLAVE_AI();
 slave_ao aos = (slave_ao)new SLAVE_AO();
 
 //局部全局变量
+const int COUPLER_TYPE = 10;		//耦合器类型
 const int SLAVE_TYPE_ID = 2;		//type所在位
 const int SLAVE_CHANNEL_ID = 5;		//channel所在位
 
@@ -20,12 +21,9 @@ int initSlaveConfigInfo() {
 	uint16 ssigen;
 	int expectedWKC;
 
-	printf("Starting slaveinfo\n");
-
 	/* initialise SOEM, bind socket to ifname */
 	if (ec_init(ifbuf))
 	{
-		printf("ec_init on %s succeeded.\n", ifbuf);
 		/* find and auto-config slaves */
 		if (ec_config(FALSE, &IOmap) > 0)
 		{
@@ -67,7 +65,6 @@ int initSlaveConfigInfo() {
 				ec_statecheck(0, EC_STATE_OPERATIONAL, 50000);
 			} while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
 
-
 			initLocalSlaveInfo();
 			return ec_slavecount;
 		}
@@ -85,43 +82,35 @@ int initSlaveConfigInfo() {
 	}
 }
 
-int getSlaveIdFromName(char* name) {
-	int slaveId = 0;
-	for (int i = 2; i < 6; i++) {//表示2,3,4,5位
-		slaveId = (name[i] - '0') + slaveId * 10;
-	}
-	return slaveId;
-}
-
 void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {
 		return;
 	}
-	//for (int i = 0; i < ec_slavecount+1; i++) {
-	//	cout << ec_slave[i].name << endl;
-	//	cout << "端口号位："<<ec_slave[i].name[5] << endl;
-	//}
 
 	for (int i = 0; i < ec_slavecount+1; i++) {
-		if (i == 0 || i==1) {									//不处理第一个
+		if (i == 0) {									//不处理第一个
+			continue;
+		}
+		else if(ec_slave[i].outputs==0 || ec_slave[i].inputs==0)	//耦合器、伺服驱动器	TODO: 伺服驱动器是否这样的情况待定
+		{
+			slave_arr[i].name = ec_slave[i].name;
+			slave_arr[i].type = COUPLER_TYPE;
+			slave_arr[i].id = ec_slave[i].eep_id;
+			slave_arr[i].channelNum = -1;
+			slave_arr[i].ptrToSlave = NULL;
+			
 			continue;
 		}
 
-		char* name = ec_slave[i].name;					//从站可读名称
-		int type = name[SLAVE_TYPE_ID] - '0';			//获取类型
-		int channel = name[SLAVE_CHANNEL_ID] - '0';		//获取从站channel数量
+		char* name	= ec_slave[i].name;	//从站可读名称
 
-		slave_arr[i].name = getSlaveIdFromName(name);						//赋值
-		slave_arr[i].type = type;
-		slave_arr[i].channelNum = channel;
-
-		//cout << "ID: " << slave_arr[i].id << endl;
-		//cout << slave_arr[i].name << endl;
-		//cout << slave_arr[i].type << endl;
-		//cout << slave_arr[i].channelNum << endl;
+		slave_arr[i].id		= ec_slave[i].eep_id;
+		slave_arr[i].name	= name;
+		slave_arr[i].type	= name[SLAVE_TYPE_ID] - '0';			//获取类型
+		slave_arr[i].channelNum = name[SLAVE_CHANNEL_ID] - '0';		//获取从站channel数量		//TODO: channel数量大于8会失败
 
 		//判断从站类型
-		switch (type)
+		switch (slave_arr[i].type)
 		{
 		case 1:				//DI
 		{
@@ -182,22 +171,16 @@ void initLocalSlaveInfo() {
 	}
 }
 
-int getSlaveInfoImpl(SLAVET_ARR *slave, int id) {
+int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id) {
 	if (slave_arr == NULL) {
 		printf("没有检查到从站信息！");
 		return -1;
 	}
-	
-	//slave->id = 1806;
-	//slave->name = 1234;
-	//slave->type = 3;
-	//slave->ptrToSlave = NULL;
-	//slave->channelNum = 2;
 
 	slave->id = slave_arr[id].id;
 	slave->name = slave_arr[id].name;
 	slave->type = slave_arr[id].type;
-	slave->ptrToSlave = NULL;
+	slave->ptrToSlave = NULL;	//useless.
 	slave->channelNum = slave_arr[id].channelNum;
 	
 	return 0;
