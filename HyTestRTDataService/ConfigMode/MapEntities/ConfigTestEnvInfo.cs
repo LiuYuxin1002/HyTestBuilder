@@ -15,8 +15,15 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         /*控件刷新频率*/
         public int refreshFrequency;
 
-        /*驱动采样频率(redis写入频率)*/
+        /// <summary>
+        /// 驱动采样频率us
+        /// </summary>
         public int driveRefreshFrequency;
+
+        /// <summary>
+        /// redis写入频率ms
+        /// </summary>
+        public int redisRefreshFrequency;
 
         /*最大设备连接数*/
         public int maxDeviceNum;
