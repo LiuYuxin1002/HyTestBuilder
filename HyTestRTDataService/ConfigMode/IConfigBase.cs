@@ -15,9 +15,9 @@ namespace HyTestRTDataService.ConfigMode
         void ReadSubConfig(object configInfo);
         //获取本地Config
         object GetSubConfig();
-        //扫描
+        //重新扫描配置
         void ScanSubConfig();
-        //保存
+        //保存配置到subconfig.Info
         void SaveSubConfig(object var);
     }
 }

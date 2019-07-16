@@ -140,7 +140,11 @@ namespace HyTestRTDataService.Utils
             }
         }
 
-        public static void DataTableToExcel(DataTable dt)
+        //TODO: 保存的文件无法使用
+        /// <summary>
+        /// 将DataTable转为Excel文件并保存到所选路径
+        /// </summary>
+        public static void DataTableToExcel(DataTable dt) 
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.RestoreDirectory = true;
@@ -175,7 +179,7 @@ namespace HyTestRTDataService.Utils
                     try
                     {
                         if (dt.Rows[i].ItemArray[j] == null)
-                            strLine = strLine + " " + Convert.ToChar(9);                                    //写内容
+                            strLine = strLine + " " + Convert.ToChar(9);                        //写内容
                         else
                         {
                             string rowstr = "";
@@ -189,7 +193,7 @@ namespace HyTestRTDataService.Utils
                     }
                     catch (IndexOutOfRangeException e)//防止超出范围
                     {
-                        //log.Error("实验数据记录异常" + e);
+                        MessageBox.Show(e.Message);
                     }
                 }
                 objStreamWriter.WriteLine(strLine);

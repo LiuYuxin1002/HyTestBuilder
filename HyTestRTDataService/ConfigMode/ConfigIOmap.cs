@@ -24,15 +24,20 @@ namespace HyTestRTDataService.ConfigMode
         {
             DataTable iomapTable = new DataTable();
             iomapTable.TableName = "IOmapTable";
-            DataColumn colId = iomapTable.Columns.Add("ID", typeof(int));
-            DataColumn colName = iomapTable.Columns.Add("变量名", typeof(string));
-            DataColumn colType = iomapTable.Columns.Add("变量类型", typeof(string));
-            DataColumn colIO = iomapTable.Columns.Add("IO类型", typeof(string));
-            DataColumn colPort = iomapTable.Columns.Add("端口号", typeof(string));
+            DataColumn colId     = iomapTable.Columns.Add("ID", typeof(int));
+            DataColumn colName   = iomapTable.Columns.Add("变量名", typeof(string));
+            DataColumn colType   = iomapTable.Columns.Add("变量类型", typeof(string));
+            DataColumn colIO     = iomapTable.Columns.Add("IO类型", typeof(string));
+            DataColumn colPort   = iomapTable.Columns.Add("端口号", typeof(string));
+            DataColumn colMax    = iomapTable.Columns.Add("变量上限", typeof(int));
+            DataColumn colMin    = iomapTable.Columns.Add("变量下限", typeof(int));
             iomapInfo.ioMapTable = iomapTable;
         }
 
-        //table结构：ID，变量名，数据类型，输入输入，端口
+        /// <summary>
+        /// Refresh iomaps with datatable which is input now.
+        /// </summary>
+        /// <!--table结构：ID，变量名，数据类型，输入输入，端口-->
         private void RefreshMap()
         {
             iomapInfo.ioMapTable.TableName = "IOmapTable";
@@ -43,17 +48,22 @@ namespace HyTestRTDataService.ConfigMode
             foreach (DataRow row in mapTable.Rows)
             {
                 int id = index++;
-                string name = (string)row["变量名"];
-                string type = (string)row["变量类型"];
-                string iotype = (string)row["IO类型"];
-                string port = (string)row["端口号"];
+                string name     = (string)row["变量名"];
+                string type     = (string)row["变量类型"];
+                string iotype   = (string)row["IO类型"];
+                string port     = (string)row["端口号"];
+                int vmax        = int.Parse((string)row["变量上限"]);
+                int vmin        = int.Parse((string)row["变量下限"]);
 
                 iomapInfo.mapIndexToName[id] = name;
                 iomapInfo.mapNameToIndex[name] = id;
                 iomapInfo.mapNameToPort[name] = port;
                 iomapInfo.mapPortToName[port] = name;
                 iomapInfo.mapNameToType[name] = type;
+                iomapInfo.mapNameToMax[name] = vmax;
+                iomapInfo.mapNameToMin[name] = vmin;
 
+                //count the num of input and output vars
                 if (iotype.Contains("I"))
                 {
                     iomapInfo.inputVarNum++;
@@ -102,7 +112,9 @@ namespace HyTestRTDataService.ConfigMode
         }
         #endregion
 
-
+        /// <summary>
+        /// 保存到Excel.
+        /// </summary>
         public void saveIOmapToExcel()
         {
             ExcelHelper.DataTableToExcel(iomapInfo.ioMapTable);

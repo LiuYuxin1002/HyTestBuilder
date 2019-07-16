@@ -72,6 +72,26 @@ namespace HyTestRTDataService.RunningMode
         }
 
         /// <summary>
+        /// 将模拟量转为实际物理量
+        /// </summary>
+        public static double AnalogToPhysical(int analog, int vmax, int vmin)   //缩小
+        {
+            double rate = (vmax - vmin) / (ANALOG_MAX - ANALOG_MIN);
+            double result = rate * (analog - ANALOG_MIN) + vmin;
+            return result;
+        }
+
+        /// <summary>
+        /// 将实际物理量转为模拟量
+        /// </summary>
+        public static int PhysicalToAnalog(double pvalue, int vmax, int vmin)   //放大
+        {
+            double rate = (ANALOG_MAX - ANALOG_MIN) / (vmax - vmin);
+            int result = (int)(rate * (pvalue - vmin)) + ANALOG_MIN;
+            return result;
+        }
+
+        /// <summary>
         /// 将模拟量转为物理输入量
         /// </summary>
         /// <param name="analog"></param>

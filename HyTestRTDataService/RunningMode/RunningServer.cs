@@ -5,6 +5,7 @@ using HyTestIEInterface;
 using System.Threading;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System.Data;
+using System.Windows.Forms;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -27,7 +28,7 @@ namespace HyTestRTDataService.RunningMode
             return server;
         }
 
-        /*Event 使用说明如下：*/
+        //Event下面有使用说明
         public event EventHandler<EventArgs> DataRefresh;
         /// <summary>
         /// 控件数据订阅如下：
@@ -69,13 +70,16 @@ namespace HyTestRTDataService.RunningMode
         {
             InitializeDataPool();
             InitializeConfig();
+            reader.DataChanged += ReadDataToDatapool;
         }
 
+        //Useless.
         private void InitializeDataPool()
         {
             datapool = new RealTimeDataPool();
         }
 
+        //Load config from xml.
         private void InitializeConfig()
         {
             configManager = new ConfigManager();
@@ -93,15 +97,14 @@ namespace HyTestRTDataService.RunningMode
             writer.SetAdapterFromConfig(config.adapterInfo.currentAdapterId);
         }
 
-        private void ReadDataToDatapool()
+        private void ReadDataToDatapool(object sender, EventArgs e)
         {
             if (datapool.rdataList == null) return;
-
-            for (int i = 0; i < datapool.rdataList.Count(); i++)
-            {
-                datapool.rdataList[i] = ReadDataFromDevice(i);
-            }
-            DataRefresh(this, new EventArgs());     //通知各控件
+            //for (int i = 0; i < datapool.rdataList.Count(); i++)
+            //{
+            //    datapool.rdataList[i] = ReadDataFromDevice(i);
+            //}
+            DataRefresh(this, null);     //通知各控件
         }
 
         /// <summary>
@@ -129,8 +132,11 @@ namespace HyTestRTDataService.RunningMode
             {
                 return InstantRead<double>(varName);
             }
-            
-            else return default(double);
+            else
+            {
+                MessageBox.Show("变量类型不正确，请检查配置文件");
+                return default(double);
+            }
         }
 
         /// <summary>
@@ -188,26 +194,43 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T InstantRead<T>(string varName)
         {
-            //int data = -1;
-            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+            Port varPort = null;
+            Type varType = null;
+            int varMax = default(int);
+            int varMin = default(int);
 
-            if (varType == typeof(bool))    //if digital
+            try
+            {
+                varPort = new Port(iomapInfo.mapNameToPort[varName]);
+                varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+                varMax = iomapInfo.mapNameToMax[varName];
+                varMin = iomapInfo.mapNameToMin[varName];
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            if (varType == typeof(bool))        //if digital
             {
                 bool data = reader.ReadDigital(varPort.deviceId, varPort.channelId);
                 return (T)Convert.ChangeType(data, typeof(T));
             }
-            else if (varType == typeof(int))    //if int, but maybe useless
-            {
-                int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
-                return (T)Convert.ChangeType(DataTransformer.InputAnalogToPhysical(data), typeof(T));
-            }
             else if (varType == typeof(double)) //if double
             {
                 int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
-                return (T)Convert.ChangeType(DataTransformer.InputAnalogToPhysical(data), typeof(T));
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(data, varMax, varMin), typeof(T));
             }
-            else throw new Exception();
+            else if (varType == typeof(int))    //if int, but maybe useless
+            {
+                int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(data, varMax, varMin), typeof(T));
+            }
+            else
+            {
+                MessageBox.Show("变量类型不正确，请检查配置文件");
+                return default(T);
+            }
         }
 
         /// <summary>
@@ -216,22 +239,36 @@ namespace HyTestRTDataService.RunningMode
         public void InstantWrite<T>(string varName, T value)
         {
             double data = -1;
-            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            
-            if (varType == typeof(bool))    //if digital
+            Port varPort = null;
+            Type varType = null;
+            int varMax = default(int);
+            int varMin = default(int);
+
+            try
+            {
+                varPort = new Port(iomapInfo.mapNameToPort[varName]);
+                varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+                varMax = iomapInfo.mapNameToMax[varName];
+                varMin = iomapInfo.mapNameToMin[varName];
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message); //varName找不到报错
+            }
+
+            if (varType == typeof(bool))        //if digital
             {
                 data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 
                         (byte)Convert.ChangeType(value, typeof(byte)));
             }
             else if (varType == typeof(int))    //if int, but maybe useless
             {
-                int realValue = DataTransformer.OutputPhysicalToAnalog((int)Convert.ChangeType(value, typeof(int)));
+                int realValue = DataTransformer.PhysicalToAnalog((double)Convert.ChangeType(value, typeof(int)), varMax, varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
             else if (varType == typeof(double)) //if double
             {
-                int realValue = DataTransformer.OutputPhysicalToAnalog((double)Convert.ChangeType(value, typeof(double)));
+                int realValue = DataTransformer.PhysicalToAnalog((double)Convert.ChangeType(value, typeof(double)), varMax, varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
         }

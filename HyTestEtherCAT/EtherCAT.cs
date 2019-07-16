@@ -210,7 +210,7 @@ namespace HyTestEtherCAT
             for (int i = 0; i < adapterNum; i++)
             {
                 int err = CppConnect.getAdapterName(tmpAdapterName, tmpAdapterDesc, i);
-                if (err != 0)//有错误
+                if (err <= 0)//有错误
                 {
                     throw new Exception(); //一般来讲是这个错误
                 }
