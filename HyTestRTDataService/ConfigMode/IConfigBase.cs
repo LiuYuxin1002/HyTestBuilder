@@ -11,13 +11,27 @@ namespace HyTestRTDataService.ConfigMode
     /// </summary>
     public interface IConfigBase
     {
-        //加载Config到本地
+        /// <summary>
+        /// 加载Config到本地
+        /// </summary>
+        /// <param name="configInfo"></param>
         void ReadSubConfig(object configInfo);
-        //获取本地Config
+
+        /// <summary>
+        /// 获取本地Config
+        /// </summary>
+        /// <returns></returns>
         object GetSubConfig();
-        //重新扫描配置
+        
+        /// <summary>
+        /// 重新扫描配置
+        /// </summary>
         void ScanSubConfig();
-        //保存配置到subconfig.Info
+
+        /// <summary>
+        /// 保存配置到subconfig.Info
+        /// </summary>
+        /// <param name="var"></param>
         void SaveSubConfig(object var);
     }
 }

@@ -66,7 +66,7 @@ int initSlaveConfigInfo() {
 			} while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
 
 			initLocalSlaveInfo();
-			return ec_slavecount;
+			return ec_slavecount - 1;
 		}
 		else
 		{
@@ -174,7 +174,7 @@ void initLocalSlaveInfo() {
 int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id) {
 	if (slave_arr == NULL) {
 		printf("没有检查到从站信息！");
-		return -1;
+		return 0;
 	}
 
 	slave->id = slave_arr[id].id;
@@ -183,5 +183,5 @@ int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id) {
 	slave->ptrToSlave = NULL;	//useless.
 	slave->channelNum = slave_arr[id].channelNum;
 	
-	return 0;
+	return id;
 }

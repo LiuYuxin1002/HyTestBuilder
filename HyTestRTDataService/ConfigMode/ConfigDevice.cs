@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Data;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using HyTestIEInterface.Entity;
+using System.Collections.Generic;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -17,7 +18,6 @@ namespace HyTestRTDataService.ConfigMode
         private ConfigDeviceInfo deviceInfo;
         private IDeviceLoader loader;
         private TreeNode deviceTree;
-        private string[] type = {"DI", "DO", "AI", "AO", };
 
         public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
@@ -33,49 +33,49 @@ namespace HyTestRTDataService.ConfigMode
             {
                 ScanSubConfig();
             }
-            this.deviceTree = ArrToTreeNode();
+            this.deviceTree = ArrToTreeNode(this.deviceInfo.deviceList);
             return this.deviceTree;
         }
 
         //从IODevice数组生成dataTable
         public DataTable getDeviceTable(bool refresh)
         {
-            if (refresh || deviceInfo.deviceTable==null)
+            if (refresh || deviceInfo.deviceList==null)
             {
                 ScanSubConfig();
             }
             
-            return deviceInfo.deviceTable;
+            return ArrToDataTable();
         }
 
-        private TreeNode ArrToTreeNode()
+        //将info中的list<list<>>变为TreeNode
+        private TreeNode ArrToTreeNode(List<List<IOdevice>> deviceList)
         {
-            IOdevice[] deviceArr = this.deviceInfo.deviceArr;
-
-            TreeNode tmpTree = new TreeNode("Devices");
-            TreeNode[] typeNode = new TreeNode[4];
-            for (int i = 0; i < 4; i++)
+            TreeNode deviceTree = new TreeNode("DEVICE");
+            foreach(List<IOdevice> deviceGroup in deviceList)
             {
-                typeNode[i] = new TreeNode(type[i]);
-            }
-
-            tmpTree.Nodes.AddRange(typeNode);
-
-            for (int i = 0; i < deviceInfo.deviceNum; i++)
-            {
-                IOdevice device = deviceArr[i];
-                TreeNode slave = new TreeNode(device.name);
-                int slaveType = device.type;
-                typeNode[slaveType - 1].Nodes.Add(slave);
-                for (int channel = 0; channel < device.channelNum; channel++)
+                //For the first, we need to select coupler out.
+                IOdevice coupler = deviceGroup[0];
+                TreeNode couplerNode = new TreeNode(coupler.name);
+                for(int i=1; i<deviceGroup.Count; i++)
                 {
-                    TreeNode ch = new TreeNode("channel" + (channel + 1));
-                    slave.Nodes.Add(ch);
+                    //For others, we need to add them to the coupler Node one-by-one.
+                    IOdevice device = deviceGroup[i];
+                    TreeNode deviceNode = new TreeNode(device.name);
+                    for (int channel = 0; channel < device.channelNum; channel++)
+                    {
+                        //For each channel, we add them auto-ly.
+                        TreeNode ch = new TreeNode("Channel" + (channel + 1));
+                        deviceNode.Nodes.Add(ch);
+                    }
+                    couplerNode.Nodes.Add(deviceNode);
                 }
+                deviceTree.Nodes.Add(couplerNode);
             }
-            return tmpTree;
+            return deviceTree;
         }
 
+        //将info中的list<list<>>变为datatable
         private DataTable ArrToDataTable()
         {
             //包括：id，设备名称，端口号，设备类型，所连接的变量名（可空）
@@ -84,27 +84,33 @@ namespace HyTestRTDataService.ConfigMode
             table.Columns.Add("ID", typeof(int));
             table.Columns.Add("设备名称", typeof(string));
             table.Columns.Add("设备编号", typeof(string));
-            table.Columns.Add("端口号", typeof(string));
             table.Columns.Add("设备类型", typeof(string));
+            table.Columns.Add("端口号", typeof(string));
             table.Columns.Add("变量名", typeof(string));
+            //TODO: 考虑添加groupID
             //完善表
             int id = 1;
-            foreach (IOdevice device in deviceInfo.deviceArr)
+            foreach (List<IOdevice> devices in deviceInfo.deviceList)
             {
-                if (device==null)
+                foreach(IOdevice device in devices)
                 {
-                    break;
-                }
-                DataRow row = table.NewRow();
-                row["ID"] = id++;
-                row["设备名称"] = device.name;
-                row["设备编号"] = device.id;
-                row["设备类型"] = type[device.type-1];
-                int channelnum = device.channelNum;
-                for (int i = 0; i < channelnum; i++)
-                {
-                    row["端口号"] = i;
-                    row["变量名"] = "N/A";
+                    if (device == null)
+                    {
+                        break;
+                    }
+                    DataRow row = table.NewRow();
+                    row["ID"] = id++;
+                    row["设备名称"] = device.name;
+                    row["设备编号"] = device.id;
+                    row["设备类型"] = device.type;
+                    int channelnum = device.channelNum;
+                    for (int i = 0; i < channelnum; i++)
+                    {
+                        DataRow tmpRow = row;
+                        row["端口号"] = i;
+                        row["变量名"] = "N/A";
+                        table.Rows.Add(tmpRow);
+                    }
                 }
             }
             return table;
@@ -123,8 +129,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public void ScanSubConfig()
         {
-            this.deviceInfo.deviceArr = loader.getDevice();
-            RefreshDataWithArray();
+            this.deviceInfo.deviceList = loader.GetDevice();
         }
 
         public void SaveSubConfig(object var)
@@ -133,18 +138,12 @@ namespace HyTestRTDataService.ConfigMode
             RefreshDataWithTree();
         }
 
-        //根据树刷新全局
-        private void RefreshDataWithTree()
-        {
-            
-        }
-        //根据数组刷新全局
-        private void RefreshDataWithArray()
-        {
-            this.deviceInfo.deviceNum = this.deviceInfo.deviceArr.Length;
-            this.deviceInfo.deviceTable = ArrToDataTable();
-        }
         #endregion
 
+        //将树转为LIST保存到info当中
+        private void RefreshDataWithTree()
+        {
+            //TODO: 暂时不需要但是之后升级配置界面后肯定需要
+        }
     }
 }

@@ -64,13 +64,13 @@ namespace HyTestRTDataService.ConfigMode
 
         public void ScanSubConfig()
         {
-            this.adapterArray = loader.getAdapter();
+            this.adapterArray = loader.GetAdapter();
         }
 
         public void SaveSubConfig(object var)
         {
             int adapterId = (int)var;
-            int errCode = loader.setAdapter(adapterId);
+            int errCode = loader.SetAdapter(adapterId);
             adapterInfo.currentAdapter = adapterArray[adapterId];
             adapterInfo.currentAdapterId = adapterId;
         }

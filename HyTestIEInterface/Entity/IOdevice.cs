@@ -9,18 +9,30 @@ namespace HyTestIEInterface.Entity
     public class IOdevice
     {
         public int id;
-        public int type;//Di,DO,AI,AO
+        public DeviceType type;//Di,DO,AI,AO
         public string name;
         public int channelNum;
 
         public IOdevice() { }
 
-        public IOdevice(int id, int type, string name, int channelNum):this()
+        public IOdevice(int id, DeviceType type, string name, int channelNum)
         {
             this.id = id;
             this.type = type;
             this.name = name;
             this.channelNum = channelNum;
         }
+    }
+
+    [Serializable]
+    public enum DeviceType
+    {
+        NULL,
+        DI = 1,
+        DO,
+        AI,
+        AO,
+        COUPLER = 10,
+        SOLVER = 20,
     }
 }

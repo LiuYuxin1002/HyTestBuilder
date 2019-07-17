@@ -17,3 +17,4 @@ IndustrialEthernetEntity.pdb
 /packages/NPOI.2.4.1/lib/netstandard2.0/NPOI.OpenXml4Net.deps.json
 /packages/NPOI.2.4.1/lib/netstandard2.0/NPOI.OOXML.deps.json
 /packages/NPOI.2.4.1
+/HyTestRTDataService/bin/Debug/HyTestEthercatDriver.dll

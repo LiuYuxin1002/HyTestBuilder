@@ -40,9 +40,9 @@ extern "C"
 		return initSlaveConfigInfo();
 	}
 
-	TEXPORT void getSlaveInfo(SLAVET_ARR* slave, char* strName, int id)
+	TEXPORT int getSlaveInfo(SLAVET_ARR* slave, char* strName, int id)
 	{
-		getSlaveInfoImpl(slave, strName, id);
+		return getSlaveInfoImpl(slave, strName, id);
 	}
 
 	//Write Value

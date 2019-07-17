@@ -22,7 +22,7 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_常量
-        private const int SAFECODE = 0;
+        private const int ERRCODE = 0;
         #endregion
 
         #region region_成员变量
@@ -68,17 +68,17 @@ namespace HyTestEtherCAT
 
         #region region_连接管理
         
-        public int close()
+        public int Close()
         {
             throw new NotImplementedException();
         }
 
-        public int connect()
+        public int Connect()
         {
             throw new NotImplementedException();
         }
 
-        public int disconnect()
+        public int Disconnect()
         {
             throw new NotImplementedException();
         }
@@ -88,34 +88,61 @@ namespace HyTestEtherCAT
         /// <summary>
         /// 获取设备列表
         /// </summary>
-        public IOdevice[] getDevice()
+        public List<List<IOdevice>> GetDevice()
         {
             int slaveNum = CppConnect.initSlaveConfig();
-            deviceNum = slaveNum == 0 ? 0 : slaveNum - 1;
+            deviceNum = slaveNum == 0 ? 0 : slaveNum;
 
-            devices = new IOdevice[deviceNum];
-            for (int i = 2; i < slaveNum+1; i++)
+            List<List<IOdevice>> deviceContiner = new List<List<IOdevice>>();   //全部device
+            List<IOdevice> devGroup = null;     //一个device组
+            IOdevice tmpDevice = null;
+
+            for (int i = 1; i < slaveNum + 1; i++)
             {
                 SlaveInfo tmpSlave = new SlaveInfo();
-
                 StringBuilder tmpSlaveName = new StringBuilder();
                 tmpSlaveName.Capacity = 128;
 
-                int err = CppConnect.getSlaveInfo(ref tmpSlave,tmpSlaveName, i);
-                if (err == SAFECODE)
+                int err = CppConnect.getSlaveInfo(ref tmpSlave, tmpSlaveName, i);
+
+                if (tmpSlave.type == 10) //耦合器或驱动器
                 {
-                    devices[i-2] = new IOdevice();
-                    devices[i-2].id         = tmpSlave.id;
-                    devices[i-2].channelNum = tmpSlave.channelNum;
-                    devices[i-2].name       = tmpSlaveName.ToString();    //renew get_name method
-                    devices[i-2].type       = tmpSlave.type;
+                    if (devGroup != null) deviceContiner.Add(devGroup);
+                    devGroup = new List<IOdevice>();
                 }
-                else//有错误
+                
+                tmpDevice = new IOdevice(tmpSlave.id, DeviceType.NULL, tmpSlaveName.ToString(), tmpSlave.channelNum);
+                //type
+                switch (tmpSlave.type)
                 {
-                    throw new Exception("设备获取出错");
+                    case 1:
+                        tmpDevice.type = DeviceType.DI;
+                        break;
+                    case 2:
+                        tmpDevice.type = DeviceType.DO;
+                        break;
+                    case 3:
+                        tmpDevice.type = DeviceType.AI;
+                        break;
+                    case 4:
+                        tmpDevice.type = DeviceType.AO;
+                        break;
+                    case 10:
+                        tmpDevice.type = DeviceType.COUPLER;
+                        break;
+                    default:
+                        break;
                 }
+
+                devGroup.Add(tmpDevice);
+                tmpSlaveName.Clear();
             }
-            return devices;
+            return deviceContiner;
+        }
+
+        public int GetDeviceNum()
+        {
+            return deviceNum;
         }
 
         #endregion
@@ -204,7 +231,7 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_网卡
-        public Adapter[] getAdapter()
+        public Adapter[] GetAdapter()
         {
             adapterNum = CppConnect.getAdapterNum();
             adapters = new Adapter[adapterNum];
@@ -229,7 +256,7 @@ namespace HyTestEtherCAT
             return adapters;
         }
 
-        public int setAdapter(int id)
+        public int SetAdapter(int id)
         {
             int errmsg = CppConnect.setAdapterId(id);   //返回-1表示赋值失败
             if (errmsg < 0)
@@ -277,7 +304,7 @@ namespace HyTestEtherCAT
 
             CppConnect.getAdapterNum();
             CppConnect.setAdapterId(this.AdapterSelected);
-            this.getDevice();
+            this.GetDevice();
             StartTimer();
 
             isLoadedDriver = true;
