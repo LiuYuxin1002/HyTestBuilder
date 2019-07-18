@@ -2,7 +2,7 @@
 
 #include "SlaveWirteManager.h"
 
-#define DEFINE_SLEEP_TIME 300
+#define DEFINE_SLEEP_TIME 300000
 #define DO 2
 #define AO 4
 

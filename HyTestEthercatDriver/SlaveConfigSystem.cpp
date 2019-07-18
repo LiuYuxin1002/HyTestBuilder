@@ -91,7 +91,7 @@ void initLocalSlaveInfo() {
 		if (i == 0) {									//不处理第一个
 			continue;
 		}
-		else if(ec_slave[i].outputs==0 || ec_slave[i].inputs==0)	//耦合器、伺服驱动器	TODO: 伺服驱动器是否这样的情况待定
+		else if(ec_slave[i].outputs==0 && ec_slave[i].inputs==0)	//耦合器、伺服驱动器	TODO: 伺服驱动器是否这样的情况待定
 		{
 			slave_arr[i].name = ec_slave[i].name;
 			slave_arr[i].type = COUPLER_TYPE;
@@ -112,62 +112,62 @@ void initLocalSlaveInfo() {
 		//判断从站类型
 		switch (slave_arr[i].type)
 		{
-		case 1:				//DI
-		{
-			slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
-			tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
+			case 1:				//DI
+			{
+				slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
+				tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
 			
-			slave_arr[i].ptrToSlave = tmpslave;						//slave_arr[i]指向当前结构体
-			tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
+				slave_arr[i].ptrToSlave = tmpslave;						//slave_arr[i]指向当前结构体
+				tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
 
-			slave_di ptr = dis->next;								//插入头结点
-			dis->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 2:				//DO
-		{
-			slave_do tmpslave = (slave_do)malloc(sizeof(SLAVE_DO));
-			tmpslave = (slave_do)ec_slave[i].outputs;
+				slave_di ptr = dis->next;								//插入头结点
+				dis->next = tmpslave;
+				tmpslave->next = ptr;
+				break;
+			}
+			case 2:				//DO
+			{
+				slave_do tmpslave = (slave_do)malloc(sizeof(SLAVE_DO));
+				tmpslave = (slave_do)ec_slave[i].outputs;
 
-			slave_arr[i].ptrToSlave = tmpslave;
-			tmpslave->slaveinfo = &slave_arr[i];
+				slave_arr[i].ptrToSlave = tmpslave;
+				tmpslave->slaveinfo = &slave_arr[i];
 
-			slave_do ptr = dos->next;
-			dos->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 3:				//AI
-		{
-			slave_ai tmpslave = (slave_ai)malloc(sizeof(SLAVE_AI));
-			tmpslave = (slave_ai)ec_slave[i].inputs;
+				slave_do ptr = dos->next;
+				dos->next = tmpslave;
+				tmpslave->next = ptr;
+				break;
+			}
+			case 3:				//AI
+			{
+				slave_ai tmpslave = (slave_ai)malloc(sizeof(SLAVE_AI));
+				tmpslave = (slave_ai)ec_slave[i].inputs;
 
-			slave_arr[i].ptrToSlave = tmpslave;
-			tmpslave->slaveinfo = &slave_arr[i];
+				slave_arr[i].ptrToSlave = tmpslave;
+				tmpslave->slaveinfo = &slave_arr[i];
 
-			slave_ai ptr = ais->next;
-			ais->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 4:				//AO
-		{
-			slave_ao tmpslave = (slave_ao)malloc(sizeof(SLAVE_AO));
-			tmpslave = (slave_ao)ec_slave[i].outputs;
+				slave_ai ptr = ais->next;
+				ais->next = tmpslave;
+				tmpslave->next = ptr;
+				break;
+			}
+			case 4:				//AO
+			{
+				slave_ao tmpslave = (slave_ao)malloc(sizeof(SLAVE_AO));
+				tmpslave = (slave_ao)ec_slave[i].outputs;
 
-			slave_arr[i].ptrToSlave = tmpslave;
-			tmpslave->slaveinfo = &slave_arr[i];
+				slave_arr[i].ptrToSlave = tmpslave;
+				tmpslave->slaveinfo = &slave_arr[i];
 
-			slave_ao ptr = aos->next;
-			aos->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		default:
-			printf("从站类型扫描错误，请检查第%d个slave\n", i);		//说明Slave的可读名称name不对
-			break;
-		}
+				slave_ao ptr = aos->next;
+				aos->next = tmpslave;
+				tmpslave->next = ptr;
+				break;
+			}
+			default:
+				printf("从站类型扫描错误，请检查第%d个slave\n", i);		//说明Slave的可读名称name不对
+				break;
+			}
 	}
 }
 
@@ -178,10 +178,12 @@ int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id) {
 	}
 
 	slave->id = slave_arr[id].id;
-	slave->name = slave_arr[id].name;
+	slave->name = NULL;
+	//slaveName = slave_arr[id].name;
 	slave->type = slave_arr[id].type;
 	slave->ptrToSlave = NULL;	//useless.
 	slave->channelNum = slave_arr[id].channelNum;
+	if (slave_arr[id].name != NULL ) strcpy(slaveName, slave_arr[id].name);
 	
 	return id;
 }

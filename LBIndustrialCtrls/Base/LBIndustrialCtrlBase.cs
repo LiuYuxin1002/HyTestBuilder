@@ -22,7 +22,16 @@ namespace LBSoft.IndustrialCtrls.Base
         #region (* My Alter *)
         [Browsable(true)]
         [Category("AAA DATA BINDING")]
-        public string VarName { get; set; }
+        public string VarName {
+            get
+            {
+                return this.varName;
+            }
+            set
+            {
+                this.varName = value;
+            }
+        }
 
         protected string varName;
 

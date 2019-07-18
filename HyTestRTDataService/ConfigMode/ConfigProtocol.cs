@@ -14,6 +14,7 @@ namespace HyTestRTDataService.ConfigMode
         public static IWriter writer;
         public static IDeviceLoader deviceLoader;
         public static IAdapterLoader adapterLoader;
+        public static IConnection connector;
 
         public ConfigProtocol()
         {
@@ -70,10 +71,23 @@ namespace HyTestRTDataService.ConfigMode
         /// Get AdapterLoader Which Is Adapte To The Protocol In Config
         /// </summary>
         /// <returns></returns>
-        public static IAdapterLoader GetAdapterLoader()
+        public static IAdapterLoader GetAdapterLoader(int adapterId)
         {
-            if (adapterLoader == null) adapterLoader = (IAdapterLoader)GetServiceEntity();
+            if (adapterLoader == null)
+            {
+                adapterLoader = (IAdapterLoader)GetServiceEntity();
+            }
             return adapterLoader;
+        }
+
+        /// <summary>
+        /// Get Connector.
+        /// </summary>
+        /// <returns></returns>
+        public static IConnection GetConnection()
+        {
+            if (connector == null) connector = (IConnection)GetServiceEntity();
+            return connector;
         }
     }
 }

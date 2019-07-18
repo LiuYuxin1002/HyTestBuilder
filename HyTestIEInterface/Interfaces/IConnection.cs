@@ -11,7 +11,7 @@ namespace HyTestIEInterface
         /// 建立连接
         /// </summary>
         /// <returns>成功返回正值</returns>
-        int Connect();
+        int Connect(int ID);
         /// <summary>
         /// 关闭连接
         /// </summary>

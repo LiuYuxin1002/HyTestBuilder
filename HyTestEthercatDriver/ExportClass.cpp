@@ -20,7 +20,7 @@ extern "C"
 
 	TEXPORT int getAdapterName(char* adapterName, char*adapterDesc, int id)
 	{
-		return getAdapterNameImpl(adapterName, adapterDesc, id);
+		return getAdapterNameImpl(adapterDesc, adapterName, id);
 	}
 
 	TEXPORT int setAdapterId(int nicId)
@@ -40,7 +40,12 @@ extern "C"
 		return initSlaveConfigInfo();
 	}
 
-	TEXPORT int getSlaveInfo(SLAVET_ARR* slave, char* strName, int id)
+	//TEXPORT int initLocalSlaveArr() {
+	//	initLocalSlaveInfo();
+	//	return 1;
+	//}
+
+	TEXPORT int getSlaveInfo(char* strName, SLAVET_ARR* slave, int id)
 	{
 		return getSlaveInfoImpl(slave, strName, id);
 	}

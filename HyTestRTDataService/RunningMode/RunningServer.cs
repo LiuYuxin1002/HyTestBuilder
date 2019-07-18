@@ -52,6 +52,8 @@ namespace HyTestRTDataService.RunningMode
         /*read & write*/
         IReader reader;//有默认值EtherCAT
         IWriter writer;
+        IConnection conn;
+        IAdapterLoader adapterLoader;
 
         /*data pool*/
         private RealTimeDataPool datapool;
@@ -68,6 +70,7 @@ namespace HyTestRTDataService.RunningMode
 
         private RunningServer()     //构造函数
         {
+            //conn = ConfigProtocol.GetConnection();
             InitializeDataPool();
             InitializeConfig();
             reader.DataChanged += ReadDataToDatapool;
@@ -91,20 +94,21 @@ namespace HyTestRTDataService.RunningMode
             iomapInfo = config.iomapInfo;
             testInfo = config.testInfo;
 
-            reader = ConfigProtocol.GetReader();
-            writer = ConfigProtocol.GetWriter();
+            conn = ConfigProtocol.GetConnection();
+            conn.Connect(adapterInfo.currentAdapterId);
 
-            writer.SetAdapterFromConfig(config.adapterInfo.currentAdapterId);
+            reader = (IReader)conn;
+            writer = (IWriter)conn;
         }
 
         private void ReadDataToDatapool(object sender, EventArgs e)
         {
-            if (datapool.rdataList == null) return;
+            //if (datapool.rdataList == null) return;
             //for (int i = 0; i < datapool.rdataList.Count(); i++)
             //{
             //    datapool.rdataList[i] = ReadDataFromDevice(i);
             //}
-            DataRefresh(this, null);     //通知各控件
+            if(DataRefresh != null) DataRefresh(this, e);     //通知各控件
         }
 
         /// <summary>
@@ -205,7 +209,7 @@ namespace HyTestRTDataService.RunningMode
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show(varName + "\n" + e.Message);
             }
 
             if (varType == typeof(bool))        //if digital

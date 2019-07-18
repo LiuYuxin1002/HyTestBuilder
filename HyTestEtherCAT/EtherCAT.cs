@@ -50,11 +50,13 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_构造函数
-        private EtherCAT() { }
+        private EtherCAT()
+        {
+            InitTimer(500);
+        }
         private EtherCAT(int refreshFrequency)
         {
             InitTimer(refreshFrequency);
-            BuildConnection();
         }
 
         #endregion
@@ -73,9 +75,11 @@ namespace HyTestEtherCAT
             throw new NotImplementedException();
         }
 
-        public int Connect()
+        public int Connect(int ID)
         {
-            throw new NotImplementedException();
+            SetAdapterFromConfig(ID);
+            BuildConnection();
+            return 1;
         }
 
         public int Disconnect()
@@ -85,25 +89,29 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_硬件
+        public int InitDevice()
+        {
+            return CppConnect.initSlaveConfig();
+        }
         /// <summary>
         /// 获取设备列表
         /// </summary>
         public List<List<IOdevice>> GetDevice()
         {
-            int slaveNum = CppConnect.initSlaveConfig();
+            int slaveNum = InitDevice();
             deviceNum = slaveNum == 0 ? 0 : slaveNum;
 
             List<List<IOdevice>> deviceContiner = new List<List<IOdevice>>();   //全部device
             List<IOdevice> devGroup = null;     //一个device组
             IOdevice tmpDevice = null;
 
-            for (int i = 1; i < slaveNum + 1; i++)
+            for (int i = 1; i < slaveNum + 2; i++)
             {
                 SlaveInfo tmpSlave = new SlaveInfo();
                 StringBuilder tmpSlaveName = new StringBuilder();
                 tmpSlaveName.Capacity = 128;
 
-                int err = CppConnect.getSlaveInfo(ref tmpSlave, tmpSlaveName, i);
+                int err = CppConnect.getSlaveInfo(tmpSlaveName, ref tmpSlave, i);
 
                 if (tmpSlave.type == 10) //耦合器或驱动器
                 {
@@ -137,6 +145,7 @@ namespace HyTestEtherCAT
                 devGroup.Add(tmpDevice);
                 tmpSlaveName.Clear();
             }
+            deviceContiner.Add(devGroup);
             return deviceContiner;
         }
 
@@ -152,7 +161,7 @@ namespace HyTestEtherCAT
         public void OnDataRefresh(object sender, EventArgs e)
         {
             //数据刷新
-            DataChanged(null, null);
+            DataChanged(this, new EventArgs());
         }
 
         //TODO:批量读
@@ -304,6 +313,7 @@ namespace HyTestEtherCAT
 
             CppConnect.getAdapterNum();
             CppConnect.setAdapterId(this.AdapterSelected);
+
             this.GetDevice();
             StartTimer();
 
@@ -315,10 +325,10 @@ namespace HyTestEtherCAT
             if (this.AdapterSelected == 0)
             {
                 this.AdapterSelected = AdapterId;
-                BuildConnection();
-                return 2;
+                //BuildConnection();
+                return 1;
             }
-            else return 1;
+            else return 2;
         }
         #endregion
     }

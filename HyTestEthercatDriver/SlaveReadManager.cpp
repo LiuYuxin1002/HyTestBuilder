@@ -17,7 +17,9 @@ char strbuf[64] = "";
 
 #define DEFINE_SLEEP_TIME1 300
 #define DI 1
+#define DO 2
 #define AI 3
+#define AO 4
 
 bool readState = true;
 HANDLE rthread;
@@ -101,15 +103,32 @@ int getDigitalValueImpl(int deviceId, int channelId) {
 	ec_send_processdata();
 	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
-	SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave;
-	return tmpSlave->values[channelId];
+	if (slave_arr[deviceId].type == DI) {
+		SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave;
+		return tmpSlave->values[channelId];
+	}
+	else if (slave_arr[deviceId].type == DO) {
+		SLAVE_DO* tmpSlave = (SLAVE_DO*)slave_arr[deviceId].ptrToSlave;
+		return tmpSlave->values[channelId];
+	}
+	else {
+		return -1;
+	}
 }
 
 int getAnalogValueImpl(int deviceId, int channelId) {
 	ec_send_processdata();
 	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
-	SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave;
-	int16 value = tmpSlave->values[channelId];
-	return tmpSlave->values[channelId];
+	if (slave_arr[deviceId].type == AI) {
+		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave;
+		int16 value = tmpSlave->values[channelId];
+		return value;
+	}
+	else if (slave_arr[deviceId].type == AO) {
+		SLAVE_AO* tmpSlave = (SLAVE_AO*)slave_arr[deviceId].ptrToSlave;
+		int16 value = tmpSlave->values[channelId];
+		return value;
+	}
+	
 }

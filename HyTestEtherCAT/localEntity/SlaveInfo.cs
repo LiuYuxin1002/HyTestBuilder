@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HyTestEtherCAT.localEntity
 {
@@ -15,6 +11,6 @@ namespace HyTestEtherCAT.localEntity
         public int type;//Di,DO,AI,AO
         public int channelNum;
         public IntPtr ptrToSth;
-        public int name;
+        public string name;
     }
 }

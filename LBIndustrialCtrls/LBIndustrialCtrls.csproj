@@ -61,6 +61,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -75,11 +76,19 @@
       <HintPath>..\HyTestRTDataService\bin\Debug\HyTestRTDataService.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalogLable\DataScanner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AnalogLable\DataScanner.Designer.cs">
+      <DependentUpon>DataScanner.cs</DependentUpon>
+    </Compile>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Base\LBIndustrialCtrlBase.cs">
       <SubType>UserControl</SubType>
@@ -129,6 +138,9 @@
     <Compile Include="Meters\MeterRenderer.cs" />
     <Compile Include="Utils\ColorMng.cs" />
     <Compile Include="Utils\MathFunc.cs" />
+    <EmbeddedResource Include="AnalogLable\DataScanner.resx">
+      <DependentUpon>DataScanner.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Button\LBButton.resx">
       <DependentUpon>LBButton.cs</DependentUpon>
     </EmbeddedResource>

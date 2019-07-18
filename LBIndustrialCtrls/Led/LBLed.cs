@@ -26,7 +26,7 @@ namespace LBSoft.IndustrialCtrls.Leds
 
         private void FetchDataAndShow()
         {
-            if (varName == null && varName == "") return;
+            if (varName == null || varName == "") return;
 
             RunningServer server = RunningServer.getServer();      
             bool value = server.InstantRead<bool>(varName);
