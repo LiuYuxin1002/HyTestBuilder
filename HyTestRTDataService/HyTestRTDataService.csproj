@@ -103,6 +103,7 @@
     <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\DataTransformer.cs" />
+    <Compile Include="RunningMode\Notifier.cs" />
     <Compile Include="RunningMode\ReadingTask.cs" />
     <Compile Include="RunningMode\RealTimeDataPool.cs" />
     <Compile Include="RunningMode\RunningGroup.cs" />

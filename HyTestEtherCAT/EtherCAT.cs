@@ -164,7 +164,7 @@ namespace HyTestEtherCAT
             DataChanged(this, new EventArgs());
         }
 
-        //TODO:批量读
+        //TODO:批量读 
         public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
         {
             throw new NotImplementedException();
@@ -311,11 +311,18 @@ namespace HyTestEtherCAT
         {
             if (isLoadedDriver) return;
 
-            CppConnect.getAdapterNum();
-            CppConnect.setAdapterId(this.AdapterSelected);
+            try
+            {
+                CppConnect.getAdapterNum();
+                CppConnect.setAdapterId(this.AdapterSelected);
 
-            this.GetDevice();
-            StartTimer();
+                this.GetDevice();
+                StartTimer();
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message+"\n"+ex.StackTrace);
+            }
 
             isLoadedDriver = true;
         }

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 using HyTestRTDataService.ConfigMode.MapEntities;
+using System;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -109,9 +110,9 @@ namespace HyTestRTDataService.ConfigMode
                     xs = new XmlSerializer(typeof(Config));
                     xs.Serialize(xw, config);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
-                    //debug sth. or throw exception
+                    throw ex;   //debug sth. or throw exception
                 }
                 fs.Close();
             }

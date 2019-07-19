@@ -51,8 +51,14 @@ namespace LBIndustrialCtrls.AnalogLable
             if (varName != null && varName != "")
             {
                 RunningServer server = RunningServer.getServer();
-                server.DataRefresh += OnDataChanged;
+                server.Connected += OnConnected;
             }
+        }
+
+        private void OnConnected(object sender, EventArgs e)
+        {
+            RunningServer server = RunningServer.getServer();
+            server.DataRefresh += OnDataChanged;
         }
     }
 }

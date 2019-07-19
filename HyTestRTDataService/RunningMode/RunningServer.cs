@@ -27,9 +27,15 @@ namespace HyTestRTDataService.RunningMode
             }
             return server;
         }
+        public bool isConnected;
 
         //Event下面有使用说明
         public event EventHandler<EventArgs> DataRefresh;
+        public event EventHandler<EventArgs> Connected;
+        public event EventHandler<EventArgs> DisConnected;
+
+        private Notifier notifier;
+
         /// <summary>
         /// 控件数据订阅如下：
         /// </summary>
@@ -70,10 +76,16 @@ namespace HyTestRTDataService.RunningMode
 
         private RunningServer()     //构造函数
         {
-            //conn = ConfigProtocol.GetConnection();
+            notifier = Notifier.notifier;
+            notifier.ProgramRunning += OnProgramRunning;
+        }
+
+        private void OnProgramRunning(object sender, EventArgs e)
+        {
             InitializeDataPool();
             InitializeConfig();
             reader.DataChanged += ReadDataToDatapool;
+            Connected(null, null);
         }
 
         //Useless.

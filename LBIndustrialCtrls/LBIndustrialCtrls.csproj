@@ -72,9 +72,6 @@
     <Reference Include="HyTestEthercatDriver">
       <HintPath>..\Debug\HyTestEthercatDriver.dll</HintPath>
     </Reference>
-    <Reference Include="HyTestRTDataService">
-      <HintPath>..\HyTestRTDataService\bin\Debug\HyTestRTDataService.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -189,5 +186,11 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HyTestRTDataService\HyTestRTDataService.csproj">
+      <Project>{78c8a452-8a2f-4416-b74a-052d73084094}</Project>
+      <Name>HyTestRTDataService</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
