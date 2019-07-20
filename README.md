@@ -125,3 +125,9 @@
 ### 2019.7.2
 #### 工作记录
 1. 需要调试cpp的写部分。问题在slaveWriteSigleDigital函数，数组slave_arr没有值。
+
+### 2019.7.19
+#### 工作记录
+1. 控件问题解决思路：
+	控件先绑定OnConnected事件，当Server触发Connected后会触发绑定OndataChanged事件，绑定了ondatachanged才能在EtherCAT的timer后刷新自己的数值。
+	server会在主程序启动后触发programRunning调用connected

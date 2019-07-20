@@ -5,6 +5,7 @@ using HyTestIEInterface;
 using HyTestEtherCAT.localEntity;
 using System.Windows.Forms;
 using HyTestIEInterface.Entity;
+using log4net;
 
 namespace HyTestEtherCAT
 {
@@ -26,6 +27,7 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_成员变量
+        ILog log = LogManager.GetLogger(ethercat.GetType());
         Timer timer = new Timer();
 
         private static EtherCAT ethercat;
@@ -321,7 +323,7 @@ namespace HyTestEtherCAT
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message+"\n"+ex.StackTrace);
+                log.Error(ex.Message+"\n"+ex.StackTrace);
             }
 
             isLoadedDriver = true;

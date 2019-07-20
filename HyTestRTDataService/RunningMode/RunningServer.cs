@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Linq;
 using HyTestRTDataService.ConfigMode;
 using HyTestIEInterface;
-using System.Threading;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System.Data;
 using System.Windows.Forms;
+using log4net;
 
 namespace HyTestRTDataService.RunningMode
 {
     public class RunningServer
     {
+        ILog log = LogManager.GetLogger(typeof(RunningServer));
+
         private static object locky = new object();
         private static RunningServer server;
         public static RunningServer getServer() //多线程单例
@@ -34,27 +35,6 @@ namespace HyTestRTDataService.RunningMode
         public event EventHandler<EventArgs> Connected;
         public event EventHandler<EventArgs> DisConnected;
 
-        private Notifier notifier;
-
-        /// <summary>
-        /// 控件数据订阅如下：
-        /// </summary>
-        // RunningServer server = RunningServer.GetServer();   //获取服务
-        // 
-        // server.DataRefresh += OnDataRefresh;                //委托绑定事件
-        // 
-        // private void OnDataRefresh(object sender, EventArgs e)  //DataRefresh函数触发调用事件
-        // {
-        //     FetchDataAndShow();      //自己写函数，向server获取数据并令控件显示获取到的数据
-        
-        // }
-        //数字量Light、模拟量meter, LED，趋势图time-value
-        //void FetchDataAndShow()
-        //{
-        //    int data = server.NormalRead<int>(varname);
-        //    this.Value = data;
-        //}
-
         /*read & write*/
         IReader reader;//有默认值EtherCAT
         IWriter writer;
@@ -76,16 +56,25 @@ namespace HyTestRTDataService.RunningMode
 
         private RunningServer()     //构造函数
         {
-            notifier = Notifier.notifier;
-            notifier.ProgramRunning += OnProgramRunning;
+            InitializeDataPool();
         }
 
-        private void OnProgramRunning(object sender, EventArgs e)
+        /// <summary>
+        /// 服务开始运行，全局控制
+        /// </summary>
+        public void Run()
         {
-            InitializeDataPool();
             InitializeConfig();
             reader.DataChanged += ReadDataToDatapool;
             Connected(null, null);
+        }
+
+        /// <summary>
+        /// 服务停止运行，全局控制
+        /// </summary>
+        public void Stop()
+        {
+            DisConnected(null, null);
         }
 
         //Useless.
