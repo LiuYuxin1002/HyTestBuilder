@@ -32,6 +32,12 @@ namespace LBSoft.IndustrialCtrls.Leds
             bool value = server.InstantRead<bool>(varName);
             this.State = value ? LedState.On : LedState.Off;
         }
+
+        private void OnConnected(object sender, EventArgs e)
+        {
+            RunningServer server = RunningServer.getServer();
+            server.DataRefresh += OnDataChanged;
+        }
         #endregion
         #region (* Enumeratives *)
         public enum LedState
@@ -84,7 +90,14 @@ namespace LBSoft.IndustrialCtrls.Leds
 			this.blinkIsOn		= false;
 			this.ledSize		= new SizeF ( 10F, 10F );
 			this.labelPosition = LedLabelPosition.Top;
-		}
+
+            //data subjection
+            if (varName != null && varName != "")
+            {
+                RunningServer server = RunningServer.getServer();
+                server.Connected += OnConnected;
+            }
+        }
 		#endregion
 		
 		#region (* Properties *)

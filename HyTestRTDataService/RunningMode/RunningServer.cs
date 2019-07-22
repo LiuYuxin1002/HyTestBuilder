@@ -10,8 +10,7 @@ namespace HyTestRTDataService.RunningMode
 {
     public class RunningServer
     {
-        ILog log = LogManager.GetLogger(typeof(RunningServer));
-
+        private static ILog log = LogManager.GetLogger(typeof(RunningServer));
         private static object locky = new object();
         private static RunningServer server;
         public static RunningServer getServer() //多线程单例
@@ -66,7 +65,7 @@ namespace HyTestRTDataService.RunningMode
         {
             InitializeConfig();
             reader.DataChanged += ReadDataToDatapool;
-            Connected(null, null);
+            if(Connected!=null) Connected(null, null);
         }
 
         /// <summary>
@@ -210,7 +209,7 @@ namespace HyTestRTDataService.RunningMode
             }
             catch(Exception e)
             {
-                MessageBox.Show(varName + "\n" + e.Message);
+                log.Debug(e.Message + "::" + varName);
             }
 
             if (varType == typeof(bool))        //if digital
@@ -230,7 +229,7 @@ namespace HyTestRTDataService.RunningMode
             }
             else
             {
-                MessageBox.Show("变量类型不正确，请检查配置文件");
+                new DelayCloseForm("变量类型不正确，请检查配置文件").Show();
                 return default(T);
             }
         }
@@ -255,7 +254,7 @@ namespace HyTestRTDataService.RunningMode
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message); //varName找不到报错
+                log.Debug(e.Message + "::" + varName); //varName找不到报错
             }
 
             if (varType == typeof(bool))        //if digital

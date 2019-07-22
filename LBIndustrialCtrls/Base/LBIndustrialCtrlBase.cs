@@ -30,6 +30,7 @@ namespace LBSoft.IndustrialCtrls.Base
             set
             {
                 this.varName = value;
+                Invalidate();
             }
         }
 

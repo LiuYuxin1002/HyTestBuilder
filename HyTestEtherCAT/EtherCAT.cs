@@ -27,7 +27,8 @@ namespace HyTestEtherCAT
         #endregion
 
         #region region_成员变量
-        ILog log = LogManager.GetLogger(ethercat.GetType());
+        ILog log = LogManager.GetLogger(typeof(EtherCAT));
+
         Timer timer = new Timer();
 
         private static EtherCAT ethercat;
@@ -320,13 +321,12 @@ namespace HyTestEtherCAT
 
                 this.GetDevice();
                 StartTimer();
+                isLoadedDriver = true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                log.Error(ex.Message+"\n"+ex.StackTrace);
+                //log.Error(ex.Message+"\n"+ex.StackTrace);
             }
-
-            isLoadedDriver = true;
         }
 
         public int SetAdapterFromConfig(int AdapterId)
