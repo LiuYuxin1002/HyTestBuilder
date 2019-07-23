@@ -10,23 +10,32 @@
 
 
 ## 安装教程
-
+0. 预处理
+	1. 安装[winpcap](https://www.winpcap.org)
+	2. 检查本机是否有 SDK for VS C++(可能会导致无法调试)
 1. 添加引用
-	1. 添加LBIndustrialCtrls.dll控件引用
+	1. 添加LBIndustrialCtrls.dll控件引用 
 	2. 添加HyTestRTDataService.dll服务引用
 	3. 添加HyTestEthercatDriver.dll驱动引用
+	4. 添加HyTestEtherCAT.dll引用
+	5. 添加HyTestIEInterface.dll接口项目引用
+2. 配置
+	1. 找到HyTestBuilderTest解决方案，运行配置程序Config，将变量表导入后点击保存。
+	2. 点击网卡扫描，选择连接硬件的网卡后点击确认。
+	3. 点击从站扫描，查看从站结果是否正确。如果正确点击右上角保存。
+	4. 点击保存配置，配置文件将存放在解决方案路径/debug目录下，复制到使用者解决方案debug目录下。
 2. 试运行
-	1. 检查配置文件是否加载，如果没有找到配置文件，搜索配置文件config.xml移动到解决方案路径的bin目录下
-	2. 检查能否找到驱动引用，如果没有找到，联系我
+	1. 检查配置文件是否加载，如果没有找到配置文件，搜索配置文件config.xml移动到解决方案路径的debug目录下
+	2. 检查能否找到驱动引用，如果没有找到，请检查是否安装[winpcap](https://www.winpcap.org)
 	3. 如果运行时出现某某问题导致“堆栈不对称”，尝试将项目的启动方式设置为x86，具体操作为：
 		项目右键->生成->目标平台下拉框->x86；
 		另外还可以添加CallingConvention = CallingConvention.Cdecl；
 		如果没有解决，先检查你的数据类型，or联系我。
 3. 调试
-	调试界面可参考HyTestBuilderTest解决方案，如果没有，联系我。
+	调试界面可参考[HyTestBuilderTest](https://github.com/LiuYuxin1002/HyTestBuilderTest)解决方案，如果没有，联系我。
 
 4. 反馈
-	如果有好的建议或意见，可以在github创建账号，拉你到HyTestBuider项目：[HyTestBuilder]https://github.com/LiuYuxin1002/HyTestBuilder
+	如果有好的建议或意见，可以在github创建账号，拉你到HyTestBuider项目：[HyTestBuilder](https://github.com/LiuYuxin1002/HyTestBuilder)
 
 
 
