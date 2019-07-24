@@ -334,7 +334,7 @@ namespace HyTestEtherCAT
         /// 将本地adapterSelected设置为给定值
         /// </summary>
         /// <returns>成功返回1，失败返回2</returns>
-        private int SetAdapterFromConfig(int AdapterId)
+        public int SetAdapterFromConfig(int AdapterId)
         {
             if (this.AdapterSelected == 0)
             {
