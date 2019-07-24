@@ -35,7 +35,7 @@ namespace HyTestEtherCAT
         /// 获取数字量，返回int需要自行处理
         /// </summary>
         /// <returns>返回1=true，返回0=false</returns>
-        [DllImport("HyTestEthercatDriver.dll")]
+        [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getDigitalValue(int slaveId, int channelId);
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int prepareToRead();
