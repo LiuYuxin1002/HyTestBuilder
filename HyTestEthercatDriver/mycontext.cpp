@@ -4,7 +4,6 @@
 #include "ethercat.h"
 
 ec_adaptert* adapter;
-
 struct adaptert myadapter;
 
 const int SLAVE_TYPE_ID = 2;		//typeËùÔÚÎ»

@@ -1,0 +1,7 @@
+/PackageLanguagePackManifestSchema.xsd
+/PackageManifestSchema.Assets.xsd
+/PackageManifestSchema.Dependencies.xsd
+/PackageManifestSchema.Installation.xsd
+/PackageManifestSchema.Metadata.xsd
+/PackageManifestSchema.xsd
+/VSIXManifestSchema.xsd
