@@ -18,7 +18,7 @@ namespace HyTestIEInterface
         void OnDataRefresh(object sender, EventArgs e);
 
         /// <summary>
-        /// 单点读模拟量
+        /// 单点读模拟量，对于伺服驱动器，需要按照配置表来选择channel值
         /// </summary>
         int ReadAnalog(int deviceId, int channel);
         

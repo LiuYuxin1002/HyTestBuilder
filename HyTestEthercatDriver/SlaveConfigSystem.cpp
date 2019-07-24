@@ -107,7 +107,7 @@ void initLocalSlaveInfo() {
 			slave_arr[i].name = ec_slave[i].name;
 			slave_arr[i].type = SERVO_TYPE;
 			slave_arr[i].id = ec_slave[i].eep_id;
-			slave_arr[i].channelNum = -1;
+			slave_arr[i].channelNum = 16;		//TODO: 根据伺服驱动器的不同而不同
 
 			//建立伺服驱动器结构体映射
 			pservo_input tmp_in = (pservo_input)malloc(sizeof(SLAVE_SERVO_IN));

@@ -13,6 +13,7 @@ using namespace std;
 extern "C" {
 #endif 
 
+#define INF				0x3fffffff
 #define EC_TIMEOUT		500
 #define EC_STACK_SIZE	128000
 #define MAX_SLAVE		1000
@@ -44,7 +45,7 @@ extern "C" {
 		int		type;			//0:empty, 1:di, 2:do, 3:ai, 4:ao
 		int		channelNum;		//1,2,4,8...目前打算只支持这四种
 		void*	ptrToSlave1;		//指向对应的从站端口
-		void*	ptrToSlave2;
+		void*	ptrToSlave2;		//指向输出
 		char*	name;			//可读名称
 	};
 	extern struct SLAVET_ARR slave_arr[MAX_SLAVE];
@@ -82,6 +83,7 @@ extern "C" {
 	typedef struct SLAVE_SERVO_OUT *pservo_output;
 	typedef struct SLAVE_SERVO_IN  *pservo_input;
 
+	//TODO: If you change these words, remember to modify Read/WriteManager
 	struct SLAVE_SERVO_OUT {
 		int16 controlWord;			//common
 		int8  operationMode;		//common

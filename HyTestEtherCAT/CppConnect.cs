@@ -11,7 +11,7 @@ namespace HyTestEtherCAT
         public static extern int getAdapterNum();
         [DllImport("HyTestEthercatDriver.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public static extern int getAdapterName(StringBuilder namestr, StringBuilder descstr, int id);
-        //设置所选网卡，如果失败返回错误信息，成功返回当前连接的从站信息
+        //设置所选网卡，如果失败返回-1，成功返回100
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setAdapterId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAdapterId(int nicId);
         //自动配置从站，成功更新结构体数组
