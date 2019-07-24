@@ -13,11 +13,19 @@ using namespace std;
 extern "C" {
 #endif 
 
-#define EC_TIMEOUT 500
-#define EC_STACK_SIZE 128000
-#define MAX_SLAVE 1000
-#define MAX_CHANNEL 16
-#define MAP_SIZE 4096
+#define INF				0x3fffffff
+#define EC_TIMEOUT		500
+#define EC_STACK_SIZE	128000
+#define MAX_SLAVE		1000
+#define MAX_CHANNEL		16
+#define MAP_SIZE		4096
+
+#define TYPE_COUPLER	10
+#define TYPE_SERVO		20
+#define TYPE_DI			1
+#define TYPE_DO			2
+#define TYPE_AI			3
+#define TYPE_AO			4
 
 	extern ec_adaptert* adapter;
 	extern char ifbuf[1024];		//网卡名称缓存
@@ -36,9 +44,9 @@ extern "C" {
 		int		id;				//ID
 		int		type;			//0:empty, 1:di, 2:do, 3:ai, 4:ao
 		int		channelNum;		//1,2,4,8...目前打算只支持这四种
-		void*	ptrToSlave;		//指向对应的从站端口
+		void*	ptrToSlave1;		//指向对应的从站端口
+		void*	ptrToSlave2;		//指向输出
 		char*	name;			//可读名称
-		//int		name;
 	};
 	extern struct SLAVET_ARR slave_arr[MAX_SLAVE];
 
@@ -71,16 +79,47 @@ extern "C" {
 		SLAVET_ARR* slaveinfo = NULL;
 	};
 
+	//松下伺服驱动器映射声明部分
+	typedef struct SLAVE_SERVO_OUT *pservo_output;
+	typedef struct SLAVE_SERVO_IN  *pservo_input;
+
+	//TODO: If you change these words, remember to modify Read/WriteManager
+	struct SLAVE_SERVO_OUT {
+		int16 controlWord;			//common
+		int8  operationMode;		//common
+		int16 maxTorque;			//speed
+		int32 targetPositon;		//position
+		int16 touchProbeFunction;	//common
+		int32 targetVelocity;		//speed
+		void* slaveInfo;
+	};
+
+	struct SLAVE_SERVO_IN {
+		int16 errorCode;			//common
+		int16 StatusWord;			//common
+		int8  OperationMode;		//common
+		int32 positionValue;		//position
+		int32 velocityValue;		//velocity
+		int16 torqueValue;			//torque
+		int32 touchProbeStatus;		//common
+		int32 touchProbePoslPosValue;
+		int32 digitalInput;
+		void* slaveInfo;
+	};
+
+	struct SLAVE_COUPLER {
+		void* slaveInfo;
+	};
+
 	//定义链表
 	extern slave_di dis;
 	extern slave_do dos;
 	extern slave_ai ais;
 	extern slave_ao aos;
 
-	//方法声明
-
-	int setIntegerValueImpl(int slaveId, int channel, int value);	//设置从站端口值
-	int setBoolValueImpl(int slaveId, int channel, boolean value);
+	//伺服驱动器链表
+	extern pservo_input sis;
+	extern pservo_output sos;
 
 #ifdef __cplusplus
 }

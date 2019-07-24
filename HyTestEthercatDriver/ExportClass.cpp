@@ -40,11 +40,6 @@ extern "C"
 		return initSlaveConfigInfo();
 	}
 
-	//TEXPORT int initLocalSlaveArr() {
-	//	initLocalSlaveInfo();
-	//	return 1;
-	//}
-
 	TEXPORT int getSlaveInfo(char* strName, SLAVET_ARR* slave, int id)
 	{
 		return getSlaveInfoImpl(slave, strName, id);

@@ -16,10 +16,6 @@ HANDLE hthread;
 char strbuf[64] = "";
 
 #define DEFINE_SLEEP_TIME1 300
-#define DI 1
-#define DO 2
-#define AI 3
-#define AO 4
 
 bool readState = true;
 HANDLE rthread;
@@ -103,12 +99,12 @@ int getDigitalValueImpl(int deviceId, int channelId) {
 	ec_send_processdata();
 	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
-	if (slave_arr[deviceId].type == DI) {
-		SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave;
+	if (slave_arr[deviceId].type == TYPE_DI) {
+		SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave1;
 		return tmpSlave->values[channelId];
 	}
-	else if (slave_arr[deviceId].type == DO) {
-		SLAVE_DO* tmpSlave = (SLAVE_DO*)slave_arr[deviceId].ptrToSlave;
+	else if (slave_arr[deviceId].type == TYPE_DO) {
+		SLAVE_DO* tmpSlave = (SLAVE_DO*)slave_arr[deviceId].ptrToSlave1;
 		return tmpSlave->values[channelId];
 	}
 	else {
@@ -120,15 +116,56 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 	ec_send_processdata();
 	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
-	if (slave_arr[deviceId].type == AI) {
-		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave;
+	if (slave_arr[deviceId].type == TYPE_AI) {		//AI
+		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave1;
 		int16 value = tmpSlave->values[channelId];
 		return value;
 	}
-	else if (slave_arr[deviceId].type == AO) {
-		SLAVE_AO* tmpSlave = (SLAVE_AO*)slave_arr[deviceId].ptrToSlave;
+	else if (slave_arr[deviceId].type == TYPE_AO) {	//AO
+		SLAVE_AO* tmpSlave = (SLAVE_AO*)slave_arr[deviceId].ptrToSlave1;
 		int16 value = tmpSlave->values[channelId];
 		return value;
+	}
+	//TODO: need to be more flexible
+	else if (slave_arr[deviceId].type == TYPE_SERVO) {//Servo
+		SLAVE_SERVO_IN* si = (SLAVE_SERVO_IN*)slave_arr[deviceId].ptrToSlave1;
+		SLAVE_SERVO_OUT* so = (SLAVE_SERVO_OUT*)slave_arr[deviceId].ptrToSlave2;
+		switch (channelId)
+		{
+		case 1:
+			return si->errorCode;
+		case 2:
+			return si->StatusWord;
+		case 3:
+			return si->OperationMode;
+		case 4:
+			return si->positionValue;	//Position Input	4
+		case 5:
+			return si->velocityValue;	//Velocity Input	5
+		case 6:
+			return si->torqueValue;
+		case 7:
+			return si->touchProbeStatus;
+		case 8:
+			return si->touchProbePoslPosValue;
+		case 9:
+			return si->digitalInput;
+		case 11:
+			return so->controlWord;
+		case 12:
+			return so->operationMode;
+		case 13:
+			return so->maxTorque;
+		case 14:
+			return so->targetPositon;	//Position Output	14
+		case 15:
+			return so->touchProbeFunction;
+		case 16:
+			return so->targetVelocity;	//Velocity Output	16
+		default:
+			break;
+		}
+		return INF;
 	}
 	
 }

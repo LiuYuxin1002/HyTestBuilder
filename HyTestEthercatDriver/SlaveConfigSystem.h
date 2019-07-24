@@ -7,5 +7,5 @@
 int initSlaveConfigInfo();
 //初始化本地slave_arr数组信息，将从站分组为DI，DO，AI，AO四类，存放在context中（原来叫做getSlaveInfoImpl，不形象）
 void initLocalSlaveInfo();
-//根据id获取从站信息
+//根据id获取从站信息，name单独返回.
 int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id);

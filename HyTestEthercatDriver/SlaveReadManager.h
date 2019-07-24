@@ -13,7 +13,7 @@ int slaveReadSuspend();
 int slaveReadResume();
 //Õ£÷π∂¡»°
 int slaveReadStop();
-
+//read digital
 int getDigitalValueImpl(int deviceId, int channelId);
-
+//read analog
 int getAnalogValueImpl(int deviceId, int channelId);

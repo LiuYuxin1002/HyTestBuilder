@@ -168,7 +168,6 @@
     <ClCompile Include="DataSerialization.cpp" />
     <ClCompile Include="ExportClass.cpp" />
     <ClCompile Include="HiredisHelper.cpp" />
-    <ClCompile Include="mycontext.cpp" />
     <ClCompile Include="NicConfigSystem.cpp" />
     <ClCompile Include="SlaveConfigSystem.cpp" />
     <ClCompile Include="SlaveReadManager.cpp" />

@@ -163,16 +163,9 @@ namespace HyTestEtherCAT
         //数据刷新时触发，目前做成Timer触发，后面应该是Redis更新触发
         public void OnDataRefresh(object sender, EventArgs e)
         {
-            //数据刷新
             DataChanged(this, new EventArgs());
         }
-
-        //TODO:批量读 
-        public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         /// <summary>
         /// 读模拟量（单个）
         /// </summary>
@@ -181,12 +174,6 @@ namespace HyTestEtherCAT
         {
             int tmpValue = CppConnect.getAnalogValue(deviceId, channel);
             return tmpValue;
-        }
-
-        //TODO:
-        public int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -204,18 +191,6 @@ namespace HyTestEtherCAT
             }
         }
 
-        //TODO: 
-        public int WriteAnalog(List<int> deviceList, List<int[]> channelList, List<int[]> values)
-        {
-            bool succeed = true;
-            for (int i=0; i<deviceList.Count; i++)
-            {
-                int device = deviceList[i];
-                //TODO: complete these write
-            }
-            return succeed ? 0 : -1;
-        }
-
         /// <summary>
         /// 写模拟量（单个）
         /// </summary>
@@ -227,12 +202,6 @@ namespace HyTestEtherCAT
         {
             return CppConnect.setAnalogValue(deviceId, channel, value);
         }
-        
-        //TODO: foreach write
-        public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<byte[]> values)
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// 写数字量（单个）
@@ -240,6 +209,36 @@ namespace HyTestEtherCAT
         public int WriteDigital(int deviceId, int channel, byte value)
         {
             return CppConnect.setDigitalValue(deviceId, channel, value);
+        }
+
+        //TODO:批量读 
+        public int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        //TODO:
+        public int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values)
+        {
+            throw new NotImplementedException();
+        }
+
+        //TODO: 
+        public int WriteAnalog(List<int> deviceList, List<int[]> channelList, List<int[]> values)
+        {
+            bool succeed = true;
+            for (int i = 0; i < deviceList.Count; i++)
+            {
+                int device = deviceList[i];
+                //TODO: complete these write
+            }
+            return succeed ? 0 : -1;
+        }
+
+        //TODO: foreach write
+        public int WriteDigital(List<int> deviceList, List<int[]> channelList, List<byte[]> values)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -269,6 +268,11 @@ namespace HyTestEtherCAT
             return adapters;
         }
 
+        /// <summary>
+        /// 选择网卡
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>成功返回100，失败返回-1</returns>
         public int SetAdapter(int id)
         {
             int errmsg = CppConnect.setAdapterId(id);   //返回-1表示赋值失败
@@ -276,11 +280,7 @@ namespace HyTestEtherCAT
             {
                 throw new Exception("Adapter selected failed");
             }
-            else                                        //返回0表示没有错误
-            {
-                deviceNum = errmsg;
-                return deviceNum;
-            }
+            return errmsg;
         }
 
         #endregion
@@ -330,6 +330,10 @@ namespace HyTestEtherCAT
             }
         }
 
+        /// <summary>
+        /// 将本地adapterSelected设置为给定值
+        /// </summary>
+        /// <returns>成功返回1，失败返回2</returns>
         public int SetAdapterFromConfig(int AdapterId)
         {
             if (this.AdapterSelected == 0)

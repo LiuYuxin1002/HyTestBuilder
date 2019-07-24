@@ -18,9 +18,6 @@
     <ClCompile Include="ExportClass.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="mycontext.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="DataSerialization.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
