@@ -186,7 +186,8 @@ namespace HyTestEtherCAT
             else if (tmpValue == 1) return true;
             else
             {
-                throw new Exception("读取bool值错误，请检查:"+typeof(EtherCAT));
+                //throw new Exception("读取bool值错误，请检查:"+typeof(EtherCAT));
+                return false;
             }
         }
 

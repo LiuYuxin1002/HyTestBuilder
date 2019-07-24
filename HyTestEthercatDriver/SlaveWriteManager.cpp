@@ -2,7 +2,7 @@
 
 #include "SlaveWirteManager.h"
 
-#define DEFINE_SLEEP_TIME 300000
+#define DEFINE_SLEEP_TIME 300
 
 bool runningState = true;
 HANDLE wthread;
