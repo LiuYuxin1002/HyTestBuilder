@@ -47,7 +47,7 @@ map<char*, char*> getDataMap() {
 int checkSlaveState() {
 	if (ec_slavecount != 0) {
 		//The work for state check here.
-
+		
 		cout << "check slave finish" << endl;
 	}
 	else {
@@ -118,7 +118,7 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 
 	if (slave_arr[deviceId].type == TYPE_AI) {		//AI
 		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave1;
-		int16 value = tmpSlave->values[channelId];
+		int16 value = tmpSlave->values[(channelId+1)*2-1];//TODO: ½öÕë¶ÔEL3004
 		return value;
 	}
 	else if (slave_arr[deviceId].type == TYPE_AO) {	//AO
@@ -132,6 +132,7 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 		SLAVE_SERVO_OUT* so = (SLAVE_SERVO_OUT*)slave_arr[deviceId].ptrToSlave2;
 		switch (channelId)
 		{
+		//inputs
 		case 1:
 			return si->errorCode;
 		case 2:
@@ -150,6 +151,7 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 			return si->touchProbePoslPosValue;
 		case 9:
 			return si->digitalInput;
+		//outputs
 		case 11:
 			return so->controlWord;
 		case 12:

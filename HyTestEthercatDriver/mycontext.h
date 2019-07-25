@@ -55,35 +55,60 @@ extern "C" {
 	typedef struct SLAVE_AI *slave_ai;
 	typedef struct SLAVE_AO *slave_ao;
 
+	PACKED_BEGIN
+	struct SLAVE_AI_CHANNEL {
+		boolean		Underrange;
+		boolean		Overrange;
+		bitset<2>	Limit1;
+		bitset<2>	Limit2;
+		boolean		Error;
+		bitset<1>	Empty1;
+		bitset<1>	Empty2;
+		boolean		PDO_State;
+		boolean		PDO_Toggle;
+		int16		value;
+	};
+	PACKED_END
+
+	PACKED_BEGIN
 	struct SLAVE_DI {
 		bitset<8> values;
 		slave_di next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;//指回去，指向从站整体列表
 	};
+	PACKED_END
 
+	PACKED_BEGIN
 	struct SLAVE_DO {
 		bitset<8> values;
 		slave_do next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;
 	};
+	PACKED_END
 	
+	PACKED_BEGIN
 	struct SLAVE_AI {
-		int16 values[MAX_CHANNEL];
+		//SLAVE_AI_CHANNEL values[MAX_CHANNEL];
+		int16 values[MAX_CHANNEL*10];
 		slave_ai next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;
 	};
+	PACKED_END
 
+	PACKED_BEGIN
 	struct SLAVE_AO {
 		int16 values[MAX_CHANNEL];
 		slave_ao next = NULL;
 		SLAVET_ARR* slaveinfo = NULL;
 	};
+	PACKED_END
 
 	//松下伺服驱动器映射声明部分
 	typedef struct SLAVE_SERVO_OUT *pservo_output;
 	typedef struct SLAVE_SERVO_IN  *pservo_input;
 
 	//TODO: If you change these words, remember to modify Read/WriteManager
+	PACKED_BEGIN
 	struct SLAVE_SERVO_OUT {
 		int16 controlWord;			//common
 		int8  operationMode;		//common
@@ -93,7 +118,9 @@ extern "C" {
 		int32 targetVelocity;		//speed
 		void* slaveInfo;
 	};
+	PACKED_END
 
+	PACKED_BEGIN
 	struct SLAVE_SERVO_IN {
 		int16 errorCode;			//common
 		int16 StatusWord;			//common
@@ -106,10 +133,13 @@ extern "C" {
 		int32 digitalInput;
 		void* slaveInfo;
 	};
+	PACKED_END
 
+	PACKED_BEGIN
 	struct SLAVE_COUPLER {
 		void* slaveInfo;
 	};
+	PACKED_END
 
 	//定义链表
 	extern slave_di dis;

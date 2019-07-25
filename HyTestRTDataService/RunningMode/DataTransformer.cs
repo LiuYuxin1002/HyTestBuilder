@@ -76,7 +76,7 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public static double AnalogToPhysical(int analog, int vmax, int vmin)   //缩小
         {
-            double rate = (vmax - vmin) / (ANALOG_MAX - ANALOG_MIN);
+            double rate = (double)(vmax - vmin) / (double)(ANALOG_MAX - ANALOG_MIN);
             double result = rate * (analog - ANALOG_MIN) + vmin;
             return result;
         }
@@ -98,7 +98,7 @@ namespace HyTestRTDataService.RunningMode
         /// <returns></returns>
         public static double InputAnalogToPhysical(int analog)
         {
-            double rate = (INPUT_MIN - INPUT_MAX) / (ANALOG_MIN - ANALOG_MAX);    //rate<1
+            double rate = (double)(INPUT_MIN - INPUT_MAX) / (double)(ANALOG_MIN - ANALOG_MAX);    //rate<1
             double result = rate * (analog - ANALOG_MIN) + INPUT_MIN;
             return result;
         }

@@ -25,7 +25,7 @@ void serialized(map<char*, char*>* map, void* tmpslave, int type) {
 			strcat(infostr, itoa(slavid, intstrbuf, 10));				//slaveid
 			strcat(infostr, "_");										//连接符
 			strcat(infostr, itoa(chnum, intstrbuf, 10));				//channelid
-			strcat(valuestr, itoa(((SLAVETYPE)tmpslave)->values[i], intstrbuf, 10));	//bool值存0和1
+			//strcat(valuestr, itoa(((SLAVETYPE)tmpslave)->values[i], intstrbuf, 10));	//bool值存0和1 TODO:::AI
 			map->insert(pair<char*, char*>(infostr, valuestr));	//插入
 		}
 		tmpslave = ((SLAVETYPE)tmpslave)->next;
