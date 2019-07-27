@@ -12,8 +12,6 @@ slave_ai ais = (slave_ai)new SLAVE_AI();
 slave_ao aos = (slave_ao)new SLAVE_AO();
 
 //局部全局变量
-const int COUPLER_TYPE = 10;		//耦合器类型
-const int SERVO_TYPE = 20;			//伺服驱动器
 const int SLAVE_TYPE_ID = 2;		//type所在位
 const int SLAVE_CHANNEL_ID = 5;		//channel所在位
 
@@ -93,7 +91,7 @@ void initLocalSlaveInfo() {
 		else if (ec_slave[i].outputs == 0 && ec_slave[i].inputs == 0)	//耦合器
 		{
 			slave_arr[i].name = ec_slave[i].name;
-			slave_arr[i].type = COUPLER_TYPE;
+			slave_arr[i].type = TYPE_COUPLER;
 			slave_arr[i].id = ec_slave[i].eep_id;
 			slave_arr[i].channelNum = -1;
 			slave_arr[i].ptrToSlave1 = NULL;
@@ -105,7 +103,7 @@ void initLocalSlaveInfo() {
 		else if (ec_slave[i].inputs != 0 && ec_slave[i].outputs != 0)	//伺服驱动器
 		{
 			slave_arr[i].name = ec_slave[i].name;
-			slave_arr[i].type = SERVO_TYPE;
+			slave_arr[i].type = TYPE_SERVO;
 			slave_arr[i].id = ec_slave[i].eep_id;
 			slave_arr[i].channelNum = 16;		//TODO: 根据伺服驱动器的不同而不同
 

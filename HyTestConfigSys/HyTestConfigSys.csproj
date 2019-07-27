@@ -218,6 +218,9 @@
     <EmbeddedResource Include="View\FormDevicesExplorer.resx">
       <DependentUpon>FormDevicesExplorer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormIOMapExplorer.resx">
+      <DependentUpon>FormIOMapExplorer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>

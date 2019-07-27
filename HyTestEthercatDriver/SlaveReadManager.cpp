@@ -118,7 +118,7 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 
 	if (slave_arr[deviceId].type == TYPE_AI) {		//AI
 		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave1;
-		int16 value = tmpSlave->values[(channelId+1)*2-1];//TODO: 仅针对EL3004
+		int16 value = tmpSlave->values[(channelId+1)*2-1];		//TODO: 仅针对EL3004
 		return value;
 	}
 	else if (slave_arr[deviceId].type == TYPE_AO) {	//AO
