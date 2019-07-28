@@ -44,7 +44,7 @@ struct SLAVET_ARR
 {
 	int		id;				//ID
 	int		type;			//0:empty, 1:di, 2:do, 3:ai, 4:ao
-	int		channelNum;		//1,2,4,8...目前打算只支持这四种
+	int		channelNum;		//1,2,4,8,16...
 	void*	ptrToSlave1;		//指向对应的从站端口
 	void*	ptrToSlave2;		//指向输出
 	char*	name;			//可读名称

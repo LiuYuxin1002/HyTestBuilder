@@ -2,7 +2,7 @@
 
 #include "SlaveWirteManager.h"
 
-#define DEFINE_SLEEP_TIME 300
+#define DEFINE_SLEEP_TIME 500
 
 bool runningState = true;
 HANDLE wthread;
@@ -11,11 +11,12 @@ HANDLE wthread;
 DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	int wkc;
 	while (runningState) {
-		ec_send_processdata();
-		wkc = ec_receive_processdata(2*DEFINE_SLEEP_TIME);
-		
 		//如果没有设定值，就用默认值DEFINE_SLEEP_TIME
 		int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
+		
+		ec_send_processdata();
+		wkc = ec_receive_processdata(2 * DEFINE_SLEEP_TIME);
+		
 		osal_usleep(sleepTime);
 	}
 	return 0;
@@ -72,7 +73,7 @@ int writeSlave(int slaveId, int channelId, bool value) {
 	SLAVET_ARR slave = slave_arr[slaveId];
 	int type = slave.type;
 
-	if (channelId > slave.channelNum) {//没那么多端口
+	if (channelId > slave.channelNum) {		//没那么多端口，强行写入会造成内存污染
 		printf("没那么多端口，检查channel的值\n");
 		return -1;
 	}
@@ -84,7 +85,7 @@ int writeSlave(int slaveId, int channelId, bool value) {
 	slave_do tmp = (slave_do)slave.ptrToSlave1;
 	tmp->values[channelId] = value;
 
-	if (wthread == NULL) wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);
+	if (wthread == NULL) wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);	//开启写线程
 
 	return TYPE_DO;
 }

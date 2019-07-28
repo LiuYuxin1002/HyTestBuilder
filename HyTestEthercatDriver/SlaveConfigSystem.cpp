@@ -125,12 +125,16 @@ void initLocalSlaveInfo() {
 
 		char* name = ec_slave[i].name;	//从站可读名称
 
+		//处理大部分基础信息
 		slave_arr[i].id = ec_slave[i].eep_id;
 		slave_arr[i].name = name;
 		slave_arr[i].type = name[SLAVE_TYPE_ID] - '0';			//获取类型
-		slave_arr[i].channelNum = name[SLAVE_CHANNEL_ID] - '0';		//获取从站channel数量		//TODO: channel数量大于8会失败
-
-																	//判断从站类型
+		
+		//单独处理channelNum
+		int tmpChannelNum = name[SLAVE_CHANNEL_ID] - '0';
+		if (tmpChannelNum == 9) tmpChannelNum = 16;		//末位为9则为16通道，针对EL1809和EL2809
+		slave_arr[i].channelNum = tmpChannelNum;
+																	
 		switch (slave_arr[i].type)
 		{
 		case 1:				//DI

@@ -30,6 +30,7 @@ namespace HyTestEtherCAT
         ILog log = LogManager.GetLogger(typeof(EtherCAT));
 
         Timer timer = new Timer();
+        private int interval = 100;
 
         private static EtherCAT ethercat;
         public static EtherCAT getEtherCAT(int refreshFrequency)//单例
@@ -55,7 +56,7 @@ namespace HyTestEtherCAT
         #region region_构造函数
         private EtherCAT()
         {
-            InitTimer(500);
+            InitTimer(interval);
         }
         private EtherCAT(int refreshFrequency)
         {
@@ -116,7 +117,7 @@ namespace HyTestEtherCAT
 
                 int err = CppConnect.getSlaveInfo(tmpSlaveName, ref tmpSlave, i);
 
-                if (tmpSlave.type == 10) //耦合器或驱动器
+                if (tmpSlave.type == 10 && tmpSlave.type == 20) //耦合器或驱动器
                 {
                     if (devGroup != null) deviceContiner.Add(devGroup);
                     devGroup = new List<IOdevice>();
@@ -140,6 +141,9 @@ namespace HyTestEtherCAT
                         break;
                     case 10:
                         tmpDevice.type = DeviceType.COUPLER;
+                        break;
+                    case 20:
+                        tmpDevice.type = DeviceType.SOLVER;
                         break;
                     default:
                         break;
