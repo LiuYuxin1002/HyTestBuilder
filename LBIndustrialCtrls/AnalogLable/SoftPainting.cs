@@ -8,7 +8,7 @@ namespace LBIndustrialCtrls.AnalogLable
 {
     /*******************************************************************************
      * 
-     *    Create Date:2017-05-03 16:56:39
+     *    Create Date:2019-7-29 09:40:52
      *    应该包含常用的绘图方法，资源，比如绘制直方图，居中的文本等
      * 
      * 
@@ -167,12 +167,6 @@ namespace LBIndustrialCtrls.AnalogLable
             g.Dispose();
             return bitmap;
         }
-
-
-
-
-
-
 
         /// <summary>
         /// 计算绘图时的相对偏移值

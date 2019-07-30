@@ -48,8 +48,8 @@ namespace LBIndustrialCtrls.AnalogLable
         {
             InitializeComponent();
             //data subjection
-            RunningServer server = RunningServer.getServer();
-            server.Connected += OnConnected;
+            //RunningServer server = RunningServer.getServer();
+            //server.Connected += OnConnected;
         }
 
         private void OnConnected(object sender, EventArgs e)

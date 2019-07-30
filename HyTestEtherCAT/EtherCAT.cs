@@ -117,7 +117,7 @@ namespace HyTestEtherCAT
 
                 int err = CppConnect.getSlaveInfo(tmpSlaveName, ref tmpSlave, i);
 
-                if (tmpSlave.type == 10 && tmpSlave.type == 20) //耦合器或驱动器
+                if (tmpSlave.type == 10 || tmpSlave.type == 20) //耦合器或驱动器
                 {
                     if (devGroup != null) deviceContiner.Add(devGroup);
                     devGroup = new List<IOdevice>();

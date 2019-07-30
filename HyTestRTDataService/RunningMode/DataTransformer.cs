@@ -27,7 +27,7 @@ namespace HyTestRTDataService.RunningMode
         //物理输出最大值
         private const double OUTPUT_MAX = 10.0;
         //物理输出最小值
-        private const double OUTPUT_MIN = 0.0;
+        private const double OUTPUT_MIN = -10.0;
 
         private const double TRUE = 1.0;
         private const double FALSE = 0.0;

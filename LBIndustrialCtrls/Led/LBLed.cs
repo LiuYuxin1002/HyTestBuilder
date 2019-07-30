@@ -92,8 +92,8 @@ namespace LBSoft.IndustrialCtrls.Leds
 			this.labelPosition = LedLabelPosition.Top;
 
             //data subjection
-            RunningServer server = RunningServer.getServer();
-            server.Connected += OnConnected;
+            //RunningServer server = RunningServer.getServer();
+            //server.Connected += OnConnected;
         }
 		#endregion
 		

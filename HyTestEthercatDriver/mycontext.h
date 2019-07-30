@@ -45,8 +45,8 @@ struct SLAVET_ARR
 	int		id;				//ID
 	int		type;			//0:empty, 1:di, 2:do, 3:ai, 4:ao
 	int		channelNum;		//1,2,4,8,16...
-	void*	ptrToSlave1;		//指向对应的从站端口
-	void*	ptrToSlave2;		//指向输出
+	void*	ptrToSlave1;	//指向对应的从站端口
+	void*	ptrToSlave2;	//指向输出
 	char*	name;			//可读名称
 };
 extern struct SLAVET_ARR slave_arr[MAX_SLAVE];
@@ -73,7 +73,7 @@ PACKED_END
 
 PACKED_BEGIN
 struct SLAVE_DI {
-	bitset<8>		values;
+	bitset<16>		values;
 	slave_di		next = NULL;
 	SLAVET_ARR*		slaveinfo = NULL;//指回去，指向从站整体列表
 };
@@ -81,7 +81,7 @@ PACKED_END
 
 PACKED_BEGIN
 struct SLAVE_DO {
-	bitset<8>		values;
+	bitset<16>		values;
 	slave_do		next = NULL;
 	SLAVET_ARR*		slaveinfo = NULL;
 };
