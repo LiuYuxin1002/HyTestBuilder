@@ -272,7 +272,7 @@ namespace HyTestRTDataService.RunningMode
                 double tmp = (double)Convert.ChangeType(value, typeof(double));
                 if(tmp > varMax || tmp < varMin)
                 {
-                    MessageBox.Show(string.Format("该值不在范围内: %d ~ %d", varMin, varMax));
+                    MessageBox.Show(string.Format("该值不在范围内: {0} ~ {1}", varMin, varMax));
                 }
                 int realValue = DataTransformer.PhysicalToAnalog(tmp, varMax, varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);

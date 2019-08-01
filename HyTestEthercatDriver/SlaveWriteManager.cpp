@@ -2,25 +2,6 @@
 
 #include "SlaveWirteManager.h"
 
-#define DEFINE_SLEEP_TIME 500
-
-bool runningState = true;
-HANDLE wthread;
-
-//循环写线程
-DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
-	int wkc;
-	while (runningState) {
-		//如果没有设定值，就用默认值DEFINE_SLEEP_TIME
-		int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
-		
-		ec_send_processdata();
-		wkc = ec_receive_processdata(2 * DEFINE_SLEEP_TIME);
-		
-		osal_usleep(sleepTime);
-	}
-	return 0;
-}
 
 int writeSlave(int slaveId, int channelId, int value) {
 	SLAVET_ARR slave = slave_arr[slaveId];
@@ -32,12 +13,8 @@ int writeSlave(int slaveId, int channelId, int value) {
 	
 	if (type == TYPE_AO) {
 		slave_ao tmp = (slave_ao)slave.ptrToSlave1;
-	tmp->values[channelId] = value;
-
-		if (wthread == NULL)	//启动循环
-			wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);
-
-		return TYPE_AO;
+		tmp->values[channelId] = value;
+		//return TYPE_AO;
 	}
 	if (type == TYPE_SERVO) {	//TODO: 根据伺服驱动器的不同需要调整
 		pservo_output tmpSlave = (pservo_output)slave.ptrToSlave2;
@@ -64,9 +41,10 @@ int writeSlave(int slaveId, int channelId, int value) {
 		default:
 			break;
 		}
-		return TYPE_SERVO;
+		//return TYPE_SERVO;
 	}
 	
+	return type;
 }
 
 int writeSlave(int slaveId, int channelId, bool value) {
@@ -85,7 +63,7 @@ int writeSlave(int slaveId, int channelId, bool value) {
 	slave_do tmp = (slave_do)slave.ptrToSlave1;
 	tmp->values[channelId] = value;
 
-	if (wthread == NULL) wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);	//开启写线程
+	//if (wthread == NULL) wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);	//开启写线程
 
 	return TYPE_DO;
 }

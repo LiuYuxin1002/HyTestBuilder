@@ -15,38 +15,57 @@ slave_ao aos = (slave_ao)new SLAVE_AO();
 const int SLAVE_TYPE_ID = 2;		//type所在位
 const int SLAVE_CHANNEL_ID = 5;		//channel所在位
 
+#define DEFINE_SLEEP_TIME 1000
+
+bool runningState = true;
+HANDLE wthread;
+
+//循环写线程
+DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
+	int wkc;
+	//如果没有设定值，就用默认值DEFINE_SLEEP_TIME
+	int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
+	while (runningState) {
+		ec_send_processdata();
+		wkc = ec_receive_processdata(2 * DEFINE_SLEEP_TIME);
+
+		osal_usleep(sleepTime * 5);
+	}
+	return 0;
+}
+
+
+bool needlf;
+bool inOP;
+int expectedWKC;
 int initSlaveConfigInfo() {
-	int i, expectedWKC;
+	int i, j, oloop, iloop, chk;
+	needlf = FALSE;
+	inOP = FALSE;
 
 	/* initialise SOEM, bind socket to ifname */
 	if (ec_init(ifbuf))
 	{
 		/* find and auto-config slaves */
-		if (ec_config(FALSE, &IOmap) > 0)
+		if (ec_config_init(FALSE) > 0)
 		{
+			ec_config_map(&IOmap);
 			ec_configdc();
+
 			while (EcatError) printf("%s", ec_elist2string());
-			printf("%d slaves found and configured.\n", ec_slavecount);
-			expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
-			printf("计算workcounter %d\n", expectedWKC);
-			/* wait for all slaves to reach SAFE_OP state */
-			ec_statecheck(0, EC_STATE_SAFE_OP, EC_TIMEOUTSTATE * 3);
-			if (ec_slave[0].state != EC_STATE_SAFE_OP)
-			{
-				printf("Not all slaves reached safe operational state.\n");
-				ec_readstate();
-				for (i = 1; i <= ec_slavecount; i++)
-				{
-					if (ec_slave[i].state != EC_STATE_SAFE_OP)
-					{
-						printf("Slave %d State=%2x StatusCode=%4x : %s\n",
-							i, ec_slave[i].state, ec_slave[i].ALstatuscode, ec_ALstatuscode2string(ec_slave[i].ALstatuscode));
-					}
-				}
-			}
-			ec_readstate();
+			
+			ec_statecheck(0, EC_STATE_SAFE_OP, EC_TIMEOUTSTATE * 4);
+
+			oloop = ec_slave[0].Obytes;
+			if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
+			if (oloop > 8) oloop = 8;
+			iloop = ec_slave[0].Ibytes;
+			if ((iloop == 0) && (ec_slave[0].Ibits > 0)) iloop = 1;
+			if (iloop > 8) iloop = 8;
 
 			/////////////////////////////////////OP STATE/////////////////////////////////////
+			expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
+			printf("Calculated workcounter %d\n", expectedWKC);
 			ec_slave[0].state = EC_STATE_OPERATIONAL;
 			/* send one valid process data to make outputs in slaves happy*/
 			ec_send_processdata();
@@ -62,7 +81,15 @@ int initSlaveConfigInfo() {
 				ec_statecheck(0, EC_STATE_OPERATIONAL, 50000);
 			} while (chk-- && (ec_slave[0].state != EC_STATE_OPERATIONAL));
 
+			if (ec_slave[0].state != EC_STATE_OPERATIONAL) {	//最终状态检查
+				cout << "未能成功进入OP状态" << endl;
+			}
+
 			initLocalSlaveInfo();
+
+			if (wthread == NULL)	//启动循环
+				wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);
+
 			return ec_slavecount - 1;
 		}
 		else

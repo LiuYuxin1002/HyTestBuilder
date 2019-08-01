@@ -17,17 +17,17 @@ namespace HyTestRTDataService.RunningMode
         public Type datatype;
         
         //模拟量数字最小值
-        private const int ANALOG_MIN = 0;
+        private const int ANALOG_MIN = -32767;
         //模拟量数字最大值
         private const int ANALOG_MAX = 32768;
-        //物理输入最大值
-        private const double INPUT_MAX = 10.0;
-        //物理输入最小值
-        private const double INPUT_MIN = 0;
-        //物理输出最大值
-        private const double OUTPUT_MAX = 10.0;
-        //物理输出最小值
-        private const double OUTPUT_MIN = -10.0;
+        ////物理输入最大值
+        //private const double INPUT_MAX = 10.0;
+        ////物理输入最小值
+        //private const double INPUT_MIN = -10.0;
+        ////物理输出最大值
+        //private const double OUTPUT_MAX = 10.0;
+        ////物理输出最小值
+        //private const double OUTPUT_MIN = -10.0;
 
         private const double TRUE = 1.0;
         private const double FALSE = 0.0;
@@ -96,10 +96,10 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="analog"></param>
         /// <returns></returns>
-        public static double InputAnalogToPhysical(int analog)
+        public static double InputAnalogToPhysical(int analog, int vmax, int vmin)
         {
-            double rate = (double)(INPUT_MIN - INPUT_MAX) / (double)(ANALOG_MIN - ANALOG_MAX);    //rate<1
-            double result = rate * (analog - ANALOG_MIN) + INPUT_MIN;
+            double rate = (double)(vmin - vmax) / (double)(ANALOG_MIN - ANALOG_MAX);    //rate<1
+            double result = rate * (analog - ANALOG_MIN) + vmin;
             return result;
         }
 
@@ -108,10 +108,10 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="physical"></param>
         /// <returns></returns>
-        public static int InputPhysicalToAnalog(double physical)
+        public static int InputPhysicalToAnalog(double physical, int vmax, int vmin)
         {
-            double rate = (ANALOG_MAX - ANALOG_MAX) / (INPUT_MAX - INPUT_MIN);  //rate>1
-            int result = (int)((physical - INPUT_MIN) * rate) + ANALOG_MIN;
+            double rate = (ANALOG_MAX - ANALOG_MAX) / (vmax - vmin);  //rate>1
+            int result = (int)((physical - vmin) * rate) + ANALOG_MIN;
             return result;
         }
 
@@ -120,10 +120,10 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="analog"></param>
         /// <returns></returns>
-        public static double OutputAnalogToPhysical(int analog)
+        public static double OutputAnalogToPhysical(int analog, int vmax, int vmin)
         {
-            double rate = (OUTPUT_MAX - OUTPUT_MIN) / (ANALOG_MAX - ANALOG_MIN);    //rate<1
-            double result = rate * (analog - ANALOG_MIN) + INPUT_MIN;
+            double rate = (vmax - vmin) / (ANALOG_MAX - ANALOG_MIN);    //rate<1
+            double result = rate * (analog - ANALOG_MIN) + vmin;
             return result;
         }
 
@@ -132,16 +132,16 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="analog"></param>
         /// <returns></returns>
-        public static int OutputPhysicalToAnalog(double physical)
+        public static int OutputPhysicalToAnalog(double physical, int vmax, int vmin)
         {
-            if (physical > OUTPUT_MAX || physical<OUTPUT_MIN)
+            if (physical > vmax || physical<vmin)
             {
                 MessageBox.Show(physical+"不在有效范围");
                 return -1;
             }
 
-            double rate = (ANALOG_MAX - ANALOG_MIN) / (OUTPUT_MAX - OUTPUT_MIN);    //rate>1
-            int result = (int)(rate * (physical - OUTPUT_MIN)) + ANALOG_MIN;
+            double rate = (ANALOG_MAX - ANALOG_MIN) / (vmax - vmin);    //rate>1
+            int result = (int)(rate * (physical - vmin)) + ANALOG_MIN;
             return result;
         }
 
