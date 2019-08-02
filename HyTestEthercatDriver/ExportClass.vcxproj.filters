@@ -42,6 +42,9 @@
     <Text Include="Text.txt">
       <Filter>资源文件</Filter>
     </Text>
+    <Text Include="EL3154.txt">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

@@ -27,9 +27,9 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
 	while (runningState) {
 		ec_send_processdata();
-		wkc = ec_receive_processdata(2 * DEFINE_SLEEP_TIME);
+		wkc = ec_receive_processdata(DEFINE_SLEEP_TIME/2);
 
-		osal_usleep(sleepTime * 5);
+		osal_usleep(sleepTime * 8);
 	}
 	return 0;
 }
@@ -55,13 +55,6 @@ int initSlaveConfigInfo() {
 			while (EcatError) printf("%s", ec_elist2string());
 			
 			ec_statecheck(0, EC_STATE_SAFE_OP, EC_TIMEOUTSTATE * 4);
-
-			oloop = ec_slave[0].Obytes;
-			if ((oloop == 0) && (ec_slave[0].Obits > 0)) oloop = 1;
-			if (oloop > 8) oloop = 8;
-			iloop = ec_slave[0].Ibytes;
-			if ((iloop == 0) && (ec_slave[0].Ibits > 0)) iloop = 1;
-			if (iloop > 8) iloop = 8;
 
 			/////////////////////////////////////OP STATE/////////////////////////////////////
 			expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;

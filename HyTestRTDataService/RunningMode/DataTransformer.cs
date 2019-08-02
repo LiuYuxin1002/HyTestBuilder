@@ -20,6 +20,9 @@ namespace HyTestRTDataService.RunningMode
         private const int ANALOG_MIN = -32767;
         //模拟量数字最大值
         private const int ANALOG_MAX = 32768;
+
+        private const int ANALOG_MIN_IN = 0;
+        private const int ANALOG_MAX_IN = 65535;
         ////物理输入最大值
         //private const double INPUT_MAX = 10.0;
         ////物理输入最小值
@@ -88,6 +91,26 @@ namespace HyTestRTDataService.RunningMode
         {
             double rate = (ANALOG_MAX - ANALOG_MIN) / (vmax - vmin);
             int result = (int)(rate * (pvalue - vmin)) + ANALOG_MIN;
+            return result;
+        }
+
+        /// <summary>
+        /// 将模拟量转为实际物理量
+        /// </summary>
+        public static double AnalogToPhysical_IN(int analog, int vmax, int vmin)   //缩小
+        {
+            double rate = (double)(vmax - vmin) / (double)(ANALOG_MAX_IN - ANALOG_MIN_IN);
+            double result = rate * (analog - ANALOG_MIN_IN) + vmin;
+            return result;
+        }
+
+        /// <summary>
+        /// 将实际物理量转为模拟量
+        /// </summary>
+        public static int PhysicalToAnalog_OUT(double pvalue, int vmax, int vmin)   //放大
+        {
+            double rate = (ANALOG_MAX_IN - ANALOG_MIN_IN) / (vmax - vmin);
+            int result = (int)(rate * (pvalue - vmin)) + ANALOG_MIN_IN;
             return result;
         }
 

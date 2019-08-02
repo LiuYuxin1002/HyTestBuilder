@@ -30,7 +30,7 @@ namespace HyTestEtherCAT
         ILog log = LogManager.GetLogger(typeof(EtherCAT));
 
         Timer timer = new Timer();
-        private int interval = 100;
+        private int interval = 200;
 
         private static EtherCAT ethercat;
         public static EtherCAT getEtherCAT(int refreshFrequency)//单例

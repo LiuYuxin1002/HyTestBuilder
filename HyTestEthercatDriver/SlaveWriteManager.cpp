@@ -13,8 +13,10 @@ int writeSlave(int slaveId, int channelId, int value) {
 	
 	if (type == TYPE_AO) {
 		slave_ao tmp = (slave_ao)slave.ptrToSlave1;
-		tmp->values[channelId] = value;
-		//return TYPE_AO;
+		while (tmp->values[channelId] != value) {
+			tmp->values[channelId] = value;
+			osal_usleep(100);
+		}
 	}
 	if (type == TYPE_SERVO) {	//TODO: 根据伺服驱动器的不同需要调整
 		pservo_output tmpSlave = (pservo_output)slave.ptrToSlave2;
@@ -41,7 +43,6 @@ int writeSlave(int slaveId, int channelId, int value) {
 		default:
 			break;
 		}
-		//return TYPE_SERVO;
 	}
 	
 	return type;
@@ -61,7 +62,10 @@ int writeSlave(int slaveId, int channelId, bool value) {
 	}
 
 	slave_do tmp = (slave_do)slave.ptrToSlave1;
-	tmp->values[channelId] = value;
+	while (tmp->values[channelId] != value) {
+		tmp->values[channelId] = value;
+		osal_usleep(100);
+	}
 
 	//if (wthread == NULL) wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);	//开启写线程
 

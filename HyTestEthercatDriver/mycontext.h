@@ -90,7 +90,7 @@ PACKED_END
 PACKED_BEGIN
 struct SLAVE_AI {
 	//SLAVE_AI_CHANNEL values[MAX_CHANNEL];
-	int16			values[MAX_CHANNEL*10];	//TODO: cause there is always sth useless in map, 10 if for EL3004 only.
+	int16			values[MAX_CHANNEL*11];	//TODO: cause there is always sth useless in map, 10 if for EL3154 only.
 	slave_ai		next = NULL;
 	SLAVET_ARR*		slaveinfo = NULL;
 };
