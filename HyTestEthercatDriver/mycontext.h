@@ -27,6 +27,7 @@ extern "C" {
 #define TYPE_AI			3
 #define TYPE_AO			4
 
+extern HANDLE		g_hMutex;			//thread read-write lock.
 extern ec_adaptert* adapter;
 extern char			ifbuf[1024];		//Íø¿¨Ãû³Æ»º´æ
 

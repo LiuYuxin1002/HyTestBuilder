@@ -6,19 +6,22 @@
 char IOmap[MAP_SIZE];
 
 struct SLAVET_ARR slave_arr[MAX_SLAVE];
-slave_di dis = (slave_di)new SLAVE_DI();	//新申请头结点
+//these are lists heads of 4 types of slave struct.
+slave_di dis = (slave_di)new SLAVE_DI();	
 slave_do dos = (slave_do)new SLAVE_DO();
 slave_ai ais = (slave_ai)new SLAVE_AI();
 slave_ao aos = (slave_ao)new SLAVE_AO();
 
-//局部全局变量
-const int SLAVE_TYPE_ID = 2;		//type所在位
-const int SLAVE_CHANNEL_ID = 5;		//channel所在位
+//Define some global variables.
+const int SLAVE_TYPE_ID = 2;		//Type bit
+const int SLAVE_CHANNEL_ID = 5;		//Channel bit
 
-#define DEFINE_SLEEP_TIME 1000
+#define DEFINE_SLEEP_TIME 1000		//Define sleep time.
 
 bool runningState = true;
 HANDLE wthread;
+
+HANDLE g_hMutex = CreateMutex(NULL, FALSE, L"WRITE_LOCK");
 
 //循环写线程
 DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
@@ -26,8 +29,10 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	//如果没有设定值，就用默认值DEFINE_SLEEP_TIME
 	int sleepTime = lpParameter == NULL ? DEFINE_SLEEP_TIME : *(int*)lpParameter;
 	while (runningState) {
+		WaitForSingleObject(g_hMutex, INFINITE);//lock
 		ec_send_processdata();
 		wkc = ec_receive_processdata(DEFINE_SLEEP_TIME/2);
+		ReleaseMutex(g_hMutex);		//unlock
 
 		osal_usleep(sleepTime * 8);
 	}
@@ -56,7 +61,7 @@ int initSlaveConfigInfo() {
 			
 			ec_statecheck(0, EC_STATE_SAFE_OP, EC_TIMEOUTSTATE * 4);
 
-			/////////////////////////////////////OP STATE/////////////////////////////////////
+			//================OP STATE===================
 			expectedWKC = (ec_group[0].outputsWKC * 2) + ec_group[0].inputsWKC;
 			printf("Calculated workcounter %d\n", expectedWKC);
 			ec_slave[0].state = EC_STATE_OPERATIONAL;
@@ -97,6 +102,13 @@ int initSlaveConfigInfo() {
 		printf("No socket connection on %s\nExcecute as root\n", ifbuf);
 		return -1;
 	}
+}
+
+void stopSlaveRunning() {
+	runningState = false;
+	ec_slave[0].state = EC_STATE_INIT;
+	ec_writestate(0);
+	ec_close();
 }
 
 void initLocalSlaveInfo() {
@@ -162,7 +174,7 @@ void initLocalSlaveInfo() {
 			slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
 			tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
 
-			slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
+			slave_arr[i].ptrToSlave1 = tmpslave;					//slave_arr[i]指向当前结构体
 			slave_arr[i].ptrToSlave2 = NULL;
 			tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
 

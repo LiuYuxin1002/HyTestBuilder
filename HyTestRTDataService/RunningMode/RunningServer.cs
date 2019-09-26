@@ -56,6 +56,7 @@ namespace HyTestRTDataService.RunningMode
         private RunningServer()     //构造函数
         {
             InitializeDataPool();
+            
         }
 
         /// <summary>
@@ -73,7 +74,8 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public void Stop()
         {
-            DisConnected(null, null);
+            if (conn != null) conn.Disconnect();
+            if(DisConnected!=null) DisConnected(null, null);
         }
 
         //Useless.

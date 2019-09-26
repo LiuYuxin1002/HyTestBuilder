@@ -9,3 +9,5 @@ int initSlaveConfigInfo();
 void initLocalSlaveInfo();
 //根据id获取从站信息，name单独返回.
 int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id);
+
+void stopSlaveRunning();

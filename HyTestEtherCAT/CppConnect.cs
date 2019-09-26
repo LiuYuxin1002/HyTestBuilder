@@ -19,6 +19,9 @@ namespace HyTestEtherCAT
         public static extern int initSlaveConfig();
         [DllImport("HyTestEthercatDriver.dll", CharSet = CharSet.Ansi,  CallingConvention = CallingConvention.Cdecl)]
         public static extern int getSlaveInfo(StringBuilder slaveName, ref SlaveInfo slaveInfo, int id);
+        //Set slave running state to init. If you need to running again, please call initSlaveConfig() and getSlaveInfo() again.
+        [DllImport("HyTestEthercatDriver.dll")]
+        public static extern void stopRunning();
         //设置从站某端口信息
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAnalogValue(int slaveId, int channel, int value);

@@ -88,7 +88,8 @@ namespace HyTestEtherCAT
 
         public int Disconnect()
         {
-            throw new NotImplementedException();
+            CppConnect.stopRunning();
+            return 1;
         }
         #endregion
 

@@ -45,6 +45,10 @@ extern "C"
 		return getSlaveInfoImpl(slave, strName, id);
 	}
 
+	TEXPORT void stopRunning() {
+		stopSlaveRunning();
+	}
+
 	//Write Value
 	TEXPORT int setAnalogValue(int slaveId, int channel, int value)
 	{
