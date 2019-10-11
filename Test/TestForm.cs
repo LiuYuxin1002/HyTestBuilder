@@ -16,8 +16,6 @@ namespace Test
         public TestForm()
         {
             InitializeComponent();
-            //RedisManager rm = new RedisManager();
-            
         }
     }
 }
