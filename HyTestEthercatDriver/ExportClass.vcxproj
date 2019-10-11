@@ -77,6 +77,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>..\Redis\src\Win32_Interop;..\Redis\deps\hiredis;..\Redis\src;$(IncludePath)</IncludePath>
     <LibraryPath>..\Redis\Lib;$(LibraryPath)</LibraryPath>
+    <WindowsMetadataLinkKeyFile>ec_driver.snk</WindowsMetadataLinkKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -104,10 +105,16 @@
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ProgramDatabaseFile />
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>
+      </ModuleDefinitionFile>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +125,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -133,6 +141,7 @@
       <AdditionalDependencies>hiredis.lib;soem.lib;wpcap.lib;Packet.lib;Ws2_32.lib;Winmm.lib;kernel32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>soem\oshw\wpcap\Lib\$(Configuration);soem\oshw\wpcap\Lib;$(SolutionDir)$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
     </Link>
     <ProjectReference>
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
@@ -146,6 +155,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <ModuleDefinitionFile>export.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -34,9 +34,10 @@ namespace HyTestEtherCAT.database
         /// <summary>
         /// 之后可以处理一些配置
         /// </summary>
-        static RedisManager()
+        private RedisManager()
         {
-            //client = new RedisClient(REDIS_HOST, REDIS_PORT);
+            client = new RedisClient(REDIS_HOST, REDIS_PORT);
+            
         }
 
 

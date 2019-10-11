@@ -5,6 +5,9 @@
 #include "SlaveReadManager.h"
 #include "SlaveWirteManager.h"
 
+using namespace System::Reflection;
+[assembly:AssemblyKeyFileAttribute("ec_driver.snk")];
+[assembly:AssemblyDelaySignAttribute(false)];
 #ifdef __cplusplus
 extern "C"
 {
@@ -12,7 +15,6 @@ extern "C"
 #else
 #define TEXPORT _declspec(dllexport)
 #endif
-
 	//ADAPTER
 	TEXPORT int getAdapterNum() {
 		return getAdapterNumImpl();
@@ -89,6 +91,32 @@ extern "C"
 
 	TEXPORT int getDigitalValue(int deviceId, int channelId) {
 		return getDigitalValueImpl(deviceId, channelId);
+	}
+
+///env. setting
+	//TODO: write func. in context
+	TEXPORT int getRefrenceClock() {
+		return 0;
+	}
+	//TODO: write func. too
+	TEXPORT void setRefrenceClock(int useconds) {
+
+	}
+	//TODO: notify that the unit frequency is Hz.
+	TEXPORT int getSamplingFrequency() {
+		return 0;
+	}
+	//TODO: Hz.
+	TEXPORT void setSamplingFrequency(int frequency) {
+
+	}
+	//TODO: return the bits of buffer
+	TEXPORT int getBufferSize() {
+		return 0;
+	}
+	//TODO: especially the redis buffer
+	TEXPORT void setBufferSize() {
+
 	}
 
 #ifdef __cplusplus

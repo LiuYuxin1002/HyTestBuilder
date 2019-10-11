@@ -9,6 +9,7 @@ using static System.Collections.Generic.Dictionary<string, string>;
 namespace HyTestEtherCAT.database
 {
     /// <summary>
+    /// 数据反序列化
     /// 数据格式
     /// key = time, 
     /// </summary>
@@ -39,7 +40,8 @@ namespace HyTestEtherCAT.database
 
             return dataframe;
         }
-        
+
+        //TODO: int的反序列化？
         public static void deserialInt(string slaveAndchannel, string data)
         {
 

@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System;
+using System.ComponentModel;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -17,15 +18,33 @@ namespace HyTestRTDataService.ConfigMode
         private ConfigIOmap configIOmap;
         private ConfigTestEnvInfo configTestEnvInfo;
 
-        public string ConfigFile//如果处于设计模式需要重写
+        public ConfigTestEnvInfo ConfigTestEnvInfo { get; set; }
+
+        private string configFile = null;
+        public string ConfigFile
         {
             get
             {
-                return Application.StartupPath + @"\\..\\..\\..\\bin\\config.xml";
+                if (configFile==null || configFile=="")
+                {
+                    configFile = Environment.CurrentDirectory + "\\..\\..\\..\\bin\\config.xml";
+                }
+                return configFile;
+            }
+            set
+            {
+                this.configFile = value;
             }
         }
 
-        public ConfigManager()
+        public ConfigManager(string configFile)
+        {
+            this.configFile = configFile;
+           
+            InitializeComponent();
+        }
+
+        public ConfigManager()  //默认配置文件路径
         {
             InitializeComponent();
         }
@@ -34,7 +53,6 @@ namespace HyTestRTDataService.ConfigMode
         private void InitializeComponent()
         {
             LoadConfig();
-
             this.configAdapter = new ConfigAdapter(config.adapterInfo);
             this.configDevice = new ConfigDevice(config.deviceInfo);
             this.configIOmap = new ConfigIOmap(config.iomapInfo);
@@ -46,11 +64,14 @@ namespace HyTestRTDataService.ConfigMode
         public void LoadConfig()
         {
             if (!File.Exists(ConfigFile))
+            {
+                MessageBox.Show("路径不存在文件:"+ConfigFile);
                 return;
-
+            }
+                
             try
             {
-                using (FileStream fs = new FileStream(ConfigFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (FileStream fs = new FileStream(configFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
                 {
                     XmlReader xr = XmlReader.Create(fs);
 
@@ -100,8 +121,9 @@ namespace HyTestRTDataService.ConfigMode
         {
             //将所有配置集中到Config对象
             MoveSubconfigToConfig();
+            //MessageBox.Show("现在程序的运行目录是："+Application.StartupPath);
 
-            using (FileStream fs = new FileStream(ConfigFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            using (FileStream fs = new FileStream(configFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
             {
                 XmlWriter xw = XmlWriter.Create(fs);
                 XmlSerializer xs = null;

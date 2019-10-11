@@ -13,6 +13,9 @@ using namespace std;
 extern "C" {
 #endif 
 
+/************************************************************************/
+/*预处理常量                                                             */
+/************************************************************************/
 #define INF				0x3fffffff
 #define EC_TIMEOUT		500
 #define EC_STACK_SIZE	128000
@@ -27,7 +30,19 @@ extern "C" {
 #define TYPE_AI			3
 #define TYPE_AO			4
 
-extern HANDLE		g_hMutex;			//thread read-write lock.
+/************************************************************************/
+/*全局变量                                                               */
+/************************************************************************/
+extern HANDLE		g_hMutex;				//thread read-write lock.
+extern int			DEFAULT_SLEEP_TIME;		//default time of every wait.
+extern int			DEFINE_WAIT_TIME;
+extern int			DEFINE_REFRENSE_CLOCK;	//the time between every writes
+extern int			READING_FREQUENCY;		//Hz of reading.
+extern int			REDIS_BUFFER_SIZE;
+
+/************************************************************************/
+/*网络适配器                                                             */
+/************************************************************************/
 extern ec_adaptert* adapter;
 extern char			ifbuf[1024];		//网卡名称缓存
 
@@ -40,7 +55,9 @@ struct adaptert {
 };
 extern struct adaptert myadapter;
 
-	
+/************************************************************************/
+/*从站结构体申明                                                          */
+/************************************************************************/
 struct SLAVET_ARR
 {
 	int		id;				//ID

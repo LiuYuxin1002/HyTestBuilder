@@ -40,6 +40,8 @@ namespace HyTestRTDataService.ConfigMode
         /// <!--table结构：ID，变量名，数据类型，输入输入，端口-->
         private void RefreshMap()
         {
+            if (this.iomapInfo.ioMapTable == null) return;
+
             iomapInfo.ioMapTable.TableName = "IOmapTable";
             iomapInfo.inputVarNum = iomapInfo.outputVarNum = 0;
             DataTable mapTable = iomapInfo.ioMapTable;

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HyTestConfigSys {
+namespace HTConfigSystem {
     using System;
     
     

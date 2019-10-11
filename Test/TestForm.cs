@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyTestEtherCAT.database;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,13 +9,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HTConfigSystem.View
+namespace Test
 {
-    public partial class FormDevicesExplorer : Form
+    public partial class TestForm : Form
     {
-        public FormDevicesExplorer()
+        public TestForm()
         {
             InitializeComponent();
+            //RedisManager rm = new RedisManager();
+            
         }
     }
 }

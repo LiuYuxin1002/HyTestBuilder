@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace HyTestConfigSys
+namespace HTConfigSystem
 {
     using System;
     using System.Runtime.InteropServices;

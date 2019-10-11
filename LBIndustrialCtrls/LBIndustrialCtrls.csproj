@@ -67,6 +67,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Key.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
     <Reference Include="HyTestEthercatDriver">
@@ -164,6 +170,7 @@
     <EmbeddedResource Include="Meters\LBDigitalMeter.resx">
       <DependentUpon>LBDigitalMeter.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Key.pfx" />
     <None Include="Knob\Knob.bmp" />
   </ItemGroup>
   <ItemGroup>
