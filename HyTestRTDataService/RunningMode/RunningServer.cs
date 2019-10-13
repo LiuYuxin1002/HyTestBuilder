@@ -156,12 +156,12 @@ namespace HyTestRTDataService.RunningMode
             int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
             {
-                int value1 = DataTransformer.DoubleToInt(datapool.rdataList[varIndex]);
+                int value1 = (int)datapool.rdataList[varIndex];
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else if (varType == typeof(bool))
             {
-                double value1 = DataTransformer.DoubleToDouble(datapool.rdataList[varIndex]);
+                double value1 = datapool.rdataList[varIndex];
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else
@@ -225,12 +225,12 @@ namespace HyTestRTDataService.RunningMode
             else if (varType == typeof(double)) //if double
             {
                 int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
-                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical_IN(data, varMax, varMin), typeof(T));
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(data, varMax, varMin), typeof(T));
             }
             else if (varType == typeof(int))    //if int, but maybe useless
             {
                 int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
-                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical_IN(data, varMax, varMin), typeof(T));
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(data, varMax, varMin), typeof(T));
             }
             else
             {
