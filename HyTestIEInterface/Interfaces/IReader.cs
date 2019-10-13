@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyTestIEInterface.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,5 +37,16 @@ namespace HyTestIEInterface
         /// 批量读数字量
         /// </summary>
         int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values);
+    }
+
+    public interface IRedisReader
+    {
+        string                  ip      { get; set; }
+        int                     port    { get; set; }
+        IDataStruct<Object>[]   Buffer  { get; set; }
+
+        event EventHandler<EventArgs> RedisDataChanged;
+
+        void subjectRedis();
     }
 }

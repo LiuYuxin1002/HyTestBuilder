@@ -6,10 +6,12 @@ using HyTestEtherCAT.localEntity;
 using System.Windows.Forms;
 using HyTestIEInterface.Entity;
 using log4net;
+using ServiceStack.Redis;
+using System.Threading;
 
 namespace HyTestEtherCAT
 {
-    public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter
+    public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter, IRedisReader
     {
         #region region_属性
         /// <summary>
@@ -20,17 +22,54 @@ namespace HyTestEtherCAT
         /// 所选网卡
         /// </summary>
         public int AdapterSelected { get; set; }
+
+        public IDataStruct<object>[] Buffer
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string ip
+        {
+            get
+            {
+                return this.redisIp;
+            }
+
+            set
+            {
+                this.redisIp = value;
+            }
+        }
+
+        public int port
+        {
+            get
+            {
+                return this.redisPort;
+            }
+
+            set
+            {
+                this.redisPort = value;
+            }
+        }
         #endregion
 
         #region region_常量
         private const int ERRCODE = 0;
+        private const int DEFAULT_FREQUENCY = 300;
         #endregion
 
         #region region_成员变量
         ILog log = LogManager.GetLogger(typeof(EtherCAT));
-
-        Timer timer = new Timer();
-        private int interval = 200;
 
         private static EtherCAT ethercat;
         public static EtherCAT getEtherCAT(int refreshFrequency)//单例
@@ -51,29 +90,31 @@ namespace HyTestEtherCAT
 
         private bool isLoadedDriver = false;
 
+        
+
         #endregion
 
         #region region_构造函数
         private EtherCAT()
         {
-            InitTimer(interval);
+            InitRedisSubjectConfig(DEFAULT_FREQUENCY);
         }
         private EtherCAT(int refreshFrequency)
         {
-            InitTimer(refreshFrequency);
+            InitRedisSubjectConfig(refreshFrequency);
         }
 
         #endregion
 
         #region region_事件
 
-        public event EventHandler datachanged;
         public event EventHandler<EventArgs> DataChanged;
+        public event EventHandler<EventArgs> RedisDataChanged;
 
         #endregion
 
         #region region_连接管理
-        
+
         public int Close()
         {
             throw new NotImplementedException();
@@ -90,6 +131,41 @@ namespace HyTestEtherCAT
         {
             CppConnect.stopRunning();
             return 1;
+        }
+
+        // 建立连接状态，包括：初始化网卡，选择网卡，初始化从站
+        private void BuildConnection()
+        {
+            if (isLoadedDriver) return;
+
+            try
+            {
+                CppConnect.getAdapterNum();
+                CppConnect.setAdapterId(this.AdapterSelected);
+
+                this.GetDevice();
+                //StartTimer();
+                redisSubjectThread = new Thread(subjectRedis);
+                redisSubjectThread.Start();
+
+                isLoadedDriver = true;
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex.Message+"\n"+ex.StackTrace);
+            }
+        }
+
+        // 将本地adapterSelected设置为给定值 <returns>成功返回1，失败返回2</returns>
+        public int SetAdapterFromConfig(int AdapterId)
+        {
+            if (this.AdapterSelected == 0)
+            {
+                this.AdapterSelected = AdapterId;
+                //BuildConnection();
+                return 1;
+            }
+            else return 2;
         }
         #endregion
 
@@ -290,64 +366,63 @@ namespace HyTestEtherCAT
 
         #endregion
 
-        #region other method
+        #region redis method
+        private Thread redisSubjectThread;
+        private RedisClient client = null;
+        private IRedisSubscription subscription = null;
+        private string redisIp = "127.0.0.1";
+        private int redisPort = 6379;
+        private IDataStruct<object> buffer = null;
+        private string listenChannel = "channel1";
+
+        //this method need to op. cpp file
         public void SetRefreshParams(int interval)
         {
-            this.timer.Interval = interval;
+
         }
 
-        private void InitTimer(int interval)
+        private void InitRedisSubjectConfig(int interval)
         {
-            this.timer.Interval = interval;
-            timer.Tick += OnDataRefresh;
-        }
-
-        public void StartTimer()
-        {
-            this.timer.Start();
-        }
-
-        public void StopTimer()
-        {
-            this.timer.Stop();
-        }
-
-        /// <summary>
-        /// 建立连接状态，包括：初始化网卡，选择网卡，初始化从站
-        /// </summary>
-        /// <returns></returns>
-        private void BuildConnection()
-        {
-            if (isLoadedDriver) return;
-
-            try
+            client = new RedisClient(ip, port);
+            subscription = client.CreateSubscription();
+            //收到消息时
+            subscription.OnMessage = (channel, msg) =>
             {
-                CppConnect.getAdapterNum();
-                CppConnect.setAdapterId(this.AdapterSelected);
-
-                this.GetDevice();
-                StartTimer();
-                isLoadedDriver = true;
-            }
-            catch (Exception ex)
+                string key = msg;
+                Dictionary<string, string> values = client.GetAllEntriesFromHash(key);
+                this.Buffer = transDictToBuffer(values);
+                if (RedisDataChanged != null) RedisDataChanged(null, null);   //remind all
+            };
+            //订阅频道时
+            subscription.OnSubscribe = (channel) =>
             {
-                //log.Error(ex.Message+"\n"+ex.StackTrace);
-            }
+                log.Info("redis客户端启动正常，正在开启数据订阅。CHANNEL_ID = " + channel);
+            };
+            //取消订阅频道时
+            subscription.OnUnSubscribe = (a) => { log.Info("Redis客户端已停止订阅。"); };
+
+            redisSubjectThread = new Thread(subjectRedis);
         }
 
-        /// <summary>
-        /// 将本地adapterSelected设置为给定值
-        /// </summary>
-        /// <returns>成功返回1，失败返回2</returns>
-        public int SetAdapterFromConfig(int AdapterId)
+        public void StartRedisRead()
         {
-            if (this.AdapterSelected == 0)
-            {
-                this.AdapterSelected = AdapterId;
-                //BuildConnection();
-                return 1;
-            }
-            else return 2;
+            this.redisSubjectThread.Start();
+        }
+
+        public void StopRedisRead()
+        {
+            this.redisSubjectThread.Abort();
+        }
+
+        public void subjectRedis()
+        {
+            //订阅频道(becareful this is a block method)
+            subscription.SubscribeToChannels(listenChannel);   
+        }
+
+        private IDataStruct<object>[] transDictToBuffer(Dictionary<string, string> values)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

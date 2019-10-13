@@ -1,3 +1,12 @@
 #pragma once
 
-//目前来说还没有配置redis的思路
+/**
+ * where diffrent from hiredisHelper.h is this file
+ * is some setting for redis other than operation.
+ */
+
+//setting the size of redis buffer.
+int setBufferSize(int bits);
+//setting the time of expire time.
+int setExpireTime(int second);
+int setExpireTime_mini(int minisecond);

@@ -102,7 +102,10 @@ namespace HyTestRTDataService.RunningMode
             reader = (IReader)conn;
             writer = (IWriter)conn;
         }
-
+        
+        /*
+         * 本意是数据变化时把数据读取到缓冲池
+         */
         private void ReadDataToDatapool(object sender, EventArgs e)
         {
             //if (datapool.rdataList == null) return;
@@ -171,26 +174,26 @@ namespace HyTestRTDataService.RunningMode
         /// <summary>
         /// 常规写入，写入的是本地数据池
         /// </summary>
-        public void NormalWrite<T>(string varName, T value)
-        {
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            int varIndex = iomapInfo.mapNameToIndex[varName];
-            if (varType == typeof(int))
-            {
-                int value1 = (int)Convert.ChangeType(value, typeof(int));
-                datapool.rdataList[varIndex] = value1;
-            }
-            else if (varType == typeof(bool))
-            {
-                double value1 = (double)Convert.ChangeType(value, typeof(double));
-                datapool.rdataList[varIndex] = value1;
-            }
-            else
-            {
-                bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
-                datapool.rdataList[varIndex] = value1 ? 1 : 0;
-            }
-        }
+        //public void NormalWrite<T>(string varName, T value)
+        //{
+        //    Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
+        //    int varIndex = iomapInfo.mapNameToIndex[varName];
+        //    if (varType == typeof(int))
+        //    {
+        //        int value1 = (int)Convert.ChangeType(value, typeof(int));
+        //        datapool.rdataList[varIndex] = value1;
+        //    }
+        //    else if (varType == typeof(bool))
+        //    {
+        //        double value1 = (double)Convert.ChangeType(value, typeof(double));
+        //        datapool.rdataList[varIndex] = value1;
+        //    }
+        //    else
+        //    {
+        //        bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
+        //        datapool.rdataList[varIndex] = value1 ? 1 : 0;
+        //    }
+        //}
 
         /// <summary>
         /// 直接从端口读取

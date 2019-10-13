@@ -9,7 +9,7 @@ namespace HyTestIEInterface.Entity
     public class IOdevice
     {
         public int id;
-        public DeviceType type;//Di,DO,AI,AO
+        public DeviceType type;
         public string name;
         public int channelNum;
 

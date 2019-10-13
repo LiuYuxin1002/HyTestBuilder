@@ -100,12 +100,10 @@
     <Compile Include="ConfigMode\MapEntities\Protocol.cs" />
     <Compile Include="ConfigMode\MapEntities\SerializableDictionary.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="RunningMode\DataCallback.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\DataTransformer.cs" />
     <Compile Include="RunningMode\ReadingTask.cs" />
     <Compile Include="RunningMode\RealTimeDataPool.cs" />
-    <Compile Include="RunningMode\RunningGroup.cs" />
     <Compile Include="RunningMode\RunningServer.cs" />
     <Compile Include="Utils\DelayCloseForm.cs">
       <SubType>Form</SubType>

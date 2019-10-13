@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceStack.Redis;
 using System.Configuration;
+using System.Threading;
 
 namespace HyTestEtherCAT.database
 {
@@ -34,10 +35,37 @@ namespace HyTestEtherCAT.database
         /// <summary>
         /// 之后可以处理一些配置
         /// </summary>
-        private RedisManager()
+        public RedisManager()
         {
-            client = new RedisClient(REDIS_HOST, REDIS_PORT);
             
+        }
+
+        private void dataSubject()
+        {
+            IRedisSubscription subscription = client.CreateSubscription();
+            //接收到消息时
+            subscription.OnMessage = (channel, msg) =>
+            {
+                Console.WriteLine($"从频道：{channel}上接受到消息：{msg},时间：{DateTime.Now.ToString("yyyyMMdd HH:mm:ss")}");
+                Console.WriteLine($"频道订阅数目：{subscription.SubscriptionCount}");
+            };
+
+            //订阅频道时
+            subscription.OnSubscribe = (channel) =>
+            {
+                Console.WriteLine("订阅客户端：开始订阅" + channel);
+            };
+
+            subscription.OnUnSubscribe = (a) => { Console.WriteLine("订阅客户端：取消订阅"); };
+
+            //订阅频道
+            subscription.SubscribeToChannels("channel1");
+        }
+
+        public void subjectPublish()
+        {
+            Thread t1 = new Thread(dataSubject);
+            t1.Start();
         }
 
 

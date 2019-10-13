@@ -4,7 +4,7 @@ namespace HyTestIEInterface
 {
     public interface IConnection
     {
-        event EventHandler datachanged;
+        //event EventHandler datachanged;
         //ConnectionContext context { get; set; }
 
         /// <summary>

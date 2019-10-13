@@ -4,7 +4,7 @@ using System.Data;
 namespace HyTestRTDataService.RunningMode
 {
     /// <summary>
-    /// 此类作用在于保存读写所需任务
+    /// 此类作用在于保存高频读取任务
     /// </summary>
     public class ReadingTask
     {

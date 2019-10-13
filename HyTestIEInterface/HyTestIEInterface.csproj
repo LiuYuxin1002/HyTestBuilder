@@ -54,6 +54,7 @@
     <Compile Include="AbstractClass\AbstractIEBConnector.cs" />
     <Compile Include="Context\ConnectionContext.cs" />
     <Compile Include="Entity\Adapter.cs" />
+    <Compile Include="Entity\IDataStruct.cs" />
     <Compile Include="Entity\IOdevice.cs" />
     <Compile Include="Interfaces\IAdapterLoader.cs" />
     <Compile Include="Interfaces\IConnection.cs" />
