@@ -1,0 +1,143 @@
+[
+  {
+    "$type": "VSToDoList.Models.Task, VSToDoList",
+    "Name": "C++系统时钟",
+    "IsDone": false,
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "queryPerformanceFrequency",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "设定接口",
+        "IsDone": false,
+        "IsExpanded": true,
+        "SubTasks": [
+          {
+            "$type": "VSToDoList.Models.Task, VSToDoList",
+            "Name": "基准时钟",
+            "IsDone": false,
+            "IsExpanded": false,
+            "SubTasks": [],
+            "Status": 0
+          },
+          {
+            "$type": "VSToDoList.Models.Task, VSToDoList",
+            "Name": "采样频率",
+            "IsDone": false,
+            "IsExpanded": false,
+            "SubTasks": [],
+            "Status": 0
+          },
+          {
+            "$type": "VSToDoList.Models.Task, VSToDoList",
+            "Name": "缓冲池大小",
+            "IsDone": false,
+            "IsExpanded": false,
+            "SubTasks": [],
+            "Status": 0
+          }
+        ],
+        "Status": 0
+      }
+    ],
+    "Status": 0
+  },
+  {
+    "$type": "VSToDoList.Models.Task, VSToDoList",
+    "Name": "C++推送模块",
+    "IsDone": false,
+    "IsExpanded": false,
+    "SubTasks": [],
+    "Status": 0
+  },
+  {
+    "$type": "VSToDoList.Models.Task, VSToDoList",
+    "Name": "C#订阅处订阅全部发布",
+    "IsDone": false,
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "test：发布后显示在log中",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "编写",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
+    "Status": 0
+  },
+  {
+    "$type": "VSToDoList.Models.Task, VSToDoList",
+    "Name": "第二级缓冲组织编写",
+    "IsDone": false,
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "test：处理后发回输出端口并显示在示波器",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "编写",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
+    "Status": 0
+  },
+  {
+    "$type": "VSToDoList.Models.Task, VSToDoList",
+    "Name": "Redis的参数Host，Port",
+    "IsDone": false,
+    "IsExpanded": true,
+    "SubTasks": [
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "Host",
+        "IsDone": false,
+        "IsExpanded": true,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "port",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "channel",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      }
+    ],
+    "Status": 0
+  }
+]

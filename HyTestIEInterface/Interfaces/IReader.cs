@@ -9,14 +9,7 @@ namespace HyTestIEInterface
 {
     public interface IReader
     {
-        event EventHandler<EventArgs> DataChanged;
-
         int SetAdapterFromConfig(int AdapterId);
-
-        /// <summary>
-        /// 数据刷新时调用myevent
-        /// </summary>
-        void OnDataRefresh(object sender, EventArgs e);
 
         /// <summary>
         /// 单点读模拟量，对于伺服驱动器，需要按照配置表来选择channel值
@@ -26,24 +19,15 @@ namespace HyTestIEInterface
         /// <summary>
         /// 单点读数字量
         /// </summary>
-        bool ReadDigital(int deviceId, int channel);
+        bool ReadBoolean(int deviceId, int channel);
         
-        /// <summary>
-        /// 批量读模拟量
-        /// </summary>
-        int ReadAnalog(List<int> deviceList, List<int[]> channelList, ref List<int[]> values);
-        
-        /// <summary>
-        /// 批量读数字量
-        /// </summary>
-        int ReadDigital(List<int> deviceList, List<int[]> channelList, ref List<byte[]> values);
     }
 
     public interface IRedisReader
     {
-        string                  ip      { get; set; }
-        int                     port    { get; set; }
-        IDataStruct<Object>[]   Buffer  { get; set; }
+        string                     Ip      { get; set; }
+        int                        Port    { get; set; }
+        Dictionary<string, string> Buffer  { get; }
 
         event EventHandler<EventArgs> RedisDataChanged;
 

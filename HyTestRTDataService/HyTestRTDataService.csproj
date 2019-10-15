@@ -103,7 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunningMode\DataTransformer.cs" />
     <Compile Include="RunningMode\ReadingTask.cs" />
-    <Compile Include="RunningMode\RealTimeDataPool.cs" />
+    <Compile Include="RunningMode\Buffer.cs" />
     <Compile Include="RunningMode\RunningServer.cs" />
     <Compile Include="Utils\DelayCloseForm.cs">
       <SubType>Form</SubType>

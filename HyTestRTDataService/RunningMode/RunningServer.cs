@@ -13,7 +13,7 @@ namespace HyTestRTDataService.RunningMode
         private static ILog log = LogManager.GetLogger(typeof(RunningServer));
         private static object locky = new object();
         private static RunningServer server;
-        public static RunningServer getServer() //多线程单例
+        public static RunningServer getServer() //singleton
         {
             if (server == null)
             {
@@ -29,19 +29,20 @@ namespace HyTestRTDataService.RunningMode
         }
         public bool isConnected;
 
-        //Event下面有使用说明
+        /*event*/
         public event EventHandler<EventArgs> DataRefresh;
         public event EventHandler<EventArgs> Connected;
         public event EventHandler<EventArgs> DisConnected;
 
         /*read & write*/
         IReader reader;//有默认值EtherCAT
+        IRedisReader redisReader;
         IWriter writer;
         IConnection conn;
         IAdapterLoader adapterLoader;
 
         /*data pool*/
-        private RealTimeDataPool datapool;
+        private Buffer buffer;
 
         /*config info*/
         private ConfigManager       configManager;
@@ -55,7 +56,7 @@ namespace HyTestRTDataService.RunningMode
 
         private RunningServer()     //构造函数
         {
-            InitializeDataPool();
+            
             
         }
 
@@ -65,8 +66,15 @@ namespace HyTestRTDataService.RunningMode
         public void Run()
         {
             InitializeConfig();
-            reader.DataChanged += ReadDataToDatapool;
-            if(Connected!=null) Connected(null, null);
+            if (redisReader != null)
+            {
+                redisReader.RedisDataChanged += ReadDataToDatapool;
+            }
+
+            if(Connected!=null)
+            {
+                Connected(null, null);
+            }
         }
 
         /// <summary>
@@ -74,14 +82,21 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public void Stop()
         {
-            if (conn != null) conn.Disconnect();
-            if(DisConnected!=null) DisConnected(null, null);
+            if (conn != null)
+            {
+                conn.Disconnect();
+            }
+
+            if(DisConnected!=null)
+            {
+                DisConnected(null, null);
+            }
         }
 
-        //Useless.
-        private void InitializeDataPool()
+        //Initialize buffer with its size.
+        private void InitBuffer(int inputSize, int outputSize)
         {
-            datapool = new RealTimeDataPool();
+            buffer = new Buffer(inputSize, outputSize);
         }
 
         //Load config from xml.
@@ -101,19 +116,25 @@ namespace HyTestRTDataService.RunningMode
 
             reader = (IReader)conn;
             writer = (IWriter)conn;
+            redisReader = (IRedisReader)conn;   //TODO: there should be an if-stat to judge "conn" has redis.
+
+            InitBuffer(this.iomapInfo.inputVarNum, this.iomapInfo.outputVarNum);
         }
-        
-        /*
-         * 本意是数据变化时把数据读取到缓冲池
-         */
+
+        /*update buffer when redis notifies us*/
         private void ReadDataToDatapool(object sender, EventArgs e)
         {
-            //if (datapool.rdataList == null) return;
-            //for (int i = 0; i < datapool.rdataList.Count(); i++)
-            //{
-            //    datapool.rdataList[i] = ReadDataFromDevice(i);
-            //}
-            if(DataRefresh != null) DataRefresh(this, e);     //通知各控件
+            if (buffer == null) return;
+            if (buffer.BufferSizeInput == 0) return;
+
+            foreach(var item in this.redisReader.Buffer)
+            {
+                string name = iomapInfo.mapPortToName[item.Key];
+                int index = iomapInfo.mapNameToIndex[name];
+                buffer.update(index, int.Parse(item.Value));    //update
+            }
+            
+            if (DataRefresh != null) DataRefresh(this, e);     //notify user control.TODO: Needed?
         }
 
         /// <summary>
@@ -156,44 +177,20 @@ namespace HyTestRTDataService.RunningMode
             int varIndex = iomapInfo.mapNameToIndex[varName];
             if (varType == typeof(int))
             {
-                int value1 = (int)datapool.rdataList[varIndex];
+                int value1 = (int)buffer.get(varIndex);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else if (varType == typeof(bool))
             {
-                double value1 = datapool.rdataList[varIndex];
+                double value1 = buffer.get(varIndex);
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
             else
             {
-                bool value1 = DataTransformer.DoubleToBool(datapool.rdataList[varIndex]);
+                bool value1 = DataTransformer.DoubleToBool(buffer.get(varIndex));
                 return (T)Convert.ChangeType(value1, typeof(T));
             }
         }
-
-        /// <summary>
-        /// 常规写入，写入的是本地数据池
-        /// </summary>
-        //public void NormalWrite<T>(string varName, T value)
-        //{
-        //    Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-        //    int varIndex = iomapInfo.mapNameToIndex[varName];
-        //    if (varType == typeof(int))
-        //    {
-        //        int value1 = (int)Convert.ChangeType(value, typeof(int));
-        //        datapool.rdataList[varIndex] = value1;
-        //    }
-        //    else if (varType == typeof(bool))
-        //    {
-        //        double value1 = (double)Convert.ChangeType(value, typeof(double));
-        //        datapool.rdataList[varIndex] = value1;
-        //    }
-        //    else
-        //    {
-        //        bool value1 = (bool)Convert.ChangeType(value, typeof(bool));
-        //        datapool.rdataList[varIndex] = value1 ? 1 : 0;
-        //    }
-        //}
 
         /// <summary>
         /// 直接从端口读取
@@ -217,9 +214,9 @@ namespace HyTestRTDataService.RunningMode
                 log.Debug(e.Message + "::" + varName);
             }
 
-            if (varType == typeof(bool))        //if digital
+            if (varType == typeof(bool))        //if bool
             {
-                bool data = reader.ReadDigital(varPort.deviceId, varPort.channelId);
+                bool data = reader.ReadBoolean(varPort.deviceId, varPort.channelId);
                 return (T)Convert.ChangeType(data, typeof(T));
             }
             else if (varType == typeof(double)) //if double
@@ -264,7 +261,7 @@ namespace HyTestRTDataService.RunningMode
 
             if (varType == typeof(bool))        //if digital
             {
-                data = writer.WriteDigital(varPort.deviceId, varPort.channelId, 
+                data = writer.WriteBoolean(varPort.deviceId, varPort.channelId, 
                         (byte)Convert.ChangeType(value, typeof(byte)));
             }
             else if (varType == typeof(int))    //if int, but maybe useless

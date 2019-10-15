@@ -18,7 +18,7 @@ namespace HyTestEtherCAT
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int initSlaveConfig();
         [DllImport("HyTestEthercatDriver.dll", CharSet = CharSet.Ansi,  CallingConvention = CallingConvention.Cdecl)]
-        public static extern int getSlaveInfo(StringBuilder slaveName, ref SlaveInfo slaveInfo, int id);
+        public static extern int getSlaveInfo(StringBuilder slaveName, ref EtherCATEntity slaveInfo, int id);
         //Set slave running state to init. If you need to running again, please call initSlaveConfig() and getSlaveInfo() again.
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern void stopRunning();

@@ -15,8 +15,6 @@ namespace HyTestEtherCAT.database
     /// </summary>
     public class DataDeserialization
     {
-
-
         static DataDeserialization() { }
         /// <summary>
         /// 将map转化为可以使用的dataframe

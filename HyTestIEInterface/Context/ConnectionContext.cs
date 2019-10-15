@@ -2,14 +2,18 @@
 
 namespace HyTestIEInterface
 {
+    /// <summary>
+    /// During running, you can use these to resolve your problems.
+    /// </summary>
     public class ConnectionContext
     {
-        public static IOdevice[] devices { get; set; }
-        public static Adapter[] adapters { get; set; }
-        public static bool haveAdapter { get; set; }
-        public static int deviceNum { get; set; }
-        public static int inputDeviceNum { get; set; }
-        public static int outputDeviceNum { get; set; }
-        public static int adapterNum { get; set; }
+        public static IOdevice[]    devices         { get; set; }   //板卡设备
+        public static Adapter[]     adapters        { get; set; }   //网络适配器
+        public static bool          haveAdapter     { get; set; }   //是否有Adapter
+        public static bool          haveRedis       { get; set; }   //是否有Redis
+        public static int           deviceNum       { get; set; }   //板卡数量
+        public static int           inputDeviceNum  { get; set; }   //输入设备数量
+        public static int           outputDeviceNum { get; set; }   //输出设备数量
+        public static int           adapterNum      { get; set; }   //本机网卡数量
     }
 }

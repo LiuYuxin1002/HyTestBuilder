@@ -5,7 +5,7 @@ namespace HyTestEtherCAT.localEntity
 {
     //单个从站
     [StructLayout(LayoutKind.Sequential)]
-    public struct SlaveInfo
+    public struct EtherCATEntity
     {
         public int id;
         public int type;//Di,DO,AI,AO

@@ -52,13 +52,19 @@ namespace HyTestRTDataService.ConfigMode
         private TreeNode ArrToTreeNode(List<List<IOdevice>> deviceList)
         {
             TreeNode deviceTree = new TreeNode("DEVICE");
-            foreach(List<IOdevice> deviceGroup in deviceList)
+
+            int deviceNum = 0, channelNum = 0;
+
+            foreach (List<IOdevice> deviceGroup in deviceList)
             {
                 //For the first, we need to select coupler out.
                 IOdevice coupler = deviceGroup[0];
                 TreeNode couplerNode = new TreeNode(coupler.name);
+                channelNum += coupler.channelNum;   //If servo, neet to count channel.
+                deviceNum += deviceGroup.Count;//add to deviceNum.
                 for(int i=1; i<deviceGroup.Count; i++)
                 {
+                    
                     //For others, we need to add them to the coupler Node one-by-one.
                     IOdevice device = deviceGroup[i];
                     TreeNode deviceNode = new TreeNode(device.name);
@@ -68,10 +74,17 @@ namespace HyTestRTDataService.ConfigMode
                         TreeNode ch = new TreeNode("Channel" + (channel + 1));
                         deviceNode.Nodes.Add(ch);
                     }
+                    channelNum += device.channelNum;
                     couplerNode.Nodes.Add(deviceNode);
                 }
                 deviceTree.Nodes.Add(couplerNode);
             }
+            /* TODO: Refresh deviceNum & channelNum. but if you haven't click scan_butten, 
+               this will not work. So we should find solution to get these two params before 
+               running.*/
+            this.deviceInfo.deviceNum = deviceNum;
+            this.deviceInfo.allChannelCount = channelNum;
+
             return deviceTree;
         }
 

@@ -3,7 +3,7 @@
 #include "NicConfigSystem.h"
 #include "mycontext.h"
 
-char ifbuf[1024];//申明网卡信息缓存，定义在context
+char ifbuf[1024];		//申明网卡信息缓存，定义在context
 ec_adaptert* adapter;
 struct adaptert myadapter;
 

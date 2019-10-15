@@ -15,7 +15,8 @@ extern "C"
 #else
 #define TEXPORT _declspec(dllexport)
 #endif
-	//ADAPTER
+	/*ADAPTER OPERATION*/
+
 	TEXPORT int getAdapterNum() {
 		return getAdapterNumImpl();
 	}
@@ -65,23 +66,15 @@ extern "C"
 
 	//AUTO READ
 	TEXPORT int prepareToRead() {
-		return slavePrepareToRead();
+		return slavePrepareToRead()->error;
 	}
 
 	TEXPORT int readStart() {
-		return slaveReadStart();
-	}
-
-	TEXPORT int readSuspend() {
-		return slaveReadSuspend();
+		return slaveReadStart()->error;
 	}
 
 	TEXPORT int readStop() {
-		return slaveReadStop();
-	}
-
-	TEXPORT int readResume() {
-		return slaveReadResume();
+		return slaveReadStop()->error;
 	}
 
 	//MANUL READ

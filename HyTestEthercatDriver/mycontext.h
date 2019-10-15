@@ -39,6 +39,14 @@ extern int			DEFINE_WAIT_TIME;
 extern int			DEFINE_REFRENSE_CLOCK;	//the time between every writes
 extern int			READING_FREQUENCY;		//Hz of reading.
 extern int			REDIS_BUFFER_SIZE;
+extern char			IOmap[MAP_SIZE];
+
+typedef struct operationResult {
+	int16 error;
+	char* error_msg;
+	operationResult(int16 _error, char* _error_msg) : 
+	error(_error), error_msg(_error_msg) {}
+} operationResult;
 
 /************************************************************************/
 /*Õ¯¬Á  ≈‰∆˜                                                             */

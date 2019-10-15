@@ -95,7 +95,7 @@
     <Compile Include="database\RedisHashHelper.cs" />
     <Compile Include="database\RedisManager.cs" />
     <Compile Include="database\RedisTest.cs" />
-    <Compile Include="localEntity\SlaveInfo.cs" />
+    <Compile Include="localEntity\EtherCATEntity.cs" />
     <Compile Include="EtherCAT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -21,7 +21,7 @@ void closeRedisClient()
 
 int checkRedisError(redisReply* reply) {
 	if (reply->type == REDIS_REPLY_ERROR) {
-		return -1;
+		return 1;
 	}
 	else {
 		return 0;

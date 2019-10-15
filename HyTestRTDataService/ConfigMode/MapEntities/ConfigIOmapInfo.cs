@@ -6,7 +6,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     [Serializable]
     public class ConfigIOmapInfo
     {
-        //Dictionary
+        /*Dictionary*/
         public SerializableDictionary<string, string> mapPortToName;    //port->name
         public SerializableDictionary<string, string> mapNameToPort;    //name->port
         public SerializableDictionary<int, string>    mapIndexToName;   //index->name
@@ -15,10 +15,10 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         public SerializableDictionary<string, int>    mapNameToMax;     //name->max
         public SerializableDictionary<string, int>    mapNameToMin;     //name->min
 
-        //Table
+        /*Table*/
         public DataTable ioMapTable;
 
-        //num of input & output
+        /*num of input & output*/
         public int inputVarNum, outputVarNum;
 
         public ConfigIOmapInfo()

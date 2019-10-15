@@ -19,7 +19,7 @@ namespace HyTestRTDataService.ConfigMode
             ReadSubConfig(iomapInfo);
         }
 
-        //从xml获取IOmapTable
+        //get IOmapTable from .xml file
         private void initIOmapTable()
         {
             DataTable iomapTable = new DataTable();
@@ -37,7 +37,7 @@ namespace HyTestRTDataService.ConfigMode
         /// <summary>
         /// Refresh iomaps with datatable which is input now.
         /// </summary>
-        /// <!--table结构：ID，变量名，数据类型，输入输入，端口-->
+        /// <!--table structure：ID，var name，data type，I/O，port number-->
         private void RefreshMap()
         {
             if (this.iomapInfo.ioMapTable == null) return;
@@ -45,7 +45,7 @@ namespace HyTestRTDataService.ConfigMode
             iomapInfo.ioMapTable.TableName = "IOmapTable";
             iomapInfo.inputVarNum = iomapInfo.outputVarNum = 0;
             DataTable mapTable = iomapInfo.ioMapTable;
-            //通过IOmapTable建立映射
+            //build map with dataTable.
             int index = 0;
             foreach (DataRow row in mapTable.Rows)
             {
@@ -114,9 +114,6 @@ namespace HyTestRTDataService.ConfigMode
         }
         #endregion
 
-        /// <summary>
-        /// 保存到Excel.
-        /// </summary>
         public void saveIOmapToExcel()
         {
             ExcelHelper.DataTableToExcel(iomapInfo.ioMapTable);

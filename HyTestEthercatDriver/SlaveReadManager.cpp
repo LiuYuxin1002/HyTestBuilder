@@ -7,16 +7,14 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include "HiredisHelper.h"
-
+#include "mmsystem.h"
+#include "hiredisHelper.h"
+#pragma comment(lib, "winmm.lib")
 using namespace std;
 
-HANDLE hthread;
-
 char strbuf[64] = "";
-
-#define DEFINE_SLEEP_TIME1 300
-
+map<char*, int> oldIOmap;
+int DEFAULT_SLEEP_TIME;
 bool readState = true;
 HANDLE rthread;
 
@@ -32,66 +30,150 @@ char* ltos(long long lld)
 	return strbuf;
 }
 
-map<char*, char*> getDataMap() {
-	for (int i = 0; i < ec_slavecount; i++)
-	{
-		int type = slave_arr[i].type;
-
-		slave_arr[i].name;
+/*Boolean CAS*/
+int booleanCompareAndSwap(int target, int real, int* location) {
+	if (target != real) {
+		target = real;
+		*location = target;
 	}
-	map<char*, char*>* dataMap = new map<char *, char *>();
-	return *dataMap;
+	return *location;
 }
 
-//If success return slavecount, else return 0.
-int checkSlaveState() {
+/*抖动率设置为1%忽略，即+-32767/100=327.67*/
+int ignoreThreshold = 327;
+
+/*Integer CAS*/
+int analogCompareAndSwap(int target, int real, int*location) {
+	int sub = target - real;
+	if (ignoreThreshold > sub > -1 * ignoreThreshold) {	//进入了忽略范围: -327~327
+		return target;
+	}
+	else {
+		target = real;
+		*location = target;
+		return *location;
+	}
+}
+
+//TODO: If success return slavecount, else return 0.
+operationResult* checkSlaveState() {
+	operationResult* res;
 	if (ec_slavecount != 0) {
 		//The work for state check here.
 		
 		cout << "check slave finish" << endl;
+		res = new operationResult(0, NULL);
 	}
 	else {
 		//Doing sth. for this state
 		cout << "No Slave Found" << endl;
+		res = new operationResult(1, "No Slave Found");
 	}
-	return ec_slavecount;
+	return res;
 }
 
-int checkRedisState() {
-	getRedisClient();
-	if (client == NULL) {
+//将两个数字连接起来
+char* contact(int key1, int key2, char* buffer) {
+	char* key = "";
+	strcat(key, itoa(key1, buffer, 10));
+	strcat(key, "_");
+	strcat(key, itoa(key2, buffer, 10));
+	return key;
+}
+
+//TODO: 
+operationResult* checkRedisState() {
+	redisContext* context = getRedisClient();
+	/*client maybe empty*/
+	if (client == NULL || context->err) {
 		cout << "redis client get failed" << endl;
-		return -1;
+		cout << context->errstr << endl;
+		return new operationResult(context->err, context->errstr);
+	}
+
+	/*iomap is empty, we should fill it with init value*/
+	if (oldIOmap.empty())	
+	{
+		char* buffer = new char[256];
+		for (int slave = 0; slave < ec_slavecount; slave++)
+		{
+			SLAVET_ARR tmp = slave_arr[slave];
+
+			for (int channel = 0; channel < tmp.channelNum; channel++) {
+				/*get your key*/
+				char* key = contact(slave, channel, buffer);
+				/*get you value*/
+				int value;
+				if(tmp.type==TYPE_DI)			value = getDigitalValueImpl(slave, channel);
+				else if (tmp.type == TYPE_AI)	value = getAnalogValueImpl(slave, channel);
+				/*insert*/
+				//oldIOmap.insert(pair<char*, int>(key, value));
+				oldIOmap[key] = value;
+			}
+		}
+		delete(buffer);
 	}
 	cout << "redis client get success" << endl;
-	return 0;
+	return new operationResult(0, NULL);
 }
 
-int slavePrepareToRead() {
+MMRESULT TimerId;
+/*redis 时钟触发事件*/
+void CALLBACK readAndSaveRedis(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
+	if (client == NULL) return;
+	char* buff = new char[128];
+	char* time = ltos(getSystemTime());	//get time as main-key
+	for (int slave=0; slave<ec_slavecount; slave++)
+	{
+		SLAVET_ARR tmp = slave_arr[slave];
+		if (tmp.type==TYPE_DI)
+		{
+			for (int channel = 0; channel < tmp.channelNum; channel++) {
+				int value = getDigitalValueImpl(slave, channel);
+				char* key = contact(slave, channel, buff);
+				/*CAS*/
+				int ans = booleanCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
+				/*add to redis if cas*/
+				if(ans==value) addKeyValue(time, key, itoa(value, buff, 10));
+			}
+		}
+		if (tmp.type == TYPE_AI)
+		{
+			for (int channel = 0; channel<tmp.channelNum; channel++)
+			{
+				int value = getAnalogValueImpl(slave, channel);
+				char* key = contact(slave, channel, buff);
+				/*CAS*/
+				int ans = analogCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
+				/*add to redis if cas*/
+				if(ans==value) addKeyValue(time, key, itoa(value, buff, 10));
+			}
+		}
+	}
+	delete(buff);
+}
+
+operationResult* slavePrepareToRead() {
 	checkRedisState();
-	int wkc = checkSlaveState();
-	cout << "prepare finished" << endl;
-	readState = true;
-	return wkc;
+	operationResult* res = checkSlaveState();
+	if (!res) {
+		cout << "prepare finished" << endl;
+		readState = true;
+	}
+	return res;
 }
 
-int slaveReadStart() {
-	//if(hthread==NULL) hthread = CreateThread(NULL,0,readSlaveThread,NULL,0,NULL);
-	return 0;
+operationResult* slaveReadStart() {
+	if (TimerId == NULL) {
+		TimerId = timeSetEvent(DEFAULT_SLEEP_TIME/1000, 0, readAndSaveRedis, NULL, TIME_PERIODIC);
+	}
+	return new operationResult(0, NULL);
 }
 
-int slaveReadSuspend() {
-	if(hthread!=NULL) SuspendThread(hthread);
-	return 0;
-}
-
-int slaveReadResume() {
-	if (hthread != NULL) ResumeThread(hthread);
-	return 1;
-}
-
-int slaveReadStop() {
-	if(hthread!=NULL) CloseHandle(hthread);
+operationResult* slaveReadStop() {
+	if (TimerId != NULL) {
+		timeKillEvent(TimerId);	//kill event
+	}
 	return 0;
 }
 

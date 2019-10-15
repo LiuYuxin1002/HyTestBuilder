@@ -85,7 +85,8 @@ int initSlaveConfigInfo() {
 
 			initLocalSlaveInfo();
 
-			if (wthread == NULL)	//启动循环
+			/*启动写循环，如果不写在此处，部分从站将无法正常启动*/
+			if (wthread == NULL)
 				wthread = CreateThread(NULL, 0, writeSlaveThread, NULL, 0, NULL);
 
 			return ec_slavecount - 1;
