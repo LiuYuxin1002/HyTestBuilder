@@ -16,6 +16,8 @@ namespace HyTestRTDataService.ConfigMode
         public static IAdapterLoader adapterLoader;
         public static IConnection connector;
 
+        public static ConnectionContext context;
+
         public ConfigProtocol()
         {
             protocolList = new List<Protocol>
@@ -71,7 +73,7 @@ namespace HyTestRTDataService.ConfigMode
         /// Get AdapterLoader Which Is Adapte To The Protocol In Config
         /// </summary>
         /// <returns></returns>
-        public static IAdapterLoader GetAdapterLoader(int adapterId)
+        public static IAdapterLoader GetAdapterLoader()
         {
             if (adapterLoader == null)
             {

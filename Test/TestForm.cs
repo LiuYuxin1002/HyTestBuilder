@@ -1,5 +1,4 @@
-﻿using HyTestEtherCAT.database;
-using log4net;
+﻿using log4net;
 using ServiceStack.Redis;
 using System;
 using System.Collections.Generic;

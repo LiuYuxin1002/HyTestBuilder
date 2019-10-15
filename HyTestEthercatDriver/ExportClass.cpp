@@ -65,8 +65,15 @@ extern "C"
 	}
 
 	//AUTO READ
-	TEXPORT int prepareToRead() {
-		return slavePrepareToRead()->error;
+	TEXPORT void doWork(ProcessCallBack processCallBack) {
+
+	}
+
+	TEXPORT void prepareToRead(ProcessCallBack processCallBack) {
+		operationResult* res = slavePrepareToRead(processCallBack);
+		if (res->error) {
+			throw res->error_msg;
+		}
 	}
 
 	TEXPORT int readStart() {

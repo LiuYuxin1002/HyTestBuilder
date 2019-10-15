@@ -52,7 +52,7 @@ namespace HyTestRTDataService.ConfigMode
         //加载xmlconfig，初始化subconfig
         private void InitializeComponent()
         {
-            LoadConfig();
+            LoadLocalConfig();
             this.configAdapter = new ConfigAdapter(config.adapterInfo);
             this.configDevice = new ConfigDevice(config.deviceInfo);
             this.configIOmap = new ConfigIOmap(config.iomapInfo);
@@ -61,7 +61,7 @@ namespace HyTestRTDataService.ConfigMode
         /// <summary>
         /// 把本地配置文件读取到Config对象中，会抛出System.Exception异常
         /// </summary>
-        public void LoadConfig()
+        public void LoadLocalConfig()
         {
             if (!File.Exists(ConfigFile))
             {

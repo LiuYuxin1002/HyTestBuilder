@@ -9,8 +9,6 @@ namespace HyTestIEInterface
 {
     public interface IReader
     {
-        int SetAdapterFromConfig(int AdapterId);
-
         /// <summary>
         /// 单点读模拟量，对于伺服驱动器，需要按照配置表来选择channel值
         /// </summary>
@@ -23,14 +21,25 @@ namespace HyTestIEInterface
         
     }
 
-    public interface IRedisReader
+    public interface IAutoReader
     {
-        string                     Ip      { get; set; }
-        int                        Port    { get; set; }
-        Dictionary<string, string> Buffer  { get; }
+        event EventHandler<DataChangedEventArgs> AutoDataChanged;
 
-        event EventHandler<EventArgs> RedisDataChanged;
+        void InitAutoReadConfig();
+        void StartAutoRead();
+    }
 
-        void subjectRedis();
+    public class DataChangedEventArgs : EventArgs
+    {
+        public int slave;
+        public int channel;
+        public int value;
+
+        public DataChangedEventArgs(int slave, int channel, int value)
+        {
+            this.slave = slave;
+            this.channel = channel;
+            this.value = value;
+        }
     }
 }

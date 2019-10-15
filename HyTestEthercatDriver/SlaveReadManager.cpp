@@ -17,6 +17,7 @@ map<char*, int> oldIOmap;
 int DEFAULT_SLEEP_TIME;
 bool readState = true;
 HANDLE rthread;
+ProcessCallBack readCallBack;
 
 long long getSystemTime() {
 	struct timeb t;
@@ -82,18 +83,11 @@ char* contact(int key1, int key2, char* buffer) {
 }
 
 //TODO: 
-operationResult* checkRedisState() {
-	redisContext* context = getRedisClient();
-	/*client maybe empty*/
-	if (client == NULL || context->err) {
-		cout << "redis client get failed" << endl;
-		cout << context->errstr << endl;
-		return new operationResult(context->err, context->errstr);
-	}
-
+operationResult* prepareCallBack(ProcessCallBack callBack) {
+	/*make read callBack method useful*/
+	readCallBack = callBack;
 	/*iomap is empty, we should fill it with init value*/
-	if (oldIOmap.empty())	
-	{
+	if (callBack && oldIOmap.empty()) {
 		char* buffer = new char[256];
 		for (int slave = 0; slave < ec_slavecount; slave++)
 		{
@@ -104,22 +98,23 @@ operationResult* checkRedisState() {
 				char* key = contact(slave, channel, buffer);
 				/*get you value*/
 				int value;
-				if(tmp.type==TYPE_DI)			value = getDigitalValueImpl(slave, channel);
+				if (tmp.type == TYPE_DI)		value = getDigitalValueImpl(slave, channel);
 				else if (tmp.type == TYPE_AI)	value = getAnalogValueImpl(slave, channel);
 				/*insert*/
-				//oldIOmap.insert(pair<char*, int>(key, value));
 				oldIOmap[key] = value;
 			}
 		}
 		delete(buffer);
+		return new operationResult(0, "buffer map initializing success");
 	}
-	cout << "redis client get success" << endl;
-	return new operationResult(0, NULL);
+	else {
+		return new operationResult(1, "Error in checkRedisState, callBack method maybe empty.");
+	}
 }
 
 MMRESULT TimerId;
-/*redis 时钟触发事件*/
-void CALLBACK readAndSaveRedis(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
+/*redis timer_tick event*/
+void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 	if (client == NULL) return;
 	char* buff = new char[128];
 	char* time = ltos(getSystemTime());	//get time as main-key
@@ -134,7 +129,7 @@ void CALLBACK readAndSaveRedis(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWO
 				/*CAS*/
 				int ans = booleanCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
 				/*add to redis if cas*/
-				if(ans==value) addKeyValue(time, key, itoa(value, buff, 10));
+				if (ans == value) readCallBack(slave, channel, value);
 			}
 		}
 		if (tmp.type == TYPE_AI)
@@ -146,15 +141,15 @@ void CALLBACK readAndSaveRedis(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWO
 				/*CAS*/
 				int ans = analogCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
 				/*add to redis if cas*/
-				if(ans==value) addKeyValue(time, key, itoa(value, buff, 10));
+				if (ans == value) readCallBack(slave, channel, value);
 			}
 		}
 	}
 	delete(buff);
 }
 
-operationResult* slavePrepareToRead() {
-	checkRedisState();
+operationResult* slavePrepareToRead(ProcessCallBack processCallBack) {
+	prepareCallBack(processCallBack);
 	operationResult* res = checkSlaveState();
 	if (!res) {
 		cout << "prepare finished" << endl;
@@ -165,7 +160,7 @@ operationResult* slavePrepareToRead() {
 
 operationResult* slaveReadStart() {
 	if (TimerId == NULL) {
-		TimerId = timeSetEvent(DEFAULT_SLEEP_TIME/1000, 0, readAndSaveRedis, NULL, TIME_PERIODIC);
+		TimerId = timeSetEvent(DEFAULT_SLEEP_TIME/1000, 0, readAndCallBack, NULL, TIME_PERIODIC);
 	}
 	return new operationResult(0, NULL);
 }

@@ -9,11 +9,6 @@ namespace HyTestIEInterface
     public interface IWriter
     {
         /// <summary>
-        /// if not setting Adapter which is selected，setting it
-        /// </summary>
-        int SetAdapterFromConfig(int AdapterId);
-
-        /// <summary>
         /// 单点写模拟量，对于伺服驱动器，需要参照配置表来使用
         /// </summary>
         /// <param name="deviceId">设备编号</param>

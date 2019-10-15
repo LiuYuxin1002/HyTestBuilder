@@ -61,6 +61,7 @@
     <Compile Include="Interfaces\IHyTestBase.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IWriter.cs" />
+    <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

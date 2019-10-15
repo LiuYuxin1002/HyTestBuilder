@@ -21,7 +21,7 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            loader = ConfigProtocol.GetAdapterLoader(adapterInfo.currentAdapterId);
+            loader = ConfigProtocol.GetAdapterLoader();
 
             ReadSubConfig(adapterInfo);
         }

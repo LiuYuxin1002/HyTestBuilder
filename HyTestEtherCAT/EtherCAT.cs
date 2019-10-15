@@ -5,57 +5,19 @@ using HyTestIEInterface;
 using HyTestEtherCAT.localEntity;
 using HyTestIEInterface.Entity;
 using log4net;
-using ServiceStack.Redis;
-using System.Threading;
 
 namespace HyTestEtherCAT
 {
-    public class EtherCAT : ConnectionContext, IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter, IRedisReader
+    public class EtherCAT : IConnection, IAdapterLoader, IDeviceLoader, IReader, IWriter, IAutoReader
     {
         #region region_Properties
         
-        public static int RefreshFrequency{ get; set; }
-
         public int AdapterSelected { get; set; }
-
-        public string Ip
+        public static EtherCAT getEtherCAT()
         {
-            get
-            {
-                return this._redisIp;
-            }
-
-            set
-            {
-                this._redisIp = value;
-            }
+            if (ethercat == null) ethercat = new EtherCAT();
+            return ethercat;
         }
-
-        public int Port
-        {
-            get
-            {
-                return this._redisPort;
-            }
-
-            set
-            {
-                this._redisPort = value;
-            }
-        }
-
-        public Dictionary<string, string> Buffer
-        {
-            get
-            {
-                return this._buffer;
-            }
-        }
-        #endregion
-
-        #region region_Const
-        private const int ERRCODE = 0;
-        private const int DEFAULT_FREQUENCY = 300;
         #endregion
 
         #region region_Member
@@ -63,12 +25,6 @@ namespace HyTestEtherCAT
         ILog log = LogManager.GetLogger(typeof(EtherCAT));
         /*Singleton*/
         private static EtherCAT ethercat;
-        public static EtherCAT getEtherCAT()
-        {
-            if (ethercat == null) ethercat = new EtherCAT();
-
-            return ethercat;
-        }
         /*Flag of driver load.*/
         //It will be set TRUE while call BuildConnection(), and will be varified in this method too.
         private bool isLoadedDriver = false;    
@@ -79,14 +35,15 @@ namespace HyTestEtherCAT
 
         private EtherCAT()
         {
-            InitRedisSubjectConfig();
+            InitConnectionContext();
+            InitAutoReadConfig();
         }
 
         #endregion
 
         #region region_IConnection
         //TODO: 需要么？
-        public int Close()
+        public OperationResult Close()
         {
             throw new NotImplementedException();
         }
@@ -96,22 +53,21 @@ namespace HyTestEtherCAT
         /// </summary>
         /// <param name="ID">所选网卡</param>
         /// <returns>应该返回操作结果</returns>
-        public int Connect(int ID)
+        public OperationResult Connect()
         {
-            SetAdapterFromConfig(ID);
             BuildConnection();
-            StartRedisRead();
-            return 1;
+            StartAutoRead();
+            return new OperationResult();
         }
 
         /// <summary>
         /// 主要作用是停止硬件运行，对于EtherCAT来说是恢复Init状态。
         /// </summary>
         /// <returns>应该返回操作结果</returns>
-        public int Disconnect()
+        public OperationResult Disconnect()
         {
             CppConnect.stopRunning();
-            return 1;
+            return new OperationResult();
         }
 
         // 建立连接状态，包括：初始化网卡，选择网卡，初始化从站
@@ -135,16 +91,6 @@ namespace HyTestEtherCAT
             }
         }
 
-        // 将本地adapterSelected设置为给定值 <returns>成功返回1，失败返回2</returns>
-        public int SetAdapterFromConfig(int AdapterId)
-        {
-            if (this.AdapterSelected == 0)
-            {
-                this.AdapterSelected = AdapterId;
-                return 1;
-            }
-            else return 2;
-        }
         #endregion
 
         #region region_IDeviceLoader
@@ -158,7 +104,7 @@ namespace HyTestEtherCAT
         public List<List<IOdevice>> GetDevice()
         {
             int slaveNum = InitDevice();
-            deviceNum = slaveNum == 0 ? 0 : slaveNum;
+            ConnectionContext.deviceNum = slaveNum == 0 ? 0 : slaveNum;
 
             List<List<IOdevice>> deviceContiner = new List<List<IOdevice>>();   //全部device
             List<IOdevice> devGroup = null;     //一个device组
@@ -213,7 +159,7 @@ namespace HyTestEtherCAT
 
         public int GetDeviceNum()
         {
-            return deviceNum;
+            return ConnectionContext.deviceNum;
         }
 
         #endregion
@@ -246,69 +192,23 @@ namespace HyTestEtherCAT
         }
         #endregion
 
-        #region region_IRedisReader
-        private Thread redisSubjectThread;
-        private RedisClient client = null;
-        private IRedisSubscription subscription = null;
-        private string _redisIp = "127.0.0.1";  //default
-        private int _redisPort = 6379;          //default
-        private string listenChannel = "channel1";
-        private Dictionary<string, string> _buffer;
-        public event EventHandler<EventArgs> RedisDataChanged;
+        #region region_IAutoReader
+        public event EventHandler<DataChangedEventArgs> AutoDataChanged;
+        CppConnect.ProcessCallback callback;
 
-        //this method need to op. cpp file
-        public void SetRefreshParams(int interval)
+        public void InitAutoReadConfig()
         {
-
+            callback = (slave, channel, value) =>
+              {
+                  AutoDataChanged(null, new DataChangedEventArgs(slave, channel, value));
+              };
+            CppConnect.doWork(callback);
         }
 
-        private void InitRedisSubjectConfig()
+        public void StartAutoRead()
         {
-            client = new RedisClient(Ip, Port);
-            subscription = client.CreateSubscription();
-            //收到消息时
-            subscription.OnMessage = (channel, msg) =>
-            {
-                string key = msg;
-                _buffer = client.GetAllEntriesFromHash(key);
-                if (RedisDataChanged != null) RedisDataChanged(null, null);   //remind all
-            };
-            //订阅频道时
-            subscription.OnSubscribe = (channel) =>
-            {
-                log.Info("redis客户端启动正常，正在开启数据订阅。CHANNEL_ID = " + channel);
-            };
-            //取消订阅频道时
-            subscription.OnUnSubscribe = (a) => { log.Info("Redis客户端已停止订阅。"); };
-
-            redisSubjectThread = new Thread(subjectRedis);
+            CppConnect.readStart();
         }
-
-        public void StartRedisRead()
-        {
-            if(redisSubjectThread==null)
-            {
-                redisSubjectThread = new Thread(subjectRedis);
-            }
-
-            /*Begin to subject*/
-            this.redisSubjectThread.Start();
-        }
-
-        public void StopRedisRead()
-        {
-            if(this.redisSubjectThread!=null)
-            {
-                this.redisSubjectThread.Abort();
-            }
-        }
-
-        public void subjectRedis()
-        {
-            //订阅频道(阻塞式方法)
-            subscription.SubscribeToChannels(listenChannel);
-        }
-
         #endregion
 
         #region region_IWriter
@@ -333,8 +233,8 @@ namespace HyTestEtherCAT
         /// </summary>
         public Adapter[] GetAdapter()
         {
-            adapterNum = CppConnect.getAdapterNum();    //Get adapter number first.
-            adapters = new Adapter[adapterNum];
+            int adapterNum = CppConnect.getAdapterNum();    //Get adapter number first.
+            Adapter[] adapters = new Adapter[adapterNum];
 
             StringBuilder tmpAdapterName = new StringBuilder();
             StringBuilder tmpAdapterDesc = new StringBuilder();
@@ -353,6 +253,7 @@ namespace HyTestEtherCAT
                 tmpAdapterName.Clear();
                 tmpAdapterDesc.Clear();
             }
+            ConnectionContext.adapters = adapters;
             return adapters;
         }
 
@@ -374,6 +275,12 @@ namespace HyTestEtherCAT
         #endregion
 
         #region ConnectionContext
+        //TODO: fill it
+        public void InitConnectionContext()
+        {
+
+        }
+
         #endregion
 
     }

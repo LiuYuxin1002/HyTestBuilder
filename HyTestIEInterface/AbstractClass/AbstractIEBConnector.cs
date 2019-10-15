@@ -29,8 +29,8 @@ namespace HyTestIEInterface
 
         }
 
-        public abstract int Connect(int ID);
-        public abstract int Close();
-        public abstract int Disconnect();
+        public abstract OperationResult Connect();
+        public abstract OperationResult Close();
+        public abstract OperationResult Disconnect();
     }
 }

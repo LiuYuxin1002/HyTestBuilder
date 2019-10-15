@@ -22,22 +22,18 @@ namespace HyTestEtherCAT
         //Set slave running state to init. If you need to running again, please call initSlaveConfig() and getSlaveInfo() again.
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern void stopRunning();
-        //设置从站某端口信息
+        /*Write*/
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAnalogValue(int slaveId, int channel, int value);
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setDigitalValue", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setDigitalValue(int slaveId, int channel, byte value);
-
-        /// <summary>
-        /// 获取模拟量
-        /// </summary>
-        /// <returns>返回真实值</returns>
+        /*Read*/
+        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+        public delegate void ProcessCallback(int slave, int channel, int value);    //define delegate.
+        [DllImport("HyTestEthercatDriver.dll")]
+        public static extern void doWork([MarshalAs(UnmanagedType.FunctionPtr)] ProcessCallback callbackPoint); //binding delegate.
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getAnalogValue(int slaveId, int channelId);
-        /// <summary>
-        /// 获取数字量，返回int需要自行处理
-        /// </summary>
-        /// <returns>返回1=true，返回0=false</returns>
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getDigitalValue(int slaveId, int channelId);
         [DllImport("HyTestEthercatDriver.dll")]
@@ -45,10 +41,6 @@ namespace HyTestEtherCAT
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int readStart();
         [DllImport("HyTestEthercatDriver.dll")]
-        public static extern int readSuspend();
-        [DllImport("HyTestEthercatDriver.dll")]
         public static extern int readStop();
-        [DllImport("HyTestEthercatDriver.dll")]
-        public static extern int readResume();
     }
 }

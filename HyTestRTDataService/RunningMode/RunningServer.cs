@@ -27,7 +27,7 @@ namespace HyTestRTDataService.RunningMode
             }
             return server;
         }
-        public bool isConnected;
+        public bool isConnected = false;
 
         /*event*/
         public event EventHandler<EventArgs> DataRefresh;
@@ -35,14 +35,11 @@ namespace HyTestRTDataService.RunningMode
         public event EventHandler<EventArgs> DisConnected;
 
         /*read & write*/
-        IReader reader;//有默认值EtherCAT
-        IRedisReader redisReader;
-        IWriter writer;
-        IConnection conn;
-        IAdapterLoader adapterLoader;
-
-        /*data pool*/
-        private Buffer buffer;
+        private Buffer      buffer;
+        private IReader     reader;//有默认值EtherCAT
+        private IAutoReader autoReader;
+        private IWriter     writer;
+        private IConnection conn;
 
         /*config info*/
         private ConfigManager       configManager;
@@ -52,13 +49,12 @@ namespace HyTestRTDataService.RunningMode
         private ConfigIOmapInfo     iomapInfo;
         private ConfigTestEnvInfo   testInfo;
 
-        private int refreshFrequency;
-
         private RunningServer()     //构造函数
         {
-            
-            
+            //这里最好不要加任何东西，主要原因是事件绑定会有问题。
         }
+
+        #region Operator
 
         /// <summary>
         /// 服务开始运行，全局控制
@@ -66,9 +62,16 @@ namespace HyTestRTDataService.RunningMode
         public void Run()
         {
             InitializeConfig();
-            if (redisReader != null)
+
+            InitGlobleContext();
+
+            SetProtocolEntity();
+
+            InitBuffer(this.iomapInfo.inputVarNum, this.iomapInfo.outputVarNum);
+
+            if (autoReader != null)
             {
-                redisReader.RedisDataChanged += ReadDataToDatapool;
+                autoReader.AutoDataChanged += ReadDataToDatapool;
             }
 
             if(Connected!=null)
@@ -85,25 +88,56 @@ namespace HyTestRTDataService.RunningMode
             if (conn != null)
             {
                 conn.Disconnect();
-            }
-
-            if(DisConnected!=null)
-            {
-                DisConnected(null, null);
+                if(DisConnected!=null)
+                {
+                    DisConnected(null, null);
+                }
             }
         }
 
+        #endregion
+
         //Initialize buffer with its size.
-        private void InitBuffer(int inputSize, int outputSize)
+        private OperationResult InitBuffer(int inputSize, int outputSize)
         {
             buffer = new Buffer(inputSize, outputSize);
+            return new OperationResult();
+        }
+
+        //Get connection, reader, writer, autoReader and so on.
+        private OperationResult SetProtocolEntity()
+        {
+            try
+            {
+                this.conn = ConfigProtocol.GetConnection();
+                this.conn.Connect();
+            }
+            catch(Exception ex)
+            {
+                return new OperationResult(1, ex.Message);
+            }
+            /*reader and writer*/
+            reader = (IReader)conn;
+            writer = (IWriter)conn;
+            if (ConnectionContext.isAutoRead)
+            {
+                autoReader = (IAutoReader)conn;
+            }
+
+            return new OperationResult();
         }
 
         //Load config from xml.
-        private void InitializeConfig()
+        private OperationResult InitializeConfig()
         {
-            configManager = new ConfigManager();
-            configManager.LoadConfig();
+            try
+            {
+                configManager = new ConfigManager();
+            }
+            catch(Exception ex)
+            {
+                return new OperationResult(1, ex.Message);
+            }
 
             config = ConfigManager.config;
             adapterInfo = config.adapterInfo;
@@ -111,63 +145,39 @@ namespace HyTestRTDataService.RunningMode
             iomapInfo = config.iomapInfo;
             testInfo = config.testInfo;
 
-            conn = ConfigProtocol.GetConnection();
-            conn.Connect(adapterInfo.currentAdapterId);
+            return new OperationResult();
+        }
 
-            reader = (IReader)conn;
-            writer = (IWriter)conn;
-            redisReader = (IRedisReader)conn;   //TODO: there should be an if-stat to judge "conn" has redis.
+        private OperationResult InitGlobleContext()
+        {
+            ConnectionContext.adapterNum = adapterInfo.adapterNum;
+            //ConnectionContext.adapters = null;
+            ConnectionContext.deviceNum = deviceInfo.deviceNum;
+            //ConnectionContext.devices = null;
+            //ConnectionContext.inputDeviceNum = 
+            ConnectionContext.isAutoRead = true;    //TODO: tmperary setting
+            ConnectionContext.needAdapter = true;   //TODO: tmperary setting.
+            //ConnectionContext.outputDeviceNum = 
+            ConnectionContext.adapterSelectId = adapterInfo.currentAdapterId;
 
-            InitBuffer(this.iomapInfo.inputVarNum, this.iomapInfo.outputVarNum);
+            return new OperationResult();
         }
 
         /*update buffer when redis notifies us*/
-        private void ReadDataToDatapool(object sender, EventArgs e)
+        private void ReadDataToDatapool(object sender, DataChangedEventArgs e)
         {
             if (buffer == null) return;
             if (buffer.BufferSizeInput == 0) return;
 
-            foreach(var item in this.redisReader.Buffer)
-            {
-                string name = iomapInfo.mapPortToName[item.Key];
-                int index = iomapInfo.mapNameToIndex[name];
-                buffer.update(index, int.Parse(item.Value));    //update
-            }
+            string key = e.slave + "_" + e.channel;
+            string name = iomapInfo.mapPortToName[key];
+            int index = iomapInfo.mapNameToIndex[name];
+            buffer.update(index, e.value);
             
             if (DataRefresh != null) DataRefresh(this, e);     //notify user control.TODO: Needed?
         }
 
-        /// <summary>
-        /// 从底层读取数值，返回以更新datapool中的数据
-        /// </summary>
-        /// <param name="index">datapool中的序号</param>
-        /// <returns></returns>
-        private double ReadDataFromDevice(int index)
-        {
-            string varName = iomapInfo.mapIndexToName[index];
-            Port varPort = new Port(iomapInfo.mapNameToPort[varName]);
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-
-            if (varType == typeof(bool))
-            {
-                bool value = InstantRead<bool>(varName);
-                return value ? 1 : 0;
-            }
-            else if (varType == typeof(int))
-            {
-                return InstantRead<int>(varName);
-            }
-            else if (varType == typeof(double))
-            {
-                return InstantRead<double>(varName);
-            }
-            else
-            {
-                MessageBox.Show("变量类型不正确，请检查配置文件");
-                return default(double);
-            }
-        }
-
+        #region Read
         /// <summary>
         /// 常规读取，读取的是本地数据池
         /// </summary>
@@ -236,6 +246,9 @@ namespace HyTestRTDataService.RunningMode
             }
         }
 
+        #endregion
+
+        #region Write
         /// <summary>
         /// 直接写到端口
         /// </summary>
@@ -281,6 +294,9 @@ namespace HyTestRTDataService.RunningMode
             }
         }
 
+        #endregion
+
+        #region 高速采集任务
         /// <summary>
         /// 设置订阅列表
         /// </summary>
@@ -342,6 +358,8 @@ namespace HyTestRTDataService.RunningMode
         {
             return null;
         }//C# dictionary java map C++ map
+
+        #endregion
     }
 
 }
