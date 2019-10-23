@@ -29,7 +29,7 @@ namespace LBSoft.IndustrialCtrls.Leds
             if (varName == null || varName == "") return;
 
             RunningServer server = RunningServer.getServer();      
-            bool value = server.InstantRead<bool>(varName);
+            bool value = server.NormalRead<bool>(varName);
             this.State = value ? LedState.On : LedState.Off;
         }
 

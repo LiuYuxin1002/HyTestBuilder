@@ -1,23 +1,22 @@
 #pragma once
 
 #include "SlaveReadManager.h"
+#include "debugPrint.h"
 #include <stdio.h>
 #include <windows.h>
 #include <sys/timeb.h>
 #include <iostream>
 #include <string>
 #include <map>
-#include "mmsystem.h"
-#include "hiredisHelper.h"
 #pragma comment(lib, "winmm.lib")
 using namespace std;
 
 char strbuf[64] = "";
-map<char*, int> oldIOmap;
+map<string, int> oldIOmap;
 int DEFAULT_SLEEP_TIME;
 bool readState = true;
 HANDLE rthread;
-ProcessCallBack readCallBack;
+ProcessCallback readCallBack;
 
 long long getSystemTime() {
 	struct timeb t;
@@ -32,27 +31,25 @@ char* ltos(long long lld)
 }
 
 /*Boolean CAS*/
-int booleanCompareAndSwap(int target, int real, int* location) {
+int booleanCompareAndSwap(int target, int real) {
 	if (target != real) {
 		target = real;
-		*location = target;
 	}
-	return *location;
+	return target;
 }
 
 /*抖动率设置为1%忽略，即+-32767/100=327.67*/
 int ignoreThreshold = 327;
 
 /*Integer CAS*/
-int analogCompareAndSwap(int target, int real, int*location) {
+int analogCompareAndSwap(int target, int real) {
 	int sub = target - real;
 	if (ignoreThreshold > sub > -1 * ignoreThreshold) {	//进入了忽略范围: -327~327
 		return target;
 	}
 	else {
 		target = real;
-		*location = target;
-		return *location;
+		return target;
 	}
 }
 
@@ -74,20 +71,16 @@ operationResult* checkSlaveState() {
 }
 
 //将两个数字连接起来
-char* contact(int key1, int key2, char* buffer) {
-	char* key = "";
-	strcat(key, itoa(key1, buffer, 10));
-	strcat(key, "_");
-	strcat(key, itoa(key2, buffer, 10));
-	return key;
+string contact(int key1, int key2) {
+	char itc[10];
+	sprintf(itc, "%d_%d", key1, key2);
+	return itc;
 }
 
 //TODO: 
-operationResult* prepareCallBack(ProcessCallBack callBack) {
-	/*make read callBack method useful*/
-	readCallBack = callBack;
+operationResult* prepareCallBack() {
 	/*iomap is empty, we should fill it with init value*/
-	if (callBack && oldIOmap.empty()) {
+	if (readCallBack && oldIOmap.empty()) {
 		char* buffer = new char[256];
 		for (int slave = 0; slave < ec_slavecount; slave++)
 		{
@@ -95,11 +88,11 @@ operationResult* prepareCallBack(ProcessCallBack callBack) {
 
 			for (int channel = 0; channel < tmp.channelNum; channel++) {
 				/*get your key*/
-				char* key = contact(slave, channel, buffer);
+				string key = contact(slave, channel);
 				/*get you value*/
 				int value;
-				if (tmp.type == TYPE_DI)		value = getDigitalValueImpl(slave, channel);
-				else if (tmp.type == TYPE_AI)	value = getAnalogValueImpl(slave, channel);
+				if (tmp.type == TYPE_DI || tmp.type==TYPE_DO)		value = getDigitalValueImpl(slave, channel);
+				else if (tmp.type == TYPE_AI || tmp.type==TYPE_AO)	value = getAnalogValueImpl(slave, channel);
 				/*insert*/
 				oldIOmap[key] = value;
 			}
@@ -115,52 +108,61 @@ operationResult* prepareCallBack(ProcessCallBack callBack) {
 MMRESULT TimerId;
 /*redis timer_tick event*/
 void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
-	if (client == NULL) return;
-	char* buff = new char[128];
-	char* time = ltos(getSystemTime());	//get time as main-key
+	//char* buff = new char[128];
+	//char* time = ltos(getSystemTime());	//get time as main-key
 	for (int slave=0; slave<ec_slavecount; slave++)
 	{
 		SLAVET_ARR tmp = slave_arr[slave];
-		if (tmp.type==TYPE_DI)
+		if (tmp.type==TYPE_DI || tmp.type == TYPE_DO)
 		{
 			for (int channel = 0; channel < tmp.channelNum; channel++) {
 				int value = getDigitalValueImpl(slave, channel);
-				char* key = contact(slave, channel, buff);
+				string key = contact(slave, channel);
 				/*CAS*/
-				int ans = booleanCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
+				int before = oldIOmap[key];
+				int ans = booleanCompareAndSwap(oldIOmap[key], value);
 				/*add to redis if cas*/
-				if (ans == value) readCallBack(slave, channel, value);
+				if (ans != before)
+				{
+					oldIOmap[key] = value;
+					readCallBack(slave, channel, value);
+				}
 			}
 		}
-		if (tmp.type == TYPE_AI)
+		if (tmp.type == TYPE_AI || tmp.type == TYPE_AO)
 		{
 			for (int channel = 0; channel<tmp.channelNum; channel++)
 			{
 				int value = getAnalogValueImpl(slave, channel);
-				char* key = contact(slave, channel, buff);
+				string key = contact(slave, channel);
 				/*CAS*/
-				int ans = analogCompareAndSwap(oldIOmap[key], value, &oldIOmap[key]);
+				int before = oldIOmap[key];
+				int ans = analogCompareAndSwap(oldIOmap[key], value);
 				/*add to redis if cas*/
-				if (ans == value) readCallBack(slave, channel, value);
+				if (value != before)
+				{
+					oldIOmap[key] = value;
+					readCallBack(slave, channel, value);
+				}
 			}
 		}
 	}
-	delete(buff);
+	//char* time2 = ltos(getSystemTime());
+	//cout <<"执行用时："<< time2 - time << endl;
+	//delete(buff);
 }
 
-operationResult* slavePrepareToRead(ProcessCallBack processCallBack) {
-	prepareCallBack(processCallBack);
+operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
+	readCallBack = processCallBack;
 	operationResult* res = checkSlaveState();
-	if (!res) {
-		cout << "prepare finished" << endl;
-		readState = true;
-	}
+	readState = true;
 	return res;
 }
 
 operationResult* slaveReadStart() {
 	if (TimerId == NULL) {
-		TimerId = timeSetEvent(DEFAULT_SLEEP_TIME/1000, 0, readAndCallBack, NULL, TIME_PERIODIC);
+		prepareCallBack();
+		TimerId = timeSetEvent(50, 0, readAndCallBack, NULL, TIME_PERIODIC);
 	}
 	return new operationResult(0, NULL);
 }
@@ -169,12 +171,11 @@ operationResult* slaveReadStop() {
 	if (TimerId != NULL) {
 		timeKillEvent(TimerId);	//kill event
 	}
-	return 0;
+	return new operationResult(0, NULL);
 }
 
 int getDigitalValueImpl(int deviceId, int channelId) {
-	ec_send_processdata();
-	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
+	//sendAndReveive();
 
 	if (slave_arr[deviceId].type == TYPE_DI) {
 		SLAVE_DI* tmpSlave = (SLAVE_DI*)slave_arr[deviceId].ptrToSlave1;
@@ -190,8 +191,6 @@ int getDigitalValueImpl(int deviceId, int channelId) {
 }
 
 int getAnalogValueImpl(int deviceId, int channelId) {
-	ec_send_processdata();
-	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 
 	if (slave_arr[deviceId].type == TYPE_AI) {		//AI
 		SLAVE_AI* tmpSlave = (SLAVE_AI*)slave_arr[deviceId].ptrToSlave1;
@@ -244,7 +243,12 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 		default:
 			break;
 		}
-		return INF;
 	}
+	return INF;
 	
+}
+
+void sendAndReveive() {
+	ec_send_processdata();
+	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
 }

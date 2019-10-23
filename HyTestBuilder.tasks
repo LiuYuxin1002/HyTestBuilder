@@ -11,7 +11,7 @@
         "IsDone": false,
         "IsExpanded": false,
         "SubTasks": [],
-        "Status": 0
+        "Status": 2
       },
       {
         "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -47,7 +47,7 @@
         "Status": 0
       }
     ],
-    "Status": 0
+    "Status": 1
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -55,7 +55,7 @@
     "IsDone": false,
     "IsExpanded": false,
     "SubTasks": [],
-    "Status": 0
+    "Status": 2
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -69,7 +69,7 @@
         "IsDone": false,
         "IsExpanded": false,
         "SubTasks": [],
-        "Status": 0
+        "Status": 2
       },
       {
         "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -77,10 +77,10 @@
         "IsDone": false,
         "IsExpanded": false,
         "SubTasks": [],
-        "Status": 0
+        "Status": 2
       }
     ],
-    "Status": 0
+    "Status": 2
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -102,10 +102,10 @@
         "IsDone": false,
         "IsExpanded": false,
         "SubTasks": [],
-        "Status": 0
+        "Status": 2
       }
     ],
-    "Status": 0
+    "Status": 1
   },
   {
     "$type": "VSToDoList.Models.Task, VSToDoList",
@@ -132,6 +132,14 @@
       {
         "$type": "VSToDoList.Models.Task, VSToDoList",
         "Name": "channel",
+        "IsDone": false,
+        "IsExpanded": false,
+        "SubTasks": [],
+        "Status": 0
+      },
+      {
+        "$type": "VSToDoList.Models.Task, VSToDoList",
+        "Name": "精度，表示ignore",
         "IsDone": false,
         "IsExpanded": false,
         "SubTasks": [],

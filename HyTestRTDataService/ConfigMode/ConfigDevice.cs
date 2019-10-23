@@ -21,8 +21,6 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigDevice(ConfigDeviceInfo deviceInfo)
         {
-            loader = ConfigProtocol.GetDeviceLoader();
-
             ReadSubConfig(deviceInfo);
         }
 
@@ -61,7 +59,7 @@ namespace HyTestRTDataService.ConfigMode
                 IOdevice coupler = deviceGroup[0];
                 TreeNode couplerNode = new TreeNode(coupler.name);
                 channelNum += coupler.channelNum;   //If servo, neet to count channel.
-                deviceNum += deviceGroup.Count;//add to deviceNum.
+                deviceNum += deviceGroup.Count;     //add to deviceNum.
                 for(int i=1; i<deviceGroup.Count; i++)
                 {
                     
@@ -142,6 +140,8 @@ namespace HyTestRTDataService.ConfigMode
 
         public void ScanSubConfig()
         {
+            if (loader == null) loader = ConfigProtocol.GetDeviceLoader();
+
             this.deviceInfo.deviceList = loader.GetDevice();
         }
 

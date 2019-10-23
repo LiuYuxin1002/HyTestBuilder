@@ -37,3 +37,7 @@ int getAdapterNameImpl(char* adapterName, char* adapterDesc, int id) {
 		return -1;			//idÓĞÎóµÄ´íÎó´úÂë
 	}
 }
+
+void setAdapterImpl(char* adapter) {
+	strcpy(ifbuf, adapter);
+}

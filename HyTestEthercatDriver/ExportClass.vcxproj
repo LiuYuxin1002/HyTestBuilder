@@ -30,28 +30,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CLRSupport>true</CLRSupport>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -94,13 +94,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <AdditionalIncludeDirectories>soem\WinMM;soem\oshw\wpcap\Include;soem\oshw;soem\osal;soem\soem;$(SolutionDir)$(Configuration)\;hiredis\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>soem\oshw\wpcap\Include;soem\oshw;soem\osal;soem\soem;$(SolutionDir)$(Configuration)\;hiredis\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>false</ExceptionHandling>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>hiredis.lib;soem.lib;wpcap.lib;Packet.lib;Ws2_32.lib;WinMM.lib;kernel32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hiredis.lib;soem.lib;wpcap.lib;Packet.lib;Ws2_32.lib;kernel32.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>soem\oshw\wpcap\Lib\$(Configuration);soem\WinMM\;soem\oshw\wpcap\Lib;$(SolutionDir)$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ProgramDatabaseFile />
@@ -165,19 +165,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataSerialization.h" />
-    <ClInclude Include="HiredisHelper.h" />
+    <ClInclude Include="debugPrint.h" />
     <ClInclude Include="mycontext.h" />
     <ClInclude Include="NicConfigSystem.h" />
-    <ClInclude Include="RedisConfigSystem.h" />
     <ClInclude Include="SafeThreadManager.h" />
     <ClInclude Include="SlaveConfigSystem.h" />
     <ClInclude Include="SlaveReadManager.h" />
     <ClInclude Include="SlaveWirteManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataSerialization.cpp" />
-    <ClCompile Include="ExportClass.cpp" />
-    <ClCompile Include="HiredisHelper.cpp" />
+    <ClCompile Include="mycontext.cpp" />
     <ClCompile Include="NicConfigSystem.cpp" />
     <ClCompile Include="SlaveConfigSystem.cpp" />
     <ClCompile Include="SlaveReadManager.cpp" />

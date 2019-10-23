@@ -14,8 +14,10 @@ namespace HyTestRTDataService.RunningMode
         /*local variable*/
         private double[] _rdataList;
         private double[] _wdataList;    //useless.
+        private double[] _datapool;
         private int      _bufferSize_in;
         private int      _bufferSize_out;
+        private int      _bufferSize;
         /*event*/
         public EventHandler<EventArgs> bufferDataRefreshed;
         /*properties*/
@@ -33,30 +35,49 @@ namespace HyTestRTDataService.RunningMode
                 return this._bufferSize_out;
             }
         }
+        public int BufferSize
+        {
+            get
+            {
+                return this._bufferSize;
+            }
+        }
 
         public Buffer(int inputSize, int outputSize)
         {
             this._bufferSize_in = inputSize;
             this._bufferSize_out = outputSize;
+            this._bufferSize = inputSize + outputSize;
             this._rdataList = new double[inputSize];
             this._wdataList = new double[outputSize];
+            this._datapool = new double[_bufferSize];
         }
 
         public void update(int id, double value)
         {
-            if (id >= _bufferSize_in) return;
+            //if (id >= _bufferSize_in)
+            //{
+            //    throw new IndexOutOfRangeException("请检查你的角标是否超出数组大小");
+            //}
 
-            this._rdataList[id] = value;
+            //this._rdataList[id] = value;
+
+            /*tmp method. it'll be better if buffer devide from input and output.*/
+            if (id >= _bufferSize)
+            {
+                throw new IndexOutOfRangeException("请检查你的角标是否超出数组大小");
+            }
+            this._datapool[id] = value;
         }
 
         public double get(int id)
         {
-            if (id >= _bufferSize_in)
+            if (id >= _bufferSize)
             {
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException("请检查你的角标是否超出数组大小");
             }
 
-            return _rdataList[id];
+            return _datapool[id];
         }
     }
 }

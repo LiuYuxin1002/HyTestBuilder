@@ -16,7 +16,7 @@ slave_ao aos = (slave_ao)new SLAVE_AO();
 const int SLAVE_TYPE_ID = 2;		//Type bit
 const int SLAVE_CHANNEL_ID = 5;		//Channel bit
 
-#define DEFINE_SLEEP_TIME 1000		//Define sleep time(us).
+#define DEFINE_SLEEP_TIME 300		//Define sleep time(us).
 
 bool runningState = true;
 HANDLE wthread;
@@ -34,7 +34,7 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 		wkc = ec_receive_processdata(DEFINE_SLEEP_TIME/2);
 		ReleaseMutex(g_hMutex);		//unlock
 
-		osal_usleep(sleepTime * 8);
+		osal_usleep(sleepTime);
 	}
 	return 0;
 }

@@ -1,7 +1,6 @@
 ﻿using HyTestRTDataService.ConfigMode.MapEntities;
 using System.Data;
 using HyTestRTDataService.Utils;
-using System;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -45,7 +44,7 @@ namespace HyTestRTDataService.ConfigMode
             iomapInfo.ioMapTable.TableName = "IOmapTable";
             iomapInfo.inputVarNum = iomapInfo.outputVarNum = 0;
             DataTable mapTable = iomapInfo.ioMapTable;
-            //build map with dataTable.
+            /*build map with dataTable.*/
             int index = 0;
             foreach (DataRow row in mapTable.Rows)
             {
@@ -65,7 +64,7 @@ namespace HyTestRTDataService.ConfigMode
                 iomapInfo.mapNameToMax[name] = vmax;
                 iomapInfo.mapNameToMin[name] = vmin;
 
-                //count the num of input and output vars
+                /*count the num of input and output vars*/
                 if (iotype.Contains("I"))
                 {
                     iomapInfo.inputVarNum++;

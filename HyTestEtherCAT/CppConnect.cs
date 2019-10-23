@@ -14,6 +14,8 @@ namespace HyTestEtherCAT
         //设置所选网卡，如果失败返回-1，成功返回100
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setAdapterId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAdapterId(int nicId);
+        [DllImport("HyTestEthercatDriver.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void SetAdapter(StringBuilder name);
         //自动配置从站，成功更新结构体数组
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int initSlaveConfig();
@@ -28,10 +30,8 @@ namespace HyTestEtherCAT
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setDigitalValue", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setDigitalValue(int slaveId, int channel, byte value);
         /*Read*/
-        [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        public delegate void ProcessCallback(int slave, int channel, int value);    //define delegate.
-        [DllImport("HyTestEthercatDriver.dll")]
-        public static extern void doWork([MarshalAs(UnmanagedType.FunctionPtr)] ProcessCallback callbackPoint); //binding delegate.
+        [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int doWork([MarshalAs(UnmanagedType.FunctionPtr)]ProcessCallback callbackPoint);
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int getAnalogValue(int slaveId, int channelId);
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -43,4 +43,7 @@ namespace HyTestEtherCAT
         [DllImport("HyTestEthercatDriver.dll")]
         public static extern int readStop();
     }
+
+    [UnmanagedFunctionPointer(CallingConvention.StdCall)]
+    public delegate void ProcessCallback(int slave, int channel, int value);
 }

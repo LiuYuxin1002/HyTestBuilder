@@ -100,7 +100,7 @@ namespace HyTestRTDataService.RunningMode
         //Initialize buffer with its size.
         private OperationResult InitBuffer(int inputSize, int outputSize)
         {
-            buffer = new Buffer(inputSize, outputSize);
+            buffer = new Buffer(inputSize, outputSize);     //TODO: 这两个数据来源都有问题，应该用device->index
             return new OperationResult();
         }
 
@@ -114,7 +114,12 @@ namespace HyTestRTDataService.RunningMode
             }
             catch(Exception ex)
             {
-                return new OperationResult(1, ex.Message);
+                MessageBox.Show(ex.Message);
+                //return new OperationResult(1, ex.Message);
+            }
+            finally
+            {
+                if (this.conn == null) throw new NullReferenceException("EtherCAT初始化失败");
             }
             /*reader and writer*/
             reader = (IReader)conn;
@@ -122,6 +127,7 @@ namespace HyTestRTDataService.RunningMode
             if (ConnectionContext.isAutoRead)
             {
                 autoReader = (IAutoReader)conn;
+                autoReader.InitAutoReadConfig();
             }
 
             return new OperationResult();
@@ -136,7 +142,7 @@ namespace HyTestRTDataService.RunningMode
             }
             catch(Exception ex)
             {
-                return new OperationResult(1, ex.Message);
+                //return new OperationResult(1, ex.Message);
             }
 
             config = ConfigManager.config;
@@ -169,9 +175,25 @@ namespace HyTestRTDataService.RunningMode
             if (buffer == null) return;
             if (buffer.BufferSizeInput == 0) return;
 
-            string key = e.slave + "_" + e.channel;
-            string name = iomapInfo.mapPortToName[key];
-            int index = iomapInfo.mapNameToIndex[name];
+            /*get params from EventArgs e. When we config slave in soem, the compler-id=1, but 
+              in our config system, we count from 0. As for channel, we count from 1~channelnum.*/
+            int slave = e.slave - 1;
+            int channel = e.channel + 1;
+            string key = slave + "-" + channel; //becareful the key format : A-B other than A_B
+
+            int index = -1;
+            try
+            {
+                string name = iomapInfo.mapPortToName[key];
+                index = iomapInfo.mapNameToIndex[name];
+            }
+            catch(Exception ex)
+            {
+                /*you havent config this port in your iomap*/
+                log.Debug(ex.Message+
+                    "\n Maybe you havent config this port in your iomap.");
+            }
+        
             buffer.update(index, e.value);
             
             if (DataRefresh != null) DataRefresh(this, e);     //notify user control.TODO: Needed?
@@ -183,22 +205,22 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            Type varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-            int varIndex = iomapInfo.mapNameToIndex[varName];
-            if (varType == typeof(int))
+            Type type = Type.GetType(iomapInfo.mapNameToType[varName]);
+            int index = iomapInfo.mapNameToIndex[varName];
+            if (type == typeof(int))
             {
-                int value1 = (int)buffer.get(varIndex);
-                return (T)Convert.ChangeType(value1, typeof(T));
+                int value = (int)buffer.get(index);
+                return (T)Convert.ChangeType(value, typeof(T));
             }
-            else if (varType == typeof(bool))
+            else if (type == typeof(double))
             {
-                double value1 = buffer.get(varIndex);
-                return (T)Convert.ChangeType(value1, typeof(T));
+                double value = buffer.get(index);
+                return (T)Convert.ChangeType(value, typeof(T));
             }
             else
             {
-                bool value1 = DataTransformer.DoubleToBool(buffer.get(varIndex));
-                return (T)Convert.ChangeType(value1, typeof(T));
+                bool value = DataTransformer.DoubleToBool(buffer.get(index));
+                return (T)Convert.ChangeType(value, typeof(T));
             }
         }
 

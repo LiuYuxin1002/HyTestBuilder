@@ -3,7 +3,7 @@
 
 #include "mycontext.h"
 //准备读，检查连接状态，检查从站状态是不是OP; 检查redis服务器连接情况
-operationResult* slavePrepareToRead(ProcessCallBack processCallBack);
+operationResult* slavePrepareToRead(ProcessCallback processCallBack);
 
 //开始读取，控制读取线程while_true循环周期性读取
 operationResult* slaveReadStart();

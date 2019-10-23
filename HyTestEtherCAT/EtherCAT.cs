@@ -26,7 +26,8 @@ namespace HyTestEtherCAT
         /*Singleton*/
         private static EtherCAT ethercat;
         /*Flag of driver load.*/
-        //It will be set TRUE while call BuildConnection(), and will be varified in this method too.
+        /* It will be set TRUE while call BuildConnection(), 
+         * and will be varified in this method too.*/
         private bool isLoadedDriver = false;    
 
         #endregion
@@ -78,10 +79,10 @@ namespace HyTestEtherCAT
             try
             {
                 CppConnect.getAdapterNum();
-                CppConnect.setAdapterId(this.AdapterSelected);
+                CppConnect.setAdapterId(ConnectionContext.adapterSelectId);
 
-                this.GetDevice();
-                //StartTimer();
+                //this.GetDevice();
+                CppConnect.initSlaveConfig();
 
                 isLoadedDriver = true;
             }
@@ -194,14 +195,15 @@ namespace HyTestEtherCAT
 
         #region region_IAutoReader
         public event EventHandler<DataChangedEventArgs> AutoDataChanged;
-        CppConnect.ProcessCallback callback;
+        public ProcessCallback callback;
 
         public void InitAutoReadConfig()
         {
             callback = (slave, channel, value) =>
-              {
-                  AutoDataChanged(null, new DataChangedEventArgs(slave, channel, value));
-              };
+            {
+                AutoDataChanged(null, new DataChangedEventArgs(slave, channel, value));
+            };
+            //binding callback.
             CppConnect.doWork(callback);
         }
 

@@ -31,7 +31,7 @@ namespace LBSoft.IndustrialCtrls.Meters
         {
             if (varName == null && varName == "") return;
             RunningServer server = RunningServer.getServer();
-            double value = server.InstantRead<double>(varName);
+            double value = server.NormalRead<double>(varName);
             this.Value = value;
         }
         #endregion

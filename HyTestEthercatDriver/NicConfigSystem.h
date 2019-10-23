@@ -8,3 +8,5 @@ int getAdapterNumImpl();
 char* setAdapterIdImpl(int nicId);
 //获取第id个网卡的序列号和可读名称，返回正数成功
 int getAdapterNameImpl(char* adapterName, char* adapterDesc, int id);
+
+void setAdapterImpl(char* adapter);

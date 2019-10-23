@@ -2,6 +2,7 @@
 using System.Data;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using HyTestIEInterface.Entity;
+using System.Net.NetworkInformation;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -21,9 +22,8 @@ namespace HyTestRTDataService.ConfigMode
 
         public ConfigAdapter(ConfigAdapterInfo adapterInfo)
         {
-            loader = ConfigProtocol.GetAdapterLoader();
-
             ReadSubConfig(adapterInfo);
+
         }
 
         public DataTable GetAdapterTable(bool refresh)
@@ -64,11 +64,22 @@ namespace HyTestRTDataService.ConfigMode
 
         public void ScanSubConfig()
         {
+            //NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
+            //this.adapterArray = new Adapter[networks.Length];
+            //for (int i = 0; i < networks.Length; i++)
+            //{
+            //    this.adapterArray[i] = new Adapter();
+            //    this.adapterArray[i].name = networks[i].Description;
+            //    this.adapterArray[i].desc = networks[i].Id;
+            //}
+            if (loader == null) loader = ConfigProtocol.GetAdapterLoader();
+
             this.adapterArray = loader.GetAdapter();
         }
 
         public void SaveSubConfig(object var)
         {
+            if(loader==null) loader = ConfigProtocol.GetAdapterLoader();
             int adapterId = (int)var;
             int errCode = loader.SetAdapter(adapterId);
             adapterInfo.currentAdapter = adapterArray[adapterId];

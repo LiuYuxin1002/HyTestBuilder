@@ -40,8 +40,14 @@ namespace LBIndustrialCtrls.AnalogLable
             if (varName == null || varName == "") return;
 
             RunningServer server = RunningServer.getServer();
-            double value = server.InstantRead<double>(varName);
-            this.textBox1.Text = value.ToString();
+            double value = server.NormalRead<double>(varName);
+            
+            /*using delegate to avoid cross-thread changing.*/
+            Action action = () =>
+            {
+                this.textBox1.Text = value.ToString();
+            };
+            Invoke(action);
         }
 
         public DataScanner()

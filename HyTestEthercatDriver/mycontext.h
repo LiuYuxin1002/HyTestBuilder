@@ -41,8 +41,7 @@ extern int			READING_FREQUENCY;		//Hz of reading.
 extern int			REDIS_BUFFER_SIZE;
 extern char			IOmap[MAP_SIZE];
 
-typedef void(__stdcall * ProcessCallBack)(int, int, int);//读取线程函数回调
-extern ProcessCallBack readCallBack;
+typedef void(__stdcall * ProcessCallback)(int, int, int);//读取线程函数回调
 
 typedef struct operationResult {
 	int16 error;
