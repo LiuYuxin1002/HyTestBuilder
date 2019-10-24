@@ -1,7 +1,8 @@
-﻿using HyTestRTDataService.ConfigMode.MapEntities;
-using System.Collections.Generic;
-using HyTestIEInterface;
-using HyTestEtherCAT;
+﻿using System.Collections.Generic;
+using HyTestRTDataService.Interfaces;
+using HyTestRTDataService.Context;
+using HyTestRTDataService.EtherCAT;
+using HyTestRTDataService.Entities;
 
 namespace HyTestRTDataService.ConfigMode
 {
@@ -14,7 +15,7 @@ namespace HyTestRTDataService.ConfigMode
         public static IWriter writer;
         public static IDeviceLoader deviceLoader;
         public static IAdapterLoader adapterLoader;
-        public static IConnection connector;
+        public static IConnection HtEcConnector;
 
         public static ConnectionContext context;
 
@@ -33,7 +34,7 @@ namespace HyTestRTDataService.ConfigMode
             switch (currentProtocol)
             {
                 case 0:
-                    serviceEntity = EtherCAT.getEtherCAT();
+                    serviceEntity = HtEthercat.getEtherCAT();
                     break;
                 default:
                     serviceEntity = null;
@@ -83,13 +84,13 @@ namespace HyTestRTDataService.ConfigMode
         }
 
         /// <summary>
-        /// Get Connector.
+        /// Get HtEcConnector.
         /// </summary>
         /// <returns></returns>
         public static IConnection GetConnection()
         {
-            if (connector == null) connector = (IConnection)GetServiceEntity();
-            return connector;
+            if (HtEcConnector == null) HtEcConnector = (IConnection)GetServiceEntity();
+            return HtEcConnector;
         }
     }
 }

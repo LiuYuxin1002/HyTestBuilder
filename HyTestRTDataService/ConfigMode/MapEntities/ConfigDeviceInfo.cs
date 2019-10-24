@@ -1,7 +1,6 @@
-﻿using HyTestIEInterface.Entity;
+﻿using HyTestRTDataService.Entities;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace HyTestRTDataService.ConfigMode.MapEntities
 {
@@ -9,23 +8,19 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     public class ConfigDeviceInfo
     {
         //有几个耦合器就有几个group
-        public int groupNum;
+        private int groupNum;
         /*total number of devices*/
-        public int deviceNum;
+        private int deviceNum;
         /*used for buffer initialize*/
-        public int allChannelCount;
-        /// <summary>
-        /// 设备列表，管理info的对象需要提供各种呈现方式（树，表，数组等）
-        /// </summary>
-        public List<List<IOdevice>> deviceList;
+        private int allChannelCount;
+        //设备列表，管理info的对象需要提供各种呈现方式（树，表，数组等）
+        private List<List<IOdevice>> deviceList;
 
-        /// <summary>
-        /// There must be a Constructor
-        /// </summary>
-        public ConfigDeviceInfo()
-        {
-            
-        }
+        public int GroupNum { get => groupNum; set => groupNum = value; }
+        public int DeviceNum { get => deviceNum; set => deviceNum = value; }
+        public int AllChannelCount { get => allChannelCount; set => allChannelCount = value; }
+        public List<List<IOdevice>> DeviceList { get => deviceList; set => deviceList = value; }
 
+        public ConfigDeviceInfo() { }
     }
 }

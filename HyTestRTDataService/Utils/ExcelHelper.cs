@@ -18,10 +18,8 @@ namespace HyTestRTDataService.Utils
         /// 手动选择Excel，导入为DataTable
         /// </summary>
         /// <returns>点击取消返回null</returns>
-        public static DataTable SelectExcelToDataTable()
+        public static string SelectExcelToDataTable(DataTable dt)
         {
-            
-            DataTable dt = null;
             try
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -32,13 +30,14 @@ namespace HyTestRTDataService.Utils
                     return null;
                 ExcelHelper excelHelper = new ExcelHelper();
                 dt = PathToDataTable(openFileDialog.FileName);    //正式转datatable
+                return openFileDialog.FileName;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
 
-            return dt;
+            return "";
         }
 
         private static DataTable PathToDataTable(string fileName)

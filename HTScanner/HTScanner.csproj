@@ -14,7 +14,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HyTestRTDataService">
-      <HintPath>..\HyTestRTDataService\bin\Debug\HyTestRTDataService.dll</HintPath>
+    <Reference Include="HyTestEthercatDriver, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1c995f281d2d9169, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Debug\HyTestEthercatDriver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,9 +84,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LBIndustrialCtrls\LBIndustrialCtrls.csproj">
-      <Project>{B4218BC9-9736-42B9-BC99-7903FDBEBA28}</Project>
-      <Name>LBIndustrialCtrls</Name>
+    <ProjectReference Include="..\HyTestRTDataService\HyTestRTDataService.csproj">
+      <Project>{78c8a452-8a2f-4416-b74a-052d73084094}</Project>
+      <Name>HyTestRTDataService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,10 +1,13 @@
 ﻿using System;
 using HyTestRTDataService.ConfigMode;
-using HyTestIEInterface;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System.Data;
 using System.Windows.Forms;
 using log4net;
+using HyTestRTDataService.Interfaces;
+using HyTestRTDataService.Context;
+using HyTestRTDataService.Forms;
+using HyTestRTDataService.Entities;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -67,7 +70,7 @@ namespace HyTestRTDataService.RunningMode
 
             SetProtocolEntity();
 
-            InitBuffer(this.iomapInfo.inputVarNum, this.iomapInfo.outputVarNum);
+            InitBuffer(this.iomapInfo.InputVarNum, this.iomapInfo.OutputVarNum);
 
             if (autoReader != null)
             {
@@ -145,26 +148,26 @@ namespace HyTestRTDataService.RunningMode
                 //return new OperationResult(1, ex.Message);
             }
 
-            config = ConfigManager.config;
-            adapterInfo = config.adapterInfo;
-            deviceInfo = config.deviceInfo;
-            iomapInfo = config.iomapInfo;
-            testInfo = config.testInfo;
+            config = configManager.Config;
+            adapterInfo = config.AdapterInfo;
+            deviceInfo = config.DeviceInfo;
+            iomapInfo = config.IomapInfo;
+            testInfo = config.TestInfo;
 
             return new OperationResult();
         }
 
         private OperationResult InitGlobleContext()
         {
-            ConnectionContext.adapterNum = adapterInfo.adapterNum;
+            ConnectionContext.adapterNum = adapterInfo.Adapters.Length;
             //ConnectionContext.adapters = null;
-            ConnectionContext.deviceNum = deviceInfo.deviceNum;
+            ConnectionContext.deviceNum = deviceInfo.DeviceNum;
             //ConnectionContext.devices = null;
             //ConnectionContext.inputDeviceNum = 
             ConnectionContext.isAutoRead = true;    //TODO: tmperary setting
             ConnectionContext.needAdapter = true;   //TODO: tmperary setting.
             //ConnectionContext.outputDeviceNum = 
-            ConnectionContext.adapterSelectId = adapterInfo.currentAdapterId;
+            ConnectionContext.adapterSelectId = adapterInfo.Selected;
 
             return new OperationResult();
         }
@@ -184,8 +187,8 @@ namespace HyTestRTDataService.RunningMode
             int index = -1;
             try
             {
-                string name = iomapInfo.mapPortToName[key];
-                index = iomapInfo.mapNameToIndex[name];
+                string name = iomapInfo.MapPortToName[key];
+                index = iomapInfo.MapNameToIndex[name];
             }
             catch(Exception ex)
             {
@@ -205,8 +208,8 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            Type type = Type.GetType(iomapInfo.mapNameToType[varName]);
-            int index = iomapInfo.mapNameToIndex[varName];
+            Type type = Type.GetType(iomapInfo.MapNameToType[varName]);
+            int index = iomapInfo.MapNameToIndex[varName];
             if (type == typeof(int))
             {
                 int value = (int)buffer.get(index);
@@ -236,10 +239,10 @@ namespace HyTestRTDataService.RunningMode
 
             try
             {
-                varPort = new Port(iomapInfo.mapNameToPort[varName]);
-                varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-                varMax = iomapInfo.mapNameToMax[varName];
-                varMin = iomapInfo.mapNameToMin[varName];
+                varPort = new Port(iomapInfo.MapNameToPort[varName]);
+                varType = Type.GetType(iomapInfo.MapNameToType[varName]);
+                varMax = iomapInfo.MapNameToMax[varName];
+                varMin = iomapInfo.MapNameToMin[varName];
             }
             catch(Exception e)
             {
@@ -284,10 +287,10 @@ namespace HyTestRTDataService.RunningMode
 
             try
             {
-                varPort = new Port(iomapInfo.mapNameToPort[varName]);
-                varType = Type.GetType(iomapInfo.mapNameToType[varName]);
-                varMax = iomapInfo.mapNameToMax[varName];
-                varMin = iomapInfo.mapNameToMin[varName];
+                varPort = new Port(iomapInfo.MapNameToPort[varName]);
+                varType = Type.GetType(iomapInfo.MapNameToType[varName]);
+                varMax = iomapInfo.MapNameToMax[varName];
+                varMin = iomapInfo.MapNameToMin[varName];
             }
             catch(Exception e)
             {

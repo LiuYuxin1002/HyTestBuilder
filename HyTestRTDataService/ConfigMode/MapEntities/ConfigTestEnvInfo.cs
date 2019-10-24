@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HyTestRTDataService.Entities;
+using System;
 
 namespace HyTestRTDataService.ConfigMode.MapEntities
 {
@@ -12,27 +9,33 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         /// <summary>
         /// 当前协议
         /// </summary>
-        public Protocol currentProtocol;
+        private Protocol currentProtocol;
 
         /// <summary>
         /// 控件刷新频率
         /// </summary>
-        public int refreshFrequency;
+        private int refreshFrequency;
 
         /// <summary>
         /// 驱动采样频率us
         /// </summary>
-        public int driveRefreshFrequency;
+        private int driveRefreshFrequency;
 
         /// <summary>
         /// redis写入频率ms
         /// </summary>
-        public int redisRefreshFrequency;
+        private int redisRefreshFrequency;
 
         /// <summary>
         /// 最大设备连接数
         /// </summary>
-        public int maxDeviceNum;
+        private int maxDeviceNum;
+
+        public Protocol CurrentProtocol { get => currentProtocol; set => currentProtocol = value; }
+        public int RefreshFrequency { get => refreshFrequency; set => refreshFrequency = value; }
+        public int DriveRefreshFrequency { get => driveRefreshFrequency; set => driveRefreshFrequency = value; }
+        public int RedisRefreshFrequency { get => redisRefreshFrequency; set => redisRefreshFrequency = value; }
+        public int MaxDeviceNum { get => maxDeviceNum; set => maxDeviceNum = value; }
 
         public ConfigTestEnvInfo() { }
     }

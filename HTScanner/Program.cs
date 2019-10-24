@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HyTestRTDataService.ConfigMode;
+using HyTestRTDataService.ConfigMode.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +18,7 @@ namespace HTScanner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormConfigManager(new ConfigManager()));
         }
     }
 }

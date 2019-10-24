@@ -1,4 +1,4 @@
-﻿using HyTestIEInterface.Entity;
+﻿using HyTestRTDataService.Entities;
 using System;
 using System.Data;
 
@@ -7,11 +7,16 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     [Serializable]
     public class ConfigAdapterInfo
     {
-        public DataTable adapterTable;
-        public Adapter currentAdapter;
-        public int adapterNum;
-        public int currentAdapterId;
+        private Adapter[] adapterTable;
+        private int selected;
 
-        public ConfigAdapterInfo() { }
+        public Adapter[] Adapters { get => adapterTable; set => adapterTable = value; }
+        public int Selected { get => selected; set => selected = value; }
+
+        public ConfigAdapterInfo()
+        {
+            this.Adapters = new Adapter[0];
+        }
+
     }
 }

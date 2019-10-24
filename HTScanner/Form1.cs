@@ -1,12 +1,6 @@
 ﻿using HyTestRTDataService.ConfigMode;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HTScanner
@@ -19,8 +13,8 @@ namespace HTScanner
         public Form1()
         {
             InitializeComponent();
-            manager.LoadLocalConfig();
-            manager.GetDeviceTreeNoRefresh();
+            //manager.LoadLocalConfig();
+            //manager.GetDeviceTreeNoRefresh();
         }
 
         //reflush
@@ -29,7 +23,7 @@ namespace HTScanner
             try
             {
                 /*refresh tree view*/
-                root = manager.GetDeviceTreeWithRefresh();
+                root = manager.GetDevsWithFormatTree();
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(root);
                 for (int i = 0; i < treeView1.Nodes.Count; i++)

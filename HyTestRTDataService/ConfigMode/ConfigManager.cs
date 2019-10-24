@@ -6,19 +6,16 @@ using System.Xml.Serialization;
 using HyTestRTDataService.ConfigMode.MapEntities;
 using System;
 using System.ComponentModel;
+using HyTestRTDataService.Entities;
+using System.Collections.Generic;
 
 namespace HyTestRTDataService.ConfigMode
 {
     public class ConfigManager
     {
-        public static Config config = new Config();
+        private static Config config;
 
-        private ConfigAdapter configAdapter;
-        private ConfigDevice configDevice;
-        private ConfigIOmap configIOmap;
-        private ConfigTestEnvInfo configTestEnvInfo;
-
-        public ConfigTestEnvInfo ConfigTestEnvInfo { get; set; }
+        private ConfigOperator configOperator;
 
         private string configFile = null;
         public string ConfigFile
@@ -37,36 +34,41 @@ namespace HyTestRTDataService.ConfigMode
             }
         }
 
+        public Config Config { get => config; set => config = value; }
+
+        /*
+         * When configFile is cirtainly, load config.xml from this path.
+         */
         public ConfigManager(string configFile)
         {
-            this.configFile = configFile;
-           
-            InitializeComponent();
+            if (!string.IsNullOrEmpty(configFile))
+            {
+                //MessageBox.Show("将把路径设置为" + configFile);
+                this.configFile = configFile;
+            }
+            LoadLocalConfig();
         }
 
-        public ConfigManager()  //默认配置文件路径
-        {
-            InitializeComponent();
-        }
-
-        //加载xmlconfig，初始化subconfig
-        private void InitializeComponent()
+        /*
+         * Using the path default.
+         */
+        public ConfigManager()
         {
             LoadLocalConfig();
-            this.configAdapter = new ConfigAdapter(config.adapterInfo);
-            this.configDevice = new ConfigDevice(config.deviceInfo);
-            this.configIOmap = new ConfigIOmap(config.iomapInfo);
         }
 
         /// <summary>
         /// 把本地配置文件读取到Config对象中，会抛出System.Exception异常
         /// </summary>
-        public void LoadLocalConfig()
+        private OperationResult LoadLocalConfig()
         {
             if (!File.Exists(ConfigFile))
             {
-                MessageBox.Show("路径不存在文件:"+ConfigFile);
-                return;
+                string errmsg = "路径不存在文件:" + ConfigFile;
+                //MessageBox.Show(errmsg);
+                Console.WriteLine(errmsg);
+                Config = new Config();
+                return this.SaveConfig();
             }
                 
             try
@@ -75,52 +77,30 @@ namespace HyTestRTDataService.ConfigMode
                 {
                     XmlReader xr = XmlReader.Create(fs);
 
-                    //if (xr.AttributeCount == 0) return;
+                    //if (xr.AttributeCount == 0) return new OperationResult();
 
                     XmlSerializer xs = new XmlSerializer(typeof(Config));
-                    config = xs.Deserialize(xr) as Config;
+                    Config = xs.Deserialize(xr) as Config;
                     fs.Close();
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show(ex.Message);    //debug
+                throw ex;
             }
-            OnConfigChanged();
-        }
-
-        //当config变化时触发，更新所有SubConfig
-        private void OnConfigChanged()
-        {
-            if(configAdapter!=null && configDevice!=null && configIOmap != null)
+            finally
             {
-                configAdapter.ReadSubConfig(config.adapterInfo);
-                configDevice.ReadSubConfig(config.deviceInfo);
-                configIOmap.ReadSubConfig(config.iomapInfo);
+                //OnConfigChanged();
             }
-            
-        }
 
-        private void MoveSubconfigToConfig()
-        {
-            //adapter
-            config.adapterInfo = (ConfigAdapterInfo)configAdapter.GetSubConfig();
-            //device
-            config.deviceInfo = (ConfigDeviceInfo)configDevice.GetSubConfig();
-            //iomap
-            config.iomapInfo = (ConfigIOmapInfo)configIOmap.GetSubConfig();
-            //database
-            //environment
-            //...
+            return new OperationResult();
         }
 
         /// <summary>
         /// save config to local xml file
         /// </summary>
-        public void SaveConfig()
+        public OperationResult SaveConfig()
         {
-            //将所有配置集中到Config对象
-            MoveSubconfigToConfig();
             //MessageBox.Show("现在程序的运行目录是："+Application.StartupPath);
 
             using (FileStream fs = new FileStream(configFile, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
@@ -130,7 +110,7 @@ namespace HyTestRTDataService.ConfigMode
                 try
                 {
                     xs = new XmlSerializer(typeof(Config));
-                    xs.Serialize(xw, config);
+                    xs.Serialize(xw, Config);
                 }
                 catch (Exception ex)
                 {
@@ -138,68 +118,56 @@ namespace HyTestRTDataService.ConfigMode
                 }
                 fs.Close();
             }
+            return new OperationResult();
         }
 
         #region AdapterConfig
 
-        /// <summary>
-        /// Read from underlying.
-        /// </summary>
-        /// <returns>The data table of real info of this computer.</returns>
-        public DataTable GetAdapterTableWithRefresh()
+        public void RefreshNicInfo()
         {
-            return configAdapter.GetAdapterTable(true);
+            AdapterConfigOperator op = new AdapterConfigOperator();
+            op.ScanSubConfig(Config);
         }
 
-        /// <summary>
-        /// Read from local config.xml
-        /// </summary>
-        /// <returns>The data table of old adapter info</returns>
-        public DataTable GetAdapterTableNoRefresh()
+        public List<ListItem> GetNicsWithFormatComboBox()
         {
-            return configAdapter.GetAdapterTable(false);
-        }
+            Adapter[] adapters = this.Config.AdapterInfo.Adapters;
+            List<ListItem> listItems = new List<ListItem>();
 
-        /// <summary>
-        /// To save adapter config to the subConfig object.
-        /// <br>(NOT CONFIG OBJ) If you want to save in config object, you should call "SaveConfig"</br>
-        /// </summary>
-        /// <param name="id">the adapter selected</param>
-        public void SaveAdapterConfig(int id)
-        {
-            configAdapter.SaveSubConfig(id);
+            for(int i=0; i<adapters.Length; i++)
+            {
+                listItems.Add(new ListItem(i+"", adapters[i].Name));
+            }
+
+            return listItems;
         }
 
         #endregion
 
         #region DeviceConfig
 
+        public void RefreshDevInfo()
+        {
+            DevConfigOperator op = (DevConfigOperator)configOperator;
+            op.ScanSubConfig(Config);
+        }
+
         /// <summary>
         /// Read from underlying.
         /// </summary>
         /// <returns>The TreeNode of real info of currnet devices connected.</returns>
-        public TreeNode GetDeviceTreeWithRefresh()
+        public TreeNode GetDevsWithFormatTree()
         {
-            return configDevice.GetDeviceTree(true);
+            DevConfigOperator op = (DevConfigOperator)configOperator;
+            return op.ListToTree(Config);
         }
 
-        /// <summary>
-        /// Read from local config.xml
-        /// </summary>
-        /// <returns>The TreeNode of old info</returns>
-        public TreeNode GetDeviceTreeNoRefresh()
+        public DataTable GetDevsWithFormatTable()
         {
-            return configDevice.GetDeviceTree(false);
-        }
-
-        /// <summary>
-        /// To save device config to the subConfig object.
-        /// <br>(NOT CONFIG OBJ) If you want to save in config object, you should call "SaveConfig"</br>
-        /// </summary>
-        /// <param name="tn">The TreeNode Now.</param>
-        public void SaveDeviceConfig(TreeNode tn)
-        {
-            configDevice.SaveSubConfig(tn);
+            using(DevConfigOperator op = new DevConfigOperator())
+            {
+                return op.ListToTable(Config.DeviceInfo.DeviceList);
+            }
         }
 
         #endregion
@@ -209,19 +177,24 @@ namespace HyTestRTDataService.ConfigMode
         /// Read from local config.xml
         /// </summary>
         /// <returns>The DataTable of old info</returns>
-        public DataTable GetIOmapTableNoRefresh()
+        public DataTable GetIOmap()
         {
-            return configIOmap.GetIOmapTable(false);
+            return Config.IomapInfo.IoMapTable;
         }
 
-        /// <summary>
-        /// Read from a Excel File. Call this method means user have to select a
-        /// Excel File from Local File System.
-        /// </summary>
-        /// <returns>The DataTable of a Excel of io map .</returns>
-        public DataTable GetIOmapWithRefresh()
+        public string GetIOmapPath()
         {
-            return configIOmap.GetIOmapTable(true);
+            return Config.IomapInfo.FileName;
+        }
+
+        public string SetIoMap()
+        {
+            string path = null;
+            using (IoMapConfigOperator op = new IoMapConfigOperator())
+            {
+                path = op.SetIoMap(Config);
+            }
+            return path;
         }
 
         /// <summary>
@@ -231,13 +204,10 @@ namespace HyTestRTDataService.ConfigMode
         /// </summary>
         public void SaveIOmapToExcel()
         {
-            configIOmap.saveIOmapToExcel();
-        }
-
-        
-        public void SaveIOmapConfig(DataTable iomapTable)   //保存1
-        {
-            configIOmap.SaveSubConfig(iomapTable);//table一变全都要变
+            using (IoMapConfigOperator op = (IoMapConfigOperator)configOperator)
+            {
+                op.saveIOmapToExcel(Config);
+            }
         }
 
         #endregion

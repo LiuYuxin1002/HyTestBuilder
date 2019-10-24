@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyTestRTDataService.Entities;
+using System;
 using System.Data;
 
 namespace HyTestRTDataService.ConfigMode.MapEntities
@@ -7,29 +8,44 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
     public class ConfigIOmapInfo
     {
         /*Dictionary*/
-        public SerializableDictionary<string, string> mapPortToName;    //port->name
-        public SerializableDictionary<string, string> mapNameToPort;    //name->port
-        public SerializableDictionary<int, string>    mapIndexToName;   //index->name
-        public SerializableDictionary<string, int>    mapNameToIndex;   //name->index
-        public SerializableDictionary<string, string> mapNameToType;    //name->type
-        public SerializableDictionary<string, int>    mapNameToMax;     //name->max
-        public SerializableDictionary<string, int>    mapNameToMin;     //name->min
+        private SerializableDictionary<string, string>  mapPortToName;    //port->name
+        private SerializableDictionary<string, string>  mapNameToPort;    //name->port
+        private SerializableDictionary<int, string>     mapIndexToName;   //index->name
+        private SerializableDictionary<string, int>     mapNameToIndex;   //name->index
+        private SerializableDictionary<string, string>  mapNameToType;    //name->type
+        private SerializableDictionary<string, int>     mapNameToMax;     //name->max
+        private SerializableDictionary<string, int>     mapNameToMin;     //name->min
 
         /*Table*/
-        public DataTable ioMapTable;
+        private DataTable ioMapTable;
 
         /*num of input & output*/
-        public int inputVarNum, outputVarNum;
+        private int outputVarNum;
+        private int inputVarNum;
+
+        private string fileName;
+
+        public SerializableDictionary<string, string> MapPortToName { get => mapPortToName; set => mapPortToName = value; }
+        public SerializableDictionary<string, string> MapNameToPort { get => mapNameToPort; set => mapNameToPort = value; }
+        public SerializableDictionary<int, string> MapIndexToName { get => mapIndexToName; set => mapIndexToName = value; }
+        public SerializableDictionary<string, int> MapNameToIndex { get => mapNameToIndex; set => mapNameToIndex = value; }
+        public SerializableDictionary<string, string> MapNameToType { get => mapNameToType; set => mapNameToType = value; }
+        public SerializableDictionary<string, int> MapNameToMax { get => mapNameToMax; set => mapNameToMax = value; }
+        public SerializableDictionary<string, int> MapNameToMin { get => mapNameToMin; set => mapNameToMin = value; }
+        public DataTable IoMapTable { get => ioMapTable; set => ioMapTable = value; }
+        public int InputVarNum { get => inputVarNum; set => inputVarNum = value; }
+        public int OutputVarNum { get => outputVarNum; set => outputVarNum = value; }
+        public string FileName { get => fileName; set => fileName = value; }
 
         public ConfigIOmapInfo()
         {
-            mapPortToName = new SerializableDictionary<string, string>();
-            mapNameToPort = new SerializableDictionary<string, string>();
-            mapIndexToName = new SerializableDictionary<int, string>();
-            mapNameToIndex = new SerializableDictionary<string, int>();
-            mapNameToType = new SerializableDictionary<string, string>();
-            mapNameToMax = new SerializableDictionary<string, int>();
-            mapNameToMin = new SerializableDictionary<string, int>();
+            MapPortToName = new SerializableDictionary<string, string>();
+            MapNameToPort = new SerializableDictionary<string, string>();
+            MapIndexToName = new SerializableDictionary<int, string>();
+            MapNameToIndex = new SerializableDictionary<string, int>();
+            MapNameToType = new SerializableDictionary<string, string>();
+            MapNameToMax = new SerializableDictionary<string, int>();
+            MapNameToMin = new SerializableDictionary<string, int>();
         }
     }
 }

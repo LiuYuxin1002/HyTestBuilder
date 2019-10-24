@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SlaveReadManager.h"
-#include "debugPrint.h"
 #include <stdio.h>
 #include <windows.h>
 #include <sys/timeb.h>
@@ -89,9 +88,9 @@ operationResult* prepareCallBack() {
 				/*get your key*/
 				string key = contact(slave, channel);
 				/*get you value*/
-				int value;
-				if (tmp.type == TYPE_DI || tmp.type==TYPE_DO)		value = getDigitalValueImpl(slave, channel);
-				else if (tmp.type == TYPE_AI || tmp.type==TYPE_AO)	value = getAnalogValueImpl(slave, channel);
+				int value = 0;
+				if (tmp.type == TYPE_DI || tmp.type == TYPE_DO)		value = getDigitalValueImpl(slave, channel);
+				else if (tmp.type == TYPE_AI || tmp.type == TYPE_AO)	value = getAnalogValueImpl(slave, channel);
 				/*insert*/
 				oldIOmap[key] = value;
 			}
