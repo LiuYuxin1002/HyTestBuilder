@@ -67,7 +67,7 @@ namespace HyTestEtherCAT
         /// <returns>应该返回操作结果</returns>
         public OperationResult Disconnect()
         {
-            CppConnect.stopRunning();
+            Connector.stopRunning();
             return new OperationResult();
         }
 
@@ -78,11 +78,11 @@ namespace HyTestEtherCAT
 
             try
             {
-                CppConnect.getAdapterNum();
-                CppConnect.setAdapterId(ConnectionContext.adapterSelectId);
+                Connector.getAdapterNum();
+                Connector.setAdapterId(ConnectionContext.adapterSelectId);
 
                 //this.GetDevice();
-                CppConnect.initSlaveConfig();
+                Connector.initSlaveConfig();
 
                 isLoadedDriver = true;
             }
@@ -97,7 +97,7 @@ namespace HyTestEtherCAT
         #region region_IDeviceLoader
         public int InitDevice()
         {
-            return CppConnect.initSlaveConfig();
+            return Connector.initSlaveConfig();
         }
         /// <summary>
         /// 获取设备列表
@@ -117,7 +117,7 @@ namespace HyTestEtherCAT
                 StringBuilder tmpSlaveName = new StringBuilder();
                 tmpSlaveName.Capacity = 128;
 
-                int err = CppConnect.getSlaveInfo(tmpSlaveName, ref tmpSlave, i);
+                int err = Connector.getSlaveInfo(tmpSlaveName, ref tmpSlave, i);
 
                 if (tmpSlave.type == 10 || tmpSlave.type == 20) //耦合器或驱动器
                 {
@@ -176,13 +176,13 @@ namespace HyTestEtherCAT
 
         public int ReadAnalog(int deviceId, int channel)
         {
-            int tmpValue = CppConnect.getAnalogValue(deviceId, channel);
+            int tmpValue = Connector.getAnalogValue(deviceId, channel);
             return tmpValue;
         }
 
         public bool ReadBoolean(int deviceId, int channel)
         {
-            int tmpValue = CppConnect.getDigitalValue(deviceId, channel);
+            int tmpValue = Connector.getDigitalValue(deviceId, channel);
             if (tmpValue == 0) return false;
             else if (tmpValue == 1) return true;
             else
@@ -204,24 +204,24 @@ namespace HyTestEtherCAT
                 AutoDataChanged(null, new DataChangedEventArgs(slave, channel, value));
             };
             //binding callback.
-            CppConnect.doWork(callback);
+            Connector.doWork(callback);
         }
 
         public void StartAutoRead()
         {
-            CppConnect.readStart();
+            Connector.readStart();
         }
         #endregion
 
         #region region_IWriter
         public int WriteAnalog(int deviceId, int channel, int value)
         {
-            return CppConnect.setAnalogValue(deviceId, channel, value);
+            return Connector.setAnalogValue(deviceId, channel, value);
         }
 
         public int WriteBoolean(int deviceId, int channel, byte value)
         {
-            return CppConnect.setDigitalValue(deviceId, channel, value);
+            return Connector.setDigitalValue(deviceId, channel, value);
         }
         
         #endregion
@@ -235,7 +235,7 @@ namespace HyTestEtherCAT
         /// </summary>
         public Adapter[] GetAdapter()
         {
-            int adapterNum = CppConnect.getAdapterNum();    //Get adapter number first.
+            int adapterNum = Connector.getAdapterNum();    //Get adapter number first.
             Adapter[] adapters = new Adapter[adapterNum];
 
             StringBuilder tmpAdapterName = new StringBuilder();
@@ -244,7 +244,7 @@ namespace HyTestEtherCAT
             tmpAdapterDesc.Capacity = 128;
             for (int i = 0; i < adapterNum; i++)    //Get adapter name one-by-one.
             {
-                int err = CppConnect.getAdapterName(tmpAdapterName, tmpAdapterDesc, i);
+                int err = Connector.getAdapterName(tmpAdapterName, tmpAdapterDesc, i);
                 if (err <= 0)//有错误
                 {
                     throw new Exception(); //一般来讲是这个错误
@@ -266,7 +266,7 @@ namespace HyTestEtherCAT
         /// <returns>成功返回100，失败返回-1</returns>
         public int SetAdapter(int id)
         {
-            int errmsg = CppConnect.setAdapterId(id);   //返回-1表示赋值失败
+            int errmsg = Connector.setAdapterId(id);   //返回-1表示赋值失败
             if (errmsg < 0)
             {
                 throw new Exception("Adapter selected failed");

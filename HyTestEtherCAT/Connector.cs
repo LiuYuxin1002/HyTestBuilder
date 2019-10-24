@@ -4,7 +4,7 @@ using HyTestEtherCAT.localEntity;
 
 namespace HyTestEtherCAT
 {
-    public class CppConnect
+    public class Connector
     {
         //获取/设置计算机网卡信息，接收到Context结构体
         [DllImport("HyTestEthercatDriver.dll")]

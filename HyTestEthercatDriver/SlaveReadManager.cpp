@@ -44,7 +44,7 @@ int ignoreThreshold = 327;
 /*Integer CAS*/
 int analogCompareAndSwap(int target, int real) {
 	int sub = target - real;
-	if (ignoreThreshold > sub > -1 * ignoreThreshold) {	//进入了忽略范围: -327~327
+	if (-ignoreThreshold < sub && sub < ignoreThreshold) {	//进入了忽略范围: -327~327
 		return target;
 	}
 	else {
@@ -81,7 +81,6 @@ string contact(int key1, int key2) {
 operationResult* prepareCallBack() {
 	/*iomap is empty, we should fill it with init value*/
 	if (readCallBack && oldIOmap.empty()) {
-		char* buffer = new char[256];
 		for (int slave = 0; slave < ec_slavecount; slave++)
 		{
 			SLAVET_ARR tmp = slave_arr[slave];
@@ -97,7 +96,6 @@ operationResult* prepareCallBack() {
 				oldIOmap[key] = value;
 			}
 		}
-		delete(buffer);
 		return new operationResult(0, "buffer map initializing success");
 	}
 	else {
@@ -108,8 +106,6 @@ operationResult* prepareCallBack() {
 MMRESULT TimerId;
 /*redis timer_tick event*/
 void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
-	//char* buff = new char[128];
-	//char* time = ltos(getSystemTime());	//get time as main-key
 	for (int slave=0; slave<ec_slavecount; slave++)
 	{
 		SLAVET_ARR tmp = slave_arr[slave];
@@ -139,7 +135,7 @@ void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWOR
 				int before = oldIOmap[key];
 				int ans = analogCompareAndSwap(oldIOmap[key], value);
 				/*add to redis if cas*/
-				if (value != before)
+				if (ans != before)
 				{
 					oldIOmap[key] = value;
 					readCallBack(slave, channel, value);
@@ -147,9 +143,6 @@ void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWOR
 			}
 		}
 	}
-	//char* time2 = ltos(getSystemTime());
-	//cout <<"执行用时："<< time2 - time << endl;
-	//delete(buff);
 }
 
 operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
@@ -162,7 +155,7 @@ operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
 operationResult* slaveReadStart() {
 	if (TimerId == NULL) {
 		prepareCallBack();
-		TimerId = timeSetEvent(50, 0, readAndCallBack, NULL, TIME_PERIODIC);
+		TimerId = timeSetEvent(100, 0, readAndCallBack, NULL, TIME_PERIODIC);
 	}
 	return new operationResult(0, NULL);
 }

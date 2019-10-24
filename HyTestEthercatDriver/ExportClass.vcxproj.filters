@@ -54,9 +54,6 @@
     <ClInclude Include="mycontext.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DataSerialization.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="NicConfigSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -70,9 +67,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SafeThreadManager.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="debugPrint.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
