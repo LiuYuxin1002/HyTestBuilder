@@ -8,7 +8,7 @@
  */
 namespace HyTestRTDataService.Controls.Buttons
 {
-	partial class LBButton
+	partial class HTButton
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.

@@ -12,10 +12,10 @@ namespace HyTestRTDataService.Controls.Leds
     /// <summary>
     /// Description of LB7SegmentDisplay.
     /// </summary>
-    public partial class LB7SegmentDisplay : LBIndustrialCtrlBase
+    public partial class HT7SegmentDisplay : HTIndustrialCtrlBase
 	{
 		#region (* Constructor *)
-		public LB7SegmentDisplay()
+		public HT7SegmentDisplay()
 		{
 			InitializeComponent();
 		}
@@ -46,9 +46,9 @@ namespace HyTestRTDataService.Controls.Leds
 		#endregion
 
         #region (* Overrided methods *)
-        protected override ILBRenderer CreateDefaultRenderer()
+        protected override IHTRenderer CreateDefaultRenderer()
         {
-            return new LB7SegmentDisplayRenderer();
+            return new HT7SegmentDisplayRenderer();
         }
         #endregion
     }

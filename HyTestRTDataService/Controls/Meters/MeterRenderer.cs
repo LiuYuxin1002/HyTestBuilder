@@ -15,7 +15,7 @@ namespace HyTestRTDataService.Controls.Meters
     /// <summary>
     /// Base class for the renderers of the analog meter
     /// </summary>
-    public class LBAnalogMeterRenderer : LBRendererBase
+    public class HTAnalogMeterRenderer : HTRendererBase
 	{
 		#region (* Variables *)
         protected PointF needleCenter;
@@ -26,9 +26,9 @@ namespace HyTestRTDataService.Controls.Meters
         #endregion
 		
 		#region (* Properties *)
-		public LBAnalogMeter AnalogMeter
+		public HTAnalogMeter AnalogMeter
 		{
-			get { return this.Control as LBAnalogMeter; }
+			get { return this.Control as HTAnalogMeter; }
 		}
 		#endregion
 
@@ -91,7 +91,7 @@ namespace HyTestRTDataService.Controls.Meters
             if (Gr == null)
                 throw new ArgumentNullException("Gr");
 
-            LBAnalogMeter ctrl = this.AnalogMeter;
+            HTAnalogMeter ctrl = this.AnalogMeter;
             if (ctrl == null)
                 throw new NullReferenceException("Associated control is not valid");
 
@@ -133,7 +133,7 @@ namespace HyTestRTDataService.Controls.Meters
 				return false;
 			
 			Color bodyColor = this.AnalogMeter.BodyColor;
-			Color cDark = LBColorManager.StepColor ( bodyColor, 20 );
+			Color cDark = HTColorManager.StepColor ( bodyColor, 20 );
 			
 			LinearGradientBrush br1 = new LinearGradientBrush ( rc, 
 			                                                   bodyColor,
@@ -175,7 +175,7 @@ namespace HyTestRTDataService.Controls.Meters
 			
 			double stepVal = rangeAngle / ( maxValue - minValue );
 
-			foreach ( LBMeterThreshold sect in this.AnalogMeter.Thresholds )
+			foreach ( HTMeterThreshold sect in this.AnalogMeter.Thresholds )
 			{
 				
 				float startPathAngle	= ( (float)(startAngle + ( stepVal *  sect.StartValue )));
@@ -213,8 +213,8 @@ namespace HyTestRTDataService.Controls.Meters
 			float w = rc.Width;
 			float h = rc.Height;
 
-			float incr = LBMath.GetRadian(( endAngle - startAngle ) / (( scaleDivisions - 1 )* (scaleSubDivisions + 1)));
-			float currentAngle = LBMath.GetRadian( startAngle );
+			float incr = HTMath.GetRadian(( endAngle - startAngle ) / (( scaleDivisions - 1 )* (scaleSubDivisions + 1)));
+			float currentAngle = HTMath.GetRadian( startAngle );
 			float radius = (float)(w / 2 - ( w * 0.08));
 			float rulerValue = (float)minValue;
 
@@ -309,7 +309,7 @@ namespace HyTestRTDataService.Controls.Meters
 			val = (( endAngle - startAngle ) * val) / 100;
 		    val += startAngle;
 			
-		    float angle = LBMath.GetRadian ( val );
+		    float angle = HTMath.GetRadian ( val );
 		    
 		    float cx = needleCenter.X;
 		    float cy = needleCenter.Y;
@@ -321,19 +321,19 @@ namespace HyTestRTDataService.Controls.Meters
 				    
 		    ptStart.X = cx;
 		    ptStart.Y = cy;		    
-		    angle = LBMath.GetRadian(val + 10);
+		    angle = HTMath.GetRadian(val + 10);
 			ptEnd.X = (float)(cx + (w * .09F) * Math.Cos(angle));
 		    ptEnd.Y = (float)(cy + (w * .09F) * Math.Sin(angle));
 		    pth1.AddLine ( ptStart, ptEnd );
 		    
 		    ptStart = ptEnd;
-		    angle = LBMath.GetRadian(val);
+		    angle = HTMath.GetRadian(val);
 		    ptEnd.X = (float)(cx + radius * Math.Cos(angle));
 		    ptEnd.Y = (float)(cy + radius * Math.Sin(angle));
 			pth1.AddLine ( ptStart, ptEnd );
 
 		    ptStart = ptEnd;
-		    angle = LBMath.GetRadian(val - 10);
+		    angle = HTMath.GetRadian(val - 10);
 			ptEnd.X = (float)(cx + (w * .09F) * Math.Cos(angle));
 		    ptEnd.Y = (float)(cy + (w * .09F) * Math.Sin(angle));
 		    pth1.AddLine ( ptStart, ptEnd );
@@ -364,7 +364,7 @@ namespace HyTestRTDataService.Controls.Meters
 			Gr.FillEllipse ( brTransp, _rc );
 			
 			clr1 = clr;
-			Color clr2 = LBColorManager.StepColor ( clr, 75 );
+			Color clr2 = HTColorManager.StepColor ( clr, 75 );
 			LinearGradientBrush br1 = new LinearGradientBrush( rc,
 			                                                   clr1,
 			                                                   clr2,

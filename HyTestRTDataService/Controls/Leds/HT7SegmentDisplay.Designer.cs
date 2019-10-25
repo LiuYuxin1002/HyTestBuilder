@@ -1,14 +1,15 @@
 ﻿/*
  * Creato da SharpDevelop.
  * Utente: lucabonotto
- * Data: 26/02/2008
- * Ora: 11.44
+ * Data: 26/03/2009
+ * Ora: 10.42
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 namespace HyTestRTDataService.Controls.Leds
+
 {
-	public partial class LBLed
+	partial class HT7SegmentDisplay
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
@@ -36,20 +37,14 @@ namespace HyTestRTDataService.Controls.Leds
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.tmrBlink = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
-			// tmrBlink
-			// 
-			this.tmrBlink.Interval = 500;
-			this.tmrBlink.Tick += new System.EventHandler(this.OnBlink);
-			// 
-			// LBLed
+			// LB7SegmentDisplay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Name = "LBLed";
+			this.Name = "LB7SegmentDisplay";
+			this.Size = new System.Drawing.Size(44, 65);
 			this.ResumeLayout(false);
 		}
 	}

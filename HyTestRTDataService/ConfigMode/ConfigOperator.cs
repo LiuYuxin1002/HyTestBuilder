@@ -67,49 +67,52 @@ namespace HyTestRTDataService.ConfigMode
         /// Refresh iomaps with datatable which is input now.
         /// </summary>
         /// <!--table structure：ID，var name，data type，I/O，port number-->
-        private void RefreshMap()
+        public void RefreshMap(Config config)
         {
-            //if (this.iomapInfo.IoMapTable == null) return;
+            if (config.IomapInfo.IoMapTable == null) return;
 
-            //iomapInfo.IoMapTable.TableName = "IOmapTable";
-            //iomapInfo.InputVarNum = iomapInfo.OutputVarNum = 0;
-            //DataTable mapTable = iomapInfo.IoMapTable;
-            ///*build map with dataTable.*/
-            //int index = 0;
-            //foreach (DataRow row in mapTable.Rows)
-            //{
-            //    int id = index++;
-            //    string name = (string)row["变量名"];
-            //    string type = (string)row["变量类型"];
-            //    string iotype = (string)row["IO类型"];
-            //    string port = (string)row["端口号"];
-            //    int vmax = int.Parse((string)row["变量上限"]);
-            //    int vmin = int.Parse((string)row["变量下限"]);
+            config.IomapInfo.IoMapTable.TableName = "IOmapTable";
+            config.IomapInfo.InputVarNum = config.IomapInfo.OutputVarNum = 0;
+            DataTable mapTable = config.IomapInfo.IoMapTable;
+            /*build map with dataTable.*/
+            int index = 0;
+            foreach (DataRow row in mapTable.Rows)
+            {
+                int id = index++;
+                string name = (string)row["变量名"];
+                string type = (string)row["变量类型"];
+                string iotype = (string)row["IO类型"];
+                string port = (string)row["端口号"];
+                int vmax = int.Parse((string)row["变量上限"]);
+                int vmin = int.Parse((string)row["变量下限"]);
 
-            //    iomapInfo.MapIndexToName[id] = name;
-            //    iomapInfo.MapNameToIndex[name] = id;
-            //    iomapInfo.MapNameToPort[name] = port;
-            //    iomapInfo.MapPortToName[port] = name;
-            //    iomapInfo.MapNameToType[name] = type;
-            //    iomapInfo.MapNameToMax[name] = vmax;
-            //    iomapInfo.MapNameToMin[name] = vmin;
+                config.IomapInfo.MapIndexToName[id] = name;
+                config.IomapInfo.MapNameToIndex[name] = id;
+                config.IomapInfo.MapNameToPort[name] = port;
+                config.IomapInfo.MapPortToName[port] = name;
+                config.IomapInfo.MapNameToType[name] = type;
+                config.IomapInfo.MapNameToMax[name] = vmax;
+                config.IomapInfo.MapNameToMin[name] = vmin;
 
-            //    /*count the num of input and output vars*/
-            //    if (iotype.Contains("I"))
-            //    {
-            //        iomapInfo.InputVarNum++;
-            //    }
-            //    else if (iotype.Contains("O"))
-            //    {
-            //        iomapInfo.OutputVarNum++;
-            //    }
-            //}
+                /*count the num of input and output vars*/
+                if (iotype.Contains("I"))
+                {
+                    config.IomapInfo.InputVarNum++;
+                }
+                else if (iotype.Contains("O"))
+                {
+                    config.IomapInfo.OutputVarNum++;
+                }
+            }
         }
 
         #region 公共方法
         public string SetIoMap(Config config)
         {
-            return ExcelHelper.SelectExcelToDataTable(config.IomapInfo.IoMapTable);
+            string fileName = "";
+            config.IomapInfo.IoMapTable = ExcelHelper.SelectExcelToDataTable(out fileName);
+            RefreshMap(config);
+            return fileName;
         }
         #endregion
 

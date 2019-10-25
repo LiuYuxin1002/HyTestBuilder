@@ -11,7 +11,7 @@ namespace HyTestRTDataService.Controls.Utils
 	/// <summary>
 	/// Mathematic Functions
 	/// </summary>
-	public class LBMath : Object
+	public class HTMath : Object
 	{
 		public static float GetRadian ( float val )
 		{

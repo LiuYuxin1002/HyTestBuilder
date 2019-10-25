@@ -24,19 +24,19 @@ namespace HyTestRTDataService.Controls.Scopes
     /// <remarks>
     /// 详细参照如下的博客:
     /// </remarks>
-    public partial class UserCurve : UserControl
+    public partial class HTUserCurve : UserControl
     {
         #region Constructor
 
         /// <summary>
         /// 实例化一个曲线显示的控件
         /// </summary>
-        public UserCurve( )
+        public HTUserCurve( )
         {
             InitializeComponent( );
             DoubleBuffered = true;
             random = new Random( );
-            data_list = new Dictionary<string, HslCurveItem>( );
+            data_list = new Dictionary<string, HTCurveItem>( );
             auxiliary_lines = new List<AuxiliaryLine>( );
 
             format_left = new StringFormat
@@ -101,7 +101,7 @@ namespace HyTestRTDataService.Controls.Scopes
 
         #region Data Member
 
-        Dictionary<string, HslCurveItem> data_list = null;  // 等待显示的实际数据
+        Dictionary<string, HTCurveItem> data_list = null;  // 等待显示的实际数据
         private string[] data_text = null;                  // 等待显示的横轴信息
 
         #endregion
@@ -432,7 +432,7 @@ namespace HyTestRTDataService.Controls.Scopes
             else
             {
                 if (data == null) data = new float[] { };
-                data_list.Add( key, new HslCurveItem( )
+                data_list.Add( key, new HTCurveItem( )
                 {
                     Data = data,
                     LineThickness = thickness,
@@ -491,7 +491,7 @@ namespace HyTestRTDataService.Controls.Scopes
 
             if (data_list.ContainsKey( key ))
             {
-                HslCurveItem curve = data_list[key];
+                HTCurveItem curve = data_list[key];
                 if (curve.Data != null)
                 {
                     if (value_IsAbscissaStrech)
@@ -588,7 +588,7 @@ namespace HyTestRTDataService.Controls.Scopes
         {
             if (data_list.ContainsKey( key ))
             {
-                HslCurveItem curve = data_list[key];
+                HTCurveItem curve = data_list[key];
                 curve.Visible = visible;
                 Invalidate( );
             }
@@ -605,7 +605,7 @@ namespace HyTestRTDataService.Controls.Scopes
             {
                 if (data_list.ContainsKey( key ))
                 {
-                    HslCurveItem curve = data_list[key];
+                    HTCurveItem curve = data_list[key];
                     curve.Visible = visible;
                 }
             }
@@ -1062,12 +1062,12 @@ namespace HyTestRTDataService.Controls.Scopes
     /// <summary>
     /// 曲线数据对象
     /// </summary>
-    internal class HslCurveItem
+    internal class HTCurveItem
     {
         /// <summary>
         /// 实例化一个对象
         /// </summary>
-        public HslCurveItem( )
+        public HTCurveItem( )
         {
             LineThickness = 1.0f;
             IsLeftFrame = true;

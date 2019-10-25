@@ -1,6 +1,6 @@
 ﻿namespace HyTestRTDataService.Controls.Base
 {
-    partial class LBIndustrialCtrlBase
+    partial class HTIndustrialCtrlBase
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.

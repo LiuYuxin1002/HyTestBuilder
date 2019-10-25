@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace HyTestRTDataService.Forms
 {
-    public partial class DelayCloseForm : Form
+    public partial class HTAutoCloseForm : Form
     {
         Timer formExistTimer;//延时关闭计时器
         /// <summary>
@@ -12,7 +12,7 @@ namespace HyTestRTDataService.Forms
         /// </summary>
         /// <param name="showWords">要显示的文字</param>
         /// <param name="interval">窗口要持续的时间（ms），默认500ms</param>
-        public DelayCloseForm(String showWords ,int interval = 500)
+        public HTAutoCloseForm(String showWords ,int interval = 500)
         {
             InitializeComponent();
             //显示文字
@@ -32,11 +32,11 @@ namespace HyTestRTDataService.Forms
             this.Close();
         }
 
-        private void DelayCloseForm_Load(object sender, EventArgs e)
+        private void HTAutoCloseForm_Load(object sender, EventArgs e)
         {
             AnimateWindow(this.Handle, 1, AW_BLEND);//淡入
         }
-        private void DelayCloseForm_FormClosing(object sender, EventArgs e)
+        private void HTAutoCloseForm_FormClosing(object sender, EventArgs e)
         {
             AnimateWindow(this.Handle, 1, AW_BLEND);//淡出
         }

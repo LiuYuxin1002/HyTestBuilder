@@ -1,6 +1,6 @@
 ﻿namespace HyTestRTDataService.Controls.Meters
 {
-    partial class LBDigitalMeter
+    partial class HTDigitalMeter
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.

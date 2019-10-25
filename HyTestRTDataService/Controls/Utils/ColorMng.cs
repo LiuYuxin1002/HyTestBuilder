@@ -12,7 +12,7 @@ namespace HyTestRTDataService.Controls.Utils
 	/// <summary>
 	/// Manager for color
 	/// </summary>
-	public class LBColorManager : Object
+	public class HTColorManager : Object
 	{
 		public static double BlendColour ( double fg, double bg, double alpha )
 		{
@@ -52,9 +52,9 @@ namespace HyTestRTDataService.Controls.Utils
 				ialpha = 1.0F + ialpha;  // 0 = transparent fg; 1 = opaque fg
 			}
 		    
-			r = (byte)(LBColorManager.BlendColour(r, bg, ialpha));
-			g = (byte)(LBColorManager.BlendColour(g, bg, ialpha));
-			b = (byte)(LBColorManager.BlendColour(b, bg, ialpha));
+			r = (byte)(HTColorManager.BlendColour(r, bg, ialpha));
+			g = (byte)(HTColorManager.BlendColour(g, bg, ialpha));
+			b = (byte)(HTColorManager.BlendColour(b, bg, ialpha));
 	    
 			return Color.FromArgb ( a, r, g, b );
 		}

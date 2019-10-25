@@ -8,7 +8,7 @@
  */
 namespace HyTestRTDataService.Controls.Meters
 {
-	public partial class LBAnalogMeter
+	public partial class HTAnalogMeter
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.

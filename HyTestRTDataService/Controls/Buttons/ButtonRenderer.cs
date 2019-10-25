@@ -16,7 +16,7 @@ namespace HyTestRTDataService.Controls.Buttons
     /// <summary>
     /// Base class for the button renderers
     /// </summary>
-    public class LBButtonRenderer : LBRendererBase
+    public class HTButtonRenderer : HTRendererBase
 	{
 		#region (* Variables *)
 		protected RectangleF 	rectCtrl;
@@ -26,7 +26,7 @@ namespace HyTestRTDataService.Controls.Buttons
 		#endregion
 				
 		#region (* Constructor *)
-		public LBButtonRenderer()
+		public HTButtonRenderer()
 		{
 			this.rectCtrl = new RectangleF ( 0, 0, 0, 0 );
 		}
@@ -49,7 +49,7 @@ namespace HyTestRTDataService.Controls.Buttons
 			this.rectCtrl.Width = this.Button.Width;
 			this.rectCtrl.Height = this.Button.Height;
 
-            if (this.Button.Style == LBButton.ButtonStyle.Circular)
+            if (this.Button.Style == HTButton.ButtonStyle.Circular)
             {
                 if (rectCtrl.Width < rectCtrl.Height)
                     rectCtrl.Height = rectCtrl.Width;
@@ -100,9 +100,9 @@ namespace HyTestRTDataService.Controls.Buttons
         /// <summary>
         /// Get the associated button object
         /// </summary>
-		public LBButton Button
+		public HTButton Button
 		{
-			get { return this.Control as LBButton; }
+			get { return this.Control as HTButton; }
 		}
 		#endregion
 		
@@ -144,15 +144,15 @@ namespace HyTestRTDataService.Controls.Buttons
 				return false;
 			
 			Color bodyColor = this.Button.ButtonColor;
-			Color cDark = LBColorManager.StepColor ( bodyColor, 20 );
+			Color cDark = HTColorManager.StepColor ( bodyColor, 20 );
 			
 			LinearGradientBrush br1 = new LinearGradientBrush ( rc, 
 			                                                   bodyColor,
 			                                                   cDark,
 			                                                   45 );
 
-            if ((this.Button.Style == LBButton.ButtonStyle.Circular) ||
-                (this.Button.Style == LBButton.ButtonStyle.Elliptical))
+            if ((this.Button.Style == HTButton.ButtonStyle.Circular) ||
+                (this.Button.Style == HTButton.ButtonStyle.Elliptical))
             {
                 Gr.FillEllipse(br1, rc);
             }
@@ -163,7 +163,7 @@ namespace HyTestRTDataService.Controls.Buttons
                 path.Dispose();
             }
 			
-			if ( this.Button.State == LBButton.ButtonState.Pressed )
+			if ( this.Button.State == HTButton.ButtonState.Pressed )
 			{			
 			    RectangleF _rc = rc;
 			    _rc.Inflate ( -15F * this.drawRatio, -15F * drawRatio );
@@ -171,8 +171,8 @@ namespace HyTestRTDataService.Controls.Buttons
 			                                                       cDark,
 			                                                       bodyColor,
 			                                                       45 );
-                if ((this.Button.Style == LBButton.ButtonStyle.Circular) ||
-                    (this.Button.Style == LBButton.ButtonStyle.Elliptical))
+                if ((this.Button.Style == HTButton.ButtonStyle.Circular) ||
+                    (this.Button.Style == HTButton.ButtonStyle.Elliptical))
                 {
                     Gr.FillEllipse(br2, _rc);
                 }
@@ -209,7 +209,7 @@ namespace HyTestRTDataService.Controls.Buttons
 	        String str = this.Button.Label;
 	
 	        Color bodyColor = this.Button.ButtonColor;
-			Color cDark = LBColorManager.StepColor ( bodyColor, 20 );
+			Color cDark = HTColorManager.StepColor ( bodyColor, 20 );
 
 			SizeF size = Gr.MeasureString ( str, font );
 			

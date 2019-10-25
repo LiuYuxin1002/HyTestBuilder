@@ -116,7 +116,6 @@
     <Compile Include="ConfigMode\ConfigOperator.cs" />
     <Compile Include="ConfigMode\ConfigManager.cs" />
     <Compile Include="ConfigMode\ConfigProtocol.cs" />
-    <Compile Include="ConfigMode\IConfigBase.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigAdapterInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigDeviceInfo.cs" />
     <Compile Include="ConfigMode\MapEntities\ConfigIOmapInfo.cs" />
@@ -124,62 +123,62 @@
     <Compile Include="BasicFramework\Entities\Port.cs" />
     <Compile Include="BasicFramework\Entities\Protocol.cs" />
     <Compile Include="BasicFramework\Entities\SerializableDictionary.cs" />
-    <Compile Include="Controls\Base\LBIndustrialCtrlBase.cs">
+    <Compile Include="Controls\Base\HTIndustrialCtrlBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Base\LBIndustrialCtrlBase.Designer.cs">
-      <DependentUpon>LBIndustrialCtrlBase.cs</DependentUpon>
+    <Compile Include="Controls\Base\HTIndustrialCtrlBase.Designer.cs">
+      <DependentUpon>HTIndustrialCtrlBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Base\Renderer.cs" />
     <Compile Include="Controls\Buttons\ButtonRenderer.cs" />
-    <Compile Include="Controls\Buttons\LBButton.cs">
+    <Compile Include="Controls\Buttons\HTButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Buttons\LBButton.Designer.cs">
-      <DependentUpon>LBButton.cs</DependentUpon>
+    <Compile Include="Controls\Buttons\HTButton.Designer.cs">
+      <DependentUpon>HTButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Leds\LB7SegmentDisplay.cs">
+    <Compile Include="Controls\Leds\HT7SegmentDisplay.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Leds\LB7SegmentDisplay.Designer.cs">
-      <DependentUpon>LB7SegmentDisplay.cs</DependentUpon>
+    <Compile Include="Controls\Leds\HT7SegmentDisplay.Designer.cs">
+      <DependentUpon>HT7SegmentDisplay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Leds\LB7SegmentDisplayRenderer.cs" />
-    <Compile Include="Controls\Leds\LBLed.cs">
+    <Compile Include="Controls\Leds\HT7SegmentDisplayRenderer.cs" />
+    <Compile Include="Controls\Leds\HTLed.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Leds\LBLed.Designer.cs">
-      <DependentUpon>LBLed.cs</DependentUpon>
+    <Compile Include="Controls\Leds\HTLed.Designer.cs">
+      <DependentUpon>HTLed.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Leds\LedRenderer.cs" />
-    <Compile Include="Controls\Meters\LBAnalogMeter.cs">
+    <Compile Include="Controls\Meters\HTAnalogMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Meters\LBAnalogMeter.Designer.cs">
-      <DependentUpon>LBAnalogMeter.cs</DependentUpon>
+    <Compile Include="Controls\Meters\HTAnalogMeter.Designer.cs">
+      <DependentUpon>HTAnalogMeter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Meters\LBDigitalMeter.cs">
+    <Compile Include="Controls\Meters\HTDigitalMeter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Meters\LBDigitalMeter.Designer.cs">
-      <DependentUpon>LBDigitalMeter.cs</DependentUpon>
+    <Compile Include="Controls\Meters\HTDigitalMeter.Designer.cs">
+      <DependentUpon>HTDigitalMeter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Meters\LBDigitalMeterRenderer.cs" />
-    <Compile Include="Controls\Meters\LBMeterThreshold.cs" />
+    <Compile Include="Controls\Meters\HTDigitalMeterRenderer.cs" />
+    <Compile Include="Controls\Meters\HTMeterThreshold.cs" />
     <Compile Include="Controls\Meters\MeterRenderer.cs" />
-    <Compile Include="Controls\Scopes\DataScanner.cs">
+    <Compile Include="Controls\Scopes\HTDataScanner.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Scopes\DataScanner.Designer.cs">
-      <DependentUpon>DataScanner.cs</DependentUpon>
+    <Compile Include="Controls\Scopes\HTDataScanner.Designer.cs">
+      <DependentUpon>HTDataScanner.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Scopes\SoftBasic.cs" />
     <Compile Include="Controls\Scopes\SoftPainting.cs" />
-    <Compile Include="Controls\Scopes\UserCurve.cs">
+    <Compile Include="Controls\Scopes\HTUserCurve.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\Scopes\UserCurve.Designer.cs">
-      <DependentUpon>UserCurve.cs</DependentUpon>
+    <Compile Include="Controls\Scopes\HTUserCurve.Designer.cs">
+      <DependentUpon>HTUserCurve.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\Utils\ColorMng.cs" />
     <Compile Include="Controls\Utils\MathFunc.cs" />
@@ -187,15 +186,20 @@
     <Compile Include="EtherCAT\HtEthercat.cs" />
     <Compile Include="EtherCAT\HtEcEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RunningMode\DataTransformer.cs" />
     <Compile Include="RunningMode\ReadingTask.cs" />
     <Compile Include="RunningMode\Buffer.cs" />
     <Compile Include="RunningMode\RunningServer.cs" />
-    <Compile Include="Controls\Forms\DelayCloseForm.cs">
+    <Compile Include="Controls\Forms\HTAutoCloseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controls\Forms\DelayCloseForm.designer.cs">
-      <DependentUpon>DelayCloseForm.cs</DependentUpon>
+    <Compile Include="Controls\Forms\HTAutoCloseForm.designer.cs">
+      <DependentUpon>HTAutoCloseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\ExcelHelper.cs" />
     <Compile Include="Utils\XmlHelper.cs" />
@@ -220,26 +224,30 @@
     <EmbeddedResource Include="ConfigMode\Components\FormIoMap.resx">
       <DependentUpon>FormIoMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Buttons\LBButton.resx">
-      <DependentUpon>LBButton.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Buttons\HTButton.resx">
+      <DependentUpon>HTButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Forms\DelayCloseForm.resx">
-      <DependentUpon>DelayCloseForm.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Forms\HTAutoCloseForm.resx">
+      <DependentUpon>HTAutoCloseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Leds\LB7SegmentDisplay.resx">
-      <DependentUpon>LB7SegmentDisplay.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Leds\HT7SegmentDisplay.resx">
+      <DependentUpon>HT7SegmentDisplay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Leds\LBLed.resx">
-      <DependentUpon>LBLed.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Leds\HTLed.resx">
+      <DependentUpon>HTLed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Meters\LBDigitalMeter.resx">
-      <DependentUpon>LBDigitalMeter.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Meters\HTDigitalMeter.resx">
+      <DependentUpon>HTDigitalMeter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Scopes\DataScanner.resx">
-      <DependentUpon>DataScanner.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Scopes\HTDataScanner.resx">
+      <DependentUpon>HTDataScanner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\Scopes\UserCurve.resx">
-      <DependentUpon>UserCurve.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\Scopes\HTUserCurve.resx">
+      <DependentUpon>HTUserCurve.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

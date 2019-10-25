@@ -97,6 +97,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -117,6 +118,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.Apply_btn);
             this.splitContainer1.Size = new System.Drawing.Size(737, 974);
             this.splitContainer1.SplitterDistance = 900;
+            this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBox_database
@@ -607,11 +609,10 @@
             // 
             // Confirm_btn
             // 
-            this.Confirm_btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Confirm_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Confirm_btn.Location = new System.Drawing.Point(332, 16);
             this.Confirm_btn.Name = "Confirm_btn";
-            this.Confirm_btn.Size = new System.Drawing.Size(127, 42);
+            this.Confirm_btn.Size = new System.Drawing.Size(127, 45);
             this.Confirm_btn.TabIndex = 2;
             this.Confirm_btn.Text = "确认";
             this.Confirm_btn.UseVisualStyleBackColor = true;
@@ -619,11 +620,10 @@
             // 
             // Cancel_btn
             // 
-            this.Cancel_btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cancel_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Cancel_btn.Location = new System.Drawing.Point(465, 16);
             this.Cancel_btn.Name = "Cancel_btn";
-            this.Cancel_btn.Size = new System.Drawing.Size(127, 42);
+            this.Cancel_btn.Size = new System.Drawing.Size(127, 45);
             this.Cancel_btn.TabIndex = 1;
             this.Cancel_btn.Text = "取消";
             this.Cancel_btn.UseVisualStyleBackColor = true;
@@ -631,11 +631,10 @@
             // 
             // Apply_btn
             // 
-            this.Apply_btn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Apply_btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Apply_btn.Location = new System.Drawing.Point(598, 16);
             this.Apply_btn.Name = "Apply_btn";
-            this.Apply_btn.Size = new System.Drawing.Size(127, 42);
+            this.Apply_btn.Size = new System.Drawing.Size(127, 45);
             this.Apply_btn.TabIndex = 0;
             this.Apply_btn.Text = "应用";
             this.Apply_btn.UseVisualStyleBackColor = true;
@@ -647,8 +646,7 @@
             // 
             // FormConfigManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(737, 974);
             this.ControlBox = false;
@@ -659,7 +657,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统配置面板";
-            this.TopMost = true;
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

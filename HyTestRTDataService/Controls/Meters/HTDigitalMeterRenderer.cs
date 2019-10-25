@@ -3,10 +3,10 @@ using HyTestRTDataService.Controls.Base;
 
 namespace HyTestRTDataService.Controls.Meters
 {
-    public class LBDigitalMeterRenderer : LBRendererBase
+    public class HTDigitalMeterRenderer : HTRendererBase
     {
         #region (* Constructor *)
-        public LBDigitalMeterRenderer()
+        public HTDigitalMeterRenderer()
         {
         }
         #endregion
@@ -26,9 +26,9 @@ namespace HyTestRTDataService.Controls.Meters
         #endregion
 
         #region (* Properties *)
-        public LBDigitalMeter Meter
+        public HTDigitalMeter Meter
         {
-            get { return this.Control as LBDigitalMeter; }
+            get { return this.Control as HTDigitalMeter; }
         }
         #endregion
 

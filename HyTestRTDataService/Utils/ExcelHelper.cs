@@ -18,7 +18,7 @@ namespace HyTestRTDataService.Utils
         /// 手动选择Excel，导入为DataTable
         /// </summary>
         /// <returns>点击取消返回null</returns>
-        public static string SelectExcelToDataTable(DataTable dt)
+        public static DataTable SelectExcelToDataTable(out string fileName)
         {
             try
             {
@@ -26,18 +26,22 @@ namespace HyTestRTDataService.Utils
                 openFileDialog.RestoreDirectory = true;
                 openFileDialog.Filter = "Excel文件|*.xlsx";
                 openFileDialog.FilterIndex = 1;
+
                 if (openFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    fileName = "";
                     return null;
+                }
                 ExcelHelper excelHelper = new ExcelHelper();
-                dt = PathToDataTable(openFileDialog.FileName);    //正式转datatable
-                return openFileDialog.FileName;
+                fileName = openFileDialog.FileName;
+                return PathToDataTable(openFileDialog.FileName);    //正式转datatable
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\n" + ex.StackTrace);
             }
-
-            return "";
+            fileName = "";
+            return null;
         }
 
         private static DataTable PathToDataTable(string fileName)

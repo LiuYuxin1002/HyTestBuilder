@@ -15,7 +15,7 @@ namespace HyTestRTDataService.Controls.Leds
     /// <summary>
     /// Base class for the led renderers
     /// </summary>
-    public class LBLedRenderer : LBRendererBase
+    public class HTLedRenderer : HTRendererBase
 	{
 		#region (* Variables *)
         private RectangleF drawRect;
@@ -27,9 +27,9 @@ namespace HyTestRTDataService.Controls.Leds
         /// <summary>
         /// Get the associated led object
         /// </summary>
-		public LBLed Led
+		public HTLed Led
 		{
-			get { return this.Control as LBLed; }
+			get { return this.Control as HTLed; }
 		}
 		#endregion
 
@@ -64,7 +64,7 @@ namespace HyTestRTDataService.Controls.Leds
             this.rectLed = drawRect;
             this.rectLabel = drawRect;
 
-            if (this.Led.LabelPosition == LBLed.LedLabelPosition.Bottom)
+            if (this.Led.LabelPosition == HTLed.LedLabelPosition.Bottom)
             {
                 this.rectLed.X = (this.rectLed.Width * 0.5F) - (this.Led.LedSize.Width * 0.5F);
                 this.rectLed.Width = this.Led.LedSize.Width;
@@ -73,7 +73,7 @@ namespace HyTestRTDataService.Controls.Leds
                 this.rectLabel.Y = this.rectLed.Bottom;
             }
 
-            else if (this.Led.LabelPosition == LBLed.LedLabelPosition.Top)
+            else if (this.Led.LabelPosition == HTLed.LedLabelPosition.Top)
             {
                 this.rectLed.X = (this.rectLed.Width * 0.5F) - (this.Led.LedSize.Width * 0.5F);
                 this.rectLed.Y = this.rectLed.Height - this.Led.LedSize.Height;
@@ -83,7 +83,7 @@ namespace HyTestRTDataService.Controls.Leds
                 this.rectLabel.Height = this.rectLed.Top;
             }
 
-            else if (this.Led.LabelPosition == LBLed.LedLabelPosition.Left)
+            else if (this.Led.LabelPosition == HTLed.LedLabelPosition.Left)
             {
                 this.rectLed.X = this.rectLed.Width - this.Led.LedSize.Width;
                 this.rectLed.Width = this.Led.LedSize.Width;
@@ -92,7 +92,7 @@ namespace HyTestRTDataService.Controls.Leds
                 this.rectLabel.Width = this.rectLabel.Width - this.rectLed.Width;
             }
 
-            else if (this.Led.LabelPosition == LBLed.LedLabelPosition.Right)
+            else if (this.Led.LabelPosition == HTLed.LedLabelPosition.Right)
             {
                 this.rectLed.Width = this.Led.LedSize.Width;
                 this.rectLed.Height = this.Led.LedSize.Height;
@@ -112,7 +112,7 @@ namespace HyTestRTDataService.Controls.Leds
             if (Gr == null)
                 throw new ArgumentNullException("Gr");
 
-            LBLed ctrl = this.Led;
+            HTLed ctrl = this.Led;
             if (ctrl == null)
                 throw new NullReferenceException("Associated control is not valid");
 
@@ -168,8 +168,8 @@ namespace HyTestRTDataService.Controls.Leds
 			if ( this.Led == null )
 				return false;
 	
-			Color cDarkOff = LBColorManager.StepColor ( Color.LightGray, 20 );
-			Color cDarkOn = LBColorManager.StepColor ( this.Led.LedColor, 60 );
+			Color cDarkOff = HTColorManager.StepColor ( Color.LightGray, 20 );
+			Color cDarkOn = HTColorManager.StepColor ( this.Led.LedColor, 60 );
 			
 			LinearGradientBrush brOff = new LinearGradientBrush ( rc, 
 			                                                   	  Color.Gray,
@@ -180,37 +180,37 @@ namespace HyTestRTDataService.Controls.Leds
 			                                                  	 this.Led.LedColor,
 			                                                  	 cDarkOn,
 			                                                  	 45 );
-			if ( this.Led.State == LBLed.LedState.Blink )
+			if ( this.Led.State == HTLed.LedState.Blink )
 			{
                 if (this.Led.BlinkIsOn == false)
                 {
-                    if (this.Led.Style == LBLed.LedStyle.Circular)
+                    if (this.Led.Style == HTLed.LedStyle.Circular)
                         Gr.FillEllipse(brOff, rc);
-                    else if (this.Led.Style == LBLed.LedStyle.Rectangular)
+                    else if (this.Led.Style == HTLed.LedStyle.Rectangular)
                         Gr.FillRectangle(brOff, rc);
                 }
                 else
                 {
-                    if (this.Led.Style == LBLed.LedStyle.Circular)
+                    if (this.Led.Style == HTLed.LedStyle.Circular)
                         Gr.FillEllipse(brOn, rc);
-                    else if (this.Led.Style == LBLed.LedStyle.Rectangular)
+                    else if (this.Led.Style == HTLed.LedStyle.Rectangular)
                         Gr.FillRectangle(brOn, rc);
                 }
 			}
 			else
 			{
-                if (this.Led.State == LBLed.LedState.Off)
+                if (this.Led.State == HTLed.LedState.Off)
                 {
-                    if (this.Led.Style == LBLed.LedStyle.Circular)
+                    if (this.Led.Style == HTLed.LedStyle.Circular)
                         Gr.FillEllipse(brOff, rc);
-                    else if (this.Led.Style == LBLed.LedStyle.Rectangular)
+                    else if (this.Led.Style == HTLed.LedStyle.Rectangular)
                         Gr.FillRectangle(brOff, rc);
                 }
                 else
                 {
-                    if (this.Led.Style == LBLed.LedStyle.Circular)
+                    if (this.Led.Style == HTLed.LedStyle.Circular)
                         Gr.FillEllipse(brOn, rc);
-                    else if (this.Led.Style == LBLed.LedStyle.Rectangular)
+                    else if (this.Led.Style == HTLed.LedStyle.Rectangular)
                         Gr.FillRectangle(brOn, rc);
                 }
 			}
@@ -243,21 +243,21 @@ namespace HyTestRTDataService.Controls.Leds
 			float vPos = 0;
 			switch ( this.Led.LabelPosition )
 			{
-				case LBLed.LedLabelPosition.Top:
+				case HTLed.LedLabelPosition.Top:
 					hPos = (float)(rc.Width*0.5F)-(float)(size.Width*0.5F);
 					vPos = rc.Bottom - size.Height;
 					break;
 					
-				case LBLed.LedLabelPosition.Bottom:
+				case HTLed.LedLabelPosition.Bottom:
 					hPos = (float)(rc.Width*0.5F)-(float)(size.Width*0.5F);
 					break;
 					
-				case LBLed.LedLabelPosition.Left:
+				case HTLed.LedLabelPosition.Left:
 					hPos = rc.Width - size.Width;
 					vPos = (float)(rc.Height*0.5F)-(float)(size.Height*0.5F);
 					break;
 					
-				case LBLed.LedLabelPosition.Right:
+				case HTLed.LedLabelPosition.Right:
 					vPos = (float)(rc.Height*0.5F)-(float)(size.Height*0.5F);
 					break;
 			}

@@ -17,7 +17,7 @@ namespace HyTestRTDataService.Controls.Base
     /// <summary>
     /// Base class for the IndustrialCtrls
     /// </summary>
-    public partial class LBIndustrialCtrlBase : UserControl
+    public partial class HTIndustrialCtrlBase : UserControl
     {
         #region (* My Alter *)
         [Browsable(true)]
@@ -43,7 +43,7 @@ namespace HyTestRTDataService.Controls.Base
         #endregion
 
         #region (* Constructor *)
-        public LBIndustrialCtrlBase()
+        public HTIndustrialCtrlBase()
         {
             InitializeComponent();
 
@@ -75,9 +75,9 @@ namespace HyTestRTDataService.Controls.Base
         /// <summary>
         /// Default renderer of the control
         /// </summary>
-        private ILBRenderer _defaultRenderer = null;
+        private IHTRenderer _defaultRenderer = null;
         [Browsable(false)]
-        public ILBRenderer DefaultRenderer
+        public IHTRenderer DefaultRenderer
         {
             get { return this._defaultRenderer; }
         }
@@ -85,9 +85,9 @@ namespace HyTestRTDataService.Controls.Base
         /// <summary>
         /// User defined renderer
         /// </summary>
-        private ILBRenderer _renderer = null;
+        private IHTRenderer _renderer = null;
         [Browsable(false)]
-        public ILBRenderer Renderer
+        public IHTRenderer Renderer
         {
             set 
             {
@@ -177,9 +177,9 @@ namespace HyTestRTDataService.Controls.Base
         /// Call from the constructor to create the default renderer
         /// </summary>
         /// <returns></returns>
-        protected virtual ILBRenderer CreateDefaultRenderer()
+        protected virtual IHTRenderer CreateDefaultRenderer()
         {
-            return new LBRendererBase();
+            return new HTRendererBase();
         }
 
         /// <summary>
@@ -201,10 +201,10 @@ namespace HyTestRTDataService.Controls.Base
     /// <summary>
     /// Base class for the controls renderer
     /// </summary>
-    public class LBRendererBase : ILBRenderer
+    public class HTRendererBase : IHTRenderer
     {
         #region (* Constructor *)
-        public LBRendererBase()
+        public HTRendererBase()
         {
         }
         #endregion

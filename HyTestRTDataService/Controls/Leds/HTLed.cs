@@ -16,7 +16,7 @@ namespace HyTestRTDataService.Controls.Leds
     /// <summary>
     /// Class for the Led control.
     /// </summary>
-    public partial class LBLed : LBIndustrialCtrlBase
+    public partial class HTLed : HTIndustrialCtrlBase
 	{
         #region(* My Alter *)
         public override void OnDataChanged(object sender, EventArgs e)
@@ -79,14 +79,14 @@ namespace HyTestRTDataService.Controls.Leds
 		#endregion
 		
 		#region (* Constructor *)
-		public LBLed()
+		public HTLed()
 		{
 			InitializeComponent();
 
             this.Size           = new Size(20, 20);
 			this.ledColor		= Color.Red;
-			this.state 			= LBLed.LedState.Off;
-            this.style          = LBLed.LedStyle.Circular;
+			this.state 			= HTLed.LedState.Off;
+            this.style          = HTLed.LedStyle.Circular;
 			this.blinkIsOn		= false;
 			this.ledSize		= new SizeF ( 10F, 10F );
 			this.labelPosition = LedLabelPosition.Top;
@@ -233,9 +233,9 @@ namespace HyTestRTDataService.Controls.Leds
 		#endregion
 		
 		#region (* Overrided methods *)
-        protected override ILBRenderer CreateDefaultRenderer()
+        protected override IHTRenderer CreateDefaultRenderer()
         {
-            return new LBLedRenderer();
+            return new HTLedRenderer();
         }
 		#endregion
 	}

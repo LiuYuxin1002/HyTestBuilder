@@ -1,6 +1,6 @@
 ﻿namespace HyTestRTDataService.Forms
 {
-    partial class DelayCloseForm
+    partial class HTAutoCloseForm
     {
         /// <summary>
         /// Required designer variable.
@@ -54,8 +54,8 @@
             this.Name = "DelayCloseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DelayCloseForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DelayCloseForm_FormClosing);
-            this.Load += new System.EventHandler(this.DelayCloseForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HTAutoCloseForm_FormClosing);
+            this.Load += new System.EventHandler(this.HTAutoCloseForm_Load);
             this.ResumeLayout(false);
 
         }

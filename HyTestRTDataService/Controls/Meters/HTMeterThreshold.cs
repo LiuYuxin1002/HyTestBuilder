@@ -13,7 +13,7 @@ namespace HyTestRTDataService.Controls.Meters
     /// <summary>
     /// Class for the meter threshold
     /// </summary>
-	public class LBMeterThreshold
+	public class HTMeterThreshold
 	{
 		#region (* Properties variables *)
 		private	Color	color = Color.Empty;
@@ -22,7 +22,7 @@ namespace HyTestRTDataService.Controls.Meters
 		#endregion
 		
 		#region (* Constructor *)
-		public LBMeterThreshold()
+		public HTMeterThreshold()
 		{			
 		}
 		#endregion
@@ -64,22 +64,22 @@ namespace HyTestRTDataService.Controls.Meters
 	/// <summary>
 	/// Collection of the meter thresolds
 	/// </summary>
-	public class LBMeterThresholdCollection : CollectionBase
+	public class HTMeterThresholdCollection : CollectionBase
     {
         #region (* Properties variables *)
 		private bool _IsReadOnly = false;
 		#endregion
 		
 		#region (* Constructor *)
-        public LBMeterThresholdCollection()
+        public HTMeterThresholdCollection()
         {
         }
 		#endregion
 		
         #region (* Properties *)
-        public virtual LBMeterThreshold this[int index]
+        public virtual HTMeterThreshold this[int index]
         {
-            get { return (LBMeterThreshold)InnerList[index]; }
+            get { return (HTMeterThreshold)InnerList[index]; }
             set { InnerList[index] = value; }
         }
 
@@ -94,7 +94,7 @@ namespace HyTestRTDataService.Controls.Meters
 		/// Add an object to the collection
 		/// </summary>
 		/// <param name="sector"></param>
-		public virtual void Add(LBMeterThreshold sector)
+		public virtual void Add(HTMeterThreshold sector)
         {
             InnerList.Add(sector);
         }
@@ -104,7 +104,7 @@ namespace HyTestRTDataService.Controls.Meters
 		/// </summary>
 		/// <param name="sector"></param>
 		/// <returns></returns>
-        public virtual bool Remove(LBMeterThreshold sector) 
+        public virtual bool Remove(HTMeterThreshold sector) 
         {
             bool result = false;
 
@@ -112,7 +112,7 @@ namespace HyTestRTDataService.Controls.Meters
             for (int i = 0; i < InnerList.Count; i++)
             {
                 //store current index being checked
-                LBMeterThreshold obj = (LBMeterThreshold)InnerList[i];
+                HTMeterThreshold obj = (HTMeterThreshold)InnerList[i];
 
                 //compare the values of the objects
                 if ( ( obj.StartValue == sector.StartValue ) && 
@@ -133,10 +133,10 @@ namespace HyTestRTDataService.Controls.Meters
         /// </summary>
         /// <param name="sector"></param>
         /// <returns></returns>
-        public bool Contains(LBMeterThreshold sector)
+        public bool Contains(HTMeterThreshold sector)
         {
             //loop through the inner ArrayList
-            foreach (LBMeterThreshold obj in InnerList)
+            foreach (HTMeterThreshold obj in InnerList)
             {
                //compare the values of the objects
                 if ( ( obj.StartValue == sector.StartValue ) && 
@@ -156,7 +156,7 @@ namespace HyTestRTDataService.Controls.Meters
         /// </summary>
         /// <param name="LBAnalogMeterSectorArray"></param>
         /// <param name="index"></param>
-        public virtual void CopyTo(LBMeterThreshold[] MeterThresholdArray, int index)
+        public virtual void CopyTo(HTMeterThreshold[] MeterThresholdArray, int index)
         {
             throw new Exception("This Method is not valid for this implementation.");
         }

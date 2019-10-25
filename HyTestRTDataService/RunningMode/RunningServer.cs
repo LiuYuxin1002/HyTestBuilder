@@ -266,7 +266,7 @@ namespace HyTestRTDataService.RunningMode
             }
             else
             {
-                new DelayCloseForm("变量类型不正确，请检查配置文件").Show();
+                new HTAutoCloseForm("变量类型不正确，请检查配置文件").Show();
                 return default(T);
             }
         }

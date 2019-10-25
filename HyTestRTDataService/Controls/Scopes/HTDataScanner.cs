@@ -5,7 +5,7 @@ using HyTestRTDataService.RunningMode;
 
 namespace HyTestRTDataService.Controls.Scopes
 {
-    public partial class DataScanner : UserControl
+    public partial class HTDataScanner : UserControl
     {
         [Category("AAA DATA BINDING")]
         public string VarName
@@ -43,7 +43,7 @@ namespace HyTestRTDataService.Controls.Scopes
             Invoke(action);
         }
 
-        public DataScanner()
+        public HTDataScanner()
         {
             InitializeComponent();
             //data subjection

@@ -25,6 +25,7 @@ namespace HyTestRTDataService.ConfigMode.Components
             BindingChangedEvent();
 
             this.manager = manager;
+            isSavedConfig = true;
 
             ShowConfigOnForm();
         }
@@ -81,8 +82,10 @@ namespace HyTestRTDataService.ConfigMode.Components
         //将Config显示出来
         private void ShowConfigOnForm()
         {
-            //manager.LoadLocalConfig();//done.
+            /*show nic setting*/
             this.comboBox_NIC.DataSource = manager.GetNicsWithFormatComboBox();
+            this.comboBox_NIC.SelectedIndex = manager.Config.AdapterInfo.Selected;
+            /*show iomap setting*/
             this.textBox_iomapPath.Text = manager.GetIOmapPath();
         }
 
@@ -180,6 +183,7 @@ namespace HyTestRTDataService.ConfigMode.Components
         {
             string path = manager.SetIoMap();
             this.textBox_iomapPath.Text = path;
+            manager.Config.IomapInfo.FileName = path;
         }
 
         private void Button_mapConfig_Click(object sender, EventArgs e)

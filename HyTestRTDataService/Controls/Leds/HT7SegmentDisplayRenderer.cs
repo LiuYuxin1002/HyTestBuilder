@@ -17,7 +17,7 @@ namespace HyTestRTDataService.Controls.Leds
     /// <summary>
     /// Description of LB7SegmentDisplayRenderer.
     /// </summary>
-    public class LB7SegmentDisplayRenderer : LBRendererBase
+    public class HT7SegmentDisplayRenderer : HTRendererBase
     {
         #region (* Constants *)
         public const int WIDTH_PIXEL     = 11;
@@ -48,7 +48,7 @@ namespace HyTestRTDataService.Controls.Leds
         #endregion
 
         #region (* Contructor *)
-        public LB7SegmentDisplayRenderer()
+        public HT7SegmentDisplayRenderer()
 		{
             this.CreateSegmetsData();
             this.CreateDefPointsCoordinates();
@@ -69,7 +69,7 @@ namespace HyTestRTDataService.Controls.Leds
             if (Gr == null)
                 throw new ArgumentNullException("Gr");
 
-            LB7SegmentDisplay ctrl = this.Display;
+            HT7SegmentDisplay ctrl = this.Display;
             if (ctrl == null)
                 throw new NullReferenceException("Associated control is not valid");
 
@@ -84,10 +84,10 @@ namespace HyTestRTDataService.Controls.Leds
 
         #region (* Properies *)
         [Browsable(false)]
-        public LB7SegmentDisplay Display
+        public HT7SegmentDisplay Display
 		{
 			set { this.Control = value; }
-            get { return this.Control as LB7SegmentDisplay; }
+            get { return this.Control as HT7SegmentDisplay; }
 		}
 
         [Browsable(false)]

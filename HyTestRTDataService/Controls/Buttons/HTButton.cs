@@ -16,7 +16,7 @@ namespace HyTestRTDataService.Controls.Buttons
     /// <summary>
     /// Description of LBButton.
     /// </summary>
-    public partial class LBButton : LBIndustrialCtrlBase
+    public partial class HTButton : HTIndustrialCtrlBase
 	{
 		#region (* Enumeratives *)
 		/// <summary>
@@ -54,7 +54,7 @@ namespace HyTestRTDataService.Controls.Buttons
         #endregion
 
         #region (* Constructor *)
-        public LBButton()
+        public HTButton()
 		{
 			// Initialization
 			InitializeComponent();
@@ -72,9 +72,9 @@ namespace HyTestRTDataService.Controls.Buttons
 		#endregion
 
         #region (* Overrided methods *)
-        protected override ILBRenderer CreateDefaultRenderer()
+        protected override IHTRenderer CreateDefaultRenderer()
         {
-            return new LBButtonRenderer();
+            return new HTButtonRenderer();
         }
         #endregion
 
@@ -181,7 +181,7 @@ namespace HyTestRTDataService.Controls.Buttons
                 this.tmrRepeat.Interval = this.repeatInterval;
 			
 			// Call the delagate
-			LBButtonEventArgs ev = new LBButtonEventArgs();
+			HTButtonEventArgs ev = new HTButtonEventArgs();
 			ev.State = this.State;
             this.OnButtonRepeatState(ev);
 
@@ -200,7 +200,7 @@ namespace HyTestRTDataService.Controls.Buttons
 			this.Invalidate();
 			
 			// Call the delagates
-			LBButtonEventArgs ev = new LBButtonEventArgs();
+			HTButtonEventArgs ev = new HTButtonEventArgs();
 			ev.State = this.State;
 			this.OnButtonChangeState ( ev );
 
@@ -224,7 +224,7 @@ namespace HyTestRTDataService.Controls.Buttons
 			this.Invalidate();
 			
 			// Call the delagates
-			LBButtonEventArgs ev = new LBButtonEventArgs();
+			HTButtonEventArgs ev = new HTButtonEventArgs();
 			ev.State = this.State;
 			this.OnButtonChangeState ( ev );
 
@@ -243,7 +243,7 @@ namespace HyTestRTDataService.Controls.Buttons
 		/// Method for call the delagetes
 		/// </summary>
 		/// <param name="e"></param>
-		protected virtual void OnButtonChangeState( LBButtonEventArgs e )
+		protected virtual void OnButtonChangeState( HTButtonEventArgs e )
 	    {
 	        if( this.ButtonChangeState != null )
 	            this.ButtonChangeState( this, e );
@@ -258,7 +258,7 @@ namespace HyTestRTDataService.Controls.Buttons
 		/// Method for call the delagetes
 		/// </summary>
 		/// <param name="e"></param>
-        protected virtual void OnButtonRepeatState(LBButtonEventArgs e)
+        protected virtual void OnButtonRepeatState(HTButtonEventArgs e)
 	    {
             if (this.ButtonRepeatState != null)
                 this.ButtonRepeatState(this, e);
@@ -272,15 +272,15 @@ namespace HyTestRTDataService.Controls.Buttons
 	/// <summary>
 	/// Class for events delegates
 	/// </summary>
-	public class LBButtonEventArgs : EventArgs
+	public class HTButtonEventArgs : EventArgs
 	{
-		private LBButton.ButtonState state;
+		private HTButton.ButtonState state;
 			
-		public LBButtonEventArgs()
+		public HTButtonEventArgs()
 		{			
 		}
 	
-		public LBButton.ButtonState State
+		public HTButton.ButtonState State
 		{
 			get { return this.state; }
 			set { this.state = value; }
@@ -289,8 +289,8 @@ namespace HyTestRTDataService.Controls.Buttons
 	#endregion
 	
 	#region (* Delegates *)
-	public delegate void ButtonChangeState ( object sender, LBButtonEventArgs e );
-	public delegate void ButtonRepeatState ( object sender, LBButtonEventArgs e );
+	public delegate void ButtonChangeState ( object sender, HTButtonEventArgs e );
+	public delegate void ButtonRepeatState ( object sender, HTButtonEventArgs e );
 	#endregion
 	
 	#endregion

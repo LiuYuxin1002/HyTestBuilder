@@ -17,7 +17,7 @@ namespace HyTestRTDataService.Controls.Meters
     /// <summary>
     /// Class for the digital meter
     /// </summary>
-    public partial class LBDigitalMeter : LBIndustrialCtrlBase
+    public partial class HTDigitalMeter : HTIndustrialCtrlBase
     {
         #region(* My Alter *)
         public override void OnDataChanged(object sender, EventArgs e)
@@ -40,7 +40,7 @@ namespace HyTestRTDataService.Controls.Meters
         #endregion
 
         #region (* Constructor *)
-        public LBDigitalMeter()
+        public HTDigitalMeter()
         {
             InitializeComponent();
 
@@ -67,9 +67,9 @@ namespace HyTestRTDataService.Controls.Meters
 
                 foreach (Control disp in this.Controls)
                 {
-                    if (disp.GetType() == typeof(LB7SegmentDisplay))
+                    if (disp.GetType() == typeof(HT7SegmentDisplay))
                     {
-                        LB7SegmentDisplay d = disp as LB7SegmentDisplay;
+                        HT7SegmentDisplay d = disp as HT7SegmentDisplay;
 
                         d.BackColor = value;
                     }
@@ -92,9 +92,9 @@ namespace HyTestRTDataService.Controls.Meters
 
                 foreach (Control disp in this.Controls)
                 {
-                    if (disp.GetType() == typeof(LB7SegmentDisplay))
+                    if (disp.GetType() == typeof(HT7SegmentDisplay))
                     {
-                        LB7SegmentDisplay d = disp as LB7SegmentDisplay;
+                        HT7SegmentDisplay d = disp as HT7SegmentDisplay;
 
                         d.ForeColor = value;
                     }
@@ -177,7 +177,7 @@ namespace HyTestRTDataService.Controls.Meters
 
                 if ( str.Length > this._numDigits )
                 {
-                    foreach (LB7SegmentDisplay d in this.Controls)
+                    foreach (HT7SegmentDisplay d in this.Controls)
                         d.Value = (int)'E';
 
                     return;
@@ -189,11 +189,11 @@ namespace HyTestRTDataService.Controls.Meters
                     int id = idx;
                     if (this.Signed != false)
                         id++;
-                    LB7SegmentDisplay d = this.Controls[id] as LB7SegmentDisplay;
+                    HT7SegmentDisplay d = this.Controls[id] as HT7SegmentDisplay;
                     d.Value = Convert.ToInt32(str[idx].ToString());
                 }
 
-                LB7SegmentDisplay s = this.Controls["digit_sign"] as LB7SegmentDisplay;
+                HT7SegmentDisplay s = this.Controls["digit_sign"] as HT7SegmentDisplay;
                 if (s != null)
                 {
                     if (sign != false)
@@ -212,9 +212,9 @@ namespace HyTestRTDataService.Controls.Meters
         /// Create the default renderer
         /// </summary>
         /// <returns></returns>
-        protected override ILBRenderer CreateDefaultRenderer()
+        protected override IHTRenderer CreateDefaultRenderer()
         {
-            return new LBDigitalMeterRenderer();
+            return new HTDigitalMeterRenderer();
         }
         /// <summary>
         /// Resize of the control
@@ -252,7 +252,7 @@ namespace HyTestRTDataService.Controls.Meters
 
             if (this.Signed != false)
             {
-                LB7SegmentDisplay disp = new LB7SegmentDisplay();
+                HT7SegmentDisplay disp = new HT7SegmentDisplay();
                 disp.Name = "digit_sign";
                 disp.Value = -1;
                 this.Controls.Add(disp);
@@ -260,7 +260,7 @@ namespace HyTestRTDataService.Controls.Meters
 
             for (int idx = 0; idx < count; idx++)
             {
-                LB7SegmentDisplay disp = new LB7SegmentDisplay();
+                HT7SegmentDisplay disp = new HT7SegmentDisplay();
 
                 disp.Name = "digit_" + idx.ToString();
 
@@ -289,9 +289,9 @@ namespace HyTestRTDataService.Controls.Meters
             bool signFind = false;
             foreach (Control disp in this.Controls)
             {
-                if (disp.GetType() == typeof(LB7SegmentDisplay))
+                if (disp.GetType() == typeof(HT7SegmentDisplay))
                 {
-                    LB7SegmentDisplay d = disp as LB7SegmentDisplay;
+                    HT7SegmentDisplay d = disp as HT7SegmentDisplay;
 
                     int idDigit = 0;
                     if (d.Name.Contains("digit_sign") != false)

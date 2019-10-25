@@ -15,7 +15,7 @@ namespace HyTestRTDataService.Controls.Meters
 	/// <summary>
 	/// Class for the analog meter control
 	/// </summary>
-	public partial class LBAnalogMeter : LBIndustrialCtrlBase
+	public partial class HTAnalogMeter : HTIndustrialCtrlBase
 	{		
 		#region (* Enumerator *)
 		public enum AnalogMeterStyle
@@ -35,7 +35,7 @@ namespace HyTestRTDataService.Controls.Meters
 		private double								maxValue;
 		private int									scaleDivisions;
 		private int									scaleSubDivisions;
-		private LBMeterThresholdCollection			listThreshold;
+		private HTMeterThresholdCollection			listThreshold;
 		#endregion
 
 		#region (* Class variables *)
@@ -44,7 +44,7 @@ namespace HyTestRTDataService.Controls.Meters
 		#endregion
 		
 		#region (* Costructors *)
-		public LBAnalogMeter()
+		public HTAnalogMeter()
 		{
 			// Initialization
 			InitializeComponent();
@@ -64,7 +64,7 @@ namespace HyTestRTDataService.Controls.Meters
 			this.scaleSubDivisions = 10;
 
 			// Create the sector list
-			this.listThreshold = new LBMeterThresholdCollection();
+			this.listThreshold = new HTMeterThresholdCollection();
 			
 			this.CalculateDimensions();
 		}
@@ -228,7 +228,7 @@ namespace HyTestRTDataService.Controls.Meters
 		}
 
 		[Browsable(false)]
-		public LBMeterThresholdCollection Thresholds
+		public HTMeterThresholdCollection Thresholds
 		{
 			get { return this.listThreshold; }
 		}
@@ -247,9 +247,9 @@ namespace HyTestRTDataService.Controls.Meters
 		#endregion
 		
         #region (* Overrided methods *)
-        protected override ILBRenderer CreateDefaultRenderer()
+        protected override IHTRenderer CreateDefaultRenderer()
         {
-            return new LBAnalogMeterRenderer();
+            return new HTAnalogMeterRenderer();
         }
         #endregion
 	}

@@ -197,6 +197,18 @@ namespace HyTestRTDataService.ConfigMode
             return path;
         }
 
+        public Config RefreshIOInfo(DataTable dt, string fileName)
+        {
+            using(IoMapConfigOperator op = new IoMapConfigOperator())
+            {
+                this.Config.IomapInfo.IoMapTable = dt;
+                this.Config.IomapInfo.FileName = fileName;
+                op.RefreshMap(Config);
+            }
+
+            return Config;
+        }
+
         /// <summary>
         /// Export current IOmap in subConfig to a <c>Excel</c>. You should notice that 
         /// you have to call "SaveIOmapConfig" before this method if you changed

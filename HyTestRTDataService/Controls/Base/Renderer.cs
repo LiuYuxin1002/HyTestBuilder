@@ -13,7 +13,7 @@ namespace HyTestRTDataService.Controls.Base
 	/// Renderer interface for all
     /// LBSoft.IndustrialCtrls renderer
 	/// </summary>
-    public interface ILBRenderer : IDisposable
+    public interface IHTRenderer : IDisposable
 	{
 		object Control
 		{
