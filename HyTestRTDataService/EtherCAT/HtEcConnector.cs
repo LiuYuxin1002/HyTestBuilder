@@ -13,7 +13,7 @@ namespace HyTestRTDataService.EtherCAT
         //设置所选网卡，如果失败返回-1，成功返回100
         [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setAdapterId", CallingConvention = CallingConvention.Cdecl)]
         public static extern int setAdapterId(int nicId);
-        [DllImport("HyTestEthercatDriver.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("HyTestEthercatDriver.dll", EntryPoint = "setAdapter" ,CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public static extern void SetAdapter(StringBuilder name);
         //自动配置从站，成功更新结构体数组
         [DllImport("HyTestEthercatDriver.dll")]

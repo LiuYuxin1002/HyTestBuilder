@@ -78,17 +78,16 @@ namespace HyTestRTDataService.EtherCAT
 
             try
             {
-                HtEcConnector.getAdapterNum();
-                HtEcConnector.setAdapterId(ConnectionContext.adapterSelectId);
+                SetAdapter(ConnectionContext.adapterId);
 
                 //this.GetDevice();
-                HtEcConnector.initSlaveConfig();
+                ConnectionContext.deviceNum = HtEcConnector.initSlaveConfig();
 
                 isLoadedDriver = true;
             }
             catch (Exception ex)
             {
-                //log.Error(ex.Message+"\n"+ex.StackTrace);
+                //log.Error(ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -104,8 +103,8 @@ namespace HyTestRTDataService.EtherCAT
         /// </summary>
         public List<List<IOdevice>> GetDevice()
         {
-            int slaveNum = InitDevice();
-            ConnectionContext.deviceNum = slaveNum == 0 ? 0 : slaveNum;
+            BuildConnection();
+            int slaveNum = ConnectionContext.deviceNum;
 
             List<List<IOdevice>> deviceContiner = new List<List<IOdevice>>();   //全部device
             List<IOdevice> devGroup = null;     //一个device组
@@ -266,7 +265,7 @@ namespace HyTestRTDataService.EtherCAT
         /// <returns>成功返回100，失败返回-1</returns>
         public OperationResult SetAdapter(string id)
         {
-            StringBuilder sb = new StringBuilder(id);
+            StringBuilder sb = new StringBuilder("\\Device\\NPF_" + id);
             HtEcConnector.SetAdapter(sb);   //返回-1表示赋值失败
             return new OperationResult();
         }

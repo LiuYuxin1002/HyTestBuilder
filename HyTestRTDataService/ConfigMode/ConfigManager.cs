@@ -148,8 +148,9 @@ namespace HyTestRTDataService.ConfigMode
 
         public void RefreshDevInfo()
         {
-            DevConfigOperator op = (DevConfigOperator)configOperator;
-            op.ScanSubConfig(Config);
+            using(DevConfigOperator op = new DevConfigOperator()){
+                op.ScanSubConfig(Config);
+            }
         }
 
         /// <summary>
@@ -158,8 +159,10 @@ namespace HyTestRTDataService.ConfigMode
         /// <returns>The TreeNode of real info of currnet devices connected.</returns>
         public TreeNode GetDevsWithFormatTree()
         {
-            DevConfigOperator op = (DevConfigOperator)configOperator;
-            return op.ListToTree(Config);
+            using(DevConfigOperator op = new DevConfigOperator())
+            {
+                return op.ListToTree(Config);
+            }
         }
 
         public DataTable GetDevsWithFormatTable()

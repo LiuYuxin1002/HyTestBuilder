@@ -168,6 +168,7 @@ namespace HyTestRTDataService.RunningMode
             ConnectionContext.needAdapter = true;   //TODO: tmperary setting.
             //ConnectionContext.outputDeviceNum = 
             ConnectionContext.adapterSelectId = adapterInfo.Selected;
+            ConnectionContext.adapterId = adapterInfo.Adapters[adapterInfo.Selected].Desc;
 
             return new OperationResult();
         }

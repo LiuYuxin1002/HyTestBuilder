@@ -1,4 +1,5 @@
 ﻿using HyTestRTDataService.ConfigMode;
+using HyTestRTDataService.RunningMode;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -10,11 +11,15 @@ namespace HTScanner
         private TreeNode root;
         private DataTable data;
         private ConfigManager manager;
+        private RunningServer server = RunningServer.getServer();
         public Form1()
         {
             InitializeComponent();
-            //manager.LoadLocalConfig();
-            //manager.GetDeviceTreeNoRefresh();
+
+            server.Run();
+            manager = new ConfigManager();
+
+            InitDeviceDatagridView();
         }
 
         //reflush
@@ -23,12 +28,18 @@ namespace HTScanner
             try
             {
                 /*refresh tree view*/
+                manager.RefreshDevInfo();
                 root = manager.GetDevsWithFormatTree();
                 treeView1.Nodes.Clear();
                 treeView1.Nodes.Add(root);
-                for (int i = 0; i < treeView1.Nodes.Count; i++)
+                /*expand two level*/
+                foreach(TreeNode coupler in treeView1.Nodes)
                 {
-                    treeView1.Nodes[i].Expand();
+                    coupler.Expand();
+                    foreach(TreeNode slave in coupler.Nodes)
+                    {
+                        slave.Expand();
+                    }
                 }
                 /*refresh data grid view*/
                 //TODO: finish it.
@@ -38,6 +49,19 @@ namespace HTScanner
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
             
+        }
+
+        private void InitDeviceDatagridView()
+        {
+            string[] colsName = { "ID", "Device", "Channel", "Variable Binding", "Type", "Bits", "Source Type(I/U)", "Range" };
+            foreach(string colName in colsName)
+            {
+                DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+                col.DataPropertyName = colName;
+                col.HeaderText = colName;
+                col.Visible = true;
+                this.dataGridView1.Columns.Add(col);
+            }
         }
     }
 }

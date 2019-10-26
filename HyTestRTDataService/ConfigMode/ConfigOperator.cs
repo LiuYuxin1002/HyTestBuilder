@@ -54,13 +54,13 @@ namespace HyTestRTDataService.ConfigMode
         {
             DataTable iomapTable = new DataTable();
             iomapTable.TableName = "IOmapTable";
-            DataColumn colId = iomapTable.Columns.Add("ID", typeof(int));
-            DataColumn colName = iomapTable.Columns.Add("变量名", typeof(string));
-            DataColumn colType = iomapTable.Columns.Add("变量类型", typeof(string));
-            DataColumn colIO = iomapTable.Columns.Add("IO类型", typeof(string));
-            DataColumn colPort = iomapTable.Columns.Add("端口号", typeof(string));
-            DataColumn colMax = iomapTable.Columns.Add("变量上限", typeof(int));
-            DataColumn colMin = iomapTable.Columns.Add("变量下限", typeof(int));
+            DataColumn colId    = iomapTable.Columns.Add("ID", typeof(int));
+            DataColumn colName  = iomapTable.Columns.Add("变量名", typeof(string));
+            DataColumn colType  = iomapTable.Columns.Add("变量类型", typeof(string));
+            DataColumn colIO    = iomapTable.Columns.Add("IO类型", typeof(string));
+            DataColumn colPort  = iomapTable.Columns.Add("端口号", typeof(string));
+            DataColumn colMax   = iomapTable.Columns.Add("变量上限", typeof(int));
+            DataColumn colMin   = iomapTable.Columns.Add("变量下限", typeof(int));
         }
 
         /// <summary>
@@ -76,15 +76,24 @@ namespace HyTestRTDataService.ConfigMode
             DataTable mapTable = config.IomapInfo.IoMapTable;
             /*build map with dataTable.*/
             int index = 0;
+            /*clear map*/
+            config.IomapInfo.MapIndexToName.Clear();
+            config.IomapInfo.MapNameToIndex.Clear();
+            config.IomapInfo.MapNameToMax.Clear();
+            config.IomapInfo.MapNameToMin.Clear();
+            config.IomapInfo.MapNameToPort.Clear();
+            config.IomapInfo.MapNameToType.Clear();
+            config.IomapInfo.MapPortToName.Clear();
+            /*remapping*/
             foreach (DataRow row in mapTable.Rows)
             {
-                int id = index++;
-                string name = (string)row["变量名"];
-                string type = (string)row["变量类型"];
-                string iotype = (string)row["IO类型"];
-                string port = (string)row["端口号"];
-                int vmax = int.Parse((string)row["变量上限"]);
-                int vmin = int.Parse((string)row["变量下限"]);
+                int    id       = index++;
+                string name     = (string)row["变量名"];
+                string type     = (string)row["变量类型"];
+                string iotype   = (string)row["IO类型"];
+                string port     = (string)row["端口号"];
+                int    vmax     = int.Parse((string)row["变量上限"]);
+                int    vmin     = int.Parse((string)row["变量下限"]);
 
                 config.IomapInfo.MapIndexToName[id] = name;
                 config.IomapInfo.MapNameToIndex[name] = id;
@@ -206,6 +215,7 @@ namespace HyTestRTDataService.ConfigMode
 
             foreach (List<IOdevice> deviceGroup in deviceList)
             {
+                if (deviceGroup == null) break;
                 //For the first, we need to select coupler out.
                 IOdevice coupler = deviceGroup[0];
                 TreeNode couplerNode = new TreeNode(coupler.name);

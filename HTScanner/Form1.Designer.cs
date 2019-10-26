@@ -105,8 +105,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(795, 450);
-            this.splitContainer1.SplitterDistance = 70;
+            this.splitContainer1.Size = new System.Drawing.Size(1042, 782);
+            this.splitContainer1.SplitterDistance = 58;
             this.splitContainer1.TabIndex = 0;
             // 
             // toolStrip1
@@ -118,7 +118,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(795, 70);
+            this.toolStrip1.Size = new System.Drawing.Size(1042, 58);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -128,7 +128,7 @@
             this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(106, 67);
+            this.toolStripButton1.Size = new System.Drawing.Size(106, 55);
             this.toolStripButton1.Text = "Reflush";
             this.toolStripButton1.Click += new System.EventHandler(this.ToolStripButton1_Click);
             // 
@@ -145,8 +145,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.dataGridView1);
-            this.splitContainer2.Size = new System.Drawing.Size(795, 376);
-            this.splitContainer2.SplitterDistance = 216;
+            this.splitContainer2.Size = new System.Drawing.Size(1042, 720);
+            this.splitContainer2.SplitterDistance = 191;
             this.splitContainer2.TabIndex = 0;
             // 
             // treeView1
@@ -154,26 +154,30 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(216, 376);
+            this.treeView1.Size = new System.Drawing.Size(191, 720);
             this.treeView1.TabIndex = 0;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(575, 376);
+            this.dataGridView1.Size = new System.Drawing.Size(847, 720);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 450);
+            this.ClientSize = new System.Drawing.Size(1042, 782);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

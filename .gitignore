@@ -45,3 +45,13 @@ Release
 /.vs
 /Test
 /TestC
+Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.XML
+Microsoft.VisualStudio.TestPlatform.TestFramework.XML
+Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+/HyTestRTDataService.TEST/bin/log
+/packages/MSTest.TestAdapter.1.3.2/build/net45/MSTest.TestAdapter.props
+/packages/MSTest.TestAdapter.1.3.2/build/net45/MSTest.TestAdapter.targets
+/packages/MSTest.TestAdapter.1.3.2/build/netcoreapp1.0/MSTest.TestAdapter.props
+/packages/MSTest.TestAdapter.1.3.2/build/uap10.0/MSTest.TestAdapter.props
+/packages/MSTest.TestAdapter.1.3.2/build/uap10.0/MSTest.TestAdapter.targets
