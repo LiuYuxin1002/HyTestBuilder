@@ -14,11 +14,66 @@ namespace HyTestRTDataService.RunningMode
         private int frequency;
         private DataTable taskData;
         
-        public int TaskId { get => taskId; set => taskId = value; }
-        public string[] VarNameList { get => varNameList; set => varNameList = value; }
-        public int TaskDuration { get => taskDuration; set => taskDuration = value; }
-        public int Frequency { get => frequency; set => frequency = value; }
-        public DataTable TaskData { get => taskData; set => taskData = value; }
+        public int TaskId
+        {
+            get
+            {
+                return taskId;
+            }
+
+            set
+            {
+                taskId = value;
+            }
+        }
+        public string[] VarNameList
+        {
+            get
+            {
+                return varNameList;
+            }
+
+            set
+            {
+                varNameList = value;
+            }
+        }
+        public int TaskDuration
+        {
+            get
+            {
+                return taskDuration;
+            }
+
+            set
+            {
+                taskDuration = value;
+            }
+        }
+        public int Frequency
+        {
+            get
+            {
+                return frequency;
+            }
+
+            set
+            {
+                frequency = value;
+            }
+        }
+        public DataTable TaskData
+        {
+            get
+            {
+                return taskData;
+            }
+
+            set
+            {
+                taskData = value;
+            }
+        }
 
         public ReadingTask(int taskId, string[] varNameList, int taskDuration, int frequency)
         {

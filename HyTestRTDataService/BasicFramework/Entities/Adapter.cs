@@ -18,10 +18,57 @@ namespace HyTestRTDataService.Entities
         private string state;
         private int isSelected;
 
-        public string Name { get => name; set => name = value; }
-        public string Desc { get => desc; set => desc = value; }
-        public string State { get => state; set => state = value; }
-        public int IsSelected { get => isSelected; set => isSelected = value; }
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                name = value;
+            }
+        }
+
+        public string Desc
+        {
+            get
+            {
+                return desc;
+            }
+
+            set
+            {
+                desc = value;
+            }
+        }
+
+        public string State
+        {
+            get
+            {
+                return state;
+            }
+
+            set
+            {
+                state = value;
+            }
+        }
+
+        public int IsSelected
+        {
+            get
+            {
+                return isSelected;
+            }
+
+            set
+            {
+                isSelected = value;
+            }
+        }
 
         public Adapter() { }
 

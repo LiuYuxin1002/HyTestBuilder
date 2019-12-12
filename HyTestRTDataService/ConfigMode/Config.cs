@@ -26,10 +26,54 @@ namespace HyTestRTDataService.ConfigMode
         /// </summary>
         private ConfigTestEnvInfo testInfo;
 
-        public ConfigAdapterInfo AdapterInfo { get => adapterInfo; set => adapterInfo = value; }
-        public ConfigDeviceInfo DeviceInfo { get => deviceInfo; set => deviceInfo = value; }
-        public ConfigIOmapInfo IomapInfo { get => iomapInfo; set => iomapInfo = value; }
-        public ConfigTestEnvInfo TestInfo { get => testInfo; set => testInfo = value; }
+        public ConfigAdapterInfo AdapterInfo
+        {
+            get
+            {
+                return adapterInfo;
+            }
+
+            set
+            {
+                adapterInfo = value;
+            }
+        }
+        public ConfigDeviceInfo DeviceInfo
+        {
+            get
+            {
+                return deviceInfo;
+            }
+
+            set
+            {
+                deviceInfo = value;
+            }
+        }
+        public ConfigIOmapInfo IomapInfo
+        {
+            get
+            {
+                return iomapInfo;
+            }
+
+            set
+            {
+                iomapInfo = value;
+            }
+        }
+        public ConfigTestEnvInfo TestInfo
+        {
+            get
+            {
+                return testInfo;
+            }
+
+            set
+            {
+                testInfo = value;
+            }
+        }
 
         public Config()
         {

@@ -34,11 +34,22 @@ namespace HyTestRTDataService.ConfigMode
             }
         }
 
-        public Config Config { get => config; set => config = value; }
+        public Config Config
+        {
+            get
+            {
+                return config;
+            }
 
-        /*
-         * When configFile is cirtainly, load config.xml from this path.
-         */
+            set
+            {
+                config = value;
+            }
+        }
+
+        /// <summary>
+        /// When configFile is cirtainly, load config.xml from this path.
+        /// </summary>
         public ConfigManager(string configFile)
         {
             if (!string.IsNullOrEmpty(configFile))
@@ -49,16 +60,17 @@ namespace HyTestRTDataService.ConfigMode
             LoadLocalConfig();
         }
 
-        /*
-         * Using the path default.
-         */
+        /// <summary>
+        /// Or, using the path default.
+        /// </summary>
         public ConfigManager()
         {
             LoadLocalConfig();
         }
 
         /// <summary>
-        /// 把本地配置文件读取到Config对象中，会抛出System.Exception异常
+        /// Load local config.xml to Config-obj.<br/>
+        /// The param "ConfigFile" here is provided by config manager.
         /// </summary>
         private OperationResult LoadLocalConfig()
         {
@@ -223,6 +235,20 @@ namespace HyTestRTDataService.ConfigMode
             {
                 op.saveIOmapToExcel(Config);
             }
+        }
+
+        #endregion
+
+        #region EnvConfig
+
+        public OperationResult SetTestInfo(ConfigTestEnvInfo envInfo)
+        {
+            if (envInfo != null)
+            {
+                this.Config.TestInfo = envInfo;
+                return new OperationResult();
+            }
+            else return new OperationResult(-4, "传入试验信息为空，无法初始化");
         }
 
         #endregion

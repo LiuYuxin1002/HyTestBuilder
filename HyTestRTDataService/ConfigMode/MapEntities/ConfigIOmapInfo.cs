@@ -25,17 +25,138 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
 
         private string fileName;
 
-        public SerializableDictionary<string, string> MapPortToName { get => mapPortToName; set => mapPortToName = value; }
-        public SerializableDictionary<string, string> MapNameToPort { get => mapNameToPort; set => mapNameToPort = value; }
-        public SerializableDictionary<int, string> MapIndexToName { get => mapIndexToName; set => mapIndexToName = value; }
-        public SerializableDictionary<string, int> MapNameToIndex { get => mapNameToIndex; set => mapNameToIndex = value; }
-        public SerializableDictionary<string, string> MapNameToType { get => mapNameToType; set => mapNameToType = value; }
-        public SerializableDictionary<string, int> MapNameToMax { get => mapNameToMax; set => mapNameToMax = value; }
-        public SerializableDictionary<string, int> MapNameToMin { get => mapNameToMin; set => mapNameToMin = value; }
-        public DataTable IoMapTable { get => ioMapTable; set => ioMapTable = value; }
-        public int InputVarNum { get => inputVarNum; set => inputVarNum = value; }
-        public int OutputVarNum { get => outputVarNum; set => outputVarNum = value; }
-        public string FileName { get => fileName; set => fileName = value; }
+        public SerializableDictionary<string, string> MapPortToName
+        {
+            get
+            {
+                return mapPortToName;
+            }
+
+            set
+            {
+                mapPortToName = value;
+            }
+        }
+        public SerializableDictionary<string, string> MapNameToPort
+        {
+            get
+            {
+                return mapNameToPort;
+            }
+
+            set
+            {
+                mapNameToPort = value;
+            }
+        }
+        public SerializableDictionary<int, string> MapIndexToName
+        {
+            get
+            {
+                return mapIndexToName;
+            }
+
+            set
+            {
+                mapIndexToName = value;
+            }
+        }
+        public SerializableDictionary<string, int> MapNameToIndex
+        {
+            get
+            {
+                return mapNameToIndex;
+            }
+
+            set
+            {
+                mapNameToIndex = value;
+            }
+        }
+        public SerializableDictionary<string, string> MapNameToType
+        {
+            get
+            {
+                return mapNameToType;
+            }
+
+            set
+            {
+                mapNameToType = value;
+            }
+        }
+        public SerializableDictionary<string, int> MapNameToMax
+        {
+            get
+            {
+                return mapNameToMax;
+            }
+
+            set
+            {
+                mapNameToMax = value;
+            }
+        }
+        public SerializableDictionary<string, int> MapNameToMin
+        {
+            get
+            {
+                return mapNameToMin;
+            }
+
+            set
+            {
+                mapNameToMin = value;
+            }
+        }
+        public DataTable IoMapTable
+        {
+            get
+            {
+                return ioMapTable;
+            }
+
+            set
+            {
+                ioMapTable = value;
+            }
+        }
+        public int InputVarNum
+        {
+            get
+            {
+                return inputVarNum;
+            }
+
+            set
+            {
+                inputVarNum = value;
+            }
+        }
+        public int OutputVarNum
+        {
+            get
+            {
+                return outputVarNum;
+            }
+
+            set
+            {
+                outputVarNum = value;
+            }
+        }
+        public string FileName
+        {
+            get
+            {
+                return fileName;
+            }
+
+            set
+            {
+                fileName = value;
+            }
+        }
 
         public ConfigIOmapInfo()
         {

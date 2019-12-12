@@ -30,38 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.htUserCurve2 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
-            this.htUserCurve1 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
-            this.htDataScanner5 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner6 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner7 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner8 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner3 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner4 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner2 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
-            this.htLed9 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed10 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed11 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed12 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed13 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed14 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed15 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed16 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htLed5 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htLed6 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htLed7 = new HyTestRTDataService.Controls.Leds.HTLed();
@@ -70,6 +38,42 @@
             this.htLed4 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htLed2 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htLed1 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.htLed9 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed10 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed11 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed12 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed13 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed14 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed15 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed16 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.htDataScanner3 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.label4 = new System.Windows.Forms.Label();
+            this.htDataScanner4 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.label2 = new System.Windows.Forms.Label();
+            this.htDataScanner2 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.label1 = new System.Windows.Forms.Label();
+            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_ao4 = new System.Windows.Forms.Button();
+            this.btn_ao3 = new System.Windows.Forms.Button();
+            this.btn_ao2 = new System.Windows.Forms.Button();
+            this.btn_ao1 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.htUserCurve2 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
+            this.htUserCurve1 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.htConfigManager1 = new HyTestRTDataService.ConfigMode.Components.HTConfigManager(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -95,6 +99,142 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "EL1008";
             // 
+            // htLed5
+            // 
+            this.htLed5.BackColor = System.Drawing.Color.Transparent;
+            this.htLed5.BlinkInterval = 500;
+            this.htLed5.Label = "DI8";
+            this.htLed5.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed5.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed5.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed5.Location = new System.Drawing.Point(379, 27);
+            this.htLed5.Name = "htLed5";
+            this.htLed5.Renderer = null;
+            this.htLed5.Size = new System.Drawing.Size(43, 46);
+            this.htLed5.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed5.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed5.TabIndex = 15;
+            this.htLed5.VarName = "DI8";
+            // 
+            // htLed6
+            // 
+            this.htLed6.BackColor = System.Drawing.Color.Transparent;
+            this.htLed6.BlinkInterval = 500;
+            this.htLed6.Label = "DI7";
+            this.htLed6.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed6.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed6.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed6.Location = new System.Drawing.Point(330, 27);
+            this.htLed6.Name = "htLed6";
+            this.htLed6.Renderer = null;
+            this.htLed6.Size = new System.Drawing.Size(43, 46);
+            this.htLed6.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed6.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed6.TabIndex = 14;
+            this.htLed6.VarName = "DI7";
+            // 
+            // htLed7
+            // 
+            this.htLed7.BackColor = System.Drawing.Color.Transparent;
+            this.htLed7.BlinkInterval = 500;
+            this.htLed7.Label = "DI6";
+            this.htLed7.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed7.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed7.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed7.Location = new System.Drawing.Point(281, 27);
+            this.htLed7.Name = "htLed7";
+            this.htLed7.Renderer = null;
+            this.htLed7.Size = new System.Drawing.Size(43, 46);
+            this.htLed7.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed7.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed7.TabIndex = 13;
+            this.htLed7.VarName = "DI6";
+            // 
+            // htLed8
+            // 
+            this.htLed8.BackColor = System.Drawing.Color.Transparent;
+            this.htLed8.BlinkInterval = 500;
+            this.htLed8.Label = "DI5";
+            this.htLed8.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed8.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed8.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed8.Location = new System.Drawing.Point(232, 27);
+            this.htLed8.Name = "htLed8";
+            this.htLed8.Renderer = null;
+            this.htLed8.Size = new System.Drawing.Size(43, 46);
+            this.htLed8.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed8.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed8.TabIndex = 12;
+            this.htLed8.VarName = "DI5";
+            // 
+            // htLed3
+            // 
+            this.htLed3.BackColor = System.Drawing.Color.Transparent;
+            this.htLed3.BlinkInterval = 500;
+            this.htLed3.Label = "DI4";
+            this.htLed3.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed3.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed3.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed3.Location = new System.Drawing.Point(183, 27);
+            this.htLed3.Name = "htLed3";
+            this.htLed3.Renderer = null;
+            this.htLed3.Size = new System.Drawing.Size(43, 46);
+            this.htLed3.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed3.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed3.TabIndex = 11;
+            this.htLed3.VarName = "DI4";
+            // 
+            // htLed4
+            // 
+            this.htLed4.BackColor = System.Drawing.Color.Transparent;
+            this.htLed4.BlinkInterval = 500;
+            this.htLed4.Label = "DI3";
+            this.htLed4.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed4.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed4.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed4.Location = new System.Drawing.Point(134, 27);
+            this.htLed4.Name = "htLed4";
+            this.htLed4.Renderer = null;
+            this.htLed4.Size = new System.Drawing.Size(43, 46);
+            this.htLed4.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed4.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed4.TabIndex = 10;
+            this.htLed4.VarName = "DI3";
+            // 
+            // htLed2
+            // 
+            this.htLed2.BackColor = System.Drawing.Color.Transparent;
+            this.htLed2.BlinkInterval = 500;
+            this.htLed2.Label = "DI2";
+            this.htLed2.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed2.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed2.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed2.Location = new System.Drawing.Point(85, 27);
+            this.htLed2.Name = "htLed2";
+            this.htLed2.Renderer = null;
+            this.htLed2.Size = new System.Drawing.Size(43, 46);
+            this.htLed2.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed2.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed2.TabIndex = 9;
+            this.htLed2.VarName = "DI2";
+            // 
+            // htLed1
+            // 
+            this.htLed1.BackColor = System.Drawing.Color.Transparent;
+            this.htLed1.BlinkInterval = 500;
+            this.htLed1.Label = "DI1";
+            this.htLed1.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed1.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed1.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed1.Location = new System.Drawing.Point(36, 27);
+            this.htLed1.Name = "htLed1";
+            this.htLed1.Renderer = null;
+            this.htLed1.Size = new System.Drawing.Size(43, 46);
+            this.htLed1.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed1.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed1.TabIndex = 8;
+            this.htLed1.VarName = "DI1";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.htLed9);
@@ -111,233 +251,6 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EL2008";
-            // 
-            // richTextBoxLog
-            // 
-            this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxLog.Location = new System.Drawing.Point(3, 21);
-            this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(1011, 150);
-            this.richTextBoxLog.TabIndex = 1;
-            this.richTextBoxLog.Text = "";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.htDataScanner3);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.htDataScanner4);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.htDataScanner2);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.htDataScanner1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 224);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(459, 100);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "EL3004";
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(236, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 23);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "AI4";
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(40, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 23);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "AI3";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(236, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 23);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "AI2";
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(40, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "AI1";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.htDataScanner5);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.htDataScanner6);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.htDataScanner7);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.htDataScanner8);
-            this.groupBox4.Location = new System.Drawing.Point(12, 330);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(459, 100);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "EL4134";
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(234, 57);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 23);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "AO4";
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(38, 57);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 23);
-            this.label6.TabIndex = 13;
-            this.label6.Text = "AO3";
-            // 
-            // label7
-            // 
-            this.label7.Location = new System.Drawing.Point(234, 21);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 23);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "AO2";
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(38, 21);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 23);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "AO1";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.richTextBoxLog);
-            this.groupBox5.Location = new System.Drawing.Point(12, 436);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1017, 174);
-            this.groupBox5.TabIndex = 3;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "日志信息";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 616);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // htUserCurve2
-            // 
-            this.htUserCurve2.BackColor = System.Drawing.Color.Transparent;
-            this.htUserCurve2.IntervalAbscissaText = 50;
-            this.htUserCurve2.Location = new System.Drawing.Point(478, 226);
-            this.htUserCurve2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htUserCurve2.Name = "htUserCurve2";
-            this.htUserCurve2.Size = new System.Drawing.Size(551, 205);
-            this.htUserCurve2.StrechDataCountMax = 500;
-            this.htUserCurve2.TabIndex = 5;
-            this.htUserCurve2.TextAddFormat = "HH:mm:SS";
-            this.htUserCurve2.Title = "AI示波器";
-            // 
-            // htUserCurve1
-            // 
-            this.htUserCurve1.BackColor = System.Drawing.Color.Transparent;
-            this.htUserCurve1.IntervalAbscissaText = 50;
-            this.htUserCurve1.Location = new System.Drawing.Point(478, 13);
-            this.htUserCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htUserCurve1.Name = "htUserCurve1";
-            this.htUserCurve1.Size = new System.Drawing.Size(551, 205);
-            this.htUserCurve1.TabIndex = 4;
-            this.htUserCurve1.TextAddFormat = "HH:mm:SS";
-            this.htUserCurve1.Title = "DI示波器";
-            this.htUserCurve1.ValueMaxLeft = 1.5F;
-            this.htUserCurve1.ValueMinLeft = -0.5F;
-            this.htUserCurve1.ValueSegment = 4;
-            // 
-            // htDataScanner5
-            // 
-            this.htDataScanner5.Location = new System.Drawing.Point(268, 54);
-            this.htDataScanner5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner5.Name = "htDataScanner5";
-            this.htDataScanner5.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner5.TabIndex = 14;
-            this.htDataScanner5.VarName = "AO4";
-            // 
-            // htDataScanner6
-            // 
-            this.htDataScanner6.Location = new System.Drawing.Point(72, 54);
-            this.htDataScanner6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner6.Name = "htDataScanner6";
-            this.htDataScanner6.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner6.TabIndex = 12;
-            this.htDataScanner6.VarName = "AO3";
-            // 
-            // htDataScanner7
-            // 
-            this.htDataScanner7.Location = new System.Drawing.Point(268, 18);
-            this.htDataScanner7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner7.Name = "htDataScanner7";
-            this.htDataScanner7.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner7.TabIndex = 10;
-            this.htDataScanner7.VarName = "AO2";
-            // 
-            // htDataScanner8
-            // 
-            this.htDataScanner8.Location = new System.Drawing.Point(72, 18);
-            this.htDataScanner8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner8.Name = "htDataScanner8";
-            this.htDataScanner8.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner8.TabIndex = 8;
-            this.htDataScanner8.VarName = "AO1";
-            // 
-            // htDataScanner3
-            // 
-            this.htDataScanner3.Location = new System.Drawing.Point(270, 62);
-            this.htDataScanner3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner3.Name = "htDataScanner3";
-            this.htDataScanner3.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner3.TabIndex = 6;
-            this.htDataScanner3.VarName = "AI4";
-            // 
-            // htDataScanner4
-            // 
-            this.htDataScanner4.Location = new System.Drawing.Point(74, 62);
-            this.htDataScanner4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner4.Name = "htDataScanner4";
-            this.htDataScanner4.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner4.TabIndex = 4;
-            this.htDataScanner4.VarName = "AI3";
-            // 
-            // htDataScanner2
-            // 
-            this.htDataScanner2.Location = new System.Drawing.Point(270, 26);
-            this.htDataScanner2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner2.Name = "htDataScanner2";
-            this.htDataScanner2.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner2.TabIndex = 2;
-            this.htDataScanner2.VarName = "AI2";
-            // 
-            // htDataScanner1
-            // 
-            this.htDataScanner1.Location = new System.Drawing.Point(74, 26);
-            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner1.Name = "htDataScanner1";
-            this.htDataScanner1.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner1.TabIndex = 0;
-            this.htDataScanner1.VarName = "AI1";
             // 
             // htLed9
             // 
@@ -483,141 +396,278 @@
             this.htLed16.VarName = "DO1";
             this.htLed16.Click += new System.EventHandler(this.HtLed16_Load);
             // 
-            // htLed5
+            // richTextBoxLog
             // 
-            this.htLed5.BackColor = System.Drawing.Color.Transparent;
-            this.htLed5.BlinkInterval = 500;
-            this.htLed5.Label = "DI8";
-            this.htLed5.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed5.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed5.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed5.Location = new System.Drawing.Point(379, 27);
-            this.htLed5.Name = "htLed5";
-            this.htLed5.Renderer = null;
-            this.htLed5.Size = new System.Drawing.Size(43, 46);
-            this.htLed5.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed5.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed5.TabIndex = 15;
-            this.htLed5.VarName = "DI8";
+            this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxLog.Location = new System.Drawing.Point(3, 21);
+            this.richTextBoxLog.Name = "richTextBoxLog";
+            this.richTextBoxLog.Size = new System.Drawing.Size(1011, 150);
+            this.richTextBoxLog.TabIndex = 1;
+            this.richTextBoxLog.Text = "";
             // 
-            // htLed6
+            // groupBox3
             // 
-            this.htLed6.BackColor = System.Drawing.Color.Transparent;
-            this.htLed6.BlinkInterval = 500;
-            this.htLed6.Label = "DI7";
-            this.htLed6.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed6.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed6.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed6.Location = new System.Drawing.Point(330, 27);
-            this.htLed6.Name = "htLed6";
-            this.htLed6.Renderer = null;
-            this.htLed6.Size = new System.Drawing.Size(43, 46);
-            this.htLed6.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed6.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed6.TabIndex = 14;
-            this.htLed6.VarName = "DI7";
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.htDataScanner3);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.htDataScanner4);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.htDataScanner2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.htDataScanner1);
+            this.groupBox3.Location = new System.Drawing.Point(12, 224);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(459, 100);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "EL3004";
             // 
-            // htLed7
+            // label3
             // 
-            this.htLed7.BackColor = System.Drawing.Color.Transparent;
-            this.htLed7.BlinkInterval = 500;
-            this.htLed7.Label = "DI6";
-            this.htLed7.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed7.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed7.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed7.Location = new System.Drawing.Point(281, 27);
-            this.htLed7.Name = "htLed7";
-            this.htLed7.Renderer = null;
-            this.htLed7.Size = new System.Drawing.Size(43, 46);
-            this.htLed7.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed7.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed7.TabIndex = 13;
-            this.htLed7.VarName = "DI6";
+            this.label3.Location = new System.Drawing.Point(236, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 23);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "AI4";
             // 
-            // htLed8
+            // htDataScanner3
             // 
-            this.htLed8.BackColor = System.Drawing.Color.Transparent;
-            this.htLed8.BlinkInterval = 500;
-            this.htLed8.Label = "DI5";
-            this.htLed8.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed8.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed8.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed8.Location = new System.Drawing.Point(232, 27);
-            this.htLed8.Name = "htLed8";
-            this.htLed8.Renderer = null;
-            this.htLed8.Size = new System.Drawing.Size(43, 46);
-            this.htLed8.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed8.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed8.TabIndex = 12;
-            this.htLed8.VarName = "DI5";
+            this.htDataScanner3.Location = new System.Drawing.Point(270, 62);
+            this.htDataScanner3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner3.Name = "htDataScanner3";
+            this.htDataScanner3.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner3.TabIndex = 6;
+            this.htDataScanner3.VarName = "AI4";
             // 
-            // htLed3
+            // label4
             // 
-            this.htLed3.BackColor = System.Drawing.Color.Transparent;
-            this.htLed3.BlinkInterval = 500;
-            this.htLed3.Label = "DI4";
-            this.htLed3.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed3.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed3.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed3.Location = new System.Drawing.Point(183, 27);
-            this.htLed3.Name = "htLed3";
-            this.htLed3.Renderer = null;
-            this.htLed3.Size = new System.Drawing.Size(43, 46);
-            this.htLed3.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed3.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed3.TabIndex = 11;
-            this.htLed3.VarName = "Di4";
+            this.label4.Location = new System.Drawing.Point(40, 65);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 23);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "AI3";
             // 
-            // htLed4
+            // htDataScanner4
             // 
-            this.htLed4.BackColor = System.Drawing.Color.Transparent;
-            this.htLed4.BlinkInterval = 500;
-            this.htLed4.Label = "DI3";
-            this.htLed4.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed4.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed4.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed4.Location = new System.Drawing.Point(134, 27);
-            this.htLed4.Name = "htLed4";
-            this.htLed4.Renderer = null;
-            this.htLed4.Size = new System.Drawing.Size(43, 46);
-            this.htLed4.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed4.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed4.TabIndex = 10;
-            this.htLed4.VarName = "DI3";
+            this.htDataScanner4.Location = new System.Drawing.Point(74, 62);
+            this.htDataScanner4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner4.Name = "htDataScanner4";
+            this.htDataScanner4.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner4.TabIndex = 4;
+            this.htDataScanner4.VarName = "AI3";
             // 
-            // htLed2
+            // label2
             // 
-            this.htLed2.BackColor = System.Drawing.Color.Transparent;
-            this.htLed2.BlinkInterval = 500;
-            this.htLed2.Label = "DI2";
-            this.htLed2.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed2.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed2.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed2.Location = new System.Drawing.Point(85, 27);
-            this.htLed2.Name = "htLed2";
-            this.htLed2.Renderer = null;
-            this.htLed2.Size = new System.Drawing.Size(43, 46);
-            this.htLed2.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed2.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed2.TabIndex = 9;
-            this.htLed2.VarName = "DI2";
+            this.label2.Location = new System.Drawing.Point(236, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 23);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "AI2";
             // 
-            // htLed1
+            // htDataScanner2
             // 
-            this.htLed1.BackColor = System.Drawing.Color.Transparent;
-            this.htLed1.BlinkInterval = 500;
-            this.htLed1.Label = "DI1";
-            this.htLed1.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed1.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed1.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed1.Location = new System.Drawing.Point(36, 27);
-            this.htLed1.Name = "htLed1";
-            this.htLed1.Renderer = null;
-            this.htLed1.Size = new System.Drawing.Size(43, 46);
-            this.htLed1.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed1.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed1.TabIndex = 8;
-            this.htLed1.VarName = "DI1";
+            this.htDataScanner2.Location = new System.Drawing.Point(270, 26);
+            this.htDataScanner2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner2.Name = "htDataScanner2";
+            this.htDataScanner2.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner2.TabIndex = 2;
+            this.htDataScanner2.VarName = "AI2";
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(40, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 23);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "AI1";
+            // 
+            // htDataScanner1
+            // 
+            this.htDataScanner1.Location = new System.Drawing.Point(74, 26);
+            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner1.Name = "htDataScanner1";
+            this.htDataScanner1.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner1.TabIndex = 0;
+            this.htDataScanner1.VarName = "AI1";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btn_ao4);
+            this.groupBox4.Controls.Add(this.btn_ao3);
+            this.groupBox4.Controls.Add(this.btn_ao2);
+            this.groupBox4.Controls.Add(this.btn_ao1);
+            this.groupBox4.Controls.Add(this.textBox4);
+            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(12, 330);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(459, 100);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "EL4134";
+            // 
+            // btn_ao4
+            // 
+            this.btn_ao4.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
+            this.btn_ao4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_ao4.Location = new System.Drawing.Point(393, 55);
+            this.btn_ao4.Name = "btn_ao4";
+            this.btn_ao4.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao4.TabIndex = 23;
+            this.btn_ao4.UseVisualStyleBackColor = true;
+            this.btn_ao4.Click += new System.EventHandler(this.btn_ao4_Click);
+            // 
+            // btn_ao3
+            // 
+            this.btn_ao3.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
+            this.btn_ao3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_ao3.Location = new System.Drawing.Point(197, 55);
+            this.btn_ao3.Name = "btn_ao3";
+            this.btn_ao3.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao3.TabIndex = 22;
+            this.btn_ao3.UseVisualStyleBackColor = true;
+            this.btn_ao3.Click += new System.EventHandler(this.btn_ao3_Click);
+            // 
+            // btn_ao2
+            // 
+            this.btn_ao2.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
+            this.btn_ao2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_ao2.Location = new System.Drawing.Point(393, 19);
+            this.btn_ao2.Name = "btn_ao2";
+            this.btn_ao2.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao2.TabIndex = 21;
+            this.btn_ao2.UseVisualStyleBackColor = true;
+            this.btn_ao2.Click += new System.EventHandler(this.btn_ao2_Click);
+            // 
+            // btn_ao1
+            // 
+            this.btn_ao1.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
+            this.btn_ao1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_ao1.Location = new System.Drawing.Point(197, 19);
+            this.btn_ao1.Name = "btn_ao1";
+            this.btn_ao1.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao1.TabIndex = 20;
+            this.btn_ao1.UseVisualStyleBackColor = true;
+            this.btn_ao1.Click += new System.EventHandler(this.btn_ao1_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(270, 56);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(117, 25);
+            this.textBox4.TabIndex = 19;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(74, 56);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(117, 25);
+            this.textBox3.TabIndex = 18;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(270, 20);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(117, 25);
+            this.textBox2.TabIndex = 17;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(74, 20);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(117, 25);
+            this.textBox1.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(234, 57);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(34, 23);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "AO4";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(38, 57);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(34, 23);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "AO3";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(234, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(34, 23);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "AO2";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(38, 21);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(34, 23);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "AO1";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.richTextBoxLog);
+            this.groupBox5.Location = new System.Drawing.Point(12, 436);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(1017, 174);
+            this.groupBox5.TabIndex = 3;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "日志信息";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(12, 616);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // htUserCurve2
+            // 
+            this.htUserCurve2.BackColor = System.Drawing.Color.Transparent;
+            this.htUserCurve2.IntervalAbscissaText = 50;
+            this.htUserCurve2.Location = new System.Drawing.Point(478, 226);
+            this.htUserCurve2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve2.Name = "htUserCurve2";
+            this.htUserCurve2.Size = new System.Drawing.Size(551, 205);
+            this.htUserCurve2.StrechDataCountMax = 500;
+            this.htUserCurve2.TabIndex = 5;
+            this.htUserCurve2.TextAddFormat = "HH:mm:SS";
+            this.htUserCurve2.Title = "AI示波器";
+            this.htUserCurve2.ValueMaxLeft = 10F;
+            this.htUserCurve2.ValueMinLeft = -10F;
+            // 
+            // htUserCurve1
+            // 
+            this.htUserCurve1.BackColor = System.Drawing.Color.Transparent;
+            this.htUserCurve1.IntervalAbscissaText = 50;
+            this.htUserCurve1.Location = new System.Drawing.Point(478, 13);
+            this.htUserCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve1.Name = "htUserCurve1";
+            this.htUserCurve1.Size = new System.Drawing.Size(551, 205);
+            this.htUserCurve1.TabIndex = 4;
+            this.htUserCurve1.TextAddFormat = "HH:mm:SS";
+            this.htUserCurve1.Title = "DI示波器";
+            this.htUserCurve1.ValueMaxLeft = 1.5F;
+            this.htUserCurve1.ValueMinLeft = -0.5F;
+            this.htUserCurve1.ValueSegment = 4;
             // 
             // Form1
             // 
@@ -639,6 +689,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -676,18 +727,22 @@
         private Controls.Scopes.HTDataScanner htDataScanner1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label5;
-        private Controls.Scopes.HTDataScanner htDataScanner5;
         private System.Windows.Forms.Label label6;
-        private Controls.Scopes.HTDataScanner htDataScanner6;
         private System.Windows.Forms.Label label7;
-        private Controls.Scopes.HTDataScanner htDataScanner7;
         private System.Windows.Forms.Label label8;
-        private Controls.Scopes.HTDataScanner htDataScanner8;
         private System.Windows.Forms.GroupBox groupBox5;
         private Controls.Scopes.HTUserCurve htUserCurve1;
         private Controls.Scopes.HTUserCurve htUserCurve2;
         private ConfigMode.Components.HTConfigManager htConfigManager1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ao1;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btn_ao4;
+        private System.Windows.Forms.Button btn_ao3;
+        private System.Windows.Forms.Button btn_ao2;
     }
 }
 

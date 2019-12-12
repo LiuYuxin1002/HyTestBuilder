@@ -20,6 +20,7 @@ namespace HyTestRTDataService.Utils
 
         private Control FindControlRecursive(Control root, string textBoxName)
         {
+            if (root == null) return null;
             if (root.Name == textBoxName) return root;
             foreach (Control c in root.Controls)
             {

@@ -52,20 +52,20 @@
             this.textBox_iomapPath = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.text_refreshPeriod = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_redisPort = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_redisIP = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.checkBox_needRedis = new System.Windows.Forms.CheckBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.text_bufferSize = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.text_resolution = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.text_writeFreq = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.text_readRefq = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -116,7 +116,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.Cancel_btn);
             this.splitContainer1.Panel2.Controls.Add(this.Apply_btn);
             this.splitContainer1.Size = new System.Drawing.Size(1072, 811);
-            this.splitContainer1.SplitterDistance = 747;
+            this.splitContainer1.SplitterDistance = 750;
             this.splitContainer1.SplitterWidth = 1;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -342,20 +342,20 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.textBox9);
+            this.groupBox4.Controls.Add(this.text_refreshPeriod);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.textBox_redisPort);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Controls.Add(this.textBox_redisIP);
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.checkBox_needRedis);
-            this.groupBox4.Controls.Add(this.textBox6);
+            this.groupBox4.Controls.Add(this.text_bufferSize);
             this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.textBox5);
+            this.groupBox4.Controls.Add(this.text_resolution);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.textBox4);
+            this.groupBox4.Controls.Add(this.text_writeFreq);
             this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.textBox3);
+            this.groupBox4.Controls.Add(this.text_readRefq);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(12, 336);
             this.groupBox4.Name = "groupBox4";
@@ -364,13 +364,13 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "测试参数配置";
             // 
-            // textBox9
+            // text_refreshPeriod
             // 
-            this.textBox9.Location = new System.Drawing.Point(876, 29);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(162, 27);
-            this.textBox9.TabIndex = 18;
-            this.textBox9.Text = "300";
+            this.text_refreshPeriod.Location = new System.Drawing.Point(876, 29);
+            this.text_refreshPeriod.Name = "text_refreshPeriod";
+            this.text_refreshPeriod.Size = new System.Drawing.Size(162, 27);
+            this.text_refreshPeriod.TabIndex = 18;
+            this.text_refreshPeriod.Text = "300";
             // 
             // label10
             // 
@@ -424,13 +424,13 @@
             this.checkBox_needRedis.Text = "Redis";
             this.checkBox_needRedis.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // text_bufferSize
             // 
-            this.textBox6.Location = new System.Drawing.Point(534, 62);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(159, 27);
-            this.textBox6.TabIndex = 11;
-            this.textBox6.Text = "1024";
+            this.text_bufferSize.Location = new System.Drawing.Point(534, 62);
+            this.text_bufferSize.Name = "text_bufferSize";
+            this.text_bufferSize.Size = new System.Drawing.Size(159, 27);
+            this.text_bufferSize.TabIndex = 11;
+            this.text_bufferSize.Text = "1024";
             // 
             // label7
             // 
@@ -440,13 +440,13 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "运行时缓存(Mb)：";
             // 
-            // textBox5
+            // text_resolution
             // 
-            this.textBox5.Location = new System.Drawing.Point(196, 62);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(152, 27);
-            this.textBox5.TabIndex = 9;
-            this.textBox5.Text = "1";
+            this.text_resolution.Location = new System.Drawing.Point(196, 62);
+            this.text_resolution.Name = "text_resolution";
+            this.text_resolution.Size = new System.Drawing.Size(152, 27);
+            this.text_resolution.TabIndex = 9;
+            this.text_resolution.Text = "1";
             // 
             // label6
             // 
@@ -456,13 +456,13 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "采样分辨率(%)：";
             // 
-            // textBox4
+            // text_writeFreq
             // 
-            this.textBox4.Location = new System.Drawing.Point(534, 29);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(159, 27);
-            this.textBox4.TabIndex = 7;
-            this.textBox4.Text = "2000";
+            this.text_writeFreq.Location = new System.Drawing.Point(534, 29);
+            this.text_writeFreq.Name = "text_writeFreq";
+            this.text_writeFreq.Size = new System.Drawing.Size(159, 27);
+            this.text_writeFreq.TabIndex = 7;
+            this.text_writeFreq.Text = "2000";
             // 
             // label2
             // 
@@ -472,13 +472,13 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "基准写入频率(Hz)：";
             // 
-            // textBox3
+            // text_readRefq
             // 
-            this.textBox3.Location = new System.Drawing.Point(196, 29);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(152, 27);
-            this.textBox3.TabIndex = 5;
-            this.textBox3.Text = "25";
+            this.text_readRefq.Location = new System.Drawing.Point(196, 29);
+            this.text_readRefq.Name = "text_readRefq";
+            this.text_readRefq.Size = new System.Drawing.Size(152, 27);
+            this.text_readRefq.TabIndex = 5;
+            this.text_readRefq.Text = "25";
             // 
             // label4
             // 
@@ -674,7 +674,6 @@
         }
 
         #endregion
-        private HTConfigManager htConfigManager1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
@@ -696,19 +695,19 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkBox_needNIC;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox text_readRefq;
+        private System.Windows.Forms.TextBox text_writeFreq;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox text_resolution;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBox_redisPort;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_redisIP;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBox_needRedis;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox text_bufferSize;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox text_refreshPeriod;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button button_mapConfig;
         private System.Windows.Forms.GroupBox groupBox_database;

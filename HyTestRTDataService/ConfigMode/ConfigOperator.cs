@@ -288,15 +288,12 @@ namespace HyTestRTDataService.ConfigMode
             return table;
         }
 
-        #region 公共方法
         public void ScanSubConfig(Config config)
         {
             if (loader == null) loader = ConfigProtocol.GetDeviceLoader();
 
             config.DeviceInfo.DeviceList = loader.GetDevice();
         }
-
-        #endregion
 
         //将树转为LIST保存到info当中
         private void RefreshDataWithTree()

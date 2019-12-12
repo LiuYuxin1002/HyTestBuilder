@@ -3,40 +3,116 @@ using System;
 
 namespace HyTestRTDataService.ConfigMode.MapEntities
 {
+    /*
+     * Usage:
+     * You should initialize this class first when running server. Then write these info of this class
+     * to the connector.
+     * 
+     */
     [Serializable]
     public class ConfigTestEnvInfo
     {
-        /// <summary>
-        /// 当前协议
-        /// </summary>
-        private Protocol currentProtocol;
-
-        /// <summary>
-        /// 控件刷新频率
-        /// </summary>
-        private int refreshFrequency;
-
-        /// <summary>
-        /// 驱动采样频率us
-        /// </summary>
-        private int driveRefreshFrequency;
-
-        /// <summary>
-        /// redis写入频率ms
-        /// </summary>
-        private int redisRefreshFrequency;
-
-        /// <summary>
-        /// 最大设备连接数
-        /// </summary>
-        private int maxDeviceNum;
-
-        public Protocol CurrentProtocol { get => currentProtocol; set => currentProtocol = value; }
-        public int RefreshFrequency { get => refreshFrequency; set => refreshFrequency = value; }
-        public int DriveRefreshFrequency { get => driveRefreshFrequency; set => driveRefreshFrequency = value; }
-        public int RedisRefreshFrequency { get => redisRefreshFrequency; set => redisRefreshFrequency = value; }
-        public int MaxDeviceNum { get => maxDeviceNum; set => maxDeviceNum = value; }
+        /*Base Setting*/
+        private int baseReadFrequency;          //基础采样频率
+        private int baseWriteFrequency;         //基础写入频率
+        private int userControlFreshFrequency;  //用户控件刷新频率
+        private int resolution;                 //传感器分辨率（滤波）
+        private int bufferSize;                 //运行时缓存
+        /*Redis*/
+        private string redisIp;
+        private int redisPort;
 
         public ConfigTestEnvInfo() { }
+
+        public int BaseReadFrequency
+        {
+            get
+            {
+                return baseReadFrequency;
+            }
+
+            set
+            {
+                baseReadFrequency = value;
+            }
+        }
+
+        public int BaseWriteFrequency
+        {
+            get
+            {
+                return baseWriteFrequency;
+            }
+
+            set
+            {
+                baseWriteFrequency = value;
+            }
+        }
+
+        public int UserControlFreshFrequency
+        {
+            get
+            {
+                return userControlFreshFrequency;
+            }
+
+            set
+            {
+                userControlFreshFrequency = value;
+            }
+        }
+
+        public int Resolution
+        {
+            get
+            {
+                return resolution;
+            }
+
+            set
+            {
+                resolution = value;
+            }
+        }
+
+        public int BufferSize
+        {
+            get
+            {
+                return bufferSize;
+            }
+
+            set
+            {
+                bufferSize = value;
+            }
+        }
+
+        public string RedisIp
+        {
+            get
+            {
+                return redisIp;
+            }
+
+            set
+            {
+                redisIp = value;
+            }
+        }
+
+        public int RedisPort
+        {
+            get
+            {
+                return redisPort;
+            }
+
+            set
+            {
+                redisPort = value;
+            }
+        }
     }
 }

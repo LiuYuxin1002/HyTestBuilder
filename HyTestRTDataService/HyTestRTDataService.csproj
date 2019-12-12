@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -217,6 +218,8 @@
   <ItemGroup>
     <None Include="Key.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\HyTestRTDataService.ConfigMode.Components.FormConfigManager.datasource" />
+    <None Include="Properties\DataSources\HyTestRTDataService.ConfigMode.MapEntities.ConfigTestEnvInfo.datasource" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ConfigMode\Components\FormConfigManager.resx">

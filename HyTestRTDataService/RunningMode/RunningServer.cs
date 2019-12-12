@@ -209,17 +209,33 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         public T NormalRead<T>(string varName)
         {
-            Type type = Type.GetType(iomapInfo.MapNameToType[varName]);
-            int index = iomapInfo.MapNameToIndex[varName];
-            if (type == typeof(int))
+            Port varPort = null;
+            Type varType = null;
+            int varMax = default(int);
+            int varMin = default(int);
+            int index = -1;
+
+            try
+            {
+                varPort = new Port(iomapInfo.MapNameToPort[varName]);
+                varType = Type.GetType(iomapInfo.MapNameToType[varName]);
+                varMax = iomapInfo.MapNameToMax[varName];
+                varMin = iomapInfo.MapNameToMin[varName];
+                index = iomapInfo.MapNameToIndex[varName];
+            }
+            catch (Exception e)
+            {
+                log.Debug(e.Message + "::" + varName);
+            }
+            if (varType == typeof(int))
             {
                 int value = (int)buffer.get(index);
-                return (T)Convert.ChangeType(value, typeof(T));
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(value, varMax, varMin), typeof(T));
             }
-            else if (type == typeof(double))
+            else if (varType == typeof(double))
             {
-                double value = buffer.get(index);
-                return (T)Convert.ChangeType(value, typeof(T));
+                int value = (int)buffer.get(index);
+                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(value, varMax, varMin), typeof(T));
             }
             else
             {

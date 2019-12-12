@@ -10,8 +10,30 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
         private Adapter[] adapterTable;
         private int selected;
 
-        public Adapter[] Adapters { get => adapterTable; set => adapterTable = value; }
-        public int Selected { get => selected; set => selected = value; }
+        public Adapter[] Adapters
+        {
+            get
+            {
+                return adapterTable;
+            }
+
+            set
+            {
+                adapterTable = value;
+            }
+        }
+        public int Selected
+        {
+            get
+            {
+                return selected;
+            }
+
+            set
+            {
+                selected = value;
+            }
+        }
 
         public ConfigAdapterInfo()
         {

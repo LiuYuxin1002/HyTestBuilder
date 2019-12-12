@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 
 namespace HyTestRTDataService.Entities
 {
+    /// <summary>
+    /// 一种可序列化的Dictionary
+    /// </summary>
     [Serializable]
     public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IXmlSerializable
     {
