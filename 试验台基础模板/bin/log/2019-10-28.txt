@@ -1,0 +1,28 @@
+2019-10-28 18:05:08,628[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 18:05:11,136[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 18:05:32,581[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 18:06:52,907[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 18:07:14,951[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 19:06:40,924[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+
+2019-10-28 19:21:36,783[INFO]
+fStandardTemplate.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\HyTestBuilder\试验台基础模板\MainForm.cs:50)
+button click...
+

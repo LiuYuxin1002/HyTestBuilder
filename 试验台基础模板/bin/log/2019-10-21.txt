@@ -1,0 +1,36 @@
+2019-10-21 11:42:49,175[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:42:50,939[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:42:51,566[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:42:52,922[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:43:01,329[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:43:01,537[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:47)
+keke
+
+2019-10-21 11:44:26,488[INFO]
+f试验台基础模板.MainForm.OnDebug_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:105)
+暂不支持调试，如需调试请联系开发人员
+
+2019-10-21 11:44:28,557[INFO]
+f试验台基础模板.MainForm.GenerateReport_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:110)
+正在处理数据，准备开始生成试验报告，这个过程可能持续几秒，请等待...
+
+2019-10-21 11:44:28,558[ERROR]
+f试验台基础模板.MainForm.GenerateReport_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:113)
+尚未进行配置
+

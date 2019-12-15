@@ -154,7 +154,7 @@ operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
 operationResult* slaveReadStart() {
 	if (TimerId == NULL) {
 		prepareCallBack();
-		TimerId = timeSetEvent(100, 0, readAndCallBack, NULL, TIME_PERIODIC);
+		TimerId = timeSetEvent(10, 0, readAndCallBack, NULL, TIME_PERIODIC);
 	}
 	return new operationResult(0, NULL);
 }

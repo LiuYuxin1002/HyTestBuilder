@@ -1,0 +1,28 @@
+2019-10-26 14:35:35,727[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:49)
+button click...
+
+2019-10-26 14:37:38,908[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:49)
+button click...
+
+2019-10-26 14:37:57,011[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:49)
+button click...
+
+2019-10-26 14:38:01,576[INFO]
+f试验台基础模板.MainForm.GenerateReport_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:114)
+正在处理数据，准备开始生成试验报告，这个过程可能持续几秒，请等待...
+
+2019-10-26 14:38:01,585[ERROR]
+f试验台基础模板.MainForm.GenerateReport_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:117)
+尚未进行配置
+
+2019-10-26 14:38:04,719[INFO]
+f试验台基础模板.MainForm.OnDebug_Click(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:109)
+暂不支持调试，如需调试请联系开发人员
+
+2019-10-26 14:38:10,842[INFO]
+f试验台基础模板.MainForm.OnConfig(C:\Users\LiuYX\Documents\Visual Studio 2015\Projects\5AHydRig\试验台基础模板\MainForm.cs:49)
+button click...
+

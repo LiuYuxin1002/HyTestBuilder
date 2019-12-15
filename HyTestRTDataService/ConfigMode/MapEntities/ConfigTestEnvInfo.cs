@@ -24,6 +24,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
 
         public ConfigTestEnvInfo() { }
 
+        #region properties
         public int BaseReadFrequency
         {
             get
@@ -114,5 +115,7 @@ namespace HyTestRTDataService.ConfigMode.MapEntities
                 redisPort = value;
             }
         }
+
+        #endregion
     }
 }
