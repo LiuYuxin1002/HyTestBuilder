@@ -10,7 +10,6 @@ namespace StandardTemplate.Test
 {
     class Valve : Entity
     {
-        List<TestType> testTypes = new List<TestType>();
         Dictionary<string, string> Pict = new Dictionary<string, string>();
 
         public Valve()
@@ -19,9 +18,15 @@ namespace StandardTemplate.Test
             {
                 this.TestList = new List<TestType>();
             }
+            this.TestSupportList = new List<TestType>
+            {
+                TestType.外泄漏试验,
+                TestType.稳态流量压力特性试验,
+                TestType.耐压试验,
+            };
         }
 
-        protected OperationResult RunTest(TestType testType)
+        protected override OperationResult RunTest(TestType testType)
         {
             switch (testType)
             {

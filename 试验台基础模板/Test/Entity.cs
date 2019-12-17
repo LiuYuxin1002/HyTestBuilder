@@ -14,9 +14,9 @@ namespace StandardTemplate.Test
 
         protected Thread threadTest;                //试验线程
 
-        protected List<TestType> TestSupportList;   //支持的试验
+        public List<TestType> TestSupportList;   //支持的试验
 
-        private List<TestType> testList;            //要做的试验
+        public List<TestType> testList;            //要做的试验
 
         protected ILog Log
         {
@@ -32,7 +32,8 @@ namespace StandardTemplate.Test
 
         #region Event
 
-        public EventHandler<EventArgs> OnTestEnd;
+        public delegate void TestEndEventHandler();
+        public TestEndEventHandler OnTestEnd;
 
         #endregion
 
@@ -87,12 +88,13 @@ namespace StandardTemplate.Test
         {
             get
             {
-                return TestList;
+                if (testList == null) return null;
+                return testList;
             }
 
             set
             {
-                TestList = value;
+                testList = value;
             }
         }
 
@@ -213,7 +215,7 @@ namespace StandardTemplate.Test
                 foreach (TestType testType in this.testList)
                 {
                     Log.Info(testType.ToString() + " 开始");
-                    RunTest();
+                    RunTest(testType);
                     Log.Info(testType.ToString() + " 结束");
                 }
             }
@@ -248,7 +250,7 @@ namespace StandardTemplate.Test
         ///    }
         /// }
         /// </example>
-        protected abstract OperationResult RunTest();
+        protected abstract OperationResult RunTest(TestType testType);
 
         /// <summary>
         /// 这个方法用于指示试验结束后应该执行的操作。比如试验结束后停止电机或泵的操作。
@@ -267,7 +269,7 @@ namespace StandardTemplate.Test
             }
             finally
             {
-                OnTestEnd(null, null);
+                OnTestEnd();
 
             }
             Log.Info("试验结束,请打印实验报告...");

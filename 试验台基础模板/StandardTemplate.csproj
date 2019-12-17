@@ -92,6 +92,12 @@
     <Compile Include="Forms\FormTestInfo.Designer.cs">
       <DependentUpon>FormTestInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\TestSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TestSelect.Designer.cs">
+      <DependentUpon>TestSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,7 +107,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\Class1.cs" />
     <Compile Include="Test\DBInitializer.cs" />
     <Compile Include="Test\Entity.cs" />
     <Compile Include="Test\MyFirstTestModel.cs" />
@@ -114,6 +119,9 @@
     <Compile Include="Utils\ZedSave.cs" />
     <EmbeddedResource Include="Forms\FormTestInfo.resx">
       <DependentUpon>FormTestInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TestSelect.resx">
+      <DependentUpon>TestSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -129,6 +137,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\StandardTemplate.Test.Entity.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -153,5 +162,6 @@
     <Content Include="License-LGPL.txt" />
     <Content Include="模板变动项.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

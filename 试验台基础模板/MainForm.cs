@@ -6,6 +6,7 @@ using StandardTemplate.Test;
 using System.Data.Entity;
 using ItemWizard;
 using System.Text;
+using StandardTemplate.Forms;
 
 namespace StandardTemplate
 {
@@ -19,12 +20,13 @@ namespace StandardTemplate
 
         private delegate void Datadelegate();
 
-        private Entity currentTest = null;
+        private Entity currentEntity = null;
 
         public MainForm()
         {
             InitializeComponent();
             //server.Run();
+            
         }
 
         #region form event
@@ -48,33 +50,33 @@ namespace StandardTemplate
         private void OnConfig(object sender, EventArgs e)
         {
             Log.Info("button click...");
-            Form1 form = new Form1();
-            if (form.ShowDialog() == DialogResult.OK)
+            /*================Mark=============*/
+            this.currentEntity = new Valve();//这里的实例化需要结合实际
+
+            TestSelect selectForm = new TestSelect(currentEntity);
+            if (selectForm.ShowDialog() == DialogResult.OK)
             {
-                StringBuilder sb;
-                /*pojo declerations*/
-                sb = TemplateHelper.GetPojoStatements(form.Pojo);
-                richTextBoxLog.AppendText(sb.ToString());
-                /*test type switch case statements*/
-                sb = TemplateHelper.GetTestNameSwitchCase(form.Pojo);
-                richTextBoxLog.AppendText(sb.ToString());
-                /*test method declarations*/
-                sb = TemplateHelper.GetTestMethodDeclaration(form.Pojo);
-                richTextBoxLog.AppendText(sb.ToString());
+                Log.Info("选择试验：");
+                foreach(TestType tt in currentEntity.testList)
+                {
+                    Log.Info("***"+tt);
+                }
+                this.AllowTest();
+                this.currentEntity.OnTestEnd += OnTestEnd;
             }
         }
 
         // 试验开始按钮
         private void OnTestStart_Click(object sender, EventArgs e)
         {
-            if (this.currentTest == null)
+            if (this.currentEntity == null)
             {
                 Log.Debug("currentTest=null");
                 return;
             }
 
             /*开始试验*/
-            this.currentTest.StartTest();           //ForEach((entity) => { entity.StartTest(); });
+            this.currentEntity.StartTest();           //ForEach((entity) => { entity.StartTest(); });
             flag = 0;//将暂停继续按钮恢复到暂停状态       
 
             /*设置按钮状态*/
@@ -91,7 +93,7 @@ namespace StandardTemplate
             ///试验暂停          
             if (flag == 0)   //flag为0表示可暂停
             {
-                this.currentTest.SuspendTest();//将当前线程挂起
+                this.currentEntity.SuspendTest();//将当前线程挂起
                 this.toolStripButtonPause.Text = "继续";
                 flag = 1;
                 return;
@@ -99,7 +101,7 @@ namespace StandardTemplate
             if (flag == 1)  //flag为1表示可继续
             {
                 this.toolStripButtonPause.Text = "暂停";
-                this.currentTest.ResumeTest();
+                this.currentEntity.ResumeTest();
                 flag = 0;
 
             }
@@ -109,7 +111,7 @@ namespace StandardTemplate
         private void OnTestStop_Click(object sender, EventArgs e)
         {
             ///试验停止
-            this.currentTest.StopTest();
+            this.currentEntity.StopTest();
             this.toolStripButtonStop.Enabled = false;
             this.toolStripButtonPause.Enabled = false;
             this.toolStripButtonStart.Enabled = false;// true;
@@ -125,18 +127,18 @@ namespace StandardTemplate
         private void GenerateReport_Click(object sender, EventArgs e)
         {
             Log.Info("正在处理数据，准备开始生成试验报告，这个过程可能持续几秒，请等待...");
-            if (this.currentTest == null)
+            if (this.currentEntity == null)
             {
                 Log.Error("尚未进行配置");
                 return;
             }
             //解决未进行试验bug
-            if (this.currentTest.TestFinished == false)
+            if (this.currentEntity.TestFinished == false)
             {
                 Log.Error("未进行试验，不能生成报告");
                 return;
             }
-            this.currentTest.GenerateReport();
+            this.currentEntity.GenerateReport();
         }
 
         //退出按钮
@@ -152,10 +154,10 @@ namespace StandardTemplate
 
         private void AllowTest()
         {
-            if (this.currentTest == null)
+            if (this.currentEntity == null)
                 return;
 
-            if (this.currentTest.RunState == RunningState.Running)
+            if (this.currentEntity.RunState == RunningState.Running)
                 return;
 
             this.toolStripButtonStart.Enabled = true;
