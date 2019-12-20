@@ -649,10 +649,9 @@
             this.htUserCurve2.Size = new System.Drawing.Size(551, 205);
             this.htUserCurve2.StrechDataCountMax = 500;
             this.htUserCurve2.TabIndex = 5;
-            this.htUserCurve2.TextAddFormat = "HH:mm:SS";
+            this.htUserCurve2.TextAddFormat = "HH:mm:ss";
             this.htUserCurve2.Title = "AI示波器";
-            this.htUserCurve2.ValueMaxLeft = 10F;
-            this.htUserCurve2.ValueMinLeft = -10F;
+            this.htUserCurve2.ValueMaxLeft = 50F;
             // 
             // htUserCurve1
             // 

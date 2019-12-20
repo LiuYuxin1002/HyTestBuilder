@@ -116,7 +116,7 @@ namespace StandardTemplate.Test
             }
             if (threadTest.ThreadState != ThreadState.Running)
             {
-                threadTest.Start(new Object());
+                threadTest.Start();
             }
 
             return new OperationResult();

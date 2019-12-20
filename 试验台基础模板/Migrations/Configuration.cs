@@ -26,8 +26,8 @@ namespace StandardTemplate.Migrations
             //    );
             //
             /* $mark_configuration$ */
-            //context.MyEntities.AddOrUpdate(new DemoEntity() { Name = "Tomy-1" });
-
+            //context.MyEntities.AddOrUpdate(new Valve2() { Name = "Tomy-1" });
+            
             context.SaveChanges();
         }
     }

@@ -51,7 +51,7 @@ namespace StandardTemplate
         {
             Log.Info("button click...");
             /*================Mark=============*/
-            this.currentEntity = new Valve();//这里的实例化需要结合实际
+            this.currentEntity = new Valve2();//这里的实例化需要结合实际
 
             TestSelect selectForm = new TestSelect(currentEntity);
             if (selectForm.ShowDialog() == DialogResult.OK)

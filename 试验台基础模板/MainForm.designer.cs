@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonSelectValve = new System.Windows.Forms.ToolStripButton();
@@ -52,8 +53,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
+            this.htConfigManager1 = new HyTestRTDataService.ConfigMode.Components.HTConfigManager(this.components);
+            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -61,6 +63,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -90,7 +93,7 @@
             this.GenerateReportToolStripButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(87, 737);
+            this.toolStrip1.Size = new System.Drawing.Size(87, 741);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -243,10 +246,10 @@
             this.toolStrip2.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel5});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 737);
+            this.toolStrip2.Location = new System.Drawing.Point(0, 741);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip2.Size = new System.Drawing.Size(1366, 31);
+            this.toolStrip2.Size = new System.Drawing.Size(1366, 27);
             this.toolStrip2.TabIndex = 6;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -271,44 +274,33 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.richTextBoxLog);
-            this.splitContainer1.Size = new System.Drawing.Size(1279, 737);
-            this.splitContainer1.SplitterDistance = 572;
+            this.splitContainer1.Size = new System.Drawing.Size(1279, 741);
+            this.splitContainer1.SplitterDistance = 576;
             this.splitContainer1.TabIndex = 5;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1279, 572);
+            this.tabControl1.Size = new System.Drawing.Size(1279, 576);
             this.tabControl1.TabIndex = 3;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.htDataScanner1);
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1271, 536);
+            this.tabPage2.Size = new System.Drawing.Size(1271, 540);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "试验台";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 32);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.tabPage1.Size = new System.Drawing.Size(1271, 540);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "油源";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // richTextBoxLog
             // 
@@ -318,6 +310,15 @@
             this.richTextBoxLog.Size = new System.Drawing.Size(1279, 161);
             this.richTextBoxLog.TabIndex = 0;
             this.richTextBoxLog.Text = "";
+            // 
+            // htDataScanner1
+            // 
+            this.htDataScanner1.Location = new System.Drawing.Point(294, 254);
+            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.htDataScanner1.Name = "htDataScanner1";
+            this.htDataScanner1.Size = new System.Drawing.Size(200, 28);
+            this.htDataScanner1.TabIndex = 0;
+            this.htDataScanner1.VarName = "AI1";
             // 
             // MainForm
             // 
@@ -347,6 +348,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,7 +371,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel10;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -378,6 +379,8 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.RichTextBox richTextBoxLog;
+        private HyTestRTDataService.Controls.Scopes.HTDataScanner htDataScanner1;
+        private HyTestRTDataService.ConfigMode.Components.HTConfigManager htConfigManager1;
     }
 }
 

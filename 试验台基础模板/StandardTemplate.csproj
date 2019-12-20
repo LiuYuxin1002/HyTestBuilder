@@ -111,6 +111,7 @@
     <Compile Include="Test\Entity.cs" />
     <Compile Include="Test\MyFirstTestModel.cs" />
     <Compile Include="Test\Valve.cs" />
+    <Compile Include="Test\Valve2.cs" />
     <Compile Include="Utils\Curve.cs" />
     <Compile Include="Utils\Curve2D.cs" />
     <Compile Include="Utils\CurvePanel.cs" />

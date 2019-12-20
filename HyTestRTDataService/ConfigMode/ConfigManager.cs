@@ -138,7 +138,7 @@ namespace HyTestRTDataService.ConfigMode
         public void RefreshNicInfo()
         {
             AdapterConfigOperator op = new AdapterConfigOperator();
-            op.ScanSubConfig(Config);
+            op.ScanAdapterList(Config);
         }
 
         public List<ListItem> GetNicsWithFormatComboBox()

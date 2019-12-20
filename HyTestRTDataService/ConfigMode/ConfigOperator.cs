@@ -27,7 +27,7 @@ namespace HyTestRTDataService.ConfigMode
             throw new NotImplementedException();
         }
 
-        public void ScanSubConfig(Config config)
+        public void ScanAdapterList(Config config)
         {
             NetworkInterface[] networks = NetworkInterface.GetAllNetworkInterfaces();
             config.AdapterInfo.Adapters = new Adapter[networks.Length];

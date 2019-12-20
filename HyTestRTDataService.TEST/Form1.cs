@@ -1,6 +1,8 @@
 ﻿using HyTestRTDataService.RunningMode;
 using log4net;
 using System;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace HyTestRTDataService.TEST
@@ -19,7 +21,7 @@ namespace HyTestRTDataService.TEST
             for (int i = 0; i < 8; i++) do_state[i] = true;
 
             htUserCurve2.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
-            htUserCurve2.SetCurve("AO1", true, null, System.Drawing.Color.Red, 0.5f);
+            htUserCurve2.SetCurve("AI2", true, null, System.Drawing.Color.Red, 0.5f);
             timer.Interval = 50;
             timer.Tick += Timer_Tick;
             server.DataRefresh += Server_DataRefresh;
@@ -100,21 +102,17 @@ namespace HyTestRTDataService.TEST
             server.Stop();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            log.Info("log测试 ...");
-            server.InstantWrite<double>("AO1", 5.0);
-        }
+        
 
         private void btn_ao1_Click(object sender, EventArgs e)
         {
             string value = textBox1.Text.Trim();
+            
             try
             {
                 server.InstantWrite<double>("AO1", double.Parse(value));
             }
             catch { throw; }
-            
         }
 
         private void btn_ao2_Click(object sender, EventArgs e)
@@ -145,6 +143,87 @@ namespace HyTestRTDataService.TEST
                 server.InstantWrite<double>("AO4", double.Parse(value));
             }
             catch { throw; }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            log.Info("log测试 ...");
+            ExportData();
+            log.Info("测试结束...");
+        }
+
+        private void ExportData()
+        {
+            //定义变量
+            string analogFile = "..\\..\\bin\\analogWriteTest.txt";
+            string digitalFile = "..\\..\\bin\\digitalWriteTest.txt";
+            double[] intervals_a = new double[1000];
+            double[] intervals_b = new double[1000];
+            double ave_a = 0;
+            double ave_b = 0;
+            MyTimer timer = new MyTimer();
+            
+            //开始测试
+            server.InstantWrite<double>("AO1", 1.2);
+            log.Info("测试开始...");
+
+            log.Info("测试Bool值写...");
+            for (int i = 0; i < 1000; i++)
+            {
+                timer.GetElapsedTime();
+                server.InstantWrite<bool>("DO1", true);
+                server.InstantWrite<bool>("DO2", true);
+                server.InstantWrite<bool>("DO3", true);
+                server.InstantWrite<bool>("DO4", true);
+                server.InstantWrite<bool>("DO5", true);
+                server.InstantWrite<bool>("DO6", true);
+                server.InstantWrite<bool>("DO7", true);
+                server.InstantWrite<bool>("DO8", true);
+                intervals_b[i] = timer.GetElapsedTime() / 0.008;  //每次写入平均时间ms
+                ave_b += intervals_b[i];
+                htUserCurve2.AddCurveData("AI1", (float)(intervals_b[i] * 1000));   //时间转换为us
+            }
+            log.Info("Bool测试结果：" + ave_b + "us");
+            log.Info("测试Double值写");
+            for (int i = 0; i < 1000; i++)
+            {
+                timer.GetElapsedTime();
+                server.InstantWrite<double>("AO1", 1);
+                server.InstantWrite<double>("AO2", 2);
+                server.InstantWrite<double>("AO3", 3);
+                server.InstantWrite<double>("AO4", 4);
+                intervals_a[i] = timer.GetElapsedTime() / 0.004;
+                ave_a += intervals_a[i];
+                htUserCurve2.AddCurveData("AI2", (float)(intervals_a[i]));
+            }
+            log.Info("Double测试结果：" + ave_a + "us");
+
+            log.Info("写入文件中...");
+            //保存测试结果
+            using (FileStream fs1 = new FileStream(analogFile, FileMode.OpenOrCreate),
+                              fs2 = new FileStream(digitalFile, FileMode.OpenOrCreate)
+            )
+            {
+                //analog
+                StreamWriter sw = new StreamWriter(fs1, Encoding.ASCII);
+                StringBuilder sb = new StringBuilder();
+                foreach(var k in intervals_a)
+                {
+                    sb.Append(k + "\n");
+                }
+                sw.Write(sb.ToString());
+                //sw.Close();
+                //digital
+                sw = new StreamWriter(fs2, Encoding.ASCII);
+                sb.Clear();
+                foreach(var k in intervals_b)
+                {
+                    sb.Append(k + "\n");
+                }
+                sw.Write(sb.ToString());
+                sw.Close();
+            }
+            log.Info("写入完成...");
         }
     }
 }
