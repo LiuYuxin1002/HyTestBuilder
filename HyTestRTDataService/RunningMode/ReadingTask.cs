@@ -45,7 +45,7 @@ namespace HyTestRTDataService.RunningMode
                 throw new TaskRunningStateError();
             }
 
-            reader.HighFreqRead(this.port.deviceId, this.port.channelId,callback);
+            reader.HighFreqRead(this.port.deviceId, this.port.channelId, this.frequency, callback);
             state = TaskState.Running;
         }
 

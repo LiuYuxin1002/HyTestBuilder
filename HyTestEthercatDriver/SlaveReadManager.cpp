@@ -306,21 +306,22 @@ void sendAndReveive() {
 ///TODO:多组数据高频采样？？？
 
 int* result = new int[1000];
-int ptr = 0;
+int Localptr = 0;
 int crtDevice, crtChannel;
 HighFreqCallback localCallback;
 void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 	//达到1000个数字返回
-	if (ptr > 1000) {
-		ptr = 0;
+	if (Localptr > 1000) {
+		Localptr = 0;
 		localCallback(result);
 	}
 	//重新初始化数组
-	if (ptr == 0) {
+	if (Localptr == 0) {
 		result = new int[1000];
 	}
 	//读取并放入数组
-	result[ptr] = getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
+	result[Localptr++] = 0;//getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
+	if (Localptr % 100 == 0) cout << Localptr << endl;	//Debug
 }
 
 MMRESULT HighTimer;

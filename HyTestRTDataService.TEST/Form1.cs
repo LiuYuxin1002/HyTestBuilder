@@ -1,8 +1,10 @@
-﻿using HyTestRTDataService.RunningMode;
+﻿using HyTestRTDataService.Interfaces;
+using HyTestRTDataService.RunningMode;
 using log4net;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace HyTestRTDataService.TEST
@@ -11,7 +13,7 @@ namespace HyTestRTDataService.TEST
     {
         public ILog log = LogManager.GetLogger(typeof(Form1));
         public RunningServer server = RunningServer.getServer();
-        private Timer timer = new Timer();
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
 
         public Form1()
         {
@@ -20,6 +22,7 @@ namespace HyTestRTDataService.TEST
             log.Info("LALLAA");
             for (int i = 0; i < 8; i++) do_state[i] = false;
 
+            htUserCurve1.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
             htUserCurve2.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
             htUserCurve2.SetCurve("AI2", true, null, System.Drawing.Color.Red, 0.5f);
             timer.Interval = 50;
@@ -224,6 +227,26 @@ namespace HyTestRTDataService.TEST
                 sw.Close();
             }
             log.Info("写入完成...");
+        }
+        HighCallback callback;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            callback = (data) =>
+            {
+                //这里如果返回的是float可以直接调用htUserCurve1.AddCurveData("AI1", data);
+                foreach (var val in data)
+                {
+                    if(val<=65535 && val>-65535) htUserCurve1.AddCurveData("AI1", val);
+                    Thread.Sleep(2);
+                }
+                log.Info("OK");
+            };
+            server.StartReadingTask(1, "AI1", 10, callback);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            server.StopReadingTask();
         }
     }
 }

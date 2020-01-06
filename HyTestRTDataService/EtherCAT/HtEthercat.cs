@@ -193,14 +193,14 @@ namespace HyTestRTDataService.EtherCAT
         }
 
         IList<HighFreqReadCallback> highCallbacks = new List<HighFreqReadCallback>();
-        public void HighFreqRead(int deviceId, int channel, HighCallback call)
+        public void HighFreqRead(int deviceId, int channel, int freq, HighCallback call)
         {
             HighFreqReadCallback callback = (ans) =>
             {
                 call(ans);
             };
             highCallbacks.Add(callback);
-            HtEcConnector.HighFreqRead(deviceId, channel, callback);
+            HtEcConnector.HighFreqRead(deviceId, channel, freq, callback);
         }
 
         public void HighFreqReadStop(int deviceId, int channelId)

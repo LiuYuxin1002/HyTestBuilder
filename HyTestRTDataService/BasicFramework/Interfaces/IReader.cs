@@ -16,7 +16,7 @@ namespace HyTestRTDataService.Interfaces
         /// </summary>
         bool ReadBoolean(int deviceId, int channel);
 
-        void HighFreqRead(int deviceId, int channel, HighCallback callback);
+        void HighFreqRead(int deviceId, int channel, int freq, HighCallback callback);
 
         void HighFreqReadStop(int deviceId, int channel);
 

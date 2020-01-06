@@ -95,12 +95,12 @@ extern "C"
 	}
 
 	//High Frequency Read
-	TEXPORT void HighFreqRead(int deviceId, int channelId, HighFreqCallback callback) {
-		HighFreqReadImpl(deviceId, channelId, callback);
+	TEXPORT void HighFreqRead(int deviceId, int channelId, int freq, HighFreqCallback callback) {
+		HighFreqReadImpl(deviceId, channelId, freq, callback);
 	}
 
 	TEXPORT void HighFreqReadStop(int deviceId, int channelId) {
-		HighFreqReadStop(deviceId, channelId);
+		HighFreqReadStopImpl(deviceId, channelId);
 	}
 
 ///env. setting

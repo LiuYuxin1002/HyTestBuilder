@@ -57,7 +57,7 @@ namespace HyTestRTDataService.EtherCAT
         public static extern int readStop();
 
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void HighFreqRead(int slave, int channelId, [MarshalAs(UnmanagedType.FunctionPtr)]HighFreqReadCallback callbackPoint);
+        public static extern void HighFreqRead(int slave, int channelId, int freq, [MarshalAs(UnmanagedType.FunctionPtr)]HighFreqReadCallback callbackPoint);
 
         [DllImport("HyTestEthercatDriver.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void HighFreqReadStop(int slave, int channel);

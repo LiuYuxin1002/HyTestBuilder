@@ -52,6 +52,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.htUserCurve2 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.htUserCurve1 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.htDataScanner3 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
@@ -92,9 +94,11 @@
             this.groupBox1.Controls.Add(this.htLed4);
             this.groupBox1.Controls.Add(this.htLed2);
             this.groupBox1.Controls.Add(this.htLed1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(10, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(459, 100);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(367, 80);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "EL1008";
@@ -109,9 +113,11 @@
             this.groupBox2.Controls.Add(this.htLed14);
             this.groupBox2.Controls.Add(this.htLed15);
             this.groupBox2.Controls.Add(this.htLed16);
-            this.groupBox2.Location = new System.Drawing.Point(12, 118);
+            this.groupBox2.Location = new System.Drawing.Point(10, 94);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(459, 100);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(367, 80);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EL2008";
@@ -119,9 +125,10 @@
             // richTextBoxLog
             // 
             this.richTextBoxLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBoxLog.Location = new System.Drawing.Point(3, 21);
+            this.richTextBoxLog.Location = new System.Drawing.Point(2, 16);
+            this.richTextBoxLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.richTextBoxLog.Name = "richTextBoxLog";
-            this.richTextBoxLog.Size = new System.Drawing.Size(1011, 150);
+            this.richTextBoxLog.Size = new System.Drawing.Size(810, 121);
             this.richTextBoxLog.TabIndex = 1;
             this.richTextBoxLog.Text = "";
             // 
@@ -135,42 +142,48 @@
             this.groupBox3.Controls.Add(this.htDataScanner2);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.htDataScanner1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 224);
+            this.groupBox3.Location = new System.Drawing.Point(10, 179);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(459, 100);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(367, 80);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "EL3004";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(236, 65);
+            this.label3.Location = new System.Drawing.Point(189, 52);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 23);
+            this.label3.Size = new System.Drawing.Size(27, 18);
             this.label3.TabIndex = 7;
             this.label3.Text = "AI4";
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(40, 65);
+            this.label4.Location = new System.Drawing.Point(32, 52);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 23);
+            this.label4.Size = new System.Drawing.Size(27, 18);
             this.label4.TabIndex = 5;
             this.label4.Text = "AI3";
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(236, 29);
+            this.label2.Location = new System.Drawing.Point(189, 23);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 23);
+            this.label2.Size = new System.Drawing.Size(27, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "AI2";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(40, 29);
+            this.label1.Location = new System.Drawing.Point(32, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 23);
+            this.label1.Size = new System.Drawing.Size(27, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "AI1";
             // 
@@ -188,9 +201,11 @@
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(12, 330);
+            this.groupBox4.Location = new System.Drawing.Point(10, 264);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(459, 100);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Size = new System.Drawing.Size(367, 80);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "EL4134";
@@ -199,9 +214,10 @@
             // 
             this.btn_ao4.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
             this.btn_ao4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_ao4.Location = new System.Drawing.Point(393, 55);
+            this.btn_ao4.Location = new System.Drawing.Point(314, 44);
+            this.btn_ao4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_ao4.Name = "btn_ao4";
-            this.btn_ao4.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao4.Size = new System.Drawing.Size(23, 21);
             this.btn_ao4.TabIndex = 23;
             this.btn_ao4.UseVisualStyleBackColor = true;
             this.btn_ao4.Click += new System.EventHandler(this.btn_ao4_Click);
@@ -210,9 +226,10 @@
             // 
             this.btn_ao3.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
             this.btn_ao3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_ao3.Location = new System.Drawing.Point(197, 55);
+            this.btn_ao3.Location = new System.Drawing.Point(158, 44);
+            this.btn_ao3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_ao3.Name = "btn_ao3";
-            this.btn_ao3.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao3.Size = new System.Drawing.Size(23, 21);
             this.btn_ao3.TabIndex = 22;
             this.btn_ao3.UseVisualStyleBackColor = true;
             this.btn_ao3.Click += new System.EventHandler(this.btn_ao3_Click);
@@ -221,9 +238,10 @@
             // 
             this.btn_ao2.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
             this.btn_ao2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_ao2.Location = new System.Drawing.Point(393, 19);
+            this.btn_ao2.Location = new System.Drawing.Point(314, 15);
+            this.btn_ao2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_ao2.Name = "btn_ao2";
-            this.btn_ao2.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao2.Size = new System.Drawing.Size(23, 21);
             this.btn_ao2.TabIndex = 21;
             this.btn_ao2.UseVisualStyleBackColor = true;
             this.btn_ao2.Click += new System.EventHandler(this.btn_ao2_Click);
@@ -232,73 +250,82 @@
             // 
             this.btn_ao1.BackgroundImage = global::HyTestRTDataService.TEST.Properties.Resources.begin;
             this.btn_ao1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_ao1.Location = new System.Drawing.Point(197, 19);
+            this.btn_ao1.Location = new System.Drawing.Point(158, 15);
+            this.btn_ao1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_ao1.Name = "btn_ao1";
-            this.btn_ao1.Size = new System.Drawing.Size(29, 26);
+            this.btn_ao1.Size = new System.Drawing.Size(23, 21);
             this.btn_ao1.TabIndex = 20;
             this.btn_ao1.UseVisualStyleBackColor = true;
             this.btn_ao1.Click += new System.EventHandler(this.btn_ao1_Click);
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(270, 56);
+            this.textBox4.Location = new System.Drawing.Point(216, 45);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(117, 25);
+            this.textBox4.Size = new System.Drawing.Size(94, 21);
             this.textBox4.TabIndex = 19;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(74, 56);
+            this.textBox3.Location = new System.Drawing.Point(59, 45);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(117, 25);
+            this.textBox3.Size = new System.Drawing.Size(94, 21);
             this.textBox3.TabIndex = 18;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(270, 20);
+            this.textBox2.Location = new System.Drawing.Point(216, 16);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(117, 25);
+            this.textBox2.Size = new System.Drawing.Size(94, 21);
             this.textBox2.TabIndex = 17;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(74, 20);
+            this.textBox1.Location = new System.Drawing.Point(59, 16);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(117, 25);
+            this.textBox1.Size = new System.Drawing.Size(94, 21);
             this.textBox1.TabIndex = 16;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(234, 57);
+            this.label5.Location = new System.Drawing.Point(187, 46);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(34, 23);
+            this.label5.Size = new System.Drawing.Size(27, 18);
             this.label5.TabIndex = 15;
             this.label5.Text = "AO4";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(38, 57);
+            this.label6.Location = new System.Drawing.Point(30, 46);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(34, 23);
+            this.label6.Size = new System.Drawing.Size(27, 18);
             this.label6.TabIndex = 13;
             this.label6.Text = "AO3";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
-            this.label7.Location = new System.Drawing.Point(234, 21);
+            this.label7.Location = new System.Drawing.Point(187, 17);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 23);
+            this.label7.Size = new System.Drawing.Size(27, 18);
             this.label7.TabIndex = 11;
             this.label7.Text = "AO2";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
-            this.label8.Location = new System.Drawing.Point(38, 21);
+            this.label8.Location = new System.Drawing.Point(30, 17);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 23);
+            this.label8.Size = new System.Drawing.Size(27, 18);
             this.label8.TabIndex = 9;
             this.label8.Text = "AO1";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -306,31 +333,55 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.richTextBoxLog);
-            this.groupBox5.Location = new System.Drawing.Point(12, 436);
+            this.groupBox5.Location = new System.Drawing.Point(10, 349);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1017, 174);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(814, 139);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "日志信息";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 616);
+            this.button1.Location = new System.Drawing.Point(10, 493);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 23);
+            this.button1.Size = new System.Drawing.Size(92, 18);
             this.button1.TabIndex = 6;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(106, 493);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(92, 18);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "高速采集";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(202, 493);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(92, 18);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "停止采集";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // htUserCurve2
             // 
             this.htUserCurve2.BackColor = System.Drawing.Color.Transparent;
             this.htUserCurve2.IntervalAbscissaText = 50;
-            this.htUserCurve2.Location = new System.Drawing.Point(478, 226);
-            this.htUserCurve2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve2.Location = new System.Drawing.Point(382, 181);
             this.htUserCurve2.Name = "htUserCurve2";
-            this.htUserCurve2.Size = new System.Drawing.Size(551, 205);
+            this.htUserCurve2.Size = new System.Drawing.Size(441, 164);
             this.htUserCurve2.StrechDataCountMax = 500;
             this.htUserCurve2.TabIndex = 5;
             this.htUserCurve2.TextAddFormat = "HH:mm:ss";
@@ -341,10 +392,9 @@
             // 
             this.htUserCurve1.BackColor = System.Drawing.Color.Transparent;
             this.htUserCurve1.IntervalAbscissaText = 50;
-            this.htUserCurve1.Location = new System.Drawing.Point(478, 13);
-            this.htUserCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve1.Location = new System.Drawing.Point(382, 10);
             this.htUserCurve1.Name = "htUserCurve1";
-            this.htUserCurve1.Size = new System.Drawing.Size(551, 205);
+            this.htUserCurve1.Size = new System.Drawing.Size(441, 164);
             this.htUserCurve1.TabIndex = 4;
             this.htUserCurve1.TextAddFormat = "HH:mm:SS";
             this.htUserCurve1.Title = "DI示波器";
@@ -354,37 +404,33 @@
             // 
             // htDataScanner3
             // 
-            this.htDataScanner3.Location = new System.Drawing.Point(270, 62);
-            this.htDataScanner3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner3.Location = new System.Drawing.Point(216, 50);
             this.htDataScanner3.Name = "htDataScanner3";
-            this.htDataScanner3.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner3.Size = new System.Drawing.Size(122, 22);
             this.htDataScanner3.TabIndex = 6;
             this.htDataScanner3.VarName = "AI4";
             // 
             // htDataScanner4
             // 
-            this.htDataScanner4.Location = new System.Drawing.Point(74, 62);
-            this.htDataScanner4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner4.Location = new System.Drawing.Point(59, 50);
             this.htDataScanner4.Name = "htDataScanner4";
-            this.htDataScanner4.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner4.Size = new System.Drawing.Size(122, 22);
             this.htDataScanner4.TabIndex = 4;
             this.htDataScanner4.VarName = "AI3";
             // 
             // htDataScanner2
             // 
-            this.htDataScanner2.Location = new System.Drawing.Point(270, 26);
-            this.htDataScanner2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner2.Location = new System.Drawing.Point(216, 21);
             this.htDataScanner2.Name = "htDataScanner2";
-            this.htDataScanner2.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner2.Size = new System.Drawing.Size(122, 22);
             this.htDataScanner2.TabIndex = 2;
             this.htDataScanner2.VarName = "AI2";
             // 
             // htDataScanner1
             // 
-            this.htDataScanner1.Location = new System.Drawing.Point(74, 26);
-            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner1.Location = new System.Drawing.Point(59, 21);
             this.htDataScanner1.Name = "htDataScanner1";
-            this.htDataScanner1.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner1.Size = new System.Drawing.Size(122, 22);
             this.htDataScanner1.TabIndex = 0;
             this.htDataScanner1.VarName = "AI1";
             // 
@@ -396,10 +442,11 @@
             this.htLed9.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed9.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed9.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed9.Location = new System.Drawing.Point(379, 27);
+            this.htLed9.Location = new System.Drawing.Point(303, 22);
+            this.htLed9.Margin = new System.Windows.Forms.Padding(2);
             this.htLed9.Name = "htLed9";
             this.htLed9.Renderer = null;
-            this.htLed9.Size = new System.Drawing.Size(43, 46);
+            this.htLed9.Size = new System.Drawing.Size(34, 37);
             this.htLed9.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed9.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed9.TabIndex = 15;
@@ -414,10 +461,11 @@
             this.htLed10.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed10.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed10.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed10.Location = new System.Drawing.Point(330, 27);
+            this.htLed10.Location = new System.Drawing.Point(264, 22);
+            this.htLed10.Margin = new System.Windows.Forms.Padding(2);
             this.htLed10.Name = "htLed10";
             this.htLed10.Renderer = null;
-            this.htLed10.Size = new System.Drawing.Size(43, 46);
+            this.htLed10.Size = new System.Drawing.Size(34, 37);
             this.htLed10.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed10.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed10.TabIndex = 14;
@@ -432,10 +480,11 @@
             this.htLed11.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed11.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed11.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed11.Location = new System.Drawing.Point(281, 27);
+            this.htLed11.Location = new System.Drawing.Point(225, 22);
+            this.htLed11.Margin = new System.Windows.Forms.Padding(2);
             this.htLed11.Name = "htLed11";
             this.htLed11.Renderer = null;
-            this.htLed11.Size = new System.Drawing.Size(43, 46);
+            this.htLed11.Size = new System.Drawing.Size(34, 37);
             this.htLed11.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed11.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed11.TabIndex = 13;
@@ -450,10 +499,11 @@
             this.htLed12.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed12.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed12.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed12.Location = new System.Drawing.Point(232, 27);
+            this.htLed12.Location = new System.Drawing.Point(186, 22);
+            this.htLed12.Margin = new System.Windows.Forms.Padding(2);
             this.htLed12.Name = "htLed12";
             this.htLed12.Renderer = null;
-            this.htLed12.Size = new System.Drawing.Size(43, 46);
+            this.htLed12.Size = new System.Drawing.Size(34, 37);
             this.htLed12.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed12.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed12.TabIndex = 12;
@@ -468,10 +518,11 @@
             this.htLed13.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed13.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed13.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed13.Location = new System.Drawing.Point(183, 27);
+            this.htLed13.Location = new System.Drawing.Point(146, 22);
+            this.htLed13.Margin = new System.Windows.Forms.Padding(2);
             this.htLed13.Name = "htLed13";
             this.htLed13.Renderer = null;
-            this.htLed13.Size = new System.Drawing.Size(43, 46);
+            this.htLed13.Size = new System.Drawing.Size(34, 37);
             this.htLed13.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed13.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed13.TabIndex = 11;
@@ -486,10 +537,11 @@
             this.htLed14.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed14.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed14.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed14.Location = new System.Drawing.Point(134, 27);
+            this.htLed14.Location = new System.Drawing.Point(107, 22);
+            this.htLed14.Margin = new System.Windows.Forms.Padding(2);
             this.htLed14.Name = "htLed14";
             this.htLed14.Renderer = null;
-            this.htLed14.Size = new System.Drawing.Size(43, 46);
+            this.htLed14.Size = new System.Drawing.Size(34, 37);
             this.htLed14.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed14.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed14.TabIndex = 10;
@@ -504,10 +556,11 @@
             this.htLed15.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed15.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed15.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed15.Location = new System.Drawing.Point(85, 27);
+            this.htLed15.Location = new System.Drawing.Point(68, 22);
+            this.htLed15.Margin = new System.Windows.Forms.Padding(2);
             this.htLed15.Name = "htLed15";
             this.htLed15.Renderer = null;
-            this.htLed15.Size = new System.Drawing.Size(43, 46);
+            this.htLed15.Size = new System.Drawing.Size(34, 37);
             this.htLed15.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed15.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed15.TabIndex = 9;
@@ -522,10 +575,11 @@
             this.htLed16.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed16.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed16.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed16.Location = new System.Drawing.Point(36, 27);
+            this.htLed16.Location = new System.Drawing.Point(29, 22);
+            this.htLed16.Margin = new System.Windows.Forms.Padding(2);
             this.htLed16.Name = "htLed16";
             this.htLed16.Renderer = null;
-            this.htLed16.Size = new System.Drawing.Size(43, 46);
+            this.htLed16.Size = new System.Drawing.Size(34, 37);
             this.htLed16.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed16.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed16.TabIndex = 8;
@@ -540,10 +594,11 @@
             this.htLed5.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed5.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed5.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed5.Location = new System.Drawing.Point(379, 27);
+            this.htLed5.Location = new System.Drawing.Point(303, 22);
+            this.htLed5.Margin = new System.Windows.Forms.Padding(2);
             this.htLed5.Name = "htLed5";
             this.htLed5.Renderer = null;
-            this.htLed5.Size = new System.Drawing.Size(43, 46);
+            this.htLed5.Size = new System.Drawing.Size(34, 37);
             this.htLed5.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed5.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed5.TabIndex = 15;
@@ -557,10 +612,11 @@
             this.htLed6.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed6.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed6.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed6.Location = new System.Drawing.Point(330, 27);
+            this.htLed6.Location = new System.Drawing.Point(264, 22);
+            this.htLed6.Margin = new System.Windows.Forms.Padding(2);
             this.htLed6.Name = "htLed6";
             this.htLed6.Renderer = null;
-            this.htLed6.Size = new System.Drawing.Size(43, 46);
+            this.htLed6.Size = new System.Drawing.Size(34, 37);
             this.htLed6.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed6.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed6.TabIndex = 14;
@@ -574,10 +630,11 @@
             this.htLed7.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed7.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed7.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed7.Location = new System.Drawing.Point(281, 27);
+            this.htLed7.Location = new System.Drawing.Point(225, 22);
+            this.htLed7.Margin = new System.Windows.Forms.Padding(2);
             this.htLed7.Name = "htLed7";
             this.htLed7.Renderer = null;
-            this.htLed7.Size = new System.Drawing.Size(43, 46);
+            this.htLed7.Size = new System.Drawing.Size(34, 37);
             this.htLed7.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed7.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed7.TabIndex = 13;
@@ -591,10 +648,11 @@
             this.htLed8.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed8.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed8.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed8.Location = new System.Drawing.Point(232, 27);
+            this.htLed8.Location = new System.Drawing.Point(186, 22);
+            this.htLed8.Margin = new System.Windows.Forms.Padding(2);
             this.htLed8.Name = "htLed8";
             this.htLed8.Renderer = null;
-            this.htLed8.Size = new System.Drawing.Size(43, 46);
+            this.htLed8.Size = new System.Drawing.Size(34, 37);
             this.htLed8.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed8.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed8.TabIndex = 12;
@@ -608,10 +666,11 @@
             this.htLed3.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed3.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed3.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed3.Location = new System.Drawing.Point(183, 27);
+            this.htLed3.Location = new System.Drawing.Point(146, 22);
+            this.htLed3.Margin = new System.Windows.Forms.Padding(2);
             this.htLed3.Name = "htLed3";
             this.htLed3.Renderer = null;
-            this.htLed3.Size = new System.Drawing.Size(43, 46);
+            this.htLed3.Size = new System.Drawing.Size(34, 37);
             this.htLed3.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed3.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed3.TabIndex = 11;
@@ -625,10 +684,11 @@
             this.htLed4.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed4.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed4.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed4.Location = new System.Drawing.Point(134, 27);
+            this.htLed4.Location = new System.Drawing.Point(107, 22);
+            this.htLed4.Margin = new System.Windows.Forms.Padding(2);
             this.htLed4.Name = "htLed4";
             this.htLed4.Renderer = null;
-            this.htLed4.Size = new System.Drawing.Size(43, 46);
+            this.htLed4.Size = new System.Drawing.Size(34, 37);
             this.htLed4.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed4.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed4.TabIndex = 10;
@@ -642,10 +702,11 @@
             this.htLed2.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed2.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed2.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed2.Location = new System.Drawing.Point(85, 27);
+            this.htLed2.Location = new System.Drawing.Point(68, 22);
+            this.htLed2.Margin = new System.Windows.Forms.Padding(2);
             this.htLed2.Name = "htLed2";
             this.htLed2.Renderer = null;
-            this.htLed2.Size = new System.Drawing.Size(43, 46);
+            this.htLed2.Size = new System.Drawing.Size(34, 37);
             this.htLed2.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed2.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed2.TabIndex = 9;
@@ -659,10 +720,11 @@
             this.htLed1.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
             this.htLed1.LedColor = System.Drawing.Color.Chartreuse;
             this.htLed1.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed1.Location = new System.Drawing.Point(36, 27);
+            this.htLed1.Location = new System.Drawing.Point(29, 22);
+            this.htLed1.Margin = new System.Windows.Forms.Padding(2);
             this.htLed1.Name = "htLed1";
             this.htLed1.Renderer = null;
-            this.htLed1.Size = new System.Drawing.Size(43, 46);
+            this.htLed1.Size = new System.Drawing.Size(34, 37);
             this.htLed1.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
             this.htLed1.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
             this.htLed1.TabIndex = 8;
@@ -670,9 +732,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1042, 645);
+            this.ClientSize = new System.Drawing.Size(834, 516);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.htUserCurve2);
             this.Controls.Add(this.htUserCurve1);
@@ -681,6 +745,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -742,6 +807,8 @@
         private System.Windows.Forms.Button btn_ao4;
         private System.Windows.Forms.Button btn_ao3;
         private System.Windows.Forms.Button btn_ao2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

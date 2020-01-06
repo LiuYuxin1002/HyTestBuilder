@@ -55,3 +55,5 @@ Microsoft.VisualStudio.TestPlatform.TestFramework.xml
 /packages/MSTest.TestAdapter.1.3.2/build/netcoreapp1.0/MSTest.TestAdapter.props
 /packages/MSTest.TestAdapter.1.3.2/build/uap10.0/MSTest.TestAdapter.props
 /packages/MSTest.TestAdapter.1.3.2/build/uap10.0/MSTest.TestAdapter.targets
+/HyTestRTDataService.TEST/bin/analogWriteTest.txt
+/HyTestRTDataService.TEST/bin/digitalWriteTest.txt
