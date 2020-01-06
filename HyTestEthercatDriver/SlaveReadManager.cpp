@@ -320,7 +320,7 @@ void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 		result = new int[1000];
 	}
 	//读取并放入数组
-	result[Localptr++] = 0;//getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
+	result[Localptr++] = getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
 	if (Localptr % 100 == 0) cout << Localptr << endl;	//Debug
 }
 
