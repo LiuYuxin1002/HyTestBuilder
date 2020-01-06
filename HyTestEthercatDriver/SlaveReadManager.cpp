@@ -7,7 +7,9 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include <AclAPI.h>
 #pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "advapi32.lib")
 using namespace std;
 
 char strbuf[64] = "";
@@ -101,9 +103,62 @@ operationResult* prepareCallBack() {
 		return new operationResult(1, "Error in checkRedisState, callBack method maybe empty.");
 	}
 }
+#pragma region CTimer
+	class CTimer
+	{
+		public:
+			CTimer(void);
+			~CTimer(void);
+
+			int time_in();
+			double time_out();
+
+		private:
+			LARGE_INTEGER litmp;
+			LONGLONG qt1, qt2,qt_diff;
+			double dft, dff, dfm;
+	};
+
+	CTimer::CTimer(void)
+	{
+	}
+
+
+	CTimer::~CTimer(void)
+	{
+	}
+
+	int CTimer::time_in()
+	{
+		QueryPerformanceCounter(&litmp);//获得初始值
+		qt1 = litmp.QuadPart;
+		
+		return 1;
+	}
+
+	double CTimer::time_out()
+	{
+		QueryPerformanceCounter(&litmp);//获得终止值
+		qt_diff = litmp.QuadPart - qt1;
+		qt_diff *= 1000000;
+
+		QueryPerformanceFrequency(&litmp);//获得时钟频率
+		dft = qt_diff / litmp.QuadPart;//获得对应的时间值
+		
+		return dft;
+	}
+#pragma endregion
 
 MMRESULT TimerId;
+CTimer timer;
+double* arr;
+int ptr = 0;
+
+int flag = 0;
 /*redis timer_tick event*/
+FILETIME ftKernelTimeStart, ftKernelTimeEnd;
+FILETIME ftUserTimeStart, ftUserTimeEnd;
+FILETIME ftDummy1, ftDummy2;
 void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 	for (int slave=0; slave<ec_slavecount; slave++)
 	{
@@ -243,4 +298,44 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 void sendAndReveive() {
 	ec_send_processdata();
 	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
+}
+
+
+///
+///高频采样
+///TODO:多组数据高频采样？？？
+
+int* result = new int[1000];
+int ptr = 0;
+int crtDevice, crtChannel;
+HighFreqCallback localCallback;
+void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
+	//达到1000个数字返回
+	if (ptr > 1000) {
+		ptr = 0;
+		localCallback(result);
+	}
+	//重新初始化数组
+	if (ptr == 0) {
+		result = new int[1000];
+	}
+	//读取并放入数组
+	result[ptr] = getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
+}
+
+MMRESULT HighTimer;
+void HighFreqReadImpl(int deviceId, int channelId, int period, HighFreqCallback callback) {
+	crtDevice = deviceId;
+	crtChannel = channelId;
+	localCallback = callback;
+	if (HighTimer == NULL) {
+		HighTimer = timeSetEvent(period, 0, record, NULL, TIME_PERIODIC);
+	}
+}
+
+void HighFreqReadStopImpl(int deviceId, int channelId) {
+	if (HighTimer != NULL) {
+		localCallback(result);
+		timeKillEvent(HighTimer);//停止计时器
+	}
 }

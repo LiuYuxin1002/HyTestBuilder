@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using HyTestRTDataService.Entities;
+using HyTestRTDataService.Interfaces;
+using System;
 
 namespace HyTestRTDataService.RunningMode
 {
@@ -9,78 +10,68 @@ namespace HyTestRTDataService.RunningMode
     public class ReadingTask
     {
         private int taskId;
-        private string[] varNameList;
-        private int taskDuration;
+        private string varName;
+        private Port port;
         private int frequency;
-        private DataTable taskData;
+        private int[] data;
+        private TaskState state = TaskState.Undefine;
+
+        private IReader reader;
+
+        private HighCallback callback;
         
-        public int TaskId
-        {
-            get
-            {
-                return taskId;
-            }
-
-            set
-            {
-                taskId = value;
-            }
-        }
-        public string[] VarNameList
-        {
-            get
-            {
-                return varNameList;
-            }
-
-            set
-            {
-                varNameList = value;
-            }
-        }
-        public int TaskDuration
-        {
-            get
-            {
-                return taskDuration;
-            }
-
-            set
-            {
-                taskDuration = value;
-            }
-        }
-        public int Frequency
-        {
-            get
-            {
-                return frequency;
-            }
-
-            set
-            {
-                frequency = value;
-            }
-        }
-        public DataTable TaskData
-        {
-            get
-            {
-                return taskData;
-            }
-
-            set
-            {
-                taskData = value;
-            }
-        }
-
-        public ReadingTask(int taskId, string[] varNameList, int taskDuration, int frequency)
+        public ReadingTask(int taskId, 
+                           string varName, 
+                           int frequency, 
+                           IReader reader, 
+                           HighCallback callback, 
+                           Port port)
         {
             this.taskId = taskId;
-            this.varNameList = varNameList;
-            this.taskDuration = taskDuration;
+            this.varName = varName;
             this.frequency = frequency;
+            this.reader = reader;
+            this.callback = callback;
+            this.port = port;
+            state = TaskState.Free;
         }
+
+        private ReadingTask() { }
+
+        public void StartSampling()
+        {
+            if (state == TaskState.Running || state == TaskState.Finished)
+            {
+                throw new TaskRunningStateError();
+            }
+
+            reader.HighFreqRead(this.port.deviceId, this.port.channelId,callback);
+            state = TaskState.Running;
+        }
+
+        public void StopSampling()
+        {
+            if(state != TaskState.Running)
+            {
+                throw new TaskRunningStateError();
+            }
+
+            reader.HighFreqReadStop(port.deviceId, port.channelId);
+            state = TaskState.Finished;
+        }
+
+    }
+
+    public enum TaskState
+    {
+        Undefine,   //未定义的任务
+        Free,       //空闲状态
+        Running,    //运行状态
+        Finished,   //已结束
+    }
+
+    public class TaskRunningStateError : Exception
+    {
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HyTestRTDataService.RunningMode;
+using System;
+using System.Data;
 
 namespace HyTestRTDataService.Interfaces
 {
@@ -13,8 +15,14 @@ namespace HyTestRTDataService.Interfaces
         /// 单点读数字量
         /// </summary>
         bool ReadBoolean(int deviceId, int channel);
-        
+
+        void HighFreqRead(int deviceId, int channel, HighCallback callback);
+
+        void HighFreqReadStop(int deviceId, int channel);
+
     }
+
+    public delegate void HighCallback(int[] data);
 
     public interface IAutoReader
     {

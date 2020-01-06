@@ -53,7 +53,7 @@ namespace HyTestRTDataService.RunningMode
             this._datapool = new double[_bufferSize];
         }
 
-        public void update(int id, double value)
+        public void Update(int id, double value)
         {
             //if (id >= _bufferSize_in)
             //{
@@ -70,7 +70,7 @@ namespace HyTestRTDataService.RunningMode
             this._datapool[id] = value;
         }
 
-        public double get(int id)
+        public double Get(int id)
         {
             if (id >= _bufferSize)
             {

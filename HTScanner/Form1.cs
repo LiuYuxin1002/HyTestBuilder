@@ -18,8 +18,11 @@ namespace HTScanner
 
             server.Run();
             manager = new ConfigManager();
-
+            
             InitDeviceDatagridView();
+
+            root = manager.GetDevsWithFormatTree();
+            ExpandTree();
         }
 
         //reflush
@@ -30,25 +33,30 @@ namespace HTScanner
                 /*refresh tree view*/
                 manager.RefreshDevInfo();
                 root = manager.GetDevsWithFormatTree();
-                treeView1.Nodes.Clear();
-                treeView1.Nodes.Add(root);
-                /*expand two level*/
-                foreach(TreeNode coupler in treeView1.Nodes)
-                {
-                    coupler.Expand();
-                    foreach(TreeNode slave in coupler.Nodes)
-                    {
-                        slave.Expand();
-                    }
-                }
-                /*refresh data grid view*/
-                //TODO: finish it.
+                ExpandTree();
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
             }
             
+        }
+
+        private void ExpandTree()
+        {
+            treeView1.Nodes.Clear();
+            treeView1.Nodes.Add(root);
+            /*expand two level*/
+            foreach (TreeNode coupler in treeView1.Nodes)
+            {
+                coupler.Expand();
+                foreach (TreeNode slave in coupler.Nodes)
+                {
+                    slave.Expand();
+                }
+            }
+            /*refresh data grid view*/
+            //TODO: finish it.
         }
 
         private void InitDeviceDatagridView()

@@ -22,7 +22,7 @@ namespace HyTestRTDataService.RunningMode
             {
                 lock (locky)
                 {
-                    if (server==null)
+                    if (server == null)
                     {
                         server = new RunningServer();
                     }
@@ -38,19 +38,19 @@ namespace HyTestRTDataService.RunningMode
         public event EventHandler<EventArgs> DisConnected;
 
         /*read & write*/
-        private Buffer      buffer;
-        private IReader     reader;//有默认值EtherCAT
+        private Buffer buffer;
+        private IReader reader;//有默认值EtherCAT
         private IAutoReader autoReader;
-        private IWriter     writer;
+        private IWriter writer;
         private IConnection conn;
 
         /*config info*/
-        private ConfigManager       configManager;
-        private Config              config;
-        private ConfigAdapterInfo   adapterInfo;
-        private ConfigDeviceInfo    deviceInfo;
-        private ConfigIOmapInfo     iomapInfo;
-        private ConfigTestEnvInfo   testInfo;
+        private ConfigManager configManager;
+        private Config config;
+        private ConfigAdapterInfo adapterInfo;
+        private ConfigDeviceInfo deviceInfo;
+        private ConfigIOmapInfo iomapInfo;
+        private ConfigTestEnvInfo testInfo;
 
         private RunningServer()     //构造函数
         {
@@ -72,12 +72,7 @@ namespace HyTestRTDataService.RunningMode
 
             InitBuffer(this.iomapInfo.InputVarNum, this.iomapInfo.OutputVarNum);
 
-            if (autoReader != null)
-            {
-                autoReader.AutoDataChanged += ReadDataToDatapool;
-            }
-
-            if(Connected!=null)
+            if (Connected != null)
             {
                 Connected(null, null);
             }
@@ -91,7 +86,7 @@ namespace HyTestRTDataService.RunningMode
             if (conn != null)
             {
                 conn.Disconnect();
-                if(DisConnected!=null)
+                if (DisConnected != null)
                 {
                     DisConnected(null, null);
                 }
@@ -115,7 +110,7 @@ namespace HyTestRTDataService.RunningMode
                 this.conn = ConfigProtocol.GetConnection();
                 this.conn.Connect();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 //return new OperationResult(1, ex.Message);
@@ -130,7 +125,16 @@ namespace HyTestRTDataService.RunningMode
             if (ConnectionContext.isAutoRead)
             {
                 autoReader = (IAutoReader)conn;
-                autoReader.InitAutoReadConfig();
+                
+                if (autoReader != null)
+                {
+                    autoReader.InitAutoReadConfig();
+                    autoReader.AutoDataChanged += ReadDataToDatapool;
+                }
+                else
+                {
+                    throw new Exception("获取AutoReader失败");
+                }
             }
 
             return new OperationResult();
@@ -143,7 +147,7 @@ namespace HyTestRTDataService.RunningMode
             {
                 configManager = new ConfigManager();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //return new OperationResult(1, ex.Message);
             }
@@ -191,15 +195,15 @@ namespace HyTestRTDataService.RunningMode
                 string name = iomapInfo.MapPortToName[key];
                 index = iomapInfo.MapNameToIndex[name];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 /*you havent config this port in your iomap*/
-                log.Debug(ex.Message+
+                log.Debug(ex.Message +
                     "\n Maybe you havent config this port in your iomap.");
             }
-        
-            buffer.update(index, e.value);
-            
+
+            buffer.Update(index, e.value);
+
             if (DataRefresh != null) DataRefresh(this, e);     //notify user control.TODO: Needed?
         }
 
@@ -225,21 +229,25 @@ namespace HyTestRTDataService.RunningMode
             }
             catch (Exception e)
             {
-                log.Debug(e.Message + "::" + varName);
+                log.Debug(e.Message + ":error location:" + varName);
             }
             if (varType == typeof(int))
             {
-                int value = (int)buffer.get(index);
-                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(value, varMax, varMin), typeof(T));
+                int value = (int)buffer.Get(index);
+                return (T)Convert.ChangeType(
+                    DataTransformer.AnalogToPhysical(value, varMax, varMin),
+                    typeof(T));
             }
             else if (varType == typeof(double))
             {
-                int value = (int)buffer.get(index);
-                return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(value, varMax, varMin), typeof(T));
+                int value = (int)buffer.Get(index);
+                return (T)Convert.ChangeType(
+                    DataTransformer.AnalogToPhysical(value, varMax, varMin),
+                    typeof(T));
             }
             else
             {
-                bool value = DataTransformer.DoubleToBool(buffer.get(index));
+                bool value = DataTransformer.DoubleToBool(buffer.Get(index));
                 return (T)Convert.ChangeType(value, typeof(T));
             }
         }
@@ -261,7 +269,7 @@ namespace HyTestRTDataService.RunningMode
                 varMax = iomapInfo.MapNameToMax[varName];
                 varMin = iomapInfo.MapNameToMin[varName];
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug(e.Message + "::" + varName);
             }
@@ -309,27 +317,29 @@ namespace HyTestRTDataService.RunningMode
                 varMax = iomapInfo.MapNameToMax[varName];
                 varMin = iomapInfo.MapNameToMin[varName];
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 log.Debug(e.Message + "::" + varName); //varName找不到报错
             }
 
             if (varType == typeof(bool))        //if digital
             {
-                data = writer.WriteBoolean(varPort.deviceId, varPort.channelId, 
+                data = writer.WriteBoolean(varPort.deviceId, varPort.channelId,
                         (byte)Convert.ChangeType(value, typeof(byte)));
             }
             else if (varType == typeof(int))    //if int, but maybe useless
             {
-                int realValue = DataTransformer.PhysicalToAnalog((double)Convert.ChangeType(value, typeof(int)), varMax, varMin);
+                int realValue = DataTransformer.PhysicalToAnalog((double)Convert.ChangeType(value, typeof(int)), 
+                                                                  varMax, 
+                                                                  varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
             }
             else if (varType == typeof(double)) //if double
             {
                 double tmp = (double)Convert.ChangeType(value, typeof(double));
-                if(tmp > varMax || tmp < varMin)
+                if (tmp > varMax || tmp < varMin)
                 {
-                    MessageBox.Show(string.Format("该值不在范围内: {0} ~ {1}", varMin, varMax));
+                    MessageBox.Show(string.Format("{0}值不在范围内: {1} ~ {2}", varName, varMin, varMax));
                 }
                 int realValue = DataTransformer.PhysicalToAnalog(tmp, varMax, varMin);
                 data = writer.WriteAnalog(varPort.deviceId, varPort.channelId, realValue);
@@ -339,67 +349,28 @@ namespace HyTestRTDataService.RunningMode
         #endregion
 
         #region 高速采集任务
+        private ReadingTask readTask;
         /// <summary>
-        /// 设置订阅列表
+        /// 开始高速采集，每产生1000组数据就会回调callback函数
         /// </summary>
-        /// <param name="nameList">订阅变量名数组</param>
-        /// <returns>成功</returns>
-        public bool SetDataPack(ReadingTask task)
+        /// <param name="taskId">任务的标识符</param>
+        /// <param name="varname"></param>
+        /// <param name="frequency"></param>
+        /// <param name="callback">对于1000组数据的处理意见，是显示还是保存</param>
+        public void StartReadingTask(int taskId, string varname, int frequency, HighCallback callback)
         {
-            return default(bool);
+            readTask = new ReadingTask(taskId, varname, frequency, reader, callback, 
+                                       new Port(iomapInfo.MapNameToPort[varname]));
+            readTask.StartSampling();
         }
-
         /// <summary>
-        /// 获取订阅列表
+        /// 停止高速采集
+        /// TODO: 多个端口高频采集时，还需实现对taskID的管理
         /// </summary>
-        /// <returns>订阅变量名数组</returns>
-        public string[] GetDataPack()
+        public void StopReadingTask()
         {
-            return null;
+            readTask.StopSampling();
         }
-
-        /// <summary>
-        /// 清空变量列表
-        /// </summary>
-        /// <returns>将Data Package 初始化</returns>
-        public string[] ClearDataPack()
-        {
-            return null;
-        }
-
-        /// <summary>
-        /// 添加订阅变量，添加失败返回-1
-        /// </summary>
-        /// <param name="varName">待添加变量名</param>
-        /// <returns>变量在列表中的ID（index）</returns>
-        public int AddDataPackMember(string varName)
-        {
-            //throw new Exception("变量名已存在");
-            return default(int);
-        }
-
-        /// <summary>
-        /// 移除订阅变量
-        /// </summary>
-        /// <param name="varName">待移除变量名</param>
-        /// <returns>成功</returns>
-        public bool RemoveDataPackMember(string varName)
-        {
-            return default(bool);
-        }
-
-        /// <summary>
-        /// 获取本次试验数据
-        /// </summary>
-        /// <remarks>
-        /// 查阅MSDN，DataTable最大存储行数为16,777,216，足够需求。如果经计算不够尽早反馈。
-        /// </remarks>
-        /// <returns>返回DataTable结构为Id, Name, Type 和 Value。
-        /// 其中Value是一个Dictionary，key代表时间(hhmmss)，value代表值，统一为double类型</returns>
-        public DataTable DataPackCallback()
-        {
-            return null;
-        }//C# dictionary java map C++ map
 
         #endregion
     }

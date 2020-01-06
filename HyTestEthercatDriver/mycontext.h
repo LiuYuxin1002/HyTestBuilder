@@ -42,6 +42,7 @@ extern int			REDIS_BUFFER_SIZE;
 extern char			IOmap[MAP_SIZE];
 
 typedef void(__stdcall * ProcessCallback)(int, int, int);//读取线程函数回调
+typedef void(__stdcall * HighFreqCallback)(int*);//高频采样回调
 
 typedef struct operationResult {
 	int16 error;

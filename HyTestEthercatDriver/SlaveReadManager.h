@@ -13,3 +13,7 @@ operationResult* slaveReadStop();
 int getDigitalValueImpl(int deviceId, int channelId);
 //read analog
 int getAnalogValueImpl(int deviceId, int channelId);
+//高频采样开始
+void HighFreqReadImpl(int deviceId, int channelId, HighFreqCallback callback);
+//高频采样停止
+void HighFreqReadStopImpl(int deviceId, int channelId);

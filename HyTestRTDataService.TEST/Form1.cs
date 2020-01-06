@@ -18,7 +18,7 @@ namespace HyTestRTDataService.TEST
             InitializeComponent();
             server.Run();
             log.Info("LALLAA");
-            for (int i = 0; i < 8; i++) do_state[i] = true;
+            for (int i = 0; i < 8; i++) do_state[i] = false;
 
             htUserCurve2.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
             htUserCurve2.SetCurve("AI2", true, null, System.Drawing.Color.Red, 0.5f);

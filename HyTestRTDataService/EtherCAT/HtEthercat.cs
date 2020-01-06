@@ -5,6 +5,7 @@ using log4net;
 using HyTestRTDataService.Interfaces;
 using HyTestRTDataService.Entities;
 using HyTestRTDataService.Context;
+using System.Threading;
 
 namespace HyTestRTDataService.EtherCAT
 {
@@ -190,6 +191,24 @@ namespace HyTestRTDataService.EtherCAT
                 return false;
             }
         }
+
+        IList<HighFreqReadCallback> highCallbacks = new List<HighFreqReadCallback>();
+        public void HighFreqRead(int deviceId, int channel, HighCallback call)
+        {
+            HighFreqReadCallback callback = (ans) =>
+            {
+                call(ans);
+            };
+            highCallbacks.Add(callback);
+            HtEcConnector.HighFreqRead(deviceId, channel, callback);
+        }
+
+        public void HighFreqReadStop(int deviceId, int channelId)
+        {
+            HtEcConnector.HighFreqReadStop(deviceId, channelId);
+            Thread.Sleep(1000); //等待回传最后一组数据
+            //highCallbacks.Remove(XXX);highcallbacks应该作一个dictionary，以便通过键值获取并释放委托内存
+        }
         #endregion
 
         #region region_IAutoReader
@@ -278,6 +297,7 @@ namespace HyTestRTDataService.EtherCAT
         {
 
         }
+
 
         #endregion
 

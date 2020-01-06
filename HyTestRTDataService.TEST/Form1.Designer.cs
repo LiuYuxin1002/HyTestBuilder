@@ -30,33 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.htLed5 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed6 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed7 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed8 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed3 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed4 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed2 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed1 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.htLed9 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed10 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed11 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed12 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed13 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed14 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed15 = new HyTestRTDataService.Controls.Leds.HTLed();
-            this.htLed16 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.htDataScanner3 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.label4 = new System.Windows.Forms.Label();
-            this.htDataScanner4 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.label2 = new System.Windows.Forms.Label();
-            this.htDataScanner2 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.label1 = new System.Windows.Forms.Label();
-            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btn_ao4 = new System.Windows.Forms.Button();
             this.btn_ao3 = new System.Windows.Forms.Button();
@@ -74,6 +54,26 @@
             this.button1 = new System.Windows.Forms.Button();
             this.htUserCurve2 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.htUserCurve1 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
+            this.htDataScanner3 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.htDataScanner4 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.htDataScanner2 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.htLed9 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed10 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed11 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed12 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed13 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed14 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed15 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed16 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed5 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed6 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed7 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed8 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed3 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed4 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed2 = new HyTestRTDataService.Controls.Leds.HTLed();
+            this.htLed1 = new HyTestRTDataService.Controls.Leds.HTLed();
             this.htConfigManager1 = new HyTestRTDataService.ConfigMode.Components.HTConfigManager(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -99,142 +99,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "EL1008";
             // 
-            // htLed5
-            // 
-            this.htLed5.BackColor = System.Drawing.Color.Transparent;
-            this.htLed5.BlinkInterval = 500;
-            this.htLed5.Label = "DI8";
-            this.htLed5.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed5.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed5.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed5.Location = new System.Drawing.Point(379, 27);
-            this.htLed5.Name = "htLed5";
-            this.htLed5.Renderer = null;
-            this.htLed5.Size = new System.Drawing.Size(43, 46);
-            this.htLed5.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed5.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed5.TabIndex = 15;
-            this.htLed5.VarName = "DI8";
-            // 
-            // htLed6
-            // 
-            this.htLed6.BackColor = System.Drawing.Color.Transparent;
-            this.htLed6.BlinkInterval = 500;
-            this.htLed6.Label = "DI7";
-            this.htLed6.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed6.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed6.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed6.Location = new System.Drawing.Point(330, 27);
-            this.htLed6.Name = "htLed6";
-            this.htLed6.Renderer = null;
-            this.htLed6.Size = new System.Drawing.Size(43, 46);
-            this.htLed6.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed6.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed6.TabIndex = 14;
-            this.htLed6.VarName = "DI7";
-            // 
-            // htLed7
-            // 
-            this.htLed7.BackColor = System.Drawing.Color.Transparent;
-            this.htLed7.BlinkInterval = 500;
-            this.htLed7.Label = "DI6";
-            this.htLed7.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed7.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed7.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed7.Location = new System.Drawing.Point(281, 27);
-            this.htLed7.Name = "htLed7";
-            this.htLed7.Renderer = null;
-            this.htLed7.Size = new System.Drawing.Size(43, 46);
-            this.htLed7.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed7.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed7.TabIndex = 13;
-            this.htLed7.VarName = "DI6";
-            // 
-            // htLed8
-            // 
-            this.htLed8.BackColor = System.Drawing.Color.Transparent;
-            this.htLed8.BlinkInterval = 500;
-            this.htLed8.Label = "DI5";
-            this.htLed8.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed8.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed8.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed8.Location = new System.Drawing.Point(232, 27);
-            this.htLed8.Name = "htLed8";
-            this.htLed8.Renderer = null;
-            this.htLed8.Size = new System.Drawing.Size(43, 46);
-            this.htLed8.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed8.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed8.TabIndex = 12;
-            this.htLed8.VarName = "DI5";
-            // 
-            // htLed3
-            // 
-            this.htLed3.BackColor = System.Drawing.Color.Transparent;
-            this.htLed3.BlinkInterval = 500;
-            this.htLed3.Label = "DI4";
-            this.htLed3.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed3.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed3.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed3.Location = new System.Drawing.Point(183, 27);
-            this.htLed3.Name = "htLed3";
-            this.htLed3.Renderer = null;
-            this.htLed3.Size = new System.Drawing.Size(43, 46);
-            this.htLed3.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed3.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed3.TabIndex = 11;
-            this.htLed3.VarName = "DI4";
-            // 
-            // htLed4
-            // 
-            this.htLed4.BackColor = System.Drawing.Color.Transparent;
-            this.htLed4.BlinkInterval = 500;
-            this.htLed4.Label = "DI3";
-            this.htLed4.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed4.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed4.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed4.Location = new System.Drawing.Point(134, 27);
-            this.htLed4.Name = "htLed4";
-            this.htLed4.Renderer = null;
-            this.htLed4.Size = new System.Drawing.Size(43, 46);
-            this.htLed4.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed4.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed4.TabIndex = 10;
-            this.htLed4.VarName = "DI3";
-            // 
-            // htLed2
-            // 
-            this.htLed2.BackColor = System.Drawing.Color.Transparent;
-            this.htLed2.BlinkInterval = 500;
-            this.htLed2.Label = "DI2";
-            this.htLed2.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed2.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed2.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed2.Location = new System.Drawing.Point(85, 27);
-            this.htLed2.Name = "htLed2";
-            this.htLed2.Renderer = null;
-            this.htLed2.Size = new System.Drawing.Size(43, 46);
-            this.htLed2.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed2.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed2.TabIndex = 9;
-            this.htLed2.VarName = "DI2";
-            // 
-            // htLed1
-            // 
-            this.htLed1.BackColor = System.Drawing.Color.Transparent;
-            this.htLed1.BlinkInterval = 500;
-            this.htLed1.Label = "DI1";
-            this.htLed1.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed1.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed1.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed1.Location = new System.Drawing.Point(36, 27);
-            this.htLed1.Name = "htLed1";
-            this.htLed1.Renderer = null;
-            this.htLed1.Size = new System.Drawing.Size(43, 46);
-            this.htLed1.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed1.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed1.TabIndex = 8;
-            this.htLed1.VarName = "DI1";
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.htLed9);
@@ -251,150 +115,6 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "EL2008";
-            // 
-            // htLed9
-            // 
-            this.htLed9.BackColor = System.Drawing.Color.Transparent;
-            this.htLed9.BlinkInterval = 500;
-            this.htLed9.Label = "DO8";
-            this.htLed9.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed9.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed9.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed9.Location = new System.Drawing.Point(379, 27);
-            this.htLed9.Name = "htLed9";
-            this.htLed9.Renderer = null;
-            this.htLed9.Size = new System.Drawing.Size(43, 46);
-            this.htLed9.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed9.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed9.TabIndex = 15;
-            this.htLed9.VarName = "DO8";
-            this.htLed9.Click += new System.EventHandler(this.HtLed9_Load);
-            // 
-            // htLed10
-            // 
-            this.htLed10.BackColor = System.Drawing.Color.Transparent;
-            this.htLed10.BlinkInterval = 500;
-            this.htLed10.Label = "DO7";
-            this.htLed10.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed10.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed10.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed10.Location = new System.Drawing.Point(330, 27);
-            this.htLed10.Name = "htLed10";
-            this.htLed10.Renderer = null;
-            this.htLed10.Size = new System.Drawing.Size(43, 46);
-            this.htLed10.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed10.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed10.TabIndex = 14;
-            this.htLed10.VarName = "DO7";
-            this.htLed10.Click += new System.EventHandler(this.HtLed10_Load);
-            // 
-            // htLed11
-            // 
-            this.htLed11.BackColor = System.Drawing.Color.Transparent;
-            this.htLed11.BlinkInterval = 500;
-            this.htLed11.Label = "DO6";
-            this.htLed11.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed11.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed11.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed11.Location = new System.Drawing.Point(281, 27);
-            this.htLed11.Name = "htLed11";
-            this.htLed11.Renderer = null;
-            this.htLed11.Size = new System.Drawing.Size(43, 46);
-            this.htLed11.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed11.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed11.TabIndex = 13;
-            this.htLed11.VarName = "DO6";
-            this.htLed11.Click += new System.EventHandler(this.HtLed11_Load);
-            // 
-            // htLed12
-            // 
-            this.htLed12.BackColor = System.Drawing.Color.Transparent;
-            this.htLed12.BlinkInterval = 500;
-            this.htLed12.Label = "DO5";
-            this.htLed12.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed12.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed12.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed12.Location = new System.Drawing.Point(232, 27);
-            this.htLed12.Name = "htLed12";
-            this.htLed12.Renderer = null;
-            this.htLed12.Size = new System.Drawing.Size(43, 46);
-            this.htLed12.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed12.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed12.TabIndex = 12;
-            this.htLed12.VarName = "DO5";
-            this.htLed12.Click += new System.EventHandler(this.HtLed12_Load);
-            // 
-            // htLed13
-            // 
-            this.htLed13.BackColor = System.Drawing.Color.Transparent;
-            this.htLed13.BlinkInterval = 500;
-            this.htLed13.Label = "DO4";
-            this.htLed13.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed13.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed13.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed13.Location = new System.Drawing.Point(183, 27);
-            this.htLed13.Name = "htLed13";
-            this.htLed13.Renderer = null;
-            this.htLed13.Size = new System.Drawing.Size(43, 46);
-            this.htLed13.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed13.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed13.TabIndex = 11;
-            this.htLed13.VarName = "DO4";
-            this.htLed13.Click += new System.EventHandler(this.HtLed13_Load);
-            // 
-            // htLed14
-            // 
-            this.htLed14.BackColor = System.Drawing.Color.Transparent;
-            this.htLed14.BlinkInterval = 500;
-            this.htLed14.Label = "DO3";
-            this.htLed14.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed14.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed14.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed14.Location = new System.Drawing.Point(134, 27);
-            this.htLed14.Name = "htLed14";
-            this.htLed14.Renderer = null;
-            this.htLed14.Size = new System.Drawing.Size(43, 46);
-            this.htLed14.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed14.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed14.TabIndex = 10;
-            this.htLed14.VarName = "DO3";
-            this.htLed14.Click += new System.EventHandler(this.HtLed14_Load);
-            // 
-            // htLed15
-            // 
-            this.htLed15.BackColor = System.Drawing.Color.Transparent;
-            this.htLed15.BlinkInterval = 500;
-            this.htLed15.Label = "DO2";
-            this.htLed15.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed15.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed15.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed15.Location = new System.Drawing.Point(85, 27);
-            this.htLed15.Name = "htLed15";
-            this.htLed15.Renderer = null;
-            this.htLed15.Size = new System.Drawing.Size(43, 46);
-            this.htLed15.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed15.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed15.TabIndex = 9;
-            this.htLed15.VarName = "DO2";
-            this.htLed15.Click += new System.EventHandler(this.HtLed15_Load);
-            // 
-            // htLed16
-            // 
-            this.htLed16.BackColor = System.Drawing.Color.Transparent;
-            this.htLed16.BlinkInterval = 500;
-            this.htLed16.Label = "DO1";
-            this.htLed16.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
-            this.htLed16.LedColor = System.Drawing.Color.Chartreuse;
-            this.htLed16.LedSize = new System.Drawing.SizeF(20F, 20F);
-            this.htLed16.Location = new System.Drawing.Point(36, 27);
-            this.htLed16.Name = "htLed16";
-            this.htLed16.Renderer = null;
-            this.htLed16.Size = new System.Drawing.Size(43, 46);
-            this.htLed16.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
-            this.htLed16.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
-            this.htLed16.TabIndex = 8;
-            this.htLed16.VarName = "DO1";
-            this.htLed16.Click += new System.EventHandler(this.HtLed16_Load);
             // 
             // richTextBoxLog
             // 
@@ -430,15 +150,6 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "AI4";
             // 
-            // htDataScanner3
-            // 
-            this.htDataScanner3.Location = new System.Drawing.Point(270, 62);
-            this.htDataScanner3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner3.Name = "htDataScanner3";
-            this.htDataScanner3.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner3.TabIndex = 6;
-            this.htDataScanner3.VarName = "AI4";
-            // 
             // label4
             // 
             this.label4.Location = new System.Drawing.Point(40, 65);
@@ -446,15 +157,6 @@
             this.label4.Size = new System.Drawing.Size(34, 23);
             this.label4.TabIndex = 5;
             this.label4.Text = "AI3";
-            // 
-            // htDataScanner4
-            // 
-            this.htDataScanner4.Location = new System.Drawing.Point(74, 62);
-            this.htDataScanner4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner4.Name = "htDataScanner4";
-            this.htDataScanner4.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner4.TabIndex = 4;
-            this.htDataScanner4.VarName = "AI3";
             // 
             // label2
             // 
@@ -464,15 +166,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "AI2";
             // 
-            // htDataScanner2
-            // 
-            this.htDataScanner2.Location = new System.Drawing.Point(270, 26);
-            this.htDataScanner2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner2.Name = "htDataScanner2";
-            this.htDataScanner2.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner2.TabIndex = 2;
-            this.htDataScanner2.VarName = "AI2";
-            // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(40, 29);
@@ -480,15 +173,6 @@
             this.label1.Size = new System.Drawing.Size(34, 23);
             this.label1.TabIndex = 1;
             this.label1.Text = "AI1";
-            // 
-            // htDataScanner1
-            // 
-            this.htDataScanner1.Location = new System.Drawing.Point(74, 26);
-            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htDataScanner1.Name = "htDataScanner1";
-            this.htDataScanner1.Size = new System.Drawing.Size(152, 28);
-            this.htDataScanner1.TabIndex = 0;
-            this.htDataScanner1.VarName = "AI1";
             // 
             // groupBox4
             // 
@@ -651,7 +335,7 @@
             this.htUserCurve2.TabIndex = 5;
             this.htUserCurve2.TextAddFormat = "HH:mm:ss";
             this.htUserCurve2.Title = "AI示波器";
-            this.htUserCurve2.ValueMaxLeft = 50F;
+            this.htUserCurve2.ValueMaxLeft = 1000F;
             // 
             // htUserCurve1
             // 
@@ -667,6 +351,322 @@
             this.htUserCurve1.ValueMaxLeft = 1.5F;
             this.htUserCurve1.ValueMinLeft = -0.5F;
             this.htUserCurve1.ValueSegment = 4;
+            // 
+            // htDataScanner3
+            // 
+            this.htDataScanner3.Location = new System.Drawing.Point(270, 62);
+            this.htDataScanner3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner3.Name = "htDataScanner3";
+            this.htDataScanner3.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner3.TabIndex = 6;
+            this.htDataScanner3.VarName = "AI4";
+            // 
+            // htDataScanner4
+            // 
+            this.htDataScanner4.Location = new System.Drawing.Point(74, 62);
+            this.htDataScanner4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner4.Name = "htDataScanner4";
+            this.htDataScanner4.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner4.TabIndex = 4;
+            this.htDataScanner4.VarName = "AI3";
+            // 
+            // htDataScanner2
+            // 
+            this.htDataScanner2.Location = new System.Drawing.Point(270, 26);
+            this.htDataScanner2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner2.Name = "htDataScanner2";
+            this.htDataScanner2.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner2.TabIndex = 2;
+            this.htDataScanner2.VarName = "AI2";
+            // 
+            // htDataScanner1
+            // 
+            this.htDataScanner1.Location = new System.Drawing.Point(74, 26);
+            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htDataScanner1.Name = "htDataScanner1";
+            this.htDataScanner1.Size = new System.Drawing.Size(152, 28);
+            this.htDataScanner1.TabIndex = 0;
+            this.htDataScanner1.VarName = "AI1";
+            // 
+            // htLed9
+            // 
+            this.htLed9.BackColor = System.Drawing.Color.Transparent;
+            this.htLed9.BlinkInterval = 500;
+            this.htLed9.Label = "DO8";
+            this.htLed9.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed9.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed9.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed9.Location = new System.Drawing.Point(379, 27);
+            this.htLed9.Name = "htLed9";
+            this.htLed9.Renderer = null;
+            this.htLed9.Size = new System.Drawing.Size(43, 46);
+            this.htLed9.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed9.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed9.TabIndex = 15;
+            this.htLed9.VarName = "DO8";
+            this.htLed9.Click += new System.EventHandler(this.HtLed9_Load);
+            // 
+            // htLed10
+            // 
+            this.htLed10.BackColor = System.Drawing.Color.Transparent;
+            this.htLed10.BlinkInterval = 500;
+            this.htLed10.Label = "DO7";
+            this.htLed10.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed10.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed10.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed10.Location = new System.Drawing.Point(330, 27);
+            this.htLed10.Name = "htLed10";
+            this.htLed10.Renderer = null;
+            this.htLed10.Size = new System.Drawing.Size(43, 46);
+            this.htLed10.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed10.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed10.TabIndex = 14;
+            this.htLed10.VarName = "DO7";
+            this.htLed10.Click += new System.EventHandler(this.HtLed10_Load);
+            // 
+            // htLed11
+            // 
+            this.htLed11.BackColor = System.Drawing.Color.Transparent;
+            this.htLed11.BlinkInterval = 500;
+            this.htLed11.Label = "DO6";
+            this.htLed11.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed11.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed11.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed11.Location = new System.Drawing.Point(281, 27);
+            this.htLed11.Name = "htLed11";
+            this.htLed11.Renderer = null;
+            this.htLed11.Size = new System.Drawing.Size(43, 46);
+            this.htLed11.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed11.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed11.TabIndex = 13;
+            this.htLed11.VarName = "DO6";
+            this.htLed11.Click += new System.EventHandler(this.HtLed11_Load);
+            // 
+            // htLed12
+            // 
+            this.htLed12.BackColor = System.Drawing.Color.Transparent;
+            this.htLed12.BlinkInterval = 500;
+            this.htLed12.Label = "DO5";
+            this.htLed12.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed12.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed12.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed12.Location = new System.Drawing.Point(232, 27);
+            this.htLed12.Name = "htLed12";
+            this.htLed12.Renderer = null;
+            this.htLed12.Size = new System.Drawing.Size(43, 46);
+            this.htLed12.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed12.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed12.TabIndex = 12;
+            this.htLed12.VarName = "DO5";
+            this.htLed12.Click += new System.EventHandler(this.HtLed12_Load);
+            // 
+            // htLed13
+            // 
+            this.htLed13.BackColor = System.Drawing.Color.Transparent;
+            this.htLed13.BlinkInterval = 500;
+            this.htLed13.Label = "DO4";
+            this.htLed13.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed13.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed13.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed13.Location = new System.Drawing.Point(183, 27);
+            this.htLed13.Name = "htLed13";
+            this.htLed13.Renderer = null;
+            this.htLed13.Size = new System.Drawing.Size(43, 46);
+            this.htLed13.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed13.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed13.TabIndex = 11;
+            this.htLed13.VarName = "DO4";
+            this.htLed13.Click += new System.EventHandler(this.HtLed13_Load);
+            // 
+            // htLed14
+            // 
+            this.htLed14.BackColor = System.Drawing.Color.Transparent;
+            this.htLed14.BlinkInterval = 500;
+            this.htLed14.Label = "DO3";
+            this.htLed14.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed14.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed14.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed14.Location = new System.Drawing.Point(134, 27);
+            this.htLed14.Name = "htLed14";
+            this.htLed14.Renderer = null;
+            this.htLed14.Size = new System.Drawing.Size(43, 46);
+            this.htLed14.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed14.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed14.TabIndex = 10;
+            this.htLed14.VarName = "DO3";
+            this.htLed14.Click += new System.EventHandler(this.HtLed14_Load);
+            // 
+            // htLed15
+            // 
+            this.htLed15.BackColor = System.Drawing.Color.Transparent;
+            this.htLed15.BlinkInterval = 500;
+            this.htLed15.Label = "DO2";
+            this.htLed15.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed15.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed15.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed15.Location = new System.Drawing.Point(85, 27);
+            this.htLed15.Name = "htLed15";
+            this.htLed15.Renderer = null;
+            this.htLed15.Size = new System.Drawing.Size(43, 46);
+            this.htLed15.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed15.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed15.TabIndex = 9;
+            this.htLed15.VarName = "DO2";
+            this.htLed15.Click += new System.EventHandler(this.HtLed15_Load);
+            // 
+            // htLed16
+            // 
+            this.htLed16.BackColor = System.Drawing.Color.Transparent;
+            this.htLed16.BlinkInterval = 500;
+            this.htLed16.Label = "DO1";
+            this.htLed16.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed16.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed16.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed16.Location = new System.Drawing.Point(36, 27);
+            this.htLed16.Name = "htLed16";
+            this.htLed16.Renderer = null;
+            this.htLed16.Size = new System.Drawing.Size(43, 46);
+            this.htLed16.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed16.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed16.TabIndex = 8;
+            this.htLed16.VarName = "DO1";
+            this.htLed16.Click += new System.EventHandler(this.HtLed16_Load);
+            // 
+            // htLed5
+            // 
+            this.htLed5.BackColor = System.Drawing.Color.Transparent;
+            this.htLed5.BlinkInterval = 500;
+            this.htLed5.Label = "DI8";
+            this.htLed5.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed5.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed5.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed5.Location = new System.Drawing.Point(379, 27);
+            this.htLed5.Name = "htLed5";
+            this.htLed5.Renderer = null;
+            this.htLed5.Size = new System.Drawing.Size(43, 46);
+            this.htLed5.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed5.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed5.TabIndex = 15;
+            this.htLed5.VarName = "DI8";
+            // 
+            // htLed6
+            // 
+            this.htLed6.BackColor = System.Drawing.Color.Transparent;
+            this.htLed6.BlinkInterval = 500;
+            this.htLed6.Label = "DI7";
+            this.htLed6.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed6.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed6.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed6.Location = new System.Drawing.Point(330, 27);
+            this.htLed6.Name = "htLed6";
+            this.htLed6.Renderer = null;
+            this.htLed6.Size = new System.Drawing.Size(43, 46);
+            this.htLed6.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed6.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed6.TabIndex = 14;
+            this.htLed6.VarName = "DI7";
+            // 
+            // htLed7
+            // 
+            this.htLed7.BackColor = System.Drawing.Color.Transparent;
+            this.htLed7.BlinkInterval = 500;
+            this.htLed7.Label = "DI6";
+            this.htLed7.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed7.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed7.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed7.Location = new System.Drawing.Point(281, 27);
+            this.htLed7.Name = "htLed7";
+            this.htLed7.Renderer = null;
+            this.htLed7.Size = new System.Drawing.Size(43, 46);
+            this.htLed7.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed7.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed7.TabIndex = 13;
+            this.htLed7.VarName = "DI6";
+            // 
+            // htLed8
+            // 
+            this.htLed8.BackColor = System.Drawing.Color.Transparent;
+            this.htLed8.BlinkInterval = 500;
+            this.htLed8.Label = "DI5";
+            this.htLed8.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed8.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed8.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed8.Location = new System.Drawing.Point(232, 27);
+            this.htLed8.Name = "htLed8";
+            this.htLed8.Renderer = null;
+            this.htLed8.Size = new System.Drawing.Size(43, 46);
+            this.htLed8.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed8.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed8.TabIndex = 12;
+            this.htLed8.VarName = "DI5";
+            // 
+            // htLed3
+            // 
+            this.htLed3.BackColor = System.Drawing.Color.Transparent;
+            this.htLed3.BlinkInterval = 500;
+            this.htLed3.Label = "DI4";
+            this.htLed3.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed3.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed3.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed3.Location = new System.Drawing.Point(183, 27);
+            this.htLed3.Name = "htLed3";
+            this.htLed3.Renderer = null;
+            this.htLed3.Size = new System.Drawing.Size(43, 46);
+            this.htLed3.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed3.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed3.TabIndex = 11;
+            this.htLed3.VarName = "DI4";
+            // 
+            // htLed4
+            // 
+            this.htLed4.BackColor = System.Drawing.Color.Transparent;
+            this.htLed4.BlinkInterval = 500;
+            this.htLed4.Label = "DI3";
+            this.htLed4.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed4.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed4.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed4.Location = new System.Drawing.Point(134, 27);
+            this.htLed4.Name = "htLed4";
+            this.htLed4.Renderer = null;
+            this.htLed4.Size = new System.Drawing.Size(43, 46);
+            this.htLed4.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed4.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed4.TabIndex = 10;
+            this.htLed4.VarName = "DI3";
+            // 
+            // htLed2
+            // 
+            this.htLed2.BackColor = System.Drawing.Color.Transparent;
+            this.htLed2.BlinkInterval = 500;
+            this.htLed2.Label = "DI2";
+            this.htLed2.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed2.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed2.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed2.Location = new System.Drawing.Point(85, 27);
+            this.htLed2.Name = "htLed2";
+            this.htLed2.Renderer = null;
+            this.htLed2.Size = new System.Drawing.Size(43, 46);
+            this.htLed2.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed2.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed2.TabIndex = 9;
+            this.htLed2.VarName = "DI2";
+            // 
+            // htLed1
+            // 
+            this.htLed1.BackColor = System.Drawing.Color.Transparent;
+            this.htLed1.BlinkInterval = 500;
+            this.htLed1.Label = "DI1";
+            this.htLed1.LabelPosition = HyTestRTDataService.Controls.Leds.HTLed.LedLabelPosition.Top;
+            this.htLed1.LedColor = System.Drawing.Color.Chartreuse;
+            this.htLed1.LedSize = new System.Drawing.SizeF(20F, 20F);
+            this.htLed1.Location = new System.Drawing.Point(36, 27);
+            this.htLed1.Name = "htLed1";
+            this.htLed1.Renderer = null;
+            this.htLed1.Size = new System.Drawing.Size(43, 46);
+            this.htLed1.State = HyTestRTDataService.Controls.Leds.HTLed.LedState.On;
+            this.htLed1.Style = HyTestRTDataService.Controls.Leds.HTLed.LedStyle.Circular;
+            this.htLed1.TabIndex = 8;
+            this.htLed1.VarName = "DI1";
             // 
             // Form1
             // 

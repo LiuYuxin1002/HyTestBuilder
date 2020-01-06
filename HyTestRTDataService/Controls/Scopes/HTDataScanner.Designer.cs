@@ -35,19 +35,21 @@
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(150, 21);
+            this.textBox1.Size = new System.Drawing.Size(200, 25);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "0.0";
             // 
-            // DataScanner
+            // HTDataScanner
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.textBox1);
-            this.Name = "DataScanner";
-            this.Size = new System.Drawing.Size(150, 22);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Name = "HTDataScanner";
+            this.Size = new System.Drawing.Size(200, 28);
             this.ResumeLayout(false);
             this.PerformLayout();
 

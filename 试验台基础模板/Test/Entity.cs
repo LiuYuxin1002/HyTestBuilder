@@ -82,8 +82,6 @@ namespace StandardTemplate.Test
 
         public int Id { get; set; }
 
-        //public string Name { get; set; }
-
         public List<TestType> TestList
         {
             get
@@ -111,14 +109,12 @@ namespace StandardTemplate.Test
             if (this.threadTest == null)
             {
                 BeforeTest();
-
                 threadTest = new Thread(this.Run);
             }
             if (threadTest.ThreadState != ThreadState.Running)
             {
                 threadTest.Start();
             }
-
             return new OperationResult();
         }
 

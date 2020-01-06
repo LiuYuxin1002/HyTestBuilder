@@ -94,6 +94,15 @@ extern "C"
 		return getDigitalValueImpl(deviceId, channelId);
 	}
 
+	//High Frequency Read
+	TEXPORT void HighFreqRead(int deviceId, int channelId, HighFreqCallback callback) {
+		HighFreqReadImpl(deviceId, channelId, callback);
+	}
+
+	TEXPORT void HighFreqReadStop(int deviceId, int channelId) {
+		HighFreqReadStop(deviceId, channelId);
+	}
+
 ///env. setting
 	//TODO: write func. in context
 	TEXPORT int getRefrenceClock() {

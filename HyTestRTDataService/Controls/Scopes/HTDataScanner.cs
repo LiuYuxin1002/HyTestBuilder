@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using HyTestRTDataService.RunningMode;
+using System.Threading;
 
 namespace HyTestRTDataService.Controls.Scopes
 {
@@ -34,8 +35,12 @@ namespace HyTestRTDataService.Controls.Scopes
 
             RunningServer server = RunningServer.getServer();
             double value = server.NormalRead<double>(varName);
-            
+
             /*using delegate to avoid cross-thread changing.*/
+            while (!this.IsHandleCreated)
+            {
+                Thread.Sleep(1000);
+            }
             Action action = () =>
             {
                 this.textBox1.Text = value.ToString();

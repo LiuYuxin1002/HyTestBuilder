@@ -55,7 +55,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.richTextBoxLog = new System.Windows.Forms.RichTextBox();
             this.htConfigManager1 = new HyTestRTDataService.ConfigMode.Components.HTConfigManager(this.components);
-            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -63,7 +62,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -292,7 +290,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.htDataScanner1);
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage2.Name = "tabPage2";
@@ -310,15 +307,6 @@
             this.richTextBoxLog.Size = new System.Drawing.Size(1279, 161);
             this.richTextBoxLog.TabIndex = 0;
             this.richTextBoxLog.Text = "";
-            // 
-            // htDataScanner1
-            // 
-            this.htDataScanner1.Location = new System.Drawing.Point(294, 254);
-            this.htDataScanner1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.htDataScanner1.Name = "htDataScanner1";
-            this.htDataScanner1.Size = new System.Drawing.Size(200, 28);
-            this.htDataScanner1.TabIndex = 0;
-            this.htDataScanner1.VarName = "AI1";
             // 
             // MainForm
             // 
@@ -348,7 +336,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,7 +366,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel toolStripLabel3;
         private System.Windows.Forms.RichTextBox richTextBoxLog;
-        private HyTestRTDataService.Controls.Scopes.HTDataScanner htDataScanner1;
         private HyTestRTDataService.ConfigMode.Components.HTConfigManager htConfigManager1;
     }
 }

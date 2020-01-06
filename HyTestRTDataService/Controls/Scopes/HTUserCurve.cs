@@ -4,18 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-
-/*******************************************************************************
- * 
- *    文件名：UserCurve.cs
- *    程序功能：显示曲线信息，包含了曲线，坐标轴，鼠标移动信息
- *    
- *    创建人：Richard.Hu
- *    时间：2018年1月21日 18:36:08
- * 
- *******************************************************************************/
-
-
 namespace HyTestRTDataService.Controls.Scopes
 {
     /// <summary>
