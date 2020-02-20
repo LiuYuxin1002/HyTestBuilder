@@ -20,16 +20,22 @@ namespace HyTestRTDataService.RunningMode
 
         private HighCallback callback;
         
+        /// <param name="taskId">任务ID</param>
+        /// <param name="varName">变量名</param>
+        /// <param name="period">采样周期</param>
+        /// <param name="reader">读取接口</param>
+        /// <param name="callback">回调函数</param>
+        /// <param name="port">端口</param>
         public ReadingTask(int taskId, 
                            string varName, 
-                           int frequency, 
+                           int period, 
                            IReader reader, 
                            HighCallback callback, 
                            Port port)
         {
             this.taskId = taskId;
             this.varName = varName;
-            this.frequency = frequency;
+            this.frequency = period;
             this.reader = reader;
             this.callback = callback;
             this.port = port;

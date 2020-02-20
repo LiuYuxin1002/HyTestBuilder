@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace StandardTemplate.Test
 {
-    public abstract class Entity
+public abstract class Entity
     {
         #region Protect
 
@@ -297,6 +297,20 @@ namespace StandardTemplate.Test
         耐压试验,
         外泄漏试验,
         稳态流量压力特性试验,
+        试运行试验,
+        启动压力特性试验,
+        耐久性试验,
+        泄漏试验,
+        缓冲试验,
+        负载效率特性试验,
+        高温试验,
+        行程试验,
+        内泄露试验,
+        恒定阀压降输出流量输入信号特性试验,
+        节流调节特性试验,
+        输出流量负载压差特性试验,
+        输出流量阀压降特性试验,
+        极限功率特性试验,
         /* $mark_testtype$ */
     }
 

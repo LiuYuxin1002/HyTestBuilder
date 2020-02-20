@@ -355,11 +355,11 @@ namespace HyTestRTDataService.RunningMode
         /// </summary>
         /// <param name="taskId">任务的标识符</param>
         /// <param name="varname"></param>
-        /// <param name="frequency"></param>
+        /// <param name="period"></param>
         /// <param name="callback">对于1000组数据的处理意见，是显示还是保存</param>
-        public void StartReadingTask(int taskId, string varname, int frequency, HighCallback callback)
+        public void StartReadingTask(int taskId, string varname, int period, HighCallback callback)
         {
-            readTask = new ReadingTask(taskId, varname, frequency, reader, callback, 
+            readTask = new ReadingTask(taskId, varname, period, reader, callback, 
                                        new Port(iomapInfo.MapNameToPort[varname]));
             readTask.StartSampling();
         }

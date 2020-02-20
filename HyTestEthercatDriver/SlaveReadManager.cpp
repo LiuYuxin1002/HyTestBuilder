@@ -8,6 +8,7 @@
 #include <string>
 #include <map>
 #include <AclAPI.h>
+#include <cmath>
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "advapi32.lib")
 using namespace std;
@@ -320,6 +321,7 @@ void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 		result = new int[1000];
 	}
 	//读取并放入数组
+	//result[Localptr++] = 32767 * sin(Localptr / 15.0);
 	result[Localptr++] = getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
 	if (Localptr % 100 == 0) cout << Localptr << endl;	//Debug
 }

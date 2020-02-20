@@ -186,5 +186,25 @@ namespace StandardTemplate
         }
 
         #endregion
+
+        private void htUserCurve1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void htLed13_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void htLed45_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void htDataScanner15_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
