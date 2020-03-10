@@ -154,7 +154,6 @@ MMRESULT TimerId;
 CTimer timer;
 double* arr;
 int ptr = 0;
-
 int flag = 0;
 /*redis timer_tick event*/
 FILETIME ftKernelTimeStart, ftKernelTimeEnd;
@@ -180,7 +179,10 @@ void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWOR
 				}
 			}
 		}
-		if (tmp.type == TYPE_AI || tmp.type == TYPE_AO)
+		else if (tmp.type == TYPE_AI || 
+				 tmp.type == TYPE_AO || 
+				 tmp.type == TYPE_DSENSOR || 
+				 tmp.type == TYPE_SERVO)
 		{
 			for (int channel = 0; channel<tmp.channelNum; channel++)
 			{
@@ -200,6 +202,7 @@ void CALLBACK readAndCallBack(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWOR
 	}
 }
 
+//准备读，此函数设置回调函数，将运行状态设置为true
 operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
 	readCallBack = processCallBack;
 	operationResult* res = checkSlaveState();
@@ -207,6 +210,7 @@ operationResult* slavePrepareToRead(ProcessCallback processCallBack) {
 	return res;
 }
 
+//开始读
 operationResult* slaveReadStart() {
 	if (TimerId == NULL) {
 		prepareCallBack();
@@ -215,6 +219,7 @@ operationResult* slaveReadStart() {
 	return new operationResult(0, NULL);
 }
 
+//停止读
 operationResult* slaveReadStop() {
 	if (TimerId != NULL) {
 		timeKillEvent(TimerId);	//kill event
@@ -222,6 +227,7 @@ operationResult* slaveReadStop() {
 	return new operationResult(0, NULL);
 }
 
+//读取数字量包括DI、DO等
 int getDigitalValueImpl(int deviceId, int channelId) {
 	//sendAndReveive();
 
@@ -238,6 +244,7 @@ int getDigitalValueImpl(int deviceId, int channelId) {
 	}
 }
 
+//包括读取AI、AO、伺服驱动器、位移传感器等
 int getAnalogValueImpl(int deviceId, int channelId) {
 
 	if (slave_arr[deviceId].type == TYPE_AI) {		//AI
@@ -292,24 +299,19 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 			break;
 		}
 	}
+	else if (slave_arr[deviceId].type == TYPE_DSENSOR) {
+		SLAVE_DSERVOR_IN* dsersor = (SLAVE_DSERVOR_IN*)slave_arr[deviceId].ptrToSlave1;
+		return dsersor->counterValue-0x7fffffff-1;	//解决返回值从uint32转为int类型问题
+	}
 	return INF;
 	
 }
-
-void sendAndReveive() {
-	ec_send_processdata();
-	int wkc = ec_receive_processdata(EC_TIMEOUTRET);
-}
-
-
-///
-///高频采样
-///TODO:多组数据高频采样？？？
 
 int* result = new int[1000];
 int Localptr = 0;
 int crtDevice, crtChannel;
 HighFreqCallback localCallback;
+//记录数据，到达一千组数据时推送，问题：推送过程缓慢，会造成阻塞
 void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 	//达到1000个数字返回
 	if (Localptr > 1000) {
@@ -321,12 +323,12 @@ void CALLBACK record(UINT uID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
 		result = new int[1000];
 	}
 	//读取并放入数组
-	//result[Localptr++] = 32767 * sin(Localptr / 15.0);
-	result[Localptr++] = getAnalogValueImpl(crtDevice, crtChannel);	//暂时只读取模拟量
+	result[Localptr++] = getAnalogValueImpl(crtDevice, crtChannel);	//支持单组的模拟量、位移传感器、伺服驱动器的值
+	
 	if (Localptr % 100 == 0) cout << Localptr << endl;	//Debug
 }
-
-MMRESULT HighTimer;
+MMRESULT HighTimer;	//高频读线程
+//高频读声明并开始
 void HighFreqReadImpl(int deviceId, int channelId, int period, HighFreqCallback callback) {
 	crtDevice = deviceId;
 	crtChannel = channelId;
@@ -335,10 +337,11 @@ void HighFreqReadImpl(int deviceId, int channelId, int period, HighFreqCallback 
 		HighTimer = timeSetEvent(period, 0, record, NULL, TIME_PERIODIC);
 	}
 }
-
+//高频读停止
 void HighFreqReadStopImpl(int deviceId, int channelId) {
 	if (HighTimer != NULL) {
 		localCallback(result);
 		timeKillEvent(HighTimer);//停止计时器
 	}
 }
+

@@ -138,3 +138,43 @@
 1. 控件问题解决思路：
 	控件先绑定OnConnected事件，当Server触发Connected后会触发绑定OndataChanged事件，绑定了ondatachanged才能在EtherCAT的timer后刷新自己的数值。
 	server会在主程序启动后触发programRunning调用connected
+
+### 2020.2.21
+#### 添加倍福位移传感器EL5151
+##### 传感器参数：   
+  SM2 outputs   
+     addr b   index: sub bitl data_type    name  
+  [0x0000.0] 0x7000:0x01 0x01 BOOLEAN      Enable latch C  
+  [0x0000.1] 0x7000:0x02 0x01 BOOLEAN      Enable latch extern on positive edge  
+  [0x0000.2] 0x7000:0x03 0x01 BOOLEAN      Set counter  
+  [0x0000.3] 0x7000:0x04 0x01 BOOLEAN      Enable latch extern on negative edge  
+  [0x0000.4] 0x0000:0x00 0x04  
+  [0x0001.0] 0x0000:0x00 0x08  
+  [0x0002.0] 0x7000:0x11 0x20 UNSIGNED32   Set counter value  
+  SM3 inputs  
+     addr b   index: sub bitl data_type    name  
+  [0x0006.0] 0x6000:0x01 0x01 BOOLEAN      Latch C valid  
+  [0x0006.1] 0x6000:0x02 0x01 BOOLEAN      Latch extern valid  
+  [0x0006.2] 0x6000:0x03 0x01 BOOLEAN      Set counter done  
+  [0x0006.3] 0x0000:0x00 0x04  
+  [0x0006.7] 0x6000:0x08 0x01 BOOLEAN      Extrapolation stall  
+  [0x0007.0] 0x6000:0x09 0x01 BOOLEAN      Status of input A  
+  [0x0007.1] 0x6000:0x0A 0x01 BOOLEAN      Status of input B  
+  [0x0007.2] 0x6000:0x0B 0x01 BOOLEAN      Status of input C  
+  [0x0007.3] 0x0000:0x00 0x01  
+  [0x0007.4] 0x6000:0x0D 0x01 BOOLEAN      Status of extern latch  
+  [0x0007.5] 0x6000:0x0E 0x01 BOOLEAN      Sync error  
+  [0x0007.6] 0x0000:0x00 0x01  
+  [0x0007.7] 0x6000:0x10 0x01 BOOLEAN      TxPDO Toggle  
+  [0x0008.0] 0x6000:0x11 0x20 UNSIGNED32   Counter value  
+  [0x000C.0] 0x6000:0x12 0x20 UNSIGNED32   Latch value  
+  [0x0010.0] 0x6000:0x14 0x20 UNSIGNED32   Period value  
+   
+1. 定义(mycontext.h)：添加位移传感器结构体和链表
+2. 接口(mycontext.cpp)：中添加读写接口
+3. 初始化(SlaveConfigSystem.cpp)：
+   1. 修改方法initLocalSlaveInfo()，在条件判断中加入如何判断是位移传感器，我的条件是输入输出都不为0且型号包含“EL5”关键字；
+   2. 仿照伺服驱动器的方法，initLocalSlaveInfo()方法的本质目的是初始化数组slave_arr[]，并将数组中的输入输出映射到ec_slave的输入输出
+4. 读取计数器(SlaveReadManager.h/.cpp):
+
+5. 写入接口实现(SlaveWriteManager.h/.cpp):

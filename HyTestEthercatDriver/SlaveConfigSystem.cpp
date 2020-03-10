@@ -2,6 +2,7 @@
 
 #include "SlaveConfigSystem.h"
 
+#define DEFINE_SLEEP_TIME 600		//Define sleep time(us).
 //变量声明
 char IOmap[MAP_SIZE];
 
@@ -15,15 +16,11 @@ slave_ao aos = (slave_ao)new SLAVE_AO();
 //Define some global variables.
 const int SLAVE_TYPE_ID = 2;		//Type bit
 const int SLAVE_CHANNEL_ID = 5;		//Channel bit
-
-#define DEFINE_SLEEP_TIME 600		//Define sleep time(us).
-
 bool runningState = true;
 HANDLE wthread;
-
 HANDLE g_hMutex = CreateMutex(NULL, FALSE, L"WRITE_LOCK");
 
-//循环写线程
+//slave write thread.
 DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	int wkc;
 	//如果没有设定值，就用默认值DEFINE_SLEEP_TIME
@@ -38,8 +35,7 @@ DWORD WINAPI writeSlaveThread(LPVOID lpParameter) {
 	}
 	return 0;
 }
-
-
+//common slave config process.
 bool needlf;
 bool inOP;
 int expectedWKC;
@@ -104,14 +100,14 @@ int initSlaveConfigInfo() {
 		return -1;
 	}
 }
-
+//interface: stop slave before program will be closed.
 void stopSlaveRunning() {
 	runningState = false;
 	ec_slave[0].state = EC_STATE_INIT;
 	ec_writestate(0);
 	ec_close();
 }
-
+//slave local config process, after slave start up.
 void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {
 		return;
@@ -133,106 +129,128 @@ void initLocalSlaveInfo() {
 			continue;
 		}
 		//TODO: 伺服驱动器使用前需要进行配置，参见"松下伺服EtherCAT使用说明.pdf"的5-4-4节.
-		else if (ec_slave[i].inputs != 0 && ec_slave[i].outputs != 0)	//伺服驱动器
+		else if (ec_slave[i].inputs != 0 && ec_slave[i].outputs != 0)	//伺服驱动器或位移传感器
 		{
-			slave_arr[i].name = ec_slave[i].name;
-			slave_arr[i].type = TYPE_SERVO;
+			if (strstr(ec_slave[i].name, "EL5") == NULL) {	//伺服驱动器
+				slave_arr[i].name = ec_slave[i].name;
+				slave_arr[i].type = TYPE_SERVO;
+				slave_arr[i].id = ec_slave[i].eep_id;
+				slave_arr[i].channelNum = 16;		//TODO: 根据伺服驱动器的不同而不同
+
+													//建立伺服驱动器结构体映射
+				pservo_input tmp_in = (pservo_input)malloc(sizeof(SLAVE_SERVO_IN));
+				pservo_output tmp_out = (pservo_output)malloc(sizeof(SLAVE_SERVO_OUT));
+
+				tmp_in = (pservo_input)ec_slave[i].inputs;	//和IOmap映射
+				tmp_out = (pservo_output)ec_slave[i].outputs;
+
+				slave_arr[i].ptrToSlave1 = tmp_in;	//slave array -> servo struct
+				slave_arr[i].ptrToSlave2 = tmp_out;
+				tmp_in->slaveInfo = &slave_arr[i];	//servo struct -> slave arr
+				tmp_out->slaveInfo = &slave_arr[i];
+
+				//TODO: 是否需要建立伺服驱动器的链表
+				continue;
+			}
+			else if (strstr(ec_slave[i].name, "EL5") != NULL) {	//位移传感器
+				slave_arr[i].name = ec_slave[i].name;
+				slave_arr[i].type = TYPE_DSENSOR;
+				slave_arr[i].id = ec_slave[i].eep_id;
+				slave_arr[i].channelNum = ec_slave[i].name[SLAVE_CHANNEL_ID] - '0';
+
+				dservor_input tmp_in = (dservor_input)malloc(sizeof(SLAVE_DSERVOR_IN));
+				dservor_output tmp_out = (dservor_output)malloc(sizeof(SLAVE_DSERVOR_OUT));
+
+				tmp_in = (dservor_input)ec_slave[i].inputs;
+				tmp_out = (dservor_output)ec_slave[i].outputs;
+
+				slave_arr[i].ptrToSlave1 = tmp_in;
+				slave_arr[i].ptrToSlave2 = tmp_out;
+
+				tmp_in->slaveInfo = &slave_arr[i];
+				tmp_out->slaveInfo = &slave_arr[i];
+				continue;
+			}
+		}
+		else {												//普通IO板
+			char* name = ec_slave[i].name;	//从站可读名称
+
+											//处理大部分基础信息
 			slave_arr[i].id = ec_slave[i].eep_id;
-			slave_arr[i].channelNum = 16;		//TODO: 根据伺服驱动器的不同而不同
+			slave_arr[i].name = name;
+			slave_arr[i].type = name[SLAVE_TYPE_ID] - '0';			//获取类型
 
-			//建立伺服驱动器结构体映射
-			pservo_input tmp_in = (pservo_input)malloc(sizeof(SLAVE_SERVO_IN));
-			pservo_output tmp_out = (pservo_output)malloc(sizeof(SLAVE_SERVO_OUT));
+																	//单独处理channelNum
+			int tmpChannelNum = name[SLAVE_CHANNEL_ID] - '0';
+			if (tmpChannelNum == 9) tmpChannelNum = 16;		//末位为9则为16通道，针对EL1809和EL2809
+			slave_arr[i].channelNum = tmpChannelNum;
 
-			tmp_in = (pservo_input)ec_slave[i].inputs;	//和IOmap映射
-			tmp_out = (pservo_output)ec_slave[i].outputs;
+			switch (slave_arr[i].type)
+			{
+				case 1:				//DI
+				{
+					slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
+					tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
 
-			slave_arr[i].ptrToSlave1 = tmp_in;	//slave array -> servo struct
-			slave_arr[i].ptrToSlave2 = tmp_out;
-			tmp_in->slaveInfo = &slave_arr[i];	//servo struct -> slave arr
-			tmp_out->slaveInfo = &slave_arr[i];
+					slave_arr[i].ptrToSlave1 = tmpslave;					//slave_arr[i]指向当前结构体
+					slave_arr[i].ptrToSlave2 = NULL;
+					tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
 
-			//TODO: 是否需要建立伺服驱动器的链表
-			continue;
-		}
+					slave_di ptr = dis->next;								//插入头结点
+					dis->next = tmpslave;
+					tmpslave->next = ptr;
+					break;
+				}
+				case 2:				//DO
+				{
+					slave_do tmpslave = (slave_do)malloc(sizeof(SLAVE_DO));
+					tmpslave = (slave_do)ec_slave[i].outputs;
 
-		char* name = ec_slave[i].name;	//从站可读名称
+					slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
+					slave_arr[i].ptrToSlave2 = NULL;
+					tmpslave->slaveinfo = &slave_arr[i];
 
-		//处理大部分基础信息
-		slave_arr[i].id = ec_slave[i].eep_id;
-		slave_arr[i].name = name;
-		slave_arr[i].type = name[SLAVE_TYPE_ID] - '0';			//获取类型
-		
-		//单独处理channelNum
-		int tmpChannelNum = name[SLAVE_CHANNEL_ID] - '0';
-		if (tmpChannelNum == 9) tmpChannelNum = 16;		//末位为9则为16通道，针对EL1809和EL2809
-		slave_arr[i].channelNum = tmpChannelNum;
-																	
-		switch (slave_arr[i].type)
-		{
-		case 1:				//DI
-		{
-			slave_di tmpslave = (slave_di)malloc(sizeof(SLAVE_DI));
-			tmpslave = (slave_di)ec_slave[i].inputs;				//将当前读取值写入di结构体
+					slave_do ptr = dos->next;
+					dos->next = tmpslave;
+					tmpslave->next = ptr;
+					break;
+				}
+				case 3:				//AI
+				{
+					slave_ai tmpslave = (slave_ai)malloc(sizeof(SLAVE_AI));
+					tmpslave = (slave_ai)ec_slave[i].inputs;
 
-			slave_arr[i].ptrToSlave1 = tmpslave;					//slave_arr[i]指向当前结构体
-			slave_arr[i].ptrToSlave2 = NULL;
-			tmpslave->slaveinfo = &slave_arr[i];					//指回去，双向链表
+					slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
+					slave_arr[i].ptrToSlave2 = NULL;
+					tmpslave->slaveinfo = &slave_arr[i];
 
-			slave_di ptr = dis->next;								//插入头结点
-			dis->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 2:				//DO
-		{
-			slave_do tmpslave = (slave_do)malloc(sizeof(SLAVE_DO));
-			tmpslave = (slave_do)ec_slave[i].outputs;
+					slave_ai ptr = ais->next;
+					ais->next = tmpslave;
+					tmpslave->next = ptr;
+					break;
+				}
+				case 4:				//AO
+				{
+					slave_ao tmpslave = (slave_ao)malloc(sizeof(SLAVE_AO));
+					tmpslave = (slave_ao)ec_slave[i].outputs;
 
-			slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
-			slave_arr[i].ptrToSlave2 = NULL;
-			tmpslave->slaveinfo = &slave_arr[i];
+					slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
+					slave_arr[i].ptrToSlave2 = NULL;
+					tmpslave->slaveinfo = &slave_arr[i];
 
-			slave_do ptr = dos->next;
-			dos->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 3:				//AI
-		{
-			slave_ai tmpslave = (slave_ai)malloc(sizeof(SLAVE_AI));
-			tmpslave = (slave_ai)ec_slave[i].inputs;
-
-			slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
-			slave_arr[i].ptrToSlave2 = NULL;
-			tmpslave->slaveinfo = &slave_arr[i];
-
-			slave_ai ptr = ais->next;
-			ais->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		case 4:				//AO
-		{
-			slave_ao tmpslave = (slave_ao)malloc(sizeof(SLAVE_AO));
-			tmpslave = (slave_ao)ec_slave[i].outputs;
-
-			slave_arr[i].ptrToSlave1 = tmpslave;						//slave_arr[i]指向当前结构体
-			slave_arr[i].ptrToSlave2 = NULL;
-			tmpslave->slaveinfo = &slave_arr[i];
-
-			slave_ao ptr = aos->next;
-			aos->next = tmpslave;
-			tmpslave->next = ptr;
-			break;
-		}
-		default:
-			printf("从站类型扫描错误，请检查第%d个slave\n", i);		//说明Slave的可读名称name不对
-			break;
+					slave_ao ptr = aos->next;
+					aos->next = tmpslave;
+					tmpslave->next = ptr;
+					break;
+				}
+				default:
+					printf("从站类型扫描错误，请检查第%d个slave\n", i);		//说明Slave的可读名称name不对
+					break;
+			}
 		}
 	}
 }
-
+//slave struct requirement.
 int getSlaveInfoImpl(SLAVET_ARR *slave, char* slaveName, int id) {
 	if (slave_arr == NULL) {
 		printf("没有检查到从站信息！");
