@@ -22,7 +22,6 @@ namespace HyTestRTDataService.TEST
             log.Info("LALLAA");
             for (int i = 0; i < 8; i++) do_state[i] = false;
 
-            htUserCurve1.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
             htUserCurve2.SetCurve("AI1", true, null, System.Drawing.Color.Blue, 0.5f);
             htUserCurve2.SetCurve("AI2", true, null, System.Drawing.Color.Red, 0.5f);
             timer.Interval = 50;
@@ -236,7 +235,6 @@ namespace HyTestRTDataService.TEST
                 //这里如果返回的是float可以直接调用htUserCurve1.AddCurveData("AI1", data);
                 foreach (var val in data)
                 {
-                    if(val<=65535 && val>-65535) htUserCurve1.AddCurveData("AI1", val);
                     Thread.Sleep(2);
                 }
                 log.Info("OK");
