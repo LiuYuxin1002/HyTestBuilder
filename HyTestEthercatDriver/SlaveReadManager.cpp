@@ -301,7 +301,8 @@ int getAnalogValueImpl(int deviceId, int channelId) {
 	}
 	else if (slave_arr[deviceId].type == TYPE_DSENSOR) {
 		SLAVE_DSERVOR_IN* dsersor = (SLAVE_DSERVOR_IN*)slave_arr[deviceId].ptrToSlave1;
-		return dsersor->counterValue-0x7fffffff-1;	//解决返回值从uint32转为int类型问题
+		int16 value = dsersor->counterValue-0x7fffffff-1;	//解决返回值从uint32转为int类型问题
+		return value;
 	}
 	return INF;
 	

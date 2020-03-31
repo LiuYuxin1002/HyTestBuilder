@@ -18,7 +18,7 @@ namespace HyTestRTDataService.TEST
 
         private void btn_ao1_Click(object sender, System.EventArgs e)
         {
-            server.InstantWrite<double>("D1", double.Parse(textBox1.Text.Trim()));
+            server.InstantWrite<double>("D_out", double.Parse(textBox1.Text.Trim()));
         }
         HighCallback callback;
         private void button1_Click(object sender, System.EventArgs e)
@@ -32,7 +32,17 @@ namespace HyTestRTDataService.TEST
                     Thread.Sleep(2);
                 }
             };
-            server.StartReadingTask(1, "D2", 10, callback);
+            server.StartReadingTask(1, "D_in", 10, callback);
+        }
+
+        private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            server.Stop();
+        }
+
+        private void button2_Click(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

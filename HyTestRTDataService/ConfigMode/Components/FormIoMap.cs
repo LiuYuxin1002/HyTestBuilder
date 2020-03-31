@@ -93,6 +93,7 @@ namespace HyTestRTDataService.ConfigMode.Components
 
         private void Confirm_btn_Click(object sender, System.EventArgs e)
         {
+            manager.RefreshIOInfo(this.dataGridView1.DataSource as DataTable, null);
             this.manager.SaveConfig();
             this.Close();
         }
@@ -108,6 +109,7 @@ namespace HyTestRTDataService.ConfigMode.Components
 
         private void Apply_btn_Click(object sender, System.EventArgs e)
         {
+            manager.RefreshIOInfo(this.dataGridView1.DataSource as DataTable, null);
             this.manager.SaveConfig();
         }
 
