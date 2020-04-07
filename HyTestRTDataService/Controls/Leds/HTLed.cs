@@ -38,6 +38,7 @@ namespace HyTestRTDataService.Controls.Leds
             RunningServer server = RunningServer.getServer();
             server.DataRefresh += OnDataChanged;
         }
+
         #endregion
         #region (* Enumeratives *)
         public enum LedState

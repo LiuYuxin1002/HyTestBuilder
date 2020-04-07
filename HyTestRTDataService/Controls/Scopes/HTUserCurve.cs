@@ -65,10 +65,10 @@ namespace HyTestRTDataService.Controls.Scopes
 
         #region Private Member
 
-        private float value_max_left = 100;                 // 左坐标的最大值
-        private float value_min_left = 0;                   // 左坐标的最小值
-        private float value_max_right = 100;                // 右坐标的最大值
-        private float value_min_right = 0;                  // 右坐标的最小值
+        private double value_max_left = 100;                 // 左坐标的最大值
+        private double value_min_left = 0;                   // 左坐标的最小值
+        private double value_max_right = 100;                // 右坐标的最大值
+        private double value_min_right = 0;                  // 右坐标的最小值
 
         private int value_Segment = 5;                      // 纵轴的片段分割
         private bool value_IsAbscissaStrech = false;        // 指示横坐标是否填充满整个坐标系
@@ -103,7 +103,7 @@ namespace HyTestRTDataService.Controls.Scopes
         [Description( "获取或设置图形的左纵坐标的最大值，该值必须大于最小值" )]
         [Browsable( true )]
         [DefaultValue( 100f )]
-        public float ValueMaxLeft
+        public double ValueMaxLeft
         {
             get { return value_max_left; }
             set
@@ -123,7 +123,7 @@ namespace HyTestRTDataService.Controls.Scopes
         [Description( "获取或设置图形的左纵坐标的最小值，该值必须小于最大值" )]
         [Browsable( true )]
         [DefaultValue( 0f )]
-        public float ValueMinLeft
+        public double ValueMinLeft
         {
             get { return value_min_left; }
             set
@@ -143,7 +143,7 @@ namespace HyTestRTDataService.Controls.Scopes
         [Description( "获取或设置图形的右纵坐标的最大值，该值必须大于最小值" )]
         [Browsable( true )]
         [DefaultValue( 100f )]
-        public float ValueMaxRight
+        public double ValueMaxRight
         {
             get { return value_max_right; }
             set
@@ -163,7 +163,7 @@ namespace HyTestRTDataService.Controls.Scopes
         [Description( "获取或设置图形的右纵坐标的最小值，该值必须小于最大值" )]
         [Browsable( true )]
         [DefaultValue( 0f )]
-        public float ValueMinRight
+        public double ValueMinRight
         {
             get { return value_min_right; }
             set
@@ -363,7 +363,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="key">曲线关键字</param>
         /// <param name="data">曲线的具体数据</param>
-        public void SetLeftCurve( string key, float[] data )
+        public void SetLeftCurve( string key, double[] data )
         {
             SetLeftCurve( key, data, Color.FromArgb( random.Next( 256 ), random.Next( 256 ), random.Next( 256 ) ) );
         }
@@ -375,7 +375,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
         /// <param name="lineColor"></param>
-        public void SetLeftCurve( string key, float[] data, Color lineColor )
+        public void SetLeftCurve( string key, double[] data, Color lineColor )
         {
             SetCurve( key, true, data, lineColor, 1f );
         }
@@ -385,7 +385,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
-        public void SetRightCurve( string key, float[] data )
+        public void SetRightCurve( string key, double[] data )
         {
             SetRightCurve( key, data, Color.FromArgb( random.Next( 256 ), random.Next( 256 ), random.Next( 256 ) ) );
         }
@@ -396,7 +396,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="key">曲线关键字</param>
         /// <param name="data"></param>
         /// <param name="lineColor"></param>
-        public void SetRightCurve( string key, float[] data, Color lineColor )
+        public void SetRightCurve( string key, double[] data, Color lineColor )
         {
             SetCurve( key, false, data, lineColor, 1f );
         }
@@ -410,16 +410,16 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="data">数据</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="thickness">线条宽度</param>
-        public void SetCurve( string key, bool isLeft, float[] data, Color lineColor, float thickness )
+        public void SetCurve( string key, bool isLeft, double[] data, Color lineColor, double thickness )
         {
             if (data_list.ContainsKey( key ))
             {
-                if (data == null) data = new float[] { };
+                if (data == null) data = new double[] { };
                 data_list[key].Data = data;
             }
             else
             {
-                if (data == null) data = new float[] { };
+                if (data == null) data = new double[] { };
                 data_list.Add( key, new HTCurveItem( )
                 {
                     Data = data,
@@ -473,7 +473,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="key">新增曲线的关键字</param>
         /// <param name="values"></param>
         /// <param name="isUpdateUI">是否刷新界面</param>
-        private void AddCurveData( string key, float[] values, bool isUpdateUI )
+        private void AddCurveData( string key, double[] values, bool isUpdateUI )
         {
             if (values?.Length < 1) return;                              // 没有传入数据
 
@@ -524,9 +524,9 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="key">曲线的关键字</param>
         /// <param name="value">数据值</param>
-        public void AddCurveData( string key, float value )
+        public void AddCurveData( string key, double value )
         {
-            AddCurveData( key, new float[] { value } );
+            AddCurveData( key, new double[] { value } );
         }
 
         /// <summary>
@@ -534,7 +534,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="key">曲线的关键字</param>
         /// <param name="values">数组值</param>
-        public void AddCurveData( string key, float[] values )
+        public void AddCurveData( string key, double[] values )
         {
             AddCurveData( key, values, false );
             if (values?.Length > 0)
@@ -549,7 +549,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="keys">曲线的关键字数组</param>
         /// <param name="values">数组值</param>
-        public void AddCurveData( string[] keys, float[] values )
+        public void AddCurveData( string[] keys, double[] values )
         {
             if (keys == null) throw new ArgumentNullException( "keys" );
             if (values == null) throw new ArgumentNullException( "values" );
@@ -558,7 +558,7 @@ namespace HyTestRTDataService.Controls.Scopes
             
             for (int i = 0; i < keys.Length; i++)
             {
-                AddCurveData( keys[i], new float[] { values[i] }, false );
+                AddCurveData( keys[i], new double[] { values[i] }, false );
             }
 
             AddCurveTime( 1 );
@@ -613,7 +613,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// 新增一条左侧的辅助线，使用默认的文本颜色
         /// </summary>
         /// <param name="value">数据值</param>
-        public void AddLeftAuxiliary( float value )
+        public void AddLeftAuxiliary( double value )
         {
             AddLeftAuxiliary( value, ColorLinesAndText );
         }
@@ -623,7 +623,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
-        public void AddLeftAuxiliary( float value, Color lineColor )
+        public void AddLeftAuxiliary( double value, Color lineColor )
         {
             AddLeftAuxiliary( value, lineColor, 1f );
         }
@@ -634,7 +634,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="lineThickness">线条宽度</param>
-        public void AddLeftAuxiliary( float value, Color lineColor, float lineThickness )
+        public void AddLeftAuxiliary( double value, Color lineColor, double lineThickness )
         {
             AddAuxiliary( value, lineColor, lineThickness, true );
         }
@@ -644,7 +644,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// 新增一条右侧的辅助线，使用默认的文本颜色
         /// </summary>
         /// <param name="value">数据值</param>
-        public void AddRightAuxiliary( float value )
+        public void AddRightAuxiliary( double value )
         {
             AddRightAuxiliary( value, ColorLinesAndText );
         }
@@ -654,7 +654,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// </summary>
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
-        public void AddRightAuxiliary( float value, Color lineColor )
+        public void AddRightAuxiliary( double value, Color lineColor )
         {
             AddRightAuxiliary( value, lineColor, 1f );
         }
@@ -666,13 +666,13 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <param name="value">数据值</param>
         /// <param name="lineColor">线条颜色</param>
         /// <param name="lineThickness">线条宽度</param>
-        public void AddRightAuxiliary( float value, Color lineColor, float lineThickness )
+        public void AddRightAuxiliary( double value, Color lineColor, double lineThickness )
         {
             AddAuxiliary( value, lineColor, lineThickness, false );
         }
 
 
-        private void AddAuxiliary( float value, Color lineColor, float lineThickness, bool isLeft )
+        private void AddAuxiliary( double value, Color lineColor, double lineThickness, bool isLeft )
         {
             auxiliary_lines.Add( new AuxiliaryLine( )
             {
@@ -694,7 +694,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// 移除所有的指定值的辅助曲线，包括左边的和右边的
         /// </summary>
         /// <param name="value"></param>
-        public void RemoveAuxiliary( float value )
+        public void RemoveAuxiliary( double value )
         {
             int removeCount = 0;
             for (int i = auxiliary_lines.Count - 1; i >= 0; i--)
@@ -793,33 +793,33 @@ namespace HyTestRTDataService.Controls.Scopes
             {
                 if (auxiliary_lines[i].IsLeftFrame)
                 {
-                    auxiliary_lines[i].PaintValue = SoftPainting.ComputePaintLocationY( value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value ) + upDowm;
+                    auxiliary_lines[i].PaintValue = SoftPainting.ComputePaintLocationY( (int)value_max_left, (int)value_min_left, (heigh_totle - upDowm - upDowm), (int)auxiliary_lines[i].Value ) + upDowm;
                 }
                 else
                 {
-                    auxiliary_lines[i].PaintValue = SoftPainting.ComputePaintLocationY( value_max_right, value_min_right, (heigh_totle - upDowm - upDowm), auxiliary_lines[i].Value ) + upDowm;
+                    auxiliary_lines[i].PaintValue = SoftPainting.ComputePaintLocationY((int)value_max_right, (int)value_min_right, (heigh_totle - upDowm - upDowm), (int)auxiliary_lines[i].Value ) + upDowm;
                 }
             }
 
             // 绘制刻度线，以及刻度文本
             for (int i = 0; i <= value_Segment; i++)
             {
-                float valueTmpLeft = i * (value_max_left - value_min_left) / value_Segment + value_min_left;
-                float paintTmp = SoftPainting.ComputePaintLocationY( value_max_left, value_min_left, (heigh_totle - upDowm - upDowm), valueTmpLeft ) + upDowm;
+                double valueTmpLeft = i * (value_max_left - value_min_left) / value_Segment + value_min_left;
+                double paintTmp = SoftPainting.ComputePaintLocationY((int)value_max_left, (int)value_min_left, (heigh_totle - upDowm - upDowm), (float)valueTmpLeft ) + upDowm;
                 if (IsNeedPaintDash( paintTmp ))
                 {
                     // 左坐标轴
-                    g.DrawLine( pen_normal, leftRight - 4, paintTmp, leftRight - 1, paintTmp );
-                    RectangleF rectTmp = new RectangleF( 0, paintTmp - 9, leftRight - 4, 20 );
+                    g.DrawLine( pen_normal, leftRight - 4, (float)paintTmp, leftRight - 1, (float)paintTmp );
+                    RectangleF rectTmp = new RectangleF( 0, (float)paintTmp - 9, leftRight - 4, 20 );
                     g.DrawString( valueTmpLeft.ToString( ), font_size9, brush_deep, rectTmp, format_right );
 
                     // 右坐标轴
-                    float valueTmpRight = i * (value_max_right - value_min_right) / value_Segment + value_min_right;
-                    g.DrawLine( pen_normal, width_totle - leftRight + 1, paintTmp, width_totle - leftRight + 4, paintTmp );
-                    rectTmp.Location = new PointF( width_totle - leftRight + 4, paintTmp - 9 );
+                    double valueTmpRight = i * (value_max_right - value_min_right) / value_Segment + value_min_right;
+                    g.DrawLine( pen_normal, width_totle - leftRight + 1, (float)paintTmp, width_totle - leftRight + 4, (float)paintTmp );
+                    rectTmp.Location = new PointF( width_totle - leftRight + 4, (float)paintTmp - 9 );
                     g.DrawString( valueTmpRight.ToString( ), font_size9, brush_deep, rectTmp, format_left );
 
-                    if (i > 0 && value_IsRenderDashLine) g.DrawLine( pen_dash, leftRight, paintTmp, width_totle - leftRight, paintTmp );
+                    if (i > 0 && value_IsRenderDashLine) g.DrawLine( pen_dash, leftRight, (float)paintTmp, width_totle - leftRight, (float)paintTmp );
                 }
             }
 
@@ -829,13 +829,13 @@ namespace HyTestRTDataService.Controls.Scopes
                 if (value_IsAbscissaStrech)
                 {
                     // 拉伸模式下，因为错位是均匀的，所以根据数据来显示
-                    float offect = (width_totle - leftRight * 2) * 1.0f / (value_StrechDataCountMax - 1);
+                    double offect = (width_totle - leftRight * 2) * 1.0f / (value_StrechDataCountMax - 1);
                     int dataCount = CalculateDataCountByOffect( offect );
                     for (int i = 0; i < value_StrechDataCountMax; i += dataCount)
                     {
                         if (i > 0 && i < value_StrechDataCountMax - 1)
                         {
-                            g.DrawLine( pen_dash, i * offect + leftRight, upDowm, i * offect + leftRight, heigh_totle - upDowm - 1 );
+                            g.DrawLine( pen_dash, (float)(i * offect + leftRight), upDowm, (float)(i * offect + leftRight), heigh_totle - upDowm - 1 );
                         }
 
                         if (data_text != null)
@@ -853,7 +853,7 @@ namespace HyTestRTDataService.Controls.Scopes
                         if (data_text.Length < value_StrechDataCountMax)
                         {
                             // 绘制最前端的虚线
-                            g.DrawLine( pen_dash, (data_text.Length - 1) * offect + leftRight, upDowm, (data_text.Length - 1) * offect + leftRight, heigh_totle - upDowm - 1 );
+                            g.DrawLine( pen_dash, (data_text.Length - 1) * (float)offect + leftRight, upDowm, (data_text.Length - 1) * (float)offect + leftRight, heigh_totle - upDowm - 1 );
                         }
 
                         Rectangle rec = new Rectangle( (int)((data_text.Length - 1) * offect + leftRight) - leftRight, heigh_totle - upDowm + 1, 100, upDowm );
@@ -950,12 +950,12 @@ namespace HyTestRTDataService.Controls.Scopes
                         {
                             points[i].X = leftRight + i * offect;
                             points[i].Y = SoftPainting.ComputePaintLocationY(
-                                line.IsLeftFrame ? value_max_left : value_max_right,
-                                line.IsLeftFrame ? value_min_left : value_min_right,
-                                (heigh_totle - upDowm - upDowm), line.Data[i] ) + upDowm;
+                                line.IsLeftFrame ? (int)value_max_left : (int)value_max_right,
+                                line.IsLeftFrame ? (int)value_min_left : (int)value_min_right,
+                                (heigh_totle - upDowm - upDowm), (int)line.Data[i] ) + upDowm;
                         }
 
-                        using (Pen penTmp = new Pen( line.LineColor, line.LineThickness ))
+                        using (Pen penTmp = new Pen( line.LineColor, (float)line.LineThickness ))
                         {
                             g.DrawLines( penTmp, points );
                         }
@@ -981,9 +981,9 @@ namespace HyTestRTDataService.Controls.Scopes
                             {
                                 points[i].X = leftRight + i;
                                 points[i].Y = SoftPainting.ComputePaintLocationY(
-                                    line.IsLeftFrame ? value_max_left : value_max_right,
-                                    line.IsLeftFrame ? value_min_left : value_min_right,
-                                    (heigh_totle - upDowm - upDowm), line.Data[i] ) + upDowm;
+                                    line.IsLeftFrame ? (int)value_max_left : (int)value_max_right,
+                                    line.IsLeftFrame ? (int)value_min_left : (int)value_min_right,
+                                    (heigh_totle - upDowm - upDowm), (int)line.Data[i] ) + upDowm;
                             }
                         }
                         else
@@ -993,13 +993,13 @@ namespace HyTestRTDataService.Controls.Scopes
                             {
                                 points[i].X = leftRight + i;
                                 points[i].Y = SoftPainting.ComputePaintLocationY(
-                                    line.IsLeftFrame ? value_max_left : value_max_right,
-                                    line.IsLeftFrame ? value_min_left : value_min_right,
-                                    (heigh_totle - upDowm - upDowm), line.Data[i + line.Data.Length - countTmp] ) + upDowm;
+                                    line.IsLeftFrame ? (int)value_max_left : (int)value_max_right,
+                                    line.IsLeftFrame ? (int)value_min_left : (int)value_min_right,
+                                    (heigh_totle - upDowm - upDowm), (int)line.Data[i + line.Data.Length - countTmp] ) + upDowm;
                             }
                         }
 
-                        using (Pen penTmp = new Pen( line.LineColor, line.LineThickness ))
+                        using (Pen penTmp = new Pen( line.LineColor, (float)line.LineThickness ))
                         {
                             g.DrawLines( penTmp, points );
                         }
@@ -1011,7 +1011,7 @@ namespace HyTestRTDataService.Controls.Scopes
         }
 
 
-        private bool IsNeedPaintDash( float paintValue )
+        private bool IsNeedPaintDash( double paintValue )
         {
             // 遍历所有的数据组
             for (int i = 0; i < auxiliary_lines.Count; i++)
@@ -1027,7 +1027,7 @@ namespace HyTestRTDataService.Controls.Scopes
             return true;
         }
 
-        private int CalculateDataCountByOffect(float offect)
+        private int CalculateDataCountByOffect(double offect)
         {
             if (offect > 40) return 1;
             offect = 40f / offect;
@@ -1066,12 +1066,12 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <summary>
         /// 数据
         /// </summary>
-        public float[] Data = null;
+        public double[] Data = null;
 
         /// <summary>
         /// 线条的宽度
         /// </summary>
-        public float LineThickness { get; set; }
+        public double LineThickness { get; set; }
 
         /// <summary>
         /// 曲线颜色
@@ -1097,7 +1097,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <summary>
         /// 实际的数据值
         /// </summary>
-        public float Value { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
         /// 实际的数据绘制
@@ -1117,7 +1117,7 @@ namespace HyTestRTDataService.Controls.Scopes
         /// <summary>
         /// 辅助线的宽度
         /// </summary>
-        public float LineThickness { get; set; }
+        public double LineThickness { get; set; }
 
         /// <summary>
         /// 辅助线文本的画刷

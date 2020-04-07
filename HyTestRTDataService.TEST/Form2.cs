@@ -23,10 +23,10 @@ namespace HyTestRTDataService.TEST
         Random random = new Random();
         private void button1_Click(object sender, EventArgs e)
         {
-            float[] data1 = new float[1000];
-            float[] data2 = new float[1000];
-            float[] data3 = new float[1000];
-            float[] data4 = new float[1000];
+            double[] data1 = new double[1000];
+            double[] data2 = new double[1000];
+            double[] data3 = new double[1000];
+            double[] data4 = new double[1000];
             for (int i=0; i<1000; i++)
             {
                 data1[i] = (float)Math.Sin(i * 2 * Math.PI / 50.0) * 10 + random.Next(-100, 100) / 150.0f;

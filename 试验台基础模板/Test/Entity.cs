@@ -311,6 +311,7 @@ public abstract class Entity
         输出流量负载压差特性试验,
         输出流量阀压降特性试验,
         极限功率特性试验,
+        启动试验
         /* $mark_testtype$ */
     }
 

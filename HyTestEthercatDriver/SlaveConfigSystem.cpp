@@ -107,6 +107,7 @@ void stopSlaveRunning() {
 	ec_writestate(0);
 	ec_close();
 }
+
 //slave local config process, after slave start up.
 void initLocalSlaveInfo() {
 	if (ec_slavecount == 0) {

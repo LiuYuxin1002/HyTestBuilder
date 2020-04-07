@@ -7,7 +7,7 @@ namespace StandardTemplate.Test
     {
         /* $mark_context$ */
         //public virtual DbSet<Alarm> Alarms { get; set; }
-        public virtual DbSet<Valve2> valve2s { get; set; }
+        public virtual DbSet<Valve> valve2s { get; set; }
 
         public MyFirstTestModel() : base("name=LocalConnection")
         {

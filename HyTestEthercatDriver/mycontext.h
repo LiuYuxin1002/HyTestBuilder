@@ -194,9 +194,26 @@ typedef struct SLAVE_DSERVOR_OUT	*dservor_output;
 //[0x0008.0] 0x6000 : 0x11 0x20 UNSIGNED32   Counter value
 //[0x000C.0] 0x6000 : 0x12 0x20 UNSIGNED32   Latch value
 //[0x0010.0] 0x6000 : 0x14 0x20 UNSIGNED32   Period value
+
+struct DSENSER_STATE {
+	bitset<1> Latch_C_Valid;
+	bitset<1> Latch_Extern_Valid;
+	bitset<1> Set_Count_Done;
+	bitset<4> null_____________;
+	bitset<1> Extrapolation_Stall;
+	bitset<1> State_A;
+	bitset<1> State_B;
+	bitset<1> State_C;
+	bitset<1> null_1__________________;
+	bitset<1> State_Extern_Latch;
+	bitset<1> Sync_Err;
+	bitset<1> null_2__________________;
+	bitset<1> TxPDO_Toggle;
+};
+
 PACKED_BEGIN
 struct SLAVE_DSERVOR_IN {
-	bitset<16> none;
+	int16 none;
 	uint32 counterValue;	//¼ÆÊýÆ÷Öµ
 	uint32 latchValue;
 	uint32 periodValue;

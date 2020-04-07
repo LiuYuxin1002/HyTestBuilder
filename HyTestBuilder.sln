@@ -21,7 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyTestRTDataService.TEST", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7D31D3DA-02AA-4B6C-938E-366D02DAF679}"
 	ProjectSection(SolutionItems) = preProject
+		DEVELOPER_GUIDE.md = DEVELOPER_GUIDE.md
 		README.md = README.md
+		UPDATE_LOG.md = UPDATE_LOG.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCSharp", "TestCSharp\TestCSharp.csproj", "{07D4069A-DFC8-4608-BBF9-7EC59A0E6DE8}"

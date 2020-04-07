@@ -30,16 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.htUserCurve1 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
             this.btn_ao1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.htConfigManager1 = new HyTestRTDataService.ConfigMode.Components.HTConfigManager(this.components);
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.htDataScanner1 = new HyTestRTDataService.Controls.Scopes.HTDataScanner();
+            this.htUserCurve2 = new HyTestRTDataService.Controls.Scopes.HTUserCurve();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -58,62 +59,6 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "EL5151输入";
-            // 
-            // htUserCurve1
-            // 
-            this.htUserCurve1.BackColor = System.Drawing.Color.Transparent;
-            this.htUserCurve1.Location = new System.Drawing.Point(0, 34);
-            this.htUserCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.htUserCurve1.Name = "htUserCurve1";
-            this.htUserCurve1.Size = new System.Drawing.Size(667, 216);
-            this.htUserCurve1.TabIndex = 0;
-            this.htUserCurve1.ValueMaxLeft = 32767F;
-            this.htUserCurve1.ValueMinLeft = -32768F;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.htDataScanner1);
-            this.groupBox4.Controls.Add(this.btn_ao1);
-            this.groupBox4.Controls.Add(this.textBox1);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Location = new System.Drawing.Point(11, 257);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(732, 59);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "EL5151输出";
-            // 
-            // btn_ao1
-            // 
-            this.btn_ao1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_ao1.Location = new System.Drawing.Point(377, 19);
-            this.btn_ao1.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_ao1.Name = "btn_ao1";
-            this.btn_ao1.Size = new System.Drawing.Size(56, 26);
-            this.btn_ao1.TabIndex = 20;
-            this.btn_ao1.Text = "写入";
-            this.btn_ao1.UseVisualStyleBackColor = true;
-            this.btn_ao1.Click += new System.EventHandler(this.btn_ao1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(107, 20);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(266, 25);
-            this.textBox1.TabIndex = 16;
-            // 
-            // label8
-            // 
-            this.label8.Location = new System.Drawing.Point(9, 21);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 22);
-            this.label8.TabIndex = 9;
-            this.label8.Text = "设定计数器";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button3
             // 
@@ -150,6 +95,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // htUserCurve1
+            // 
+            this.htUserCurve1.BackColor = System.Drawing.Color.Transparent;
+            this.htUserCurve1.Location = new System.Drawing.Point(0, 34);
+            this.htUserCurve1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve1.Name = "htUserCurve1";
+            this.htUserCurve1.Size = new System.Drawing.Size(667, 216);
+            this.htUserCurve1.TabIndex = 0;
+            this.htUserCurve1.ValueMaxLeft = 65535F;
+            this.htUserCurve1.ValueMinLeft = -65535F;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.htDataScanner1);
+            this.groupBox4.Controls.Add(this.btn_ao1);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Location = new System.Drawing.Point(11, 257);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(732, 59);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "EL5151输出";
+            // 
             // htDataScanner1
             // 
             this.htDataScanner1.Location = new System.Drawing.Point(526, 19);
@@ -159,11 +130,53 @@
             this.htDataScanner1.TabIndex = 21;
             this.htDataScanner1.VarName = "D_out";
             // 
+            // btn_ao1
+            // 
+            this.btn_ao1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_ao1.Location = new System.Drawing.Point(377, 19);
+            this.btn_ao1.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ao1.Name = "btn_ao1";
+            this.btn_ao1.Size = new System.Drawing.Size(56, 26);
+            this.btn_ao1.TabIndex = 20;
+            this.btn_ao1.Text = "写入";
+            this.btn_ao1.UseVisualStyleBackColor = true;
+            this.btn_ao1.Click += new System.EventHandler(this.btn_ao1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(107, 20);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(266, 25);
+            this.textBox1.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.Location = new System.Drawing.Point(9, 21);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 22);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "设定计数器";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // htUserCurve2
+            // 
+            this.htUserCurve2.BackColor = System.Drawing.Color.Transparent;
+            this.htUserCurve2.Location = new System.Drawing.Point(11, 322);
+            this.htUserCurve2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.htUserCurve2.Name = "htUserCurve2";
+            this.htUserCurve2.Size = new System.Drawing.Size(736, 270);
+            this.htUserCurve2.TabIndex = 24;
+            this.htUserCurve2.ValueMaxLeft = 65535F;
+            this.htUserCurve2.ValueMinLeft = -65535F;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 321);
+            this.ClientSize = new System.Drawing.Size(758, 594);
+            this.Controls.Add(this.htUserCurve2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Name = "Form3";
@@ -189,5 +202,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private Controls.Scopes.HTDataScanner htDataScanner1;
+        private Controls.Scopes.HTUserCurve htUserCurve2;
     }
 }

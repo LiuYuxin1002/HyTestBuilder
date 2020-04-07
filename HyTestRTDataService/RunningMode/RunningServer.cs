@@ -280,7 +280,7 @@ namespace HyTestRTDataService.RunningMode
                 return (T)Convert.ChangeType(data, typeof(T));
             }
             else if (varType == typeof(double)) //if double
-            {
+            {   
                 int data = reader.ReadAnalog(varPort.deviceId, varPort.channelId);
                 return (T)Convert.ChangeType(DataTransformer.AnalogToPhysical(data, varMax, varMin), typeof(T));
             }

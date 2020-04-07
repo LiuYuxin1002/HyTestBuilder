@@ -1,17 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using HyTestRTDataService;
+using HyTestRTDataService;
+using StandardTemplate.utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StandardTemplate.Test
 {
-    public class Valve2 : Entity
+    class Pump : Entity
     {
         //数据库字段部分
-        public string Types { get; set; }
-        public double Pressure { get; set; }
-        public double Flow { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
 
-        public Valve2()
+        public Pump()
         {
             if (this.TestList == null)
             {
@@ -20,16 +28,10 @@ namespace StandardTemplate.Test
 
             this.TestSupportList = new List<TestType>(){
                 //这里用于添加试验类型
-                TestType.耐压试验,
-                TestType.内泄露试验,
-                TestType.恒定阀压降输出流量输入信号特性试验,
-                TestType.节流调节特性试验,
-                TestType.输出流量负载压差特性试验,
-                TestType.输出流量阀压降特性试验,
-                TestType.极限功率特性试验,
+                TestType.试运行试验,
+                TestType.启动试验,
             };
         }
-
 
 
 
@@ -38,11 +40,11 @@ namespace StandardTemplate.Test
             switch (testType)
             {
                 //判断试验-方法匹配
-                case TestType.耐压试验:
-                    this.PressureTest();
+                case TestType.试运行试验:
+                    this.XXXTest();
                     break;
-                case TestType.稳态流量压力特性试验:
-                    this.FlowTest();
+                case TestType.启动试验:
+                    this.XXXXTest();
                     break;
 
                 default:
@@ -53,30 +55,28 @@ namespace StandardTemplate.Test
 
         public override OperationResult AfterTestCustom(object testInfo)
         {
-            Log.Info("试验结束");
             return new OperationResult();
         }
 
         public override OperationResult BeforeTestCustom(object testInfo)
         {
-            Log.Info("试验开始");
             return new OperationResult();
         }
 
         public override void GenerateReport()
         {
-            
+            throw new NotImplementedException();
         }
 
         #region TEST
 
-        private void PressureTest()
+        private void XXXTest()
         {
-            Log.Info("耐压试验开始");
+            //试验1流程
         }
-        private void FlowTest()
+        private void XXXXTest()
         {
-            Log.Info("稳态压力流量试验开始");
+            //试验2流程
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using HyTestRTDataService;
+using log4net;
 using StandardTemplate.utils;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace StandardTemplate.Test
 {
-    class Valve : Entity
+    public class Valve : Entity
     {
+        private ILog Log = LogManager.GetLogger(typeof(Valve)); //日志定义
         Dictionary<string, string> Pict = new Dictionary<string, string>();
 
         public Valve()
@@ -24,6 +26,7 @@ namespace StandardTemplate.Test
                 TestType.稳态流量压力特性试验,
                 TestType.耐压试验,
             };
+            Log.Info("想写的日志");  //日志使用
         }
 
         protected override OperationResult RunTest(TestType testType)
